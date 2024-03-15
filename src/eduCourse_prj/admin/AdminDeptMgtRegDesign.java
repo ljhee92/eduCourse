@@ -2,7 +2,7 @@ package eduCourse_prj.admin;
 
 import javax.swing.*;
 
-import eduCourse_prj.VO.CourseVO;
+import eduCourse_prj.VO.DeptVO;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

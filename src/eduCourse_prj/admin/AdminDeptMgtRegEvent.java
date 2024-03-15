@@ -6,7 +6,7 @@ import java.awt.event.WindowAdapter;
 
 import javax.swing.JOptionPane;
 
-import eduCourse_prj.VO.CourseVO;
+import eduCourse_prj.VO.DeptVO;
 
 public class AdminDeptMgtRegEvent extends WindowAdapter implements ActionListener {
 	AdminDeptMgtRegDesign admrd;
@@ -30,10 +30,12 @@ public class AdminDeptMgtRegEvent extends WindowAdapter implements ActionListene
 		
 		if(ae.getSource() == admrd.getRegisterButton()) {
 			JOptionPane.showMessageDialog(admrd, "등록버튼 클릭");
+			
             String departmentName = admrd.getDepartmentNameTextField().getText();
             int capacity = Integer.parseInt(admrd.getDepartmentCapacityTextField().getText());
-            CourseVO cVO = new CourseVO(departmentName, capacity);
-//            acd.addDepartment(cVO);
+            DeptVO cVO = new DeptVO(departmentName, capacity);
+            //acd.addDepartment(cVO);
+
 			
 			
 		}

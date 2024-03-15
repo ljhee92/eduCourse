@@ -108,7 +108,7 @@ public class AdminLoginEvent extends WindowAdapter implements ActionListener {
 			LoginVO LoginResult = null;
 			try {
 
-				LoginResult = alDAO.AdminLogin(lVO);
+				LoginResult = alDAO.adminLogin(lVO);
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -126,5 +126,9 @@ public class AdminLoginEvent extends WindowAdapter implements ActionListener {
 		}
 
 	}
+	
+	
+	
+	
 
 }
