@@ -128,7 +128,7 @@ public class StudentLoginEvent extends WindowAdapter implements ActionListener {
 
 			if (LoginResult != null) {// 객체가 존재하면 로그인 성공
 				JOptionPane.showMessageDialog(sld, LoginResult.getName() + " 학생님 로그인 성공");
-				new StudentHomeDesign(LoginResult);
+				new StdntHomeDesign(LoginResult);
 				sld.dispose();
 			} else {
 				JOptionPane.showMessageDialog(sld, "로그인 실패\n 로그인 정보를 다시 확인해주세요.");
