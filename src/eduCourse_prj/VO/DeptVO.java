@@ -14,7 +14,7 @@ public class DeptVO {
 	public DeptVO(String dept_name, int dept_capacity) {
 		this.dept_name = dept_name;
 		this.dept_capacity = dept_capacity;
-		this.dept_input_date  = LocalDate.now().toString();//2024-03-15
+
 
 	}
 	

@@ -8,22 +8,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AdminDeptMgtRegDesign extends JDialog {
-	AdminCourDesign acd;
+	AdminDeptMgtDesign admd;
 	JButton registerButton;// 등록버튼
 	JButton cancelButton;// 취소버튼
 
 	JTextField departmentNameTextField;// 학과
-	JTextField departmentCodeTextField;// 학과코드
+	//JTextField departmentCodeTextField;// 학과코드
 	JTextField departmentCapacityTextField;// 정원
 
-	public AdminDeptMgtRegDesign(AdminCourDesign acd, String title) {
-		super(acd, title, true);
-		this.acd = acd;
+	public AdminDeptMgtRegDesign(AdminDeptMgtDesign admd, String title) {
+		super(admd, title, true);
+		this.admd = admd;
 
 		setSize(1000, 650);
-		setLocationRelativeTo(acd);
+		setLocationRelativeTo(admd);
 		setModal(true);
 		setLayout(null);
+		
+		
 
 /////////////////////////////////////////////////////////////////////////////////        
 //-------------------------------등록버튼 생성----------------------------------        
@@ -41,14 +43,14 @@ public class AdminDeptMgtRegDesign extends JDialog {
 		departmentNameTextField = new JTextField();
 		departmentNameTextField.setBounds(50, 50, 200, 30);
 
-		departmentCodeTextField = new JTextField();
-		departmentCodeTextField.setBounds(50, 100, 200, 30);
+		//departmentCodeTextField = new JTextField();
+		//departmentCodeTextField.setBounds(50, 100, 200, 30);
 
 		departmentCapacityTextField = new JTextField();
 		departmentCapacityTextField.setBounds(50, 150, 200, 30);
 
 		add(departmentNameTextField);
-		add(departmentCodeTextField);
+		//add(departmentCodeTextField);
 		add(departmentCapacityTextField);
 
 		add(registerButton);
@@ -63,11 +65,14 @@ public class AdminDeptMgtRegDesign extends JDialog {
 		registerButton.addActionListener(admre);
 		cancelButton.addActionListener(admre);
 
+		
+		
+		
 		setVisible(true);
 	}
 
-	public AdminCourDesign getAcd() {
-		return acd;
+	public AdminDeptMgtDesign getAdmd() {
+		return admd;
 	}
 
 	public JButton getRegisterButton() {
@@ -82,17 +87,17 @@ public class AdminDeptMgtRegDesign extends JDialog {
 		return departmentNameTextField;
 	}
 
-	public JTextField getDepartmentCodeTextField() {
-		return departmentCodeTextField;
-	}
+//	public JTextField getDepartmentCodeTextField() {
+//		return departmentCodeTextField;
+//	}
 
 	public JTextField getDepartmentCapacityTextField() {
 		return departmentCapacityTextField;
 	}
 
-	public static void main(String[] args) {
-
-		AdminDeptMgtRegDesign dialog = new AdminDeptMgtRegDesign(null, "test");
-
-	}// main
+//	public static void main(String[] args) {
+//
+//		AdminDeptMgtRegDesign dialog = new AdminDeptMgtRegDesign(null, "test");
+//
+//	}// main
 }
