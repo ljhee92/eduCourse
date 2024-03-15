@@ -53,6 +53,12 @@ public class AdminAdminMgtDesign extends JDialog {
 	JLabel jlInCart2;//장바구니라벨
 	
 	 
+	
+	
+	JLabel jltotalcredit1;//학점라벨 라벨용
+	JLabel jlSumCredit;//학점라벨 sum용 
+	
+
 	JButton jbtnEnroll ;//최종신청 버튼
 	
 	
@@ -168,9 +174,19 @@ public class AdminAdminMgtDesign extends JDialog {
     	add(jlInCart2);   
 		
     	
+    	jltotalcredit1 = new JLabel("총 학점");//학점라벨 라벨용
+    	jltotalcredit1.setFont(font);
+    	jltotalcredit1.setBounds(750,563,80,20);
+    	add(jltotalcredit1);
     	
-    	jbtnEnroll = new JButton("최종수강");
-    	jbtnEnroll.setBounds(880,328,80,20);
+    	jlSumCredit = new JLabel(("0"));//학점라벨 sum용 
+    	jlSumCredit.setFont(font);
+    	jlSumCredit.setBounds(820,563,80,20);
+    	add(jlSumCredit);
+    	
+    	
+    	jbtnEnroll = new JButton("최종신청");
+    	jbtnEnroll.setBounds(870,555,90,30);
     	add(jbtnEnroll);   
 		
 		
