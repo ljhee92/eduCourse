@@ -33,11 +33,40 @@ public class AdminAdminMgtDesign extends JDialog {
     JLabel jlTitle3; // 바구니 하단 컬럼
     JLabel jlTitle4; // 바구니 상단 컬럼
     
+	JLabel jlTopLogin; // 우상단 로그인상태 확인창
+	JLabel jlEnroll;//수강신청라벨
+	JLabel jlDept1;//학과라벨
+	JLabel jlCrs1;//과목라벨
+	JLabel jlCrsCode1;//과목코드라벨
+	JLabel jlLect1;//강의실라벨
+	JLabel jlCapa1;//정원라벨
+	JLabel jlCredit1;//학점라벨
+	JLabel jlInCart1;//장바구니라벨
+	
+	JLabel jlCart;//장바구니라벨
+	JLabel jlDept2;//학과라벨
+	JLabel jlCrs2;//과목라벨
+	JLabel jlCrsCode2;//과목코드라벨
+	JLabel jlLect2;//강의실라벨
+	JLabel jlCapa2;//정원라벨
+	JLabel jlCredit2;//학점라벨
+	JLabel jlInCart2;//장바구니라벨
+	
+	 
+	JButton jbtnEnroll ;//최종신청 버튼
+	
+	
     
 
     public AdminAdminMgtDesign(AdminHomeDesign awd, String title) {
-        super(awd, title, true);
-        this.awd = awd;
+    	
+        super(awd, title,true);
+        this.awd = awd; 
+        
+		String commonPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/common/";
+		String adminPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/admin/";
+        Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
+
         outerPanel1List = new ArrayList<>();
         outerPanel2List = new ArrayList<>();
         setLayout(null);
@@ -45,10 +74,120 @@ public class AdminAdminMgtDesign extends JDialog {
         outerPanel1 = new JPanel();
 
         outerPanel1.setLayout(new GridBagLayout()); // 외부패널1 GridBagLayout으로 변경
+        jlTopLogin = new JLabel(awd.getTopLogin().getText());
+        jlTopLogin.setFont(font);
+        jlTopLogin.setForeground(Color.RED);
+        jlTopLogin.setBounds(720, 15, 200, 20);
+        
+        add(jlTopLogin);
+        
+    	jlEnroll = new JLabel("수강 신청");//수강신청라벨
+    	jlEnroll.setFont(new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 20));
+    	jlEnroll.setBounds(450, 43, 100, 30);
+    	add(jlEnroll);
+    	
+    	
+    	jlDept1 = new JLabel("학과");//학과라벨
+    	jlDept1.setFont(font);
+    	jlDept1.setBounds(28,77,50,20);
+    	add(jlDept1);
+    	
+    	jlCrs1 = new JLabel("과목");//과목라벨
+    	jlCrs1.setFont(font);
+    	jlCrs1.setBounds(170,77,50,20);
+    	add(jlCrs1);
+    	
+    	jlCrsCode1 = new JLabel("과목코드");//과목코드라벨
+    	jlCrsCode1.setFont(font);
+    	jlCrsCode1.setBounds(300,77,70,20);
+    	add(jlCrsCode1);
+    	
+    	jlLect1 = new JLabel("강의실");//강의실라벨
+    	jlLect1.setFont(font);
+    	jlLect1.setBounds(451,77,50,20);
+    	add(jlLect1);
+    	
+    	jlCapa1 = new JLabel("정원");//정원라벨
+    	jlCapa1.setFont(font);
+    	jlCapa1.setBounds(590,77,50,20);
+    	add(jlCapa1);
+    	
+    	jlCredit1 = new JLabel("학점");//학점라벨
+    	jlCredit1.setFont(font);
+    	jlCredit1.setBounds(735,77,50,20);
+    	add(jlCredit1);
+    	
+    	jlInCart1 = new JLabel("장바구니");//장바구니라벨
+    	jlInCart1.setFont(font);
+    	jlInCart1.setBounds(880,77,80,20);
+    	add(jlInCart1);    	
+    	
+		///////////////////////////////////////////////////////////
+    	
+    	
+    	jlCart = new JLabel("장바구니");//수강신청라벨
+    	jlCart.setFont(new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 20));
+    	jlCart.setBounds(450, 293, 100, 30);
+    	add(jlCart);
+    	
+    	
+    	
+    	jlDept2 = new JLabel("학과");//학과라벨
+    	jlDept2.setFont(font);
+    	jlDept2.setBounds(28,328,50,20);
+    	add(jlDept2);
+    	
+    	jlCrs2 = new JLabel("과목");//과목라벨
+    	jlCrs2.setFont(font);
+    	jlCrs2.setBounds(170,328,50,20);
+    	add(jlCrs2);
+    	
+    	jlCrsCode2 = new JLabel("과목코드");//과목코드라벨
+    	jlCrsCode2.setFont(font);
+    	jlCrsCode2.setBounds(300,328,70,20);
+    	add(jlCrsCode2);
+    	
+    	jlLect2 = new JLabel("강의실");//강의실라벨
+    	jlLect2.setFont(font);
+    	jlLect2.setBounds(451,328,50,20);
+    	add(jlLect2);
+    	
+    	jlCapa2 = new JLabel("정원");//정원라벨
+    	jlCapa2.setFont(font);
+    	jlCapa2.setBounds(590,328,50,20);
+    	add(jlCapa2);
+    	
+    	jlCredit2 = new JLabel("학점");//학점라벨
+    	jlCredit2.setFont(font);
+    	jlCredit2.setBounds(735,328,50,20);
+    	add(jlCredit2);
+    	
+    	jlInCart2 = new JLabel("장바구니");//장바구니라벨
+    	jlInCart2.setFont(font);
+    	jlInCart2.setBounds(880,328,80,20);
+    	add(jlInCart2);   
+		
+    	
+    	
+    	jbtnEnroll = new JButton("최종수강");
+    	jbtnEnroll.setBounds(880,328,80,20);
+    	add(jbtnEnroll);   
+		
+		
+		
+		
 
+
+        
+        
+        
+        
+        
         ////////////////////////////////////////////////////////////////////////
         int numberOfInnerPanels1 = 10; // outerPanel1에 추가할 innerPanel의 수
         ///////////////////////////////////////////////////////////////////
+        
+        
         
         
         for (int i = 0; i < numberOfInnerPanels1; i++) {
@@ -73,10 +212,10 @@ public class AdminAdminMgtDesign extends JDialog {
         JScrollPane jsp2 = new JScrollPane(outerPanel2); // outerPanel2을 JScrollPane의 viewport에 추가
         jsp2.setBounds(15, 350, 950, 200);
         add(jsp2);
-        jlBack = new JLabel(new ImageIcon("C:/dev/image/common/back1.png"));
+        jlBack = new JLabel(new ImageIcon(commonPath+"back1.png"));
         jlBack.setBounds(0,0,984,620);
         
-        jlSistMark = new JLabel(new ImageIcon("C:/dev/image/common/sistMark.png"));
+        jlSistMark = new JLabel(new ImageIcon(commonPath+"sistMark.png"));
         jlSistMark .setBounds(5,5,66,42);
         
         jlSistTitle = new JLabel("살려조쌍용대학교");
@@ -85,20 +224,20 @@ public class AdminAdminMgtDesign extends JDialog {
         jlSistTitle.setForeground(Color.white);
         
         
-        jlTitleColor = new JLabel(new ImageIcon("C:/dev/image/admin/back.png"));
+        
+        jlTitleColor = new JLabel(new ImageIcon(adminPath+"back.png"));
         jlTitleColor.setBounds(16, 44,949, 28);
         
-        
-        jlTitle1 = new JLabel(new ImageIcon("C:/dev/image/admin/title1.png"));
+        jlTitle1 = new JLabel(new ImageIcon(adminPath+"title1.png"));
         jlTitle1.setBounds(16, 72,949, 28);
         
-        jlTitle2 = new JLabel(new ImageIcon("C:/dev/image/admin/back1.png"));
+        jlTitle2 = new JLabel(new ImageIcon(adminPath+"back1.png"));
         jlTitle2.setBounds(16, 294,949, 28);
         
-        jlTitle3 = new JLabel(new ImageIcon("C:/dev/image/admin/back1.png"));
+        jlTitle3 = new JLabel(new ImageIcon(adminPath+"back1.png"));
         jlTitle3.setBounds(16, 551,949, 40);
         
-        jlTitle4 = new JLabel(new ImageIcon("C:/dev/image/admin/title1.png"));
+        jlTitle4 = new JLabel(new ImageIcon(adminPath+"title1.png"));
         jlTitle4.setBounds(16, 322,949, 28);
         
         add(jlSistTitle);
