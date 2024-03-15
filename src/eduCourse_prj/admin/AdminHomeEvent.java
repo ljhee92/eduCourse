@@ -38,7 +38,7 @@ public class AdminHomeEvent extends WindowAdapter implements ActionListener {
 		}
 		if (ae.getSource() == awd.getJbtDeptMgt()) {
 			JOptionPane.showMessageDialog(awd, "학과 관리 클릭");
-			new AdminDeptMgtDialog(awd, "학과 관리");
+			new AdminDeptMgtDesign(awd, "학과 관리");
 		}
 		if (ae.getSource() == awd.getJbtStudMgt()) {
 			JOptionPane.showMessageDialog(awd, "학생 관리 클릭");
