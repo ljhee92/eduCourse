@@ -9,7 +9,7 @@ import java.awt.event.WindowEvent;
 public class AdminAcadCalEvent extends WindowAdapter implements ActionListener{
 	
 	AdminAcadCalDesign aacd;
-	
+	int i=0;
 	public AdminAcadCalEvent(AdminAcadCalDesign aacd) {
 		this.aacd = aacd;
 	}
