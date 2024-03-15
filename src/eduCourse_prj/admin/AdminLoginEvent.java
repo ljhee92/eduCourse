@@ -72,7 +72,7 @@ public class AdminLoginEvent extends WindowAdapter implements ActionListener {
 
 		if (ae.getSource() == ald.getLoginButton()) {
 			//JOptionPane.showMessageDialog(null, "로그인 버튼이 클릭되었습니다.");
-			AdminLoginDAO alDAO = AdminLoginDAO.getInstance();
+			AdminDAO alDAO = AdminDAO.getInstance();
 			String id = "";
 			String pass = "";
 
