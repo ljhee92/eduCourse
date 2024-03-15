@@ -1,15 +1,13 @@
 package eduCourse_prj.login;
 
-import javax.swing.*;
-
-import eduCourse_prj.admin.AdminLoginDesign;
-import eduCourse_prj.professor.ProfessorLoginDesign;
-import eduCourse_prj.student.StudentLoginDesign;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
+import eduCourse_prj.admin.AdminLoginDesign;
+import eduCourse_prj.professor.ProfessorLoginDesign;
+import eduCourse_prj.student.StudentLoginDesign;
 
 public class SelectLoginEvent extends WindowAdapter implements ActionListener {
 	private SelectLoginDesign sld;
