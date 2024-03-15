@@ -9,9 +9,9 @@ import javax.swing.JOptionPane;
 
 import eduCourse_prj.login.SelectLoginDesign;
 
-public class StudentHomeEvent extends WindowAdapter  implements ActionListener {
-	private StudentHomeDesign swd;
-	public StudentHomeEvent( StudentHomeDesign swd) {
+public class StdntHomeEvent extends WindowAdapter  implements ActionListener {
+	private StdntHomeDesign swd;
+	public StdntHomeEvent( StdntHomeDesign swd) {
 		this.swd =swd;
 		
 	}
