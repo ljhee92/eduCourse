@@ -116,6 +116,11 @@ public class AdminHomeDesign extends JFrame {
 		setLocationRelativeTo(null);
 	}
 
+	public LoginVO getlVO() {
+		return lVO;
+	}
+
+
 	public LoginVO getLoginVO() {
 		return lVO;
 	}
