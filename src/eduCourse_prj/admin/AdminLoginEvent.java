@@ -72,7 +72,7 @@ public class AdminLoginEvent extends WindowAdapter implements ActionListener {
 
 		if (ae.getSource() == ald.getLoginButton()) {
 			//JOptionPane.showMessageDialog(null, "로그인 버튼이 클릭되었습니다.");
-			AdminLoginDAO alDAO = AdminLoginDAO.getInstance();
+			AdminDAO aDAO = AdminDAO.getInstance();
 			String id = "";
 			String pass = "";
 
@@ -108,7 +108,7 @@ public class AdminLoginEvent extends WindowAdapter implements ActionListener {
 			LoginVO LoginResult = null;
 			try {
 
-				LoginResult = alDAO.AdminLogin(lVO);
+				LoginResult = aDAO.adminLogin(lVO);
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -126,5 +126,9 @@ public class AdminLoginEvent extends WindowAdapter implements ActionListener {
 		}
 
 	}
+	
+	
+	
+	
 
 }
