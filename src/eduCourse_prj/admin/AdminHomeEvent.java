@@ -46,7 +46,7 @@ public class AdminHomeEvent extends WindowAdapter implements ActionListener {
 		}
 		if (ae.getSource() == awd.getJbtCourMgt()) {
 			JOptionPane.showMessageDialog(awd, "과목 관리 클릭");
-			new AdminCourDesign(awd, "과목 관리");
+			new AdminCrsDesign(awd, "과목 관리");
 		}
 		if (ae.getSource() == awd.getJbtSchedMgt()) {
 			JOptionPane.showMessageDialog(awd, "일정 관리 클릭");
