@@ -7,10 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import eduCourse_prj.DbConnection;
 import eduCourse_prj.VO.LoginVO;
 import eduCourse_prj.VO.ProfVO;
-import oracle.jdbc.proxy.annotation.Pre;
 
 public class ProfessorDAO {
 	private static ProfessorDAO pDAO;
@@ -89,7 +90,7 @@ public class ProfessorDAO {
 			
 			con = dbCon.getConnection(id, pass);
 			
-			String selectProfMgt = "select prof_number, prof_name from professor";
+			String selectProfMgt = "select prof_number, prof_name from professor order by prof_number";
 			pstmt = con.prepareStatement(selectProfMgt);
 			
 			rs = pstmt.executeQuery();
@@ -105,6 +106,12 @@ public class ProfessorDAO {
 		return listProfVO;
 	} // slctProfMgt
 	
+	/**
+	 * 관리자 모드 > 교수 관리 > 교수 상세 조회를 위한 method
+	 * @param prof_number
+	 * @return
+	 * @throws SQLException
+	 */
 	public List<ProfVO> slctProfMgsSlct(int prof_number) throws SQLException{
 		List<ProfVO> listProfVO = new ArrayList<ProfVO>();
 		ProfVO pVO = null;
@@ -122,7 +129,6 @@ public class ProfessorDAO {
 			
 			String selectProf = "select distinct p.prof_number, p.prof_name, p.prof_email, d.dept_name "
 								+ "from professor p "
-								+ "join lecture l on l.prof_number = p.prof_number "
 								+ "join dept d on d.dept_code = p.dept_code "
 								+ "where p.prof_number = ?";
 			pstmt = con.prepareStatement(selectProf);
@@ -139,4 +145,51 @@ public class ProfessorDAO {
 		
 		return listProfVO;
 	} // slctProfMgtSlct
+	
+	/**
+	 * 관리자모드 > 교수 등록 구현부 
+	 * @param pVO
+	 * @throws SQLException
+	 */
+	public void addProf(ProfVO pVO) throws SQLException {
+		DbConnection dbCon = DbConnection.getInstance();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
+		ResultSet rs = null;
+		
+		try {
+			String id = "scott";
+			String pass = "tiger";
+			con = dbCon.getConnection(id, pass);
+			
+			// 교수 번호 확인 후, max 교번+1로 추가
+			int prof_num = 000000001;
+			String checkProfNum = "select max(prof_number) from professor";
+			pstmt = con.prepareStatement(checkProfNum);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				int lastProfNum = rs.getInt(1);
+				prof_num = lastProfNum +1;
+			} // end if
+			
+			String addProf = "insert into professor(PROF_NUMBER, PROF_PASSWORD, PROF_NAME, PROF_EMAIL, DEPT_CODE)"
+							+ "	values(?, ?, ?, ?, (select dept_code from dept where dept_name = ?))";
+			pstmt2 = con.prepareStatement(addProf);
+			
+			pstmt2.setInt(1, prof_num);
+			pstmt2.setString(2, pVO.getProf_password());
+			pstmt2.setString(3, pVO.getProf_name());
+			pstmt2.setString(4, pVO.getProf_email());
+			pstmt2.setString(5, pVO.getDept_name());
+			
+			pstmt2.executeUpdate();
+			JOptionPane.showMessageDialog(null, "교수가 성공적으로 등록되었습니다.");
+		} finally {
+			dbCon.dbClose(rs, pstmt, con);
+			dbCon.dbClose(rs, pstmt2, con);
+		} // end finally
+		
+	} // addProf
 } // class

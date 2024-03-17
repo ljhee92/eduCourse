@@ -1,15 +1,12 @@
 package eduCourse_prj.admin;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -19,11 +16,11 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-import eduCourse_prj.VO.LoginVO;
 import eduCourse_prj.VO.ProfVO;
 import eduCourse_prj.professor.ProfessorDAO;
 
 
+@SuppressWarnings("serial")
 public class AdminProfMgtDesign extends JDialog {
 	private AdminHomeDesign awd;
 	
@@ -53,7 +50,7 @@ public class AdminProfMgtDesign extends JDialog {
 		
 		// 교수관리 라벨 추가
 		profMgt = new JLabel(new ImageIcon(profPath + "ProfMgt.png"));
-		profMgt.setBounds(10, 75, 967, 44);
+		profMgt.setBounds(10, 76, 967, 44);
 		add(profMgt);
 		
 		// 테이블 추가
@@ -159,6 +156,10 @@ public class AdminProfMgtDesign extends JDialog {
 
 	public DefaultTableModel getDtmProfMgt() {
 		return dtmProfMgt;
+	}
+
+	public AdminHomeDesign getAwd() {
+		return awd;
 	}
 	
 } // class
