@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import eduCourse_prj.VO.ProfVO;
-import eduCourse_prj.professor.ProfessorDAO;
+import eduCourse_prj.professor.ProfDAO;
 
 
 @SuppressWarnings("serial")
@@ -108,7 +108,7 @@ public class AdminProfMgtDesign extends JDialog {
 	 * DB에서 교번, 이름을 불러와 테이블에 넣는 method
 	 */
 	public void slctProfMgt() {
-		ProfessorDAO pDAO = ProfessorDAO.getInstance();
+		ProfDAO pDAO = ProfDAO.getInstance();
 		try {
 			List<ProfVO> listProfVO = pDAO.slctProfMgt();
 			

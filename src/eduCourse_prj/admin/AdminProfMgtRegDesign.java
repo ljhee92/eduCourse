@@ -17,8 +17,6 @@ import eduCourse_prj.VO.DeptVO;
 
 public class AdminProfMgtRegDesign extends JDialog {
 	
-	private AdminProfMgtDesign apmd;
-	
 	private JLabel jlBack; //배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
 	private JLabel profMgt, profMgtReg, photo, jlProfNum, jlProfName, jlProfPass, jlProfEmail, jlDept, jlNecessary;
@@ -29,7 +27,6 @@ public class AdminProfMgtRegDesign extends JDialog {
 	
 	public AdminProfMgtRegDesign(AdminProfMgtDesign apmd, String title) {
 		super(apmd, title, true);
-		this.apmd = apmd;
 		
 		setLayout(null);
 		

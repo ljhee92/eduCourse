@@ -11,7 +11,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import eduCourse_prj.VO.ProfVO;
-import eduCourse_prj.professor.ProfessorDAO;
+import eduCourse_prj.professor.ProfDAO;
 
 public class AdminProfMgtEvent extends WindowAdapter implements ActionListener {
 	
@@ -37,19 +37,19 @@ public class AdminProfMgtEvent extends WindowAdapter implements ActionListener {
 			} // end if
 			try {
 				int prof_number = Integer.parseInt(apmd.getDtmProfMgt().getValueAt(index, 0).toString());
-				ProfessorDAO pDAO = ProfessorDAO.getInstance();
-				List<ProfVO> listPVO = pDAO.slctProfMgsSlct(prof_number);
+				
+				ProfDAO pDAO = ProfDAO.getInstance();
+				ProfVO pVO = pDAO.slctProfMgsSlct(prof_number);
+				
 				StringBuilder output = new StringBuilder();
-				for(ProfVO pVO : listPVO) {
-					output.append("교번: ").append(pVO.getProf_number()).append("\n");
-					output.append("이름: ").append(pVO.getProf_name()).append("\n");
-					output.append("이메일: ").append(pVO.getProf_email()!=null?pVO.getProf_email():"").append("\n");
-					output.append("소속학과: ").append(pVO.getDept_name()).append("\n");
-					JTextArea jta = new JTextArea(output.toString(), 8, 50);
-					JScrollPane jsp = new JScrollPane(jta);
-					jta.setEditable(false);
-					JOptionPane.showMessageDialog(apmd, jsp, "교수 상세 조회", JOptionPane.INFORMATION_MESSAGE);
-				} // end for
+				output.append("교번: ").append(pVO.getProf_number()).append("\n");
+				output.append("이름: ").append(pVO.getProf_name()).append("\n");
+				output.append("이메일: ").append(pVO.getProf_email()!=null?pVO.getProf_email():"").append("\n");
+				output.append("소속학과: ").append(pVO.getDept_name()).append("\n");
+				JTextArea jta = new JTextArea(output.toString(), 8, 50);
+				JScrollPane jsp = new JScrollPane(jta);
+				jta.setEditable(false);
+				JOptionPane.showMessageDialog(apmd, jsp, "교수 상세 조회", JOptionPane.INFORMATION_MESSAGE);
 			} catch (SQLException e1) {
 				JOptionPane.showMessageDialog(apmd, "SQL 문제가 발생했습니다.");
 				e1.printStackTrace();
@@ -80,7 +80,7 @@ public class AdminProfMgtEvent extends WindowAdapter implements ActionListener {
 			case JOptionPane.NO_OPTION : return;
 			case JOptionPane.OK_OPTION :
 				try {
-				ProfessorDAO pDAO = ProfessorDAO.getInstance();
+				ProfDAO pDAO = ProfDAO.getInstance();
 				int prof_number = Integer.parseInt(apmd.getDtmProfMgt().getValueAt(index, 0).toString());
 
 				pDAO.deleteProf(prof_number);
