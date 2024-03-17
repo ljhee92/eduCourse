@@ -41,7 +41,7 @@ public class AdminProfMgtDesign extends JDialog {
 		String profPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/prof/";
 		
 		// 우상단 로그인상태 확인창 추가
-		topLogin = new JLabel(awd.getLoginVO().getName() + " 관리자님 로그인 중");
+		topLogin = new JLabel(awd.getlVO().getName() + " 관리자님 로그인 중");
 		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.RED);

@@ -30,8 +30,12 @@ public class AdminProfMgtEvent extends WindowAdapter implements ActionListener {
 		
 		// 교수 정보 상세 조회 클릭
 		if(e.getSource() == apmd.getJbtnSlct()) {
+			int index = apmd.getJtbProfMgt().getSelectedRow();
+			if(index == -1) {
+				JOptionPane.showMessageDialog(apmd, "조회할 교수님을 선택해주세요.");
+				return;
+			} // end if
 			try {
-				int index = apmd.getJtbProfMgt().getSelectedRow();
 				int prof_number = Integer.parseInt(apmd.getDtmProfMgt().getValueAt(index, 0).toString());
 				ProfessorDAO pDAO = ProfessorDAO.getInstance();
 				List<ProfVO> listPVO = pDAO.slctProfMgsSlct(prof_number);
@@ -54,11 +58,22 @@ public class AdminProfMgtEvent extends WindowAdapter implements ActionListener {
 		
 		// 교수 정보 수정 버튼 클릭
 		if(e.getSource() == apmd.getJbtnMdfy()) {
-			JOptionPane.showMessageDialog(apmd, "수정버튼");
+			int index = apmd.getJtbProfMgt().getSelectedRow();
+			if(index == -1) {
+				JOptionPane.showMessageDialog(apmd, "수정할 교수님을 선택해주세요.");
+				return;
+			} // end if
+			new AdminProfMgtMdfyDesign(apmd, "교수 정보 수정");
 		} // end if
 		
 		// 교수 정보 삭제 버튼 클릭
 		if(e.getSource() == apmd.getJbtnDel()) {
+			int index = apmd.getJtbProfMgt().getSelectedRow();
+			if(index == -1) {
+				JOptionPane.showMessageDialog(apmd, "삭제할 교수님을 선택해주세요.");
+				return;
+			} // end if
+			
 			int deleteFlag = JOptionPane.showConfirmDialog(apmd, "정말 삭제하시겠습니까?");
 			switch(deleteFlag) {
 			case JOptionPane.CANCEL_OPTION :
@@ -66,7 +81,6 @@ public class AdminProfMgtEvent extends WindowAdapter implements ActionListener {
 			case JOptionPane.OK_OPTION :
 				try {
 				ProfessorDAO pDAO = ProfessorDAO.getInstance();
-				int index = apmd.getJtbProfMgt().getSelectedRow();
 				int prof_number = Integer.parseInt(apmd.getDtmProfMgt().getValueAt(index, 0).toString());
 
 				pDAO.deleteProf(prof_number);
