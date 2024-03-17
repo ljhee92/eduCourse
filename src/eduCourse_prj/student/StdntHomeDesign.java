@@ -11,7 +11,7 @@ import eduCourse_prj.VO.LoginVO;
 
 
 @SuppressWarnings({ "serial", "unused" })
-public class StudentHomeDesign extends JFrame {
+public class StdntHomeDesign extends JFrame {
 	private LoginVO lVO;
 
 	private JButton jbtnEnrollCour, jbtnEnrollHist, jbtnExamAttendResu, jbtnJbtnExamCorr, jbtnInfoUpda,
@@ -28,7 +28,7 @@ public class StudentHomeDesign extends JFrame {
 
 	
 	
-	public StudentHomeDesign(LoginVO lVO) {
+	public StdntHomeDesign(LoginVO lVO) {
 		super("학생 작업창");
 
 		this.lVO = lVO;
@@ -111,7 +111,7 @@ public class StudentHomeDesign extends JFrame {
 		
 		//AdminWorkEvent와 has a관계 설정
 		
-		StudentHomeEvent awe = new StudentHomeEvent(this);
+		StdntHomeEvent awe = new StdntHomeEvent(this);
 		addWindowListener(awe);
 		jbtnEnrollCour.addActionListener(awe);
 		jbtnEnrollHist.addActionListener(awe);
@@ -178,6 +178,12 @@ public class StudentHomeDesign extends JFrame {
 
 	public JButton getJbtnLogout() {
 		return jbtnLogout;
+	}
+
+
+
+	public JLabel getTopLogin() {
+		return topLogin;
 	}
 
 
