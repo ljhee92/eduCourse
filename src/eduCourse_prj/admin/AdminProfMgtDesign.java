@@ -75,13 +75,13 @@ public class AdminProfMgtDesign extends JDialog {
 		
 		// 교수등록, 조회, 수정, 삭제 버튼 추가
 		jbtnProfReg = new JButton(new ImageIcon(profPath + "ProfReg.png"));
-		jbtnSlct = new JButton(new ImageIcon(commonPath + "Slct_s.png"));
-		jbtnMdfy = new JButton(new ImageIcon(commonPath + "Mdfy_s.png"));
-		jbtnDel = new JButton(new ImageIcon(commonPath + "Del_s.png"));
+		jbtnSlct = new JButton(new ImageIcon(commonPath + "Slct.png"));
+		jbtnMdfy = new JButton(new ImageIcon(commonPath + "Mdfy.png"));
+		jbtnDel = new JButton(new ImageIcon(commonPath + "Del.png"));
 		jbtnProfReg.setBounds(150, 500, 168, 59);
-		jbtnSlct.setBounds(400, 500, 80, 40);
-		jbtnMdfy.setBounds(500, 500, 80, 40);
-		jbtnDel.setBounds(600, 500, 80, 40);
+		jbtnSlct.setBounds(400, 500, 111, 59);
+		jbtnMdfy.setBounds(550, 500, 111, 59);
+		jbtnDel.setBounds(700, 500, 111, 59);
 		add(jbtnProfReg);
 		add(jbtnSlct);
 		add(jbtnMdfy);
