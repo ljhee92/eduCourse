@@ -6,7 +6,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import eduCourse_prj.admin.AdminLoginDesign;
-import eduCourse_prj.professor.ProfessorLoginDesign;
+import eduCourse_prj.professor.ProfLoginDesign;
 import eduCourse_prj.student.StudentLoginDesign;
 
 public class SelectLoginEvent extends WindowAdapter implements ActionListener {
@@ -28,7 +28,7 @@ public class SelectLoginEvent extends WindowAdapter implements ActionListener {
 		}
 		if (ae.getSource() == sld.getProfessorButton()) {
 			//JOptionPane.showMessageDialog(null, "교수 버튼이 클릭되었습니다.");
-			new ProfessorLoginDesign(this);
+			new ProfLoginDesign(this);
 			sld.dispose();
 		}
 		if (ae.getSource() == sld.getStudentButton()) {

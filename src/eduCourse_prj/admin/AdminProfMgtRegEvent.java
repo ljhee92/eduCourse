@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 import eduCourse_prj.VO.ProfVO;
-import eduCourse_prj.professor.ProfessorDAO;
+import eduCourse_prj.professor.ProfDAO;
 
 public class AdminProfMgtRegEvent extends WindowAdapter implements ActionListener {
 
@@ -21,7 +21,7 @@ public class AdminProfMgtRegEvent extends WindowAdapter implements ActionListene
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == apmrd.getJbtnReg()) {
-			ProfessorDAO pDAO = ProfessorDAO.getInstance();
+			ProfDAO pDAO = ProfDAO.getInstance();
 			ProfVO pVO;
 			
 			String profName = apmrd.getJtfProfName().getText().trim();

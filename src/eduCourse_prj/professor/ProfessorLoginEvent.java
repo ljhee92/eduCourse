@@ -11,9 +11,9 @@ import javax.swing.JOptionPane;
 import eduCourse_prj.VO.LoginVO;
 
 public class ProfessorLoginEvent extends WindowAdapter implements ActionListener {
-	private ProfessorLoginDesign pld;
+	private ProfLoginDesign pld;
 
-	public ProfessorLoginEvent(ProfessorLoginDesign pld) {
+	public ProfessorLoginEvent(ProfLoginDesign pld) {
 		this.pld = pld;
 
 	}
@@ -81,7 +81,7 @@ public class ProfessorLoginEvent extends WindowAdapter implements ActionListener
 
 		if (ae.getSource() == pld.getLoginButton()) {
 		//	JOptionPane.showMessageDialog(null, "로그인 버튼이 클릭되었습니다.");
-			ProfessorDAO plDAO = ProfessorDAO.getInstance();
+			ProfDAO plDAO = ProfDAO.getInstance();
 			int id = 0;
 			String pass = "";
 
@@ -127,7 +127,7 @@ public class ProfessorLoginEvent extends WindowAdapter implements ActionListener
 
 			if (LoginResult != null) {// 객체가 존재하면 로그인 성공
 				JOptionPane.showMessageDialog(pld, LoginResult.getName()+ "교수님 로그인 성공");
-				new ProfessorHomeDesign(LoginResult);
+				new ProfHomeDesign(LoginResult);
 				pld.dispose();
 			} else {
 				JOptionPane.showMessageDialog(pld, "로그인 실패\n 로그인 정보를 다시 확인해주세요.");

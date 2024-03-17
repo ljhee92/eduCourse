@@ -9,7 +9,7 @@ import eduCourse_prj.login.SelectLoginEvent;
 
 
 @SuppressWarnings("serial")
-public class ProfessorLoginDesign extends JFrame {
+public class ProfLoginDesign extends JFrame {
 	
 	private SelectLoginEvent sle;
     private JTextField jtfId;
@@ -27,7 +27,7 @@ public class ProfessorLoginDesign extends JFrame {
 
     
 
-   public  ProfessorLoginDesign(SelectLoginEvent sle) {
+   public  ProfLoginDesign(SelectLoginEvent sle) {
 
         super("교수 로그인");
         this.sle = sle;

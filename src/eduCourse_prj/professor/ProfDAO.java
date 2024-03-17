@@ -13,15 +13,15 @@ import eduCourse_prj.DbConnection;
 import eduCourse_prj.VO.LoginVO;
 import eduCourse_prj.VO.ProfVO;
 
-public class ProfessorDAO {
-	private static ProfessorDAO pDAO;
+public class ProfDAO {
+	private static ProfDAO pDAO;
 
-	private ProfessorDAO() {
+	private ProfDAO() {
 	}
 
-	public static ProfessorDAO getInstance() {
+	public static ProfDAO getInstance() {
 		if (pDAO == null) {
-			pDAO = new ProfessorDAO();
+			pDAO = new ProfDAO();
 		} // end if
 		return pDAO;
 	}
@@ -112,8 +112,7 @@ public class ProfessorDAO {
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<ProfVO> slctProfMgsSlct(int prof_number) throws SQLException{
-		List<ProfVO> listProfVO = new ArrayList<ProfVO>();
+	public ProfVO slctProfMgsSlct(int prof_number) throws SQLException{
 		ProfVO pVO = null;
 		DbConnection dbCon = DbConnection.getInstance();
 		
@@ -137,13 +136,13 @@ public class ProfessorDAO {
 			
 			while(rs.next()) {
 				pVO = new ProfVO(prof_number, rs.getString("prof_name"), rs.getString("prof_email"), rs.getString("dept_name"));
-				listProfVO.add(pVO);
 			} // end while
 		} finally {
 			dbCon.dbClose(rs, pstmt, con);
 		} // end finally
 		
-		return listProfVO;
+		return pVO;
+//		return listProfVO;
 	} // slctProfMgtSlct
 	
 	/**
