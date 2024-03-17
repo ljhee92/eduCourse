@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 import eduCourse_prj.VO.ProfVO;
-import eduCourse_prj.professor.ProfessorDAO;
+import eduCourse_prj.professor.ProfDAO;
 
 public class AdminProfMgtMdfyEvent extends WindowAdapter implements ActionListener {
 
@@ -23,7 +23,7 @@ public class AdminProfMgtMdfyEvent extends WindowAdapter implements ActionListen
 		// 수정버튼 클릭
 		if(e.getSource() == apmmd.getJbtnMdfy()) {
 			JOptionPane.showMessageDialog(apmmd, "수정버튼 클릭");
-			ProfessorDAO pDAO = ProfessorDAO.getInstance();
+			ProfDAO pDAO = ProfDAO.getInstance();
 			
 			int profNum = Integer.parseInt(apmmd.getJtfProfNum().getText().trim());
 			

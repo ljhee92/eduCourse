@@ -3,15 +3,17 @@ package eduCourse_prj.professor;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.sql.SQLException;
 
 import javax.swing.*;
 
 import eduCourse_prj.VO.LoginVO;
+import eduCourse_prj.VO.ProfVO;
 
 
 
 @SuppressWarnings({ "serial", "unused" })
-public class ProfessorHomeDesign extends JFrame {
+public class ProfHomeDesign extends JFrame {
 	private LoginVO lVO;
 
 	private JButton jbtnCourMgt, jbtnExamMgtGrad, jbtnStudMgt, jbtnStudySucc, jbtnInfoUpda,
@@ -23,8 +25,9 @@ public class ProfessorHomeDesign extends JFrame {
 	JLabel name; // 이름
 	JLabel back ; // 배경사진 라벨
 	JLabel topLogin ;// 우상단 로그인상태 확인창
+	JLabel dept, email;
 	
-	public ProfessorHomeDesign(LoginVO lVO) {
+	public ProfHomeDesign(LoginVO lVO) {
 		super("관리자 작업창");
 
 		this.lVO = lVO;
@@ -34,14 +37,26 @@ public class ProfessorHomeDesign extends JFrame {
 		String commonPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/common/";
 		String profPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/prof/";
 
-		
 		back = new JLabel(new ImageIcon(commonPath+"back.png"));
 		role = new JLabel("권한 : 교수");
 		showId = new JLabel("ID : " + lVO.getId());
 		name = new JLabel("이름 : " + lVO.getName());
+		
+		ProfDAO pDAO = ProfDAO.getInstance();
+		ProfVO pVO = null;
+		
+		try {
+			pVO = pDAO.slctProfMgsSlct(Integer.parseInt(lVO.getId()));
+			dept = new JLabel("소속학과 : " + pVO.getDept_name());
+			email = new JLabel("이메일 : " + (pVO.getProf_email() == null ? "" : pVO.getProf_email()));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} // end catch
 
 		topLogin = new JLabel(lVO.getName()+" 교수님 로그인 중");
-		img = new JLabel(new ImageIcon(commonPath+"img.png"));
+		img = new JLabel(new ImageIcon(commonPath+"photo.png"));
 		
 		
 		jbtnCourMgt = new JButton(new ImageIcon(profPath+"CourMgt.png"));
@@ -62,6 +77,8 @@ public class ProfessorHomeDesign extends JFrame {
 		role.setFont(font);
 		showId.setFont(font);
 		name.setFont(font);
+		dept.setFont(font);
+		email.setFont(font);
 
 		/////////////////////////////////////////////////
 		
@@ -73,9 +90,11 @@ public class ProfessorHomeDesign extends JFrame {
 		
 		back.setBounds(0, 0, 984, 620);//성공
 		
-		role.setBounds(520,200,150,20);
-		showId.setBounds(520,230,150,20);
-		name.setBounds(520, 260, 150, 20);
+		role.setBounds(520,150,150,20);
+		showId.setBounds(520,190,150,20);
+		name.setBounds(520, 230, 150, 20);
+		dept.setBounds(520, 270, 150, 20);
+		email.setBounds(520, 310, 300, 20);
 		topLogin.setBounds(670,30,200,20);
 		img.setBounds(310, 150, 160, 188);
 		
@@ -95,6 +114,8 @@ public class ProfessorHomeDesign extends JFrame {
 		add(img);
 		add(showId);
 		add(name);
+		add(dept);
+		add(email);
 		add(jbtnCourMgt);
 		add(jbtnExamMgtGrad);
 		add(jbtnStudMgt);
@@ -108,7 +129,7 @@ public class ProfessorHomeDesign extends JFrame {
 		
 		//AdminWorkEvent와 has a관계 설정
 		
-		ProfessorHomeEvent awe = new ProfessorHomeEvent(this);
+		ProfHomeEvent awe = new ProfHomeEvent(this);
 		addWindowListener(awe);
 		jbtnCourMgt.addActionListener(awe);
 		jbtnExamMgtGrad.addActionListener(awe);
