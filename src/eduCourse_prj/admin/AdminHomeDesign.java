@@ -120,11 +120,6 @@ public class AdminHomeDesign extends JFrame {
 		return lVO;
 	}
 
-
-	public LoginVO getLoginVO() {
-		return lVO;
-	}
-
 	public JButton getJbtAdminMgt() {
 		return jbtAdminMgt;
 	}

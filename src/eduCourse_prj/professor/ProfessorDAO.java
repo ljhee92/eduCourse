@@ -218,4 +218,37 @@ public class ProfessorDAO {
 			dbCon.dbClose(null, pstmt, con);
 		} // end finally
 	} // deleteProf
+	
+	/**
+	 * 관리자모드 > 교수 관리에서 교수 정보 수정을 위한 method
+	 * @param pVO
+	 * @throws SQLException
+	 */
+	public void modifyProf(ProfVO pVO) throws SQLException {
+		DbConnection dbCon = DbConnection.getInstance();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			String id = "scott";
+			String pass = "tiger";
+			
+			con = dbCon.getConnection(id, pass);
+			 
+			String modifyProf = "update professor set prof_name = ?, prof_password = ?, prof_email = ?, "
+					+ "dept_code = (select dept_code from dept where dept_name = ?) where prof_number = ?";
+			pstmt = con.prepareStatement(modifyProf);
+			
+			pstmt.setString(1, pVO.getProf_name());
+			pstmt.setString(2, pVO.getProf_password());
+			pstmt.setString(3, pVO.getProf_email());
+			pstmt.setString(4, pVO.getDept_name());
+			pstmt.setInt(5, pVO.getProf_number());
+			
+			pstmt.executeUpdate();
+		} finally {
+			dbCon.dbClose(null, pstmt, con);
+		} // end finally
+	} // modifyProf
 } // class

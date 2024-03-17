@@ -21,7 +21,6 @@ public class AdminProfMgtRegEvent extends WindowAdapter implements ActionListene
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == apmrd.getJbtnReg()) {
-			JOptionPane.showMessageDialog(apmrd, "등록버튼 클릭");
 			ProfessorDAO pDAO = ProfessorDAO.getInstance();
 			ProfVO pVO;
 			
@@ -37,7 +36,6 @@ public class AdminProfMgtRegEvent extends WindowAdapter implements ActionListene
 				Character.toString(cha);
 				profPass += (profPass.equals("")) ? "" + cha + "" : cha + "";
 			} // end for
-			System.out.println(profPass);
 			if(profPass.isEmpty()) {
 				JOptionPane.showMessageDialog(apmrd, "비밀번호는 필수 입력 사항입니다.");
 				return;

@@ -15,19 +15,19 @@ import javax.swing.JTextField;
 
 import eduCourse_prj.VO.DeptVO;
 
-public class AdminProfMgtRegDesign extends JDialog {
+public class AdminProfMgtMdfyDesign extends JDialog {
 	
 	private AdminProfMgtDesign apmd;
 	
 	private JLabel jlBack; //배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
-	private JLabel profMgt, profMgtReg, photo, jlProfNum, jlProfName, jlProfPass, jlProfEmail, jlDept, jlNecessary;
+	private JLabel profMgt, profMgtMdfy, photo, jlProfNum, jlProfName, jlProfPass, jlProfEmail, jlDept, jlNecessary;
 	private JTextField jtfProfNum, jtfProfName, jtfProfEmail;
 	private JPasswordField jpfProfPass;
 	private JComboBox<String> jcbDept;
-	private JButton jbtnReg, jbtnCancel;
+	private JButton jbtnMdfy, jbtnCancel;
 	
-	public AdminProfMgtRegDesign(AdminProfMgtDesign apmd, String title) {
+	public AdminProfMgtMdfyDesign(AdminProfMgtDesign apmd, String title) {
 		super(apmd, title, true);
 		this.apmd = apmd;
 		
@@ -44,13 +44,13 @@ public class AdminProfMgtRegDesign extends JDialog {
 		topLogin.setBounds(670, 30, 200, 20);
 		add(topLogin);
 		
-		// 교수관리, 등록 라벨 추가
+		// 교수관리, 수정 라벨 추가
 		profMgt = new JLabel(new ImageIcon(profPath + "ProfMgt.png"));
-		profMgtReg = new JLabel(new ImageIcon(commonPath + "Reg_label.png"));
+		profMgtMdfy = new JLabel(new ImageIcon(commonPath + "Mdfy_label.png"));
 		profMgt.setBounds(10, 76, 967, 44);
-		profMgtReg.setBounds(10, 120, 967, 44);
+		profMgtMdfy.setBounds(10, 120, 967, 44);
 		add(profMgt);
-		add(profMgtReg);
+		add(profMgtMdfy);
 		
 		// 프로필 사진 추가
 		photo = new JLabel(new ImageIcon(commonPath + "photo.png"));
@@ -87,9 +87,14 @@ public class AdminProfMgtRegDesign extends JDialog {
 		add(jlDept);
 		add(jlNecessary);
 		
+		// JTable에서 선택된 교번, 이름 가져오기
+		int index = apmd.getJtbProfMgt().getSelectedRow();
+		String prof_number = apmd.getDtmProfMgt().getValueAt(index, 0).toString();
+		String prof_name = apmd.getDtmProfMgt().getValueAt(index, 1).toString();
+
 		// 교번, 이름, PW, 이메일, 소속학과 JTF, JPF, ComboBox 추가
-		jtfProfNum = new JTextField("교번 자동입력");
-		jtfProfName = new JTextField();
+		jtfProfNum = new JTextField(prof_number);
+		jtfProfName = new JTextField(prof_name);
 		jpfProfPass = new JPasswordField();
 		jtfProfEmail = new JTextField();
 		
@@ -120,21 +125,21 @@ public class AdminProfMgtRegDesign extends JDialog {
 		add(jtfProfEmail);
 		add(jcbDept);
 		
-		// 등록, 취소 버튼 추가
-		jbtnReg = new JButton(new ImageIcon(commonPath + "Reg.png"));
+		// 수정, 취소 버튼 추가
+		jbtnMdfy = new JButton(new ImageIcon(commonPath + "Mdfy.png"));
 		jbtnCancel = new JButton(new ImageIcon(commonPath + "Cancel.png"));
 		
-		jbtnReg.setBounds(345, 490, 111, 59);
+		jbtnMdfy.setBounds(345, 490, 111, 59);
 		jbtnCancel.setBounds(530, 490, 111, 59);
 		
-		add(jbtnReg);
+		add(jbtnMdfy);
 		add(jbtnCancel);
 				
 		// 이벤트 클래스 연결
-		AdminProfMgtRegEvent apmre = new AdminProfMgtRegEvent(this);
-		addWindowListener(apmre);
-		jbtnReg.addActionListener(apmre);
-		jbtnCancel.addActionListener(apmre);
+		AdminProfMgtMdfyEvent apmme = new AdminProfMgtMdfyEvent(this);
+		addWindowListener(apmme);
+		jbtnMdfy.addActionListener(apmme);
+		jbtnCancel.addActionListener(apmme);
 		
 		// 배경 추가
         jlBack = new JLabel(new ImageIcon(commonPath + "Back.png"));
@@ -145,12 +150,16 @@ public class AdminProfMgtRegDesign extends JDialog {
 		setVisible(true);
 	} // AdminProfMgtRegDesign
 
-	public JButton getJbtnReg() {
-		return jbtnReg;
+	public JButton getJbtnMdfy() {
+		return jbtnMdfy;
 	}
 
 	public JButton getJbtnCancel() {
 		return jbtnCancel;
+	}
+
+	public JTextField getJtfProfNum() {
+		return jtfProfNum;
 	}
 
 	public JTextField getJtfProfName() {
