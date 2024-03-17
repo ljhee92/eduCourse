@@ -81,7 +81,7 @@ public class ProfessorLoginEvent extends WindowAdapter implements ActionListener
 
 		if (ae.getSource() == pld.getLoginButton()) {
 		//	JOptionPane.showMessageDialog(null, "로그인 버튼이 클릭되었습니다.");
-			ProfessorLoginDAO plDAO = ProfessorLoginDAO.getInstance();
+			ProfessorDAO plDAO = ProfessorDAO.getInstance();
 			int id = 0;
 			String pass = "";
 

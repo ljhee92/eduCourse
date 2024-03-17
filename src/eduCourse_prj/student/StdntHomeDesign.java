@@ -182,6 +182,12 @@ public class StdntHomeDesign extends JFrame {
 
 
 
+	public JLabel getTopLogin() {
+		return topLogin;
+	}
+
+
+
 
 
 }
