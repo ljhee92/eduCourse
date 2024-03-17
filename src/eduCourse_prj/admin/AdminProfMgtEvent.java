@@ -42,7 +42,7 @@ public class AdminProfMgtEvent extends WindowAdapter implements ActionListener {
 					JTextArea jta = new JTextArea(output.toString(), 8, 50);
 					JScrollPane jsp = new JScrollPane(jta);
 					jta.setEditable(false);
-					JOptionPane.showMessageDialog(apmd, jsp);
+					JOptionPane.showMessageDialog(apmd, jsp, "교수 상세 조회", JOptionPane.INFORMATION_MESSAGE);
 				} // end for
 			} catch (SQLException e1) {
 				e1.printStackTrace();
