@@ -90,7 +90,7 @@ public class ProfessorDAO {
 			
 			con = dbCon.getConnection(id, pass);
 			
-			String selectProfMgt = "select prof_number, prof_name from professor order by prof_number";
+			String selectProfMgt = "select prof_number, prof_name from professor where prof_delete_flag = 'N' order by prof_number";
 			pstmt = con.prepareStatement(selectProfMgt);
 			
 			rs = pstmt.executeQuery();
@@ -185,11 +185,37 @@ public class ProfessorDAO {
 			pstmt2.setString(5, pVO.getDept_name());
 			
 			pstmt2.executeUpdate();
-			JOptionPane.showMessageDialog(null, "교수가 성공적으로 등록되었습니다.");
 		} finally {
 			dbCon.dbClose(rs, pstmt, con);
 			dbCon.dbClose(rs, pstmt2, con);
 		} // end finally
-		
 	} // addProf
+	
+	/**
+	 * 관리자모드 > 교수 관리에서 교수 삭제를 위한 method
+	 * @param prof_number
+	 * @throws SQLException
+	 */
+	public void deleteProf(int prof_number) throws SQLException {
+		DbConnection dbCon = DbConnection.getInstance();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			String id = "scott";
+			String pass = "tiger";
+			
+			con = dbCon.getConnection(id, pass);
+			
+			String deleteProf = "update professor set prof_delete_flag = 'Y' where prof_number = ?";
+			pstmt = con.prepareStatement(deleteProf);
+			
+			pstmt.setInt(1, prof_number);
+			
+			pstmt.executeUpdate();
+		} finally {
+			dbCon.dbClose(null, pstmt, con);
+		} // end finally
+	} // deleteProf
 } // class

@@ -31,7 +31,13 @@ public class AdminProfMgtRegEvent extends WindowAdapter implements ActionListene
 				return;
 			} // end if
 			
-			String profPass = apmrd.getJpfProfPass().getPassword().toString().trim();
+			String profPass = "";
+			char[] secret_pass = apmrd.getJpfProfPass().getPassword();
+			for(char cha : secret_pass) {
+				Character.toString(cha);
+				profPass += (profPass.equals("")) ? "" + cha + "" : cha + "";
+			} // end for
+			System.out.println(profPass);
 			if(profPass.isEmpty()) {
 				JOptionPane.showMessageDialog(apmrd, "비밀번호는 필수 입력 사항입니다.");
 				return;
@@ -49,6 +55,8 @@ public class AdminProfMgtRegEvent extends WindowAdapter implements ActionListene
 			
 			try {
 				pDAO.addProf(pVO);
+				JOptionPane.showMessageDialog(null, pVO.getProf_name() + " 교수님 정보가 성공적으로 등록되었습니다.\n등록된 정보를 확인하시려면 교수관리 창을 종료 후 재실행해주세요.");
+				apmrd.dispose();
 			} catch (SQLException e1) {
 				JOptionPane.showMessageDialog(apmrd, "SQL 문제가 발생했습니다.");
 				e1.printStackTrace();
