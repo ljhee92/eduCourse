@@ -24,14 +24,14 @@ public class AdminProfMgtEvent extends WindowAdapter implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == apmd.getJbtnProfReg()) {
-			JOptionPane.showMessageDialog(apmd, "등록버튼");
+			new AdminProfMgtRegDesign(apmd, "교수 등록");
 		} // end if
 
 		if(e.getSource() == apmd.getJbtnSlct()) {
-			int index = apmd.getJtbProfMgt().getSelectedRowCount();
-			int prof_number = Integer.parseInt(apmd.getDtmProfMgt().getValueAt(index-1, 0).toString());
-			ProfessorDAO pDAO = ProfessorDAO.getInstance();
 			try {
+				int index = apmd.getJtbProfMgt().getSelectedRow();
+				int prof_number = Integer.parseInt(apmd.getDtmProfMgt().getValueAt(index, 0).toString());
+				ProfessorDAO pDAO = ProfessorDAO.getInstance();
 				List<ProfVO> listPVO = pDAO.slctProfMgsSlct(prof_number);
 				StringBuilder output = new StringBuilder();
 				for(ProfVO pVO : listPVO) {

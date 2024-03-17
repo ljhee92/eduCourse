@@ -3,6 +3,7 @@ package eduCourse_prj.VO;
 public class ProfVO {
 	
 	private int prof_number;
+	private String prof_password;
 	private String prof_name;
 	private String prof_email;
 	private String prof_delete_flag;
@@ -24,8 +25,16 @@ public class ProfVO {
 		this.dept_name = dept_name;
 	}
 	
-	public ProfVO(int prof_number, String prof_name, String prof_email, String prof_delete_flag, String prof_input_date, String dept_name) {
+	public ProfVO(String prof_password, String prof_name, String prof_email, String dept_name) {
+		this.prof_password = prof_password;
+		this.prof_name = prof_name;
+		this.prof_email = prof_email;
+		this.dept_name = dept_name;
+	}
+	
+	public ProfVO(int prof_number, String prof_password, String prof_name, String prof_email, String prof_delete_flag, String prof_input_date, String dept_name) {
 		this.prof_number = prof_number;
+		this.prof_password = prof_password;
 		this.prof_name = prof_name;
 		this.prof_email = prof_email;
 		this.prof_delete_flag = prof_delete_flag;
@@ -35,6 +44,10 @@ public class ProfVO {
 
 	public int getProf_number() {
 		return prof_number;
+	}
+
+	public String getProf_password() {
+		return prof_password;
 	}
 
 	public String getProf_name() {
