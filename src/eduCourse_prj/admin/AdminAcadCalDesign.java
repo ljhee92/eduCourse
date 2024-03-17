@@ -15,11 +15,11 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+@SuppressWarnings("serial")
 public class AdminAcadCalDesign extends JDialog {
 	AdminHomeDesign awd;
 		
@@ -85,6 +85,10 @@ public class AdminAcadCalDesign extends JDialog {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						selectDay(clickBtnIndex-(6+cnt));
+						String key = year+""+month+""+day;
+						if(memoMap.containsKey(key)) {
+//							memoJtf.setText()
+						}
 					}
 				});
 	        }

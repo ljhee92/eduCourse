@@ -16,11 +16,11 @@ public class AdminAcadCalEvent extends WindowAdapter implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent ae) {
-		if(ae.getSource() == aacd.getSearchBtn()) {
+		if(ae.getSource() == aacd.getSearchBtn()) { //조회 버튼 클릭
 			aacd.calSet();
 		}
 		
-		if(ae.getSource() == aacd.getSaveBtn()) {
+		if(ae.getSource() == aacd.getSaveBtn()) { //저장 버튼 클릭
 			int selectedYear = (int)aacd.getYearCb().getSelectedItem();
 			int selectedMonth = (int)aacd.getMonthCb().getSelectedItem();			
 			int selectedDay = aacd.getDay();
