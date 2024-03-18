@@ -6,6 +6,7 @@ import java.awt.event.WindowAdapter;
 
 import javax.swing.JOptionPane;
 
+import eduCourse_prj.VO.CrsRegVO;
 import eduCourse_prj.student.design.StdntCrsRegDesign;
 
 public class StdntCrsRegEvent extends WindowAdapter implements ActionListener {
@@ -19,7 +20,7 @@ public class StdntCrsRegEvent extends WindowAdapter implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == scrd.getJbtnAdd()) {
-			JOptionPane.showMessageDialog(scrd, "담기 버튼 클릭");
+			addCart();
 		} // end if
 		
 		if(e.getSource() == scrd.getJbtnCancel()) {
@@ -29,7 +30,10 @@ public class StdntCrsRegEvent extends WindowAdapter implements ActionListener {
 		if(e.getSource() == scrd.getJbtnReg()) {
 			JOptionPane.showMessageDialog(scrd, "최종신청 버튼 클릭");
 		} // end if
-		
 	} // actionPerformed
+	
+	public void addCart() {
+		int index = scrd.getJtbCrsReg().getSelectedRow();
+	} // addCart
 
 } // class
