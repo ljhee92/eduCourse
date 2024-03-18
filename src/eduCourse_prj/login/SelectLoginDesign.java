@@ -87,6 +87,6 @@ public class SelectLoginDesign extends JFrame {
     public JButton getStudentButton() {
         return studentButton;
     }
-
+    
 
 }
