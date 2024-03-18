@@ -9,14 +9,14 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 import eduCourse_prj.VO.LoginVO;
-import eduCourse_prj.student.dao.StudentLoginDAO;
+import eduCourse_prj.student.dao.StdntDAO;
 import eduCourse_prj.student.design.StdntHomeDesign;
-import eduCourse_prj.student.design.StudentLoginDesign;
+import eduCourse_prj.student.design.StdntLoginDesign;
 
-public class StudentLoginEvent extends WindowAdapter implements ActionListener {
-	private StudentLoginDesign sld;
+public class StdntLoginEvent extends WindowAdapter implements ActionListener {
+	private StdntLoginDesign sld;
 
-	public StudentLoginEvent(StudentLoginDesign sld) {
+	public StdntLoginEvent(StdntLoginDesign sld) {
 		this.sld = sld;
 
 	}
@@ -85,7 +85,7 @@ public class StudentLoginEvent extends WindowAdapter implements ActionListener {
 
 		if (ae.getSource() == sld.getLoginButton()) {
 			//JOptionPane.showMessageDialog(null, "로그인 버튼이 클릭되었습니다.");
-			StudentLoginDAO slDAO = StudentLoginDAO.getInstance();
+			StdntDAO slDAO = StdntDAO.getInstance();
 			int id = 0;
 			String pass = "";
 

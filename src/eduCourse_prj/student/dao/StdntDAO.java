@@ -11,16 +11,16 @@ import eduCourse_prj.VO.StdntVO;
 
 
 
-public class StudentLoginDAO {
-	private static StudentLoginDAO slDAO;
+public class StdntDAO {
+	private static StdntDAO slDAO;
 
-	private StudentLoginDAO() {
+	private StdntDAO() {
 
 	}
 
-	public static StudentLoginDAO getInstance() {
+	public static StdntDAO getInstance() {
 		if (slDAO == null) {
-			slDAO = new StudentLoginDAO();
+			slDAO = new StdntDAO();
 
 		} // end if
 

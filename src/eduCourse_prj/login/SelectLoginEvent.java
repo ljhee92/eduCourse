@@ -7,7 +7,7 @@ import java.awt.event.WindowEvent;
 
 import eduCourse_prj.admin.design.AdminLoginDesign;
 import eduCourse_prj.professor.design.ProfLoginDesign;
-import eduCourse_prj.student.design.StudentLoginDesign;
+import eduCourse_prj.student.design.StdntLoginDesign;
 
 public class SelectLoginEvent extends WindowAdapter implements ActionListener {
 	private SelectLoginDesign sld;
@@ -33,7 +33,7 @@ public class SelectLoginEvent extends WindowAdapter implements ActionListener {
 		}
 		if (ae.getSource() == sld.getStudentButton()) {
 			//JOptionPane.showMessageDialog(null, "학생 버튼이 클릭되었습니다.");
-			new StudentLoginDesign(this);
+			new StdntLoginDesign(this);
 			sld.dispose();
 		}
 

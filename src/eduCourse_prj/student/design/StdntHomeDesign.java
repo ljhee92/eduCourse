@@ -2,15 +2,16 @@ package eduCourse_prj.student.design;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Image;
 import java.sql.SQLException;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import eduCourse_prj.VO.LoginVO;
 import eduCourse_prj.VO.StdntVO;
 import eduCourse_prj.student.StdntDAO;
-import eduCourse_prj.student.dao.StudentLoginDAO;
 import eduCourse_prj.student.event.StdntHomeEvent;
 
 
@@ -45,7 +46,7 @@ public class StdntHomeDesign extends JFrame {
 		showId = new JLabel("학번 : " + lVO.getId());
 		name = new JLabel("이름 : " +lVO.getName());
 		
-		StudentLoginDAO sDAO = StudentLoginDAO.getInstance();
+		StdntDAO sDAO = StdntDAO.getInstance();
 		StdntVO sVO = null;
 		
 		try {
