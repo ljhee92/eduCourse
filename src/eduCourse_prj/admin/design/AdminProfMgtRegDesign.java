@@ -32,8 +32,8 @@ public class AdminProfMgtRegDesign extends JDialog {
 		
 		setLayout(null);
 		
-		String commonPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/common/";
-		String profPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/prof/";
+		String commonPath = "src/eduCourse_prj/image/common/";
+		String profPath = "src/eduCourse_prj/image/prof/";
 		
 		// 우상단 로그인상태 확인창 추가
 		topLogin = new JLabel(apmd.getAwd().getlVO().getName() + " 관리자님 로그인 중");
