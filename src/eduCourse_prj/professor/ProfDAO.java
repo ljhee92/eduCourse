@@ -105,7 +105,7 @@ public class ProfDAO {
 	} // slctProfMgt
 	
 	/**
-	 * 관리자 모드 > 교수 관리 > 교수 상세 조회를 위한 method
+	 * 관리자 모드 > 교수 관리 > 교수 상세 조회, 교수 모드 > 교수 메인을 위한 method
 	 * @param prof_number
 	 * @return
 	 * @throws SQLException
