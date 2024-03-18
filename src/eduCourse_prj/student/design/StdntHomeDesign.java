@@ -2,11 +2,16 @@ package eduCourse_prj.student.design;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Image;
+import java.sql.SQLException;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import eduCourse_prj.VO.LoginVO;
+import eduCourse_prj.VO.StdntVO;
+import eduCourse_prj.student.StdntDAO;
 import eduCourse_prj.student.event.StdntHomeEvent;
 
 
@@ -22,12 +27,9 @@ public class StdntHomeDesign extends JFrame {
 	JLabel role; // 권한 표시될 라벨
 	JLabel showId; // id 표시될 라벨
 	JLabel name ;// 이름
-	
-	
 	JLabel back ; // 배경사진 라벨
 	JLabel topLogin ;// 우상단 로그인상태 확인창
-
-	
+	JLabel dept, email, addr;
 	
 	public StdntHomeDesign(LoginVO lVO) {
 		super("학생 작업창");
@@ -36,13 +38,28 @@ public class StdntHomeDesign extends JFrame {
 
 		setLayout(null); // 수동 배치를 위해 레이아웃 매니저를 null로 설정
 
-		String commonPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/common/";
-		String studPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/stud/";
+		String commonPath = "src/eduCourse_prj/image/common/";
+		String studPath = "src/eduCourse_prj/image/stud/";
 		
 		back = new JLabel(new ImageIcon(commonPath+"back.png"));
 		role = new JLabel("권한 : 학생");
 		showId = new JLabel("학번 : " + lVO.getId());
 		name = new JLabel("이름 : " +lVO.getName());
+		
+		StdntDAO sDAO = StdntDAO.getInstance();
+		StdntVO sVO = null;
+		
+		try {
+			sVO = sDAO.slctOneStdnt(Integer.parseInt(lVO.getId()));
+			dept = new JLabel("학과 : " + sVO.getDept_name());
+			email = new JLabel("이메일 : " + sVO.getStdnt_email());
+			addr = new JLabel("주소 : " + sVO.getStdnt_addr());
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} // end catch
+		
 		topLogin = new JLabel(lVO.getName()+" 학생님 로그인 중");
 		img = new JLabel(new ImageIcon(commonPath+"img.png"));
 		
@@ -65,6 +82,9 @@ public class StdntHomeDesign extends JFrame {
 		role.setFont(font);
 		showId.setFont(font);
 		name.setFont(font);
+		dept.setFont(font);
+		email.setFont(font);
+		addr.setFont(font);
 
 		/////////////////////////////////////////////////
 		
@@ -76,9 +96,12 @@ public class StdntHomeDesign extends JFrame {
 		
 		back.setBounds(0, 0, 984, 620);//성공
 		
-		role.setBounds(520,200,150,20);
-		showId.setBounds(520,230,150,20);
-		name.setBounds(520,260,200,20);
+		role.setBounds(520,150,300,20);
+		showId.setBounds(520,180,300,20);
+		name.setBounds(520,210, 300,20);
+		dept.setBounds(520, 240, 300, 20);
+		email.setBounds(520, 270, 300, 20);
+		addr.setBounds(520, 300, 300, 20);
 		topLogin.setBounds(670,30,200,20);
 		img.setBounds(310, 150, 160, 188);
 		
@@ -99,6 +122,9 @@ public class StdntHomeDesign extends JFrame {
 		add(img);
 		add(showId);
 		add(name);
+		add(dept);
+		add(email);
+		add(addr);
 		add(jbtnEnrollCour);
 		add(jbtnEnrollHist);
 		add(jbtnExamAttendResu);
