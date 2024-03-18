@@ -27,7 +27,12 @@ public class StdntDAO {
 		return slDAO;
 	}
 	
-	
+	/**
+	 * 학생 로그인 정보를 가져오기 위한 DAO
+	 * @param lVO
+	 * @return
+	 * @throws SQLException
+	 */
 	public LoginVO studentLogin(LoginVO lVO) throws SQLException {
 	    LoginVO lresultVO = null;
 	    DbConnection dbcon = DbConnection.getInstance();
@@ -92,6 +97,7 @@ public class StdntDAO {
 								+ "from student s "
 								+ "join dept d on d.dept_code = s.dept_code "
 								+ "where s.std_number = ?";
+			
 			pstmt = con.prepareStatement(selectProf);
 			pstmt.setInt(1, stdnt_number);
 			rs = pstmt.executeQuery();
@@ -105,6 +111,31 @@ public class StdntDAO {
 		} // end finally
 		
 		return sVO;
-//		return listProfVO;
-	} // slctProfMgtSlct
+	} // slctOneStdnt
+	
+	/**
+	 * 학생모드 > 학생 정보 수정을 위한 method
+	 * @param sVO
+	 * @throws SQLException
+	 */
+	public void modifyStdnt(StdntVO sVO) throws SQLException {
+		DbConnection dbCon = DbConnection.getInstance();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			String id = "scott";
+			String pass = "tiger";
+			
+			con = dbCon.getConnection(id, pass);
+			
+			String modifyStdnt = "update student ";
+			pstmt = con.prepareStatement(modifyStdnt);
+			
+			
+		} finally {
+			dbCon.dbClose(null, pstmt, con);
+		} // end finally
+	} // modifyStdnt
 } // class
