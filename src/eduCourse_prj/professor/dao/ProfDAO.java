@@ -188,6 +188,16 @@ public class ProfDAO {
 //		return listProfVO;
 	} // slctProfMgtSlct
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 * 관리자모드 > 교수 등록 구현부 
 	 * @param pVO

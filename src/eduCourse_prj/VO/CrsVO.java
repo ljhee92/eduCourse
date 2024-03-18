@@ -1,28 +1,18 @@
 package eduCourse_prj.VO;
 
 public class CrsVO {
-	private String courCode;//과목코드
-	private String courName;//과목명
-	private int creditHour;//학점
-	private String courInputDate;//입력일
-	private String CourDelFlag;//삭제플레그
-	private int deptCode;//학과번호
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	private String courCode;// 과목코드
+	private String courName;// 과목명
+	private int creditHour;// 학점
+	private String courInputDate;// 입력일
+	private String CourDelFlag;// 삭제플레그
+	private int deptCode;// 학과번호
+	private String deptName;
+
 	public CrsVO() {
 		super();
 	}
+
 	public CrsVO(String courCode, String courName, int creditHour, int deptCode) {
 		super();
 		this.courCode = courCode;
@@ -30,6 +20,7 @@ public class CrsVO {
 		this.creditHour = creditHour;
 		this.deptCode = deptCode;
 	}
+
 	public CrsVO(String courCode, String courName, int creditHour, String courInputDate, String courDelFlag,
 			int deptCode) {
 		super();
@@ -40,31 +31,69 @@ public class CrsVO {
 		CourDelFlag = courDelFlag;
 		this.deptCode = deptCode;
 	}
+	
+	
+	
+	
+
+	public CrsVO(String courCode, String courName, int creditHour, int deptCode, String deptName) {
+		super();
+		this.courCode = courCode;
+		this.courName = courName;
+		this.creditHour = creditHour;
+		this.deptCode = deptCode;
+		this.deptName = deptName;
+	}
+
+	public CrsVO(String courCode, String courName, int creditHour, String courInputDate, String courDelFlag,
+			int deptCode, String deptName) {
+		super();
+		this.courCode = courCode;
+		this.courName = courName;
+		this.creditHour = creditHour;
+		this.courInputDate = courInputDate;
+		CourDelFlag = courDelFlag;
+		this.deptCode = deptCode;
+		this.deptName = deptName;
+	}
+	
+	
+	
+	
+	
+
+	public String getDeptName() {
+		return deptName;
+	}
+
 	public String getCourCode() {
 		return courCode;
 	}
+
 	public String getCourName() {
 		return courName;
 	}
+
 	public int getCreditHour() {
 		return creditHour;
 	}
+
 	public String getCourInputDate() {
 		return courInputDate;
 	}
+
 	public String getCourDelFlag() {
 		return CourDelFlag;
 	}
+
 	public int getDeptCode() {
 		return deptCode;
 	}
+
 	@Override
 	public String toString() {
 		return "CrsVO [courCode=" + courCode + ", courName=" + courName + ", creditHour=" + creditHour
 				+ ", courInputDate=" + courInputDate + ", CourDelFlag=" + CourDelFlag + ", deptCode=" + deptCode + "]";
 	}
-	
-	
-	
 
 }
