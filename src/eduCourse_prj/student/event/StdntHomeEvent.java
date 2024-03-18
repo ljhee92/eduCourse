@@ -9,11 +9,12 @@ import javax.swing.JOptionPane;
 
 import eduCourse_prj.login.SelectLoginDesign;
 import eduCourse_prj.student.design.StdntHomeDesign;
+import eduCourse_prj.student.design.StdntMdfyDesign;
 
 public class StdntHomeEvent extends WindowAdapter  implements ActionListener {
-	private StdntHomeDesign swd;
-	public StdntHomeEvent( StdntHomeDesign swd) {
-		this.swd =swd;
+	private StdntHomeDesign shd;
+	public StdntHomeEvent( StdntHomeDesign shd) {
+		this.shd =shd;
 		
 	}
 	
@@ -25,7 +26,7 @@ public class StdntHomeEvent extends WindowAdapter  implements ActionListener {
 	@Override
 	public void windowClosing(WindowEvent e) {
 
-		swd.dispose();
+		shd.dispose();
 	}
 
 
@@ -36,26 +37,27 @@ public class StdntHomeEvent extends WindowAdapter  implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		
-		if (ae.getSource()==swd.getJbtnEnrollCour()) {
-			JOptionPane.showMessageDialog(swd, "수강 신청 클릭");
+		if (ae.getSource()==shd.getJbtnEnrollCour()) {
+			JOptionPane.showMessageDialog(shd, "수강 신청 클릭");
 		}
-		if (ae.getSource()==swd.getJbtnEnrollHist()) {
-			JOptionPane.showMessageDialog(swd, "수강 신청 내역 클릭");
+		if (ae.getSource()==shd.getJbtnEnrollHist()) {
+			JOptionPane.showMessageDialog(shd, "수강 신청 내역 클릭");
 		}
-		if (ae.getSource()==swd.getJbtnExamAttendResu()) {
-			JOptionPane.showMessageDialog(swd, "시험 응시 및 결과 클릭");
+		if (ae.getSource()==shd.getJbtnExamAttendResu()) {
+			JOptionPane.showMessageDialog(shd, "시험 응시 및 결과 클릭");
 		}
-		if (ae.getSource()==swd.getJbtnJbtnExamCorr()) {
-			JOptionPane.showMessageDialog(swd, "시험 정오표 클릭");
+		if (ae.getSource()==shd.getJbtnJbtnExamCorr()) {
+			JOptionPane.showMessageDialog(shd, "시험 정오표 클릭");
 		}
-		if (ae.getSource()==swd.getJbtnInfoUpda()) {
-			JOptionPane.showMessageDialog(swd, "정보 수정 클릭");
+		if (ae.getSource()==shd.getJbtnInfoUpda()) {
+			JOptionPane.showMessageDialog(shd, "정보 수정 클릭");
+			new StdntMdfyDesign(shd, "학생 정보 수정");
 		}
 
-		if (ae.getSource()==swd.getJbtnLogout()) {
-			JOptionPane.showMessageDialog(swd, "로그아웃 버튼클릭");
+		if (ae.getSource()==shd.getJbtnLogout()) {
+			JOptionPane.showMessageDialog(shd, "로그아웃 버튼클릭");
 			new SelectLoginDesign();
-			swd.dispose();
+			shd.dispose();
 		}
 		
 	}
