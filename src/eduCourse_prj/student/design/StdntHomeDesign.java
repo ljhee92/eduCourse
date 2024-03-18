@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 
 import eduCourse_prj.VO.LoginVO;
 import eduCourse_prj.VO.StdntVO;
-import eduCourse_prj.student.StdntDAO;
+import eduCourse_prj.student.dao.StdntDAO;
 import eduCourse_prj.student.event.StdntHomeEvent;
 
 
