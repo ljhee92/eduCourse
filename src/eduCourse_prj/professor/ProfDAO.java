@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import eduCourse_prj.DbConnection;
 import eduCourse_prj.VO.LoginVO;
 import eduCourse_prj.VO.ProfVO;
@@ -112,7 +110,7 @@ public class ProfDAO {
 	 * @return
 	 * @throws SQLException
 	 */
-	public ProfVO slctProfMgsSlct(int prof_number) throws SQLException{
+	public ProfVO slctProfMgtSlct(int prof_number) throws SQLException{
 		ProfVO pVO = null;
 		DbConnection dbCon = DbConnection.getInstance();
 		
