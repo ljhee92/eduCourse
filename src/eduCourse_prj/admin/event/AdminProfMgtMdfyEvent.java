@@ -1,0 +1,73 @@
+package eduCourse_prj.admin.event;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.sql.SQLException;
+
+import javax.swing.JOptionPane;
+
+import eduCourse_prj.VO.ProfVO;
+import eduCourse_prj.admin.design.AdminProfMgtMdfyDesign;
+import eduCourse_prj.professor.dao.ProfDAO;
+
+public class AdminProfMgtMdfyEvent extends WindowAdapter implements ActionListener {
+
+	private AdminProfMgtMdfyDesign apmmd;
+	
+	public AdminProfMgtMdfyEvent(AdminProfMgtMdfyDesign apmmd) {
+		this.apmmd = apmmd;
+	} // AdminProfMgtRegEvent
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// 수정버튼 클릭
+		if(e.getSource() == apmmd.getJbtnMdfy()) {
+			JOptionPane.showMessageDialog(apmmd, "수정버튼 클릭");
+			ProfDAO pDAO = ProfDAO.getInstance();
+			
+			int profNum = Integer.parseInt(apmmd.getJtfProfNum().getText().trim());
+			
+			String profName = apmmd.getJtfProfName().getText().trim();
+			if(profName.isEmpty()) {
+				JOptionPane.showMessageDialog(apmmd, "이름은 필수 입력 사항입니다.");
+				return;
+			} // end if
+			
+			String profPass = "";
+			char[] secret_pass = apmmd.getJpfProfPass().getPassword();
+			for(char cha : secret_pass) {
+				Character.toString(cha);
+				profPass += (profPass.equals("")) ? "" + cha + "" : cha + "";
+			} // end for
+			if(profPass.isEmpty()) {
+				JOptionPane.showMessageDialog(apmmd, "비밀번호는 필수 입력 사항입니다.");
+				return;
+			} // end if
+			
+			String profEmail = apmmd.getJtfProfEmail().getText().trim();
+			if(!profEmail.isEmpty() && !profEmail.contains("@")) {
+				JOptionPane.showMessageDialog(apmmd, "유효한 이메일 형식이 아닙니다.");
+				return;
+			} // end if
+			
+			String deptName = (String) apmmd.getJcbDept().getSelectedItem();
+			
+			try {
+				ProfVO pVO = new ProfVO(profNum, profPass, profName, profEmail, null, null, deptName);
+				pDAO.modifyProf(pVO);
+				JOptionPane.showMessageDialog(null, pVO.getProf_name() + " 교수님 정보가 성공적으로 수정되었습니다.\n등록된 정보를 확인하시려면 교수관리 창을 종료 후 재실행해주세요.");
+				apmmd.dispose();
+			} catch (SQLException e1) {
+				JOptionPane.showMessageDialog(apmmd, "SQL 문제가 발생했습니다.");
+				e1.printStackTrace();
+			} // end catch
+		} // end if
+		
+		// 취소 버튼 클릭
+		if(e.getSource() == apmmd.getJbtnCancel()) {
+			apmmd.dispose();
+		} // end if
+	} // actionPerformed
+	
+} // class

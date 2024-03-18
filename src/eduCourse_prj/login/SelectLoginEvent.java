@@ -5,9 +5,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import eduCourse_prj.admin.AdminLoginDesign;
-import eduCourse_prj.professor.ProfLoginDesign;
-import eduCourse_prj.student.StudentLoginDesign;
+import eduCourse_prj.admin.design.AdminLoginDesign;
+import eduCourse_prj.professor.design.ProfLoginDesign;
+import eduCourse_prj.student.design.StudentLoginDesign;
 
 public class SelectLoginEvent extends WindowAdapter implements ActionListener {
 	private SelectLoginDesign sld;
