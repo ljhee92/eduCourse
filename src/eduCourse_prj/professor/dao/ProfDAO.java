@@ -68,6 +68,51 @@ public class ProfDAO {
 	    return lresultVO;
 	}
 	
+
+	
+	
+	/**
+	 * 관리자모드 과목관리의 특정학과의 교수의 교번, 이름을 가져오기 위한 DAO
+	 * @return 특정학과의 교수 리스트
+	 * @throws SQLException
+	 */
+	public List<ProfVO> slctDeptProf(int dept_code) throws SQLException {
+		List<ProfVO> listProfVO = new ArrayList<ProfVO>();
+		ProfVO pVO = null;
+		DbConnection dbCon = DbConnection.getInstance();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String id = "scott";
+			String pass = "tiger";
+			
+			con = dbCon.getConnection(id, pass);
+			
+			String selectDeptProf = "select prof_number, prof_name from professor where prof_delete_flag = 'N' and DEPT_CODE = ? order by prof_number";
+			pstmt = con.prepareStatement(selectDeptProf);
+			pstmt.setInt(1, dept_code);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				pVO = new ProfVO(rs.getInt("prof_number"), rs.getString("prof_name"));
+				listProfVO.add(pVO);
+			} // end while
+		} finally {
+			dbCon.dbClose(rs, pstmt, con);
+		} // end finally
+		
+		return listProfVO;
+	} // slctDeptProf
+	
+	
+	
+	
+
+	
 	/**
 	 * 관리자모드 교수관리의 교번, 이름을 가져오기 위한 DAO
 	 * @return

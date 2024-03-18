@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import javax.swing.JOptionPane;
 
 import eduCourse_prj.DbConnection;
 import eduCourse_prj.VO.AdminVO;
+import eduCourse_prj.VO.CrsVO;
 import eduCourse_prj.VO.DeptVO;
 import eduCourse_prj.VO.LoginVO;
 import eduCourse_prj.VO.ProfVO;
@@ -92,6 +94,7 @@ public class AdminDAO {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
 		try {
 
@@ -100,11 +103,30 @@ public class AdminDAO {
 			con = dbCon.getConnection(id, pass);
 
 			// 학과추가 순서
-			// 1. 우선 학과번호가 확인
+
+			
+			
+			
+			
+			// 0. 동일한 학과명 있는지 확인
+			String checkDeptName = "select 	DEPT_NAME 		from	 dept where DEPT_NAME = ?";
+			pstmt = con.prepareStatement(checkDeptName);
+			pstmt.setString(1, dVO.getDept_name());
+			rs=pstmt.executeQuery();
+			if(rs.next()){
+				JOptionPane.showMessageDialog(null, "입력하신 학과명과 동일한 학과명을 가진 학과가 이미 존재합니다..", "오류",
+						JOptionPane.ERROR_MESSAGE);
+				return;
+				
+			}			
+			// 1. 학과번호 확인
+			
+			
+			
 			int dept_code = 0000;
 			String checkDept = "select 	max(dept_code) 		from	 dept";
 			pstmt = con.prepareStatement(checkDept);
-			ResultSet rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				// 2 존재한다면 DEPT_CODE의 가장 마지막번호 + 1으로 설정
 				int lastDeptCode = rs.getInt(1);
@@ -131,6 +153,83 @@ public class AdminDAO {
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * 과목 등록을 위한 DAO
+	 * 동일한 과목명이 존재하거나 동일한 과목코드가 존재하면 리턴
+	 * 
+	 * @param dVO
+	 * @throws SQLException
+	 */
+	@SuppressWarnings("resource")
+	public void addcourse(CrsVO cVO) throws SQLException {
+
+		DbConnection dbCon = DbConnection.getInstance();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			String id = "scott";
+			String pass = "tiger";
+			con = dbCon.getConnection(id, pass);
+			
+			String checkCorseCode = "SELECT COURSE_CODE FROM COURSE WHERE COURSE_CODE = ? ";
+			pstmt = con.prepareStatement(checkCorseCode);
+			pstmt.setString(1,cVO.getCourCode());
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				JOptionPane.showMessageDialog(null, "입력하신 과목코드와 동일한 과목코드를가진 과목이 이미 존재합니다.", "오류",
+						JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			
+			
+			
+			
+			String checkCourseName = "SELECT COURSE_NAME FROM COURSE WHERE COURSE_NAME = ?";
+			pstmt = con.prepareStatement(checkCourseName);
+			pstmt.setString(1,cVO.getCourName());
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				JOptionPane.showMessageDialog(null, "입력하신 과목명과 동일한 과목명을 가진 과목이 이미 존재합니다.", "오류",
+						JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			
+			
+			
+
+
+			String addcourse = "insert into COURSE(COURSE_CODE,COURSE_NAME,CREDIT_HOURS,DEPT_CODE) values(?,?,?,?)";
+			pstmt = con.prepareStatement(addcourse);
+
+			pstmt.setString(1, cVO.getCourCode());
+			pstmt.setString(2, cVO.getCourName());
+			pstmt.setInt(3, cVO.getCreditHour());
+
+			pstmt.setInt(4, cVO.getDeptCode());
+
+			pstmt.executeUpdate();
+			JOptionPane.showMessageDialog(null, "과목 등록이 완료되었습니다.");
+
+		} finally {
+
+			dbCon.dbClose(null, pstmt, con);
+		} // end finally
+
+	}// addDepartment
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * 모든 부서의 정보를 가져오기 위한 DAO
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
 	public List<DeptVO> slctAllDept() throws SQLException {
 
 		DbConnection dbCon = DbConnection.getInstance();

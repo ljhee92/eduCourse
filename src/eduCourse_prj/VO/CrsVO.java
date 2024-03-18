@@ -20,6 +20,26 @@ public class CrsVO {
 	
 	
 	
+	public CrsVO() {
+		super();
+	}
+	public CrsVO(String courCode, String courName, int creditHour, int deptCode) {
+		super();
+		this.courCode = courCode;
+		this.courName = courName;
+		this.creditHour = creditHour;
+		this.deptCode = deptCode;
+	}
+	public CrsVO(String courCode, String courName, int creditHour, String courInputDate, String courDelFlag,
+			int deptCode) {
+		super();
+		this.courCode = courCode;
+		this.courName = courName;
+		this.creditHour = creditHour;
+		this.courInputDate = courInputDate;
+		CourDelFlag = courDelFlag;
+		this.deptCode = deptCode;
+	}
 	public String getCourCode() {
 		return courCode;
 	}

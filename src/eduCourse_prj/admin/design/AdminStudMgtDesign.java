@@ -5,6 +5,7 @@ import javax.swing.JDialog;
 
 import eduCourse_prj.admin.event.AdminStudMgtEvent;
 
+@SuppressWarnings("serial")
 public class AdminStudMgtDesign extends JDialog {
 	AdminHomeDesign awd;
 	JButton jbtTest;

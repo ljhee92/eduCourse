@@ -11,7 +11,7 @@ import eduCourse_prj.VO.DeptVO;
 import eduCourse_prj.admin.dao.AdminDAO;
 import eduCourse_prj.admin.design.AdminDeptMgtRegDesign;
 
-public class AdminDeptMgtRegEvent extends WindowAdapter implements ActionListener {
+public class AdminDeptMgtRegEvent extends WindowAdapter implements ActionListener{
 	AdminDeptMgtRegDesign admrd;
 
 	public AdminDeptMgtRegEvent(AdminDeptMgtRegDesign admrd) {
