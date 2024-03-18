@@ -189,6 +189,14 @@ public class StdntCrsRegDesign extends JDialog {
 		return jbtnReg;
 	}
 	
+	public JTable getJtbCrsReg() {
+		return jtbCrsReg;
+	}
+
+	public DefaultTableModel getDtmCrsReg() {
+		return dtmCrsReg;
+	}
+
 	public StdntHomeDesign getShd() {
 		return shd;
 	}
