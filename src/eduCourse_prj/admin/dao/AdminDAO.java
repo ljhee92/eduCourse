@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -13,6 +14,7 @@ import javax.swing.JOptionPane;
 import eduCourse_prj.DbConnection;
 import eduCourse_prj.VO.AdminVO;
 import eduCourse_prj.VO.CrsVO;
+import eduCourse_prj.VO.DeptDTO;
 import eduCourse_prj.VO.DeptVO;
 import eduCourse_prj.VO.LoginVO;
 
@@ -208,8 +210,7 @@ public class AdminDAO {
 
 	}// addDepartment
 
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/**
 	 * 모든 부서의 정보를 가져오기 위한 DAO
 	 * 
@@ -257,9 +258,87 @@ public class AdminDAO {
 		return list;
 
 	}// slctAllDept
+	
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+	 * @return 학과관리 조회를 위한 메서드
+	 * @throws SQLException
+	 */
+	public DeptDTO selectOneDept(int deptCode) throws SQLException{
+		DeptDTO dDTO = null;
+		DbConnection dbCon = DbConnection.getInstance();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			String id = "scott";
+			String pass = "tiger";
+
+			con = dbCon.getConnection(id, pass);
+
+			String selectQuery =   "SELECT d.DEPT_CODE, d.DEPT_NAME, p.PROF_NAME, d.DEPT_CAPACITY "
+                    + "FROM DEPT d "
+                    + "INNER JOIN PROFESSOR p ON d.DEPT_CODE = p.DEPT_CODE "
+                    + "WHERE d.DEPT_CODE = ?";		
+
+			pstmt = con.prepareStatement(selectQuery);
+			pstmt.setInt(1, deptCode);
+			rs = pstmt.executeQuery();
+			
+			List<String> professors =  new ArrayList<>(); // 교수 목록을 저장하기 위한 리스트 생성
+			while(rs.next()) {
+				  professors.add(rs.getString("PROF_NAME")); //리스트에 PROF_NAME 데이터 추가
+	              dDTO = new DeptDTO(
+	                        rs.getInt("DEPT_CODE"),
+	                        rs.getString("DEPT_NAME"),
+	                        professors, 	//DeptDTO에 리스트 전달
+	                        rs.getInt("DEPT_CAPACITY")
+	                );
+				} // end while
+			} finally {
+				dbCon.dbClose(rs, pstmt, con);
+			} // end finally
+			return dDTO;
+		}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+	 * 학과 삭제를 위한 메서드
+	 * @param deptCode 삭제할 학과의 코드
+	 * @throws SQLException
+	 */
+	public boolean deleteDept(int deptCode) throws SQLException {
+	    DbConnection dbCon = DbConnection.getInstance();
+	    
+	    Connection con = null;
+	    PreparedStatement pstmt = null;
+	    boolean isSuccess = false; // 삭제 성공 여부를 저장할 변수
 
+	    try {
+	        String id = "scott";
+	        String pass = "tiger";
+	        
+	        con = dbCon.getConnection(id, pass);
+	        
+	        String deleteDept = "DELETE FROM DEPT WHERE DEPT_CODE = ?";
+	        pstmt = con.prepareStatement(deleteDept);
+	        
+	        pstmt.setInt(1, deptCode);
+	        
+	        int rowsAffected = pstmt.executeUpdate(); // 실행된 행의 수를 반환 
+	        if (rowsAffected > 0) { // 행이 한 개 이상 영향을 받았을 때
+	            isSuccess = true;
+	        }      
+	        pstmt.executeUpdate();
+	    } finally {
+	        dbCon.dbClose(null, pstmt, con);
+	    } // end finally
+		return isSuccess;
+	} // deleteDept
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/**
 	 * 관리자모드 모든 관리자들의 정보를 가져오기 위한 DAO
 	 * 
