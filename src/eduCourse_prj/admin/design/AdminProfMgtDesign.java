@@ -151,6 +151,18 @@ public class AdminProfMgtDesign extends JDialog {
 		return jbtnDel;
 	}
 
+	public JLabel getJlBack() {
+		return jlBack;
+	}
+
+	public JLabel getTopLogin() {
+		return topLogin;
+	}
+
+	public JLabel getProfMgt() {
+		return profMgt;
+	}
+
 	public JTable getJtbProfMgt() {
 		return jtbProfMgt;
 	}
