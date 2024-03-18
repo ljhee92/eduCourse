@@ -16,9 +16,12 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import eduCourse_prj.VO.CrsRegVO;
+import eduCourse_prj.VO.CrsVO;
 import eduCourse_prj.VO.ProfVO;
 import eduCourse_prj.admin.event.AdminProfMgtEvent;
 import eduCourse_prj.professor.dao.ProfDAO;
+import eduCourse_prj.student.dao.CrsRegDAO;
 import eduCourse_prj.student.event.StdntCrsRegEvent;
 
 
@@ -43,7 +46,7 @@ public class StdntCrsRegDesign extends JDialog {
 		String stdntPath = "src/eduCourse_prj/image/stud/";
 		
 		// 우상단 로그인상태 확인창 추가
-		topLogin = new JLabel(shd.getlVO().getName() + " 관리자님 로그인 중");
+		topLogin = new JLabel(shd.getlVO().getName() + " 학생님 로그인 중");
 		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.RED);
@@ -118,6 +121,9 @@ public class StdntCrsRegDesign extends JDialog {
 		add(jspReg);
 		add(jspCart);
 		
+		// 테이블에 DB 추가
+		searchAllCrsReg();
+		
 		// 이벤트 클래스 연결
 		StdntCrsRegEvent scre = new StdntCrsRegEvent(this);
 		addWindowListener(scre);
@@ -133,11 +139,27 @@ public class StdntCrsRegDesign extends JDialog {
 		setLocationRelativeTo(null);
 		setVisible(true);
 	} // AdminProfMgtDesign
-
-	public StdntHomeDesign getShd() {
-		return shd;
-	}
 	
+	/**
+	 * DB에서 로그인한 학생이 수강 신청 가능한 과목들을 가져와 테이블에 넣는 method
+	 */
+	public void searchAllCrsReg() {
+		CrsRegDAO crDAO = CrsRegDAO.getInstance();
+		
+		try {
+			List<CrsRegVO> listCrsRegVO = crDAO.slctAllCrsReg(Integer.parseInt(shd.getlVO().getId()));
+			
+			for(CrsRegVO crVO : listCrsRegVO) {
+				Object[] row = {crVO.getDept_name(), crVO.getCourse_name(), crVO.getCourse_code(), crVO.getLect_room(), crVO.getCapacity(), crVO.getCredit_hours()};
+				dtmCrsReg.addRow(row);
+			} // end for
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} // end catch
+	} // searchAllCrsReg
+
 	/**
 	 * 테이블의 컬럼을 가운데 정렬
 	 */
@@ -165,6 +187,10 @@ public class StdntCrsRegDesign extends JDialog {
 
 	public JButton getJbtnReg() {
 		return jbtnReg;
+	}
+	
+	public StdntHomeDesign getShd() {
+		return shd;
 	}
 	
 } // class
