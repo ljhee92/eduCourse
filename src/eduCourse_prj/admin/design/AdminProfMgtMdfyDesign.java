@@ -17,6 +17,7 @@ import eduCourse_prj.VO.DeptVO;
 import eduCourse_prj.admin.dao.AdminDAO;
 import eduCourse_prj.admin.event.AdminProfMgtMdfyEvent;
 
+@SuppressWarnings("serial")
 public class AdminProfMgtMdfyDesign extends JDialog {
 	
 	private JLabel jlBack; //배경
@@ -27,6 +28,50 @@ public class AdminProfMgtMdfyDesign extends JDialog {
 	private JComboBox<String> jcbDept;
 	private JButton jbtnMdfy, jbtnCancel;
 	
+	public JLabel getJlBack() {
+		return jlBack;
+	}
+
+	public JLabel getTopLogin() {
+		return topLogin;
+	}
+
+	public JLabel getProfMgt() {
+		return profMgt;
+	}
+
+	public JLabel getProfMgtMdfy() {
+		return profMgtMdfy;
+	}
+
+	public JLabel getPhoto() {
+		return photo;
+	}
+
+	public JLabel getJlProfNum() {
+		return jlProfNum;
+	}
+
+	public JLabel getJlProfName() {
+		return jlProfName;
+	}
+
+	public JLabel getJlProfPass() {
+		return jlProfPass;
+	}
+
+	public JLabel getJlProfEmail() {
+		return jlProfEmail;
+	}
+
+	public JLabel getJlDept() {
+		return jlDept;
+	}
+
+	public JLabel getJlNecessary() {
+		return jlNecessary;
+	}
+
 	public AdminProfMgtMdfyDesign(AdminProfMgtDesign apmd, String title) {
 		super(apmd, title, true);
 		

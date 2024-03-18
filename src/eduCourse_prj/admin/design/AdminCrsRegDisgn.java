@@ -1,28 +1,35 @@
 package eduCourse_prj.admin.design;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
+
 import java.util.List;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JTextField;
 
 import eduCourse_prj.VO.DeptVO;
+import eduCourse_prj.VO.ProfVO;
 import eduCourse_prj.admin.dao.AdminDAO;
 import eduCourse_prj.admin.event.AdminCrsRegEvent;
+import eduCourse_prj.professor.dao.ProfDAO;
 
+@SuppressWarnings("serial")
 public class AdminCrsRegDisgn extends JDialog {
 	AdminCrsDesign acd;
 	AdminDAO aDAO = AdminDAO.getInstance();
+	ProfDAO pDAO = ProfDAO.getInstance();
 
-	List<DeptVO> ldept;
-	JComboBox<String> jcbdept;
-	JTextField crsName;
-	JTextField crsCode;
-	JTextField credit;
+	List<DeptVO> lDept;
+	List<ProfVO> lProf;
+
+	JComboBox<String> jcbDept;
+	JComboBox<String> jcbProf;
+	JTextField JtfCrsName;
+	JTextField JtfCrsCode;
+	JTextField JtfCredit;
+	JTextField JtfProfName;
 
 	JButton jbtnRegister; // 등록버튼
 	JButton jbtnCancel; // 취소버튼
@@ -34,19 +41,19 @@ public class AdminCrsRegDisgn extends JDialog {
 		setLayout(null);
 		setSize(1000, 650);
 
-		// JComboBox 초기화
-		jcbdept = new JComboBox<>();
-		jcbdept.setBounds(400, 100, 200, 30);
-		add(jcbdept);
+		// jcbDept 초기화
+		jcbDept = new JComboBox<>();
+		jcbDept.setBounds(400, 100, 200, 30);
+		add(jcbDept);
 
 		try {
 
 			// 모든 학과 정보 가져오기
-			ldept = aDAO.slctAllDept();
+			lDept = aDAO.slctAllDept();
 
 			// 학과명만 저장하는 리스트에 학과명 저장
-			for (DeptVO dept : ldept) {
-				jcbdept.addItem(dept.getDept_name());
+			for (DeptVO dept : lDept) {
+				jcbDept.addItem(dept.getDept_name());
 
 			}
 
@@ -54,17 +61,41 @@ public class AdminCrsRegDisgn extends JDialog {
 			e.printStackTrace();
 		}
 
-		crsName = new JTextField("과목명");
-		crsName.setBounds(400, 150, 200, 30);
-		add(crsName);
+		// JcbProf 초기화
+		jcbProf = new JComboBox<>();
+		jcbProf.setBounds(400, 250, 200, 30);
 
-		crsCode = new JTextField("과목코드");
-		crsCode.setBounds(400, 200, 200, 30);
-		add(crsCode);
+		try {
 
-		credit = new JTextField("학점");
-		credit.setBounds(400, 300, 200, 30);
-		add(credit);
+			// 최초 선택된 학과에 소속되어있는 교수를 리스트에 저장
+
+			int dept_code = lDept.get(jcbDept.getSelectedIndex()).getDept_code();
+
+			lProf = pDAO.slctDeptProf(dept_code);
+
+			// 교수명만 저장하는 리스트에 교수명 저장
+			for (ProfVO prof : lProf) {
+				jcbProf.addItem(prof.getProf_name());
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		add(jcbProf);
+
+		JtfCrsName = new JTextField("과목명");
+		JtfCrsName.setBounds(400, 150, 200, 30);
+		add(JtfCrsName);
+
+		JtfCrsCode = new JTextField("과목코드");
+		JtfCrsCode.setBounds(400, 200, 200, 30);
+		add(JtfCrsCode);
+
+		JtfCredit = new JTextField("학점");
+		JtfCredit.setBounds(400, 300, 200, 30);
+		add(JtfCredit);
 
 		jbtnRegister = new JButton("등록");
 		jbtnRegister.setBounds(300, 400, 200, 30);
@@ -76,6 +107,7 @@ public class AdminCrsRegDisgn extends JDialog {
 
 		AdminCrsRegEvent acre = new AdminCrsRegEvent(this);
 		addWindowListener(acre);
+		jcbDept.addActionListener(acre);
 		jbtnRegister.addActionListener(acre);
 		jbtnCancel.addActionListener(acre);
 
@@ -91,24 +123,40 @@ public class AdminCrsRegDisgn extends JDialog {
 		return aDAO;
 	}
 
-	public List<DeptVO> getLdept() {
-		return ldept;
+	public ProfDAO getpDAO() {
+		return pDAO;
 	}
 
-	public JComboBox<String> getJcbdept() {
-		return jcbdept;
+	public List<DeptVO> getlDept() {
+		return lDept;
 	}
 
-	public JTextField getCrsName() {
-		return crsName;
+	public List<ProfVO> getlProf() {
+		return lProf;
 	}
 
-	public JTextField getCrsCode() {
-		return crsCode;
+	public JComboBox<String> getJcbDept() {
+		return jcbDept;
 	}
 
-	public JTextField getCredit() {
-		return credit;
+	public JComboBox<String> getJcbProf() {
+		return jcbProf;
+	}
+
+	public JTextField getJtfCrsName() {
+		return JtfCrsName;
+	}
+
+	public JTextField getJtfCrsCode() {
+		return JtfCrsCode;
+	}
+
+	public JTextField getJtfCredit() {
+		return JtfCredit;
+	}
+
+	public JTextField getJtfProfName() {
+		return JtfProfName;
 	}
 
 	public JButton getJbtnRegister() {

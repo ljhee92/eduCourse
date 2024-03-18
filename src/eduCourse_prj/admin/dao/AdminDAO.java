@@ -4,14 +4,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
 
 import eduCourse_prj.DbConnection;
+import eduCourse_prj.VO.AdminVO;
+import eduCourse_prj.VO.CrsVO;
 import eduCourse_prj.VO.DeptVO;
 import eduCourse_prj.VO.LoginVO;
+
 
 public class AdminDAO {
 	private static AdminDAO alDAO;
@@ -28,6 +32,7 @@ public class AdminDAO {
 
 		return alDAO;
 	}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/**
 	 * 로그인 기능구현부
@@ -75,6 +80,7 @@ public class AdminDAO {
 		return lresultVO;
 	}// AdminLogin
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	/**
 	 * 학과 등록 구현부
 	 * 
@@ -88,6 +94,7 @@ public class AdminDAO {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
 		try {
 
@@ -96,11 +103,24 @@ public class AdminDAO {
 			con = dbCon.getConnection(id, pass);
 
 			// 학과추가 순서
-			// 1. 우선 학과번호가 확인
+
+			// 0. 동일한 학과명 있는지 확인
+			String checkDeptName = "select 	DEPT_NAME 		from	 dept where DEPT_NAME = ?";
+			pstmt = con.prepareStatement(checkDeptName);
+			pstmt.setString(1, dVO.getDept_name());
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				JOptionPane.showMessageDialog(null, "입력하신 학과명과 동일한 학과명을 가진 학과가 이미 존재합니다..", "오류",
+						JOptionPane.ERROR_MESSAGE);
+				return;
+
+			}
+			// 1. 학과번호 확인
+
 			int dept_code = 0000;
 			String checkDept = "select 	max(dept_code) 		from	 dept";
 			pstmt = con.prepareStatement(checkDept);
-			ResultSet rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				// 2 존재한다면 DEPT_CODE의 가장 마지막번호 + 1으로 설정
 				int lastDeptCode = rs.getInt(1);
@@ -124,12 +144,79 @@ public class AdminDAO {
 		} // end finally
 
 	}// addDepartment
-	
-	
-	
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	public List<DeptVO>  slctAllDept() throws SQLException {
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * 과목 등록을 위한 DAO 동일한 과목명이 존재하거나 동일한 과목코드가 존재하면 리턴
+	 * 
+	 * @param dVO
+	 * @throws SQLException
+	 */
+	@SuppressWarnings("resource")
+	public void addcourse(CrsVO cVO) throws SQLException {
+
+		DbConnection dbCon = DbConnection.getInstance();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			String id = "scott";
+			String pass = "tiger";
+			con = dbCon.getConnection(id, pass);
+
+			String checkCorseCode = "SELECT COURSE_CODE FROM COURSE WHERE COURSE_CODE = ? ";
+			pstmt = con.prepareStatement(checkCorseCode);
+			pstmt.setString(1, cVO.getCourCode());
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				JOptionPane.showMessageDialog(null, "입력하신 과목코드와 동일한 과목코드를가진 과목이 이미 존재합니다.", "오류",
+						JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+
+			String checkCourseName = "SELECT COURSE_NAME FROM COURSE WHERE COURSE_NAME = ?";
+			pstmt = con.prepareStatement(checkCourseName);
+			pstmt.setString(1, cVO.getCourName());
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				JOptionPane.showMessageDialog(null, "입력하신 과목명과 동일한 과목명을 가진 과목이 이미 존재합니다.", "오류",
+						JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+
+			String addcourse = "insert into COURSE(COURSE_CODE,COURSE_NAME,CREDIT_HOURS,DEPT_CODE) values(?,?,?,?)";
+			pstmt = con.prepareStatement(addcourse);
+
+			pstmt.setString(1, cVO.getCourCode());
+			pstmt.setString(2, cVO.getCourName());
+			pstmt.setInt(3, cVO.getCreditHour());
+
+			pstmt.setInt(4, cVO.getDeptCode());
+
+			pstmt.executeUpdate();
+			JOptionPane.showMessageDialog(null, "과목 등록이 완료되었습니다.");
+
+		} finally {
+
+			dbCon.dbClose(null, pstmt, con);
+		} // end finally
+
+	}// addDepartment
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * 모든 부서의 정보를 가져오기 위한 DAO
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<DeptVO> slctAllDept() throws SQLException {
 
 		DbConnection dbCon = DbConnection.getInstance();
 		DeptVO dVO = null;
@@ -138,8 +225,7 @@ public class AdminDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
-		
+
 		try {
 
 			String id = "scott";
@@ -150,42 +236,142 @@ public class AdminDAO {
 					+ "	FROM DEPT ";
 			pstmt = con.prepareStatement(selectQuery);
 
-
 			// 5. 쿼리 실행 및 결과 처리
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				dVO = new DeptVO(rs.getInt("DEPT_CODE"),rs.getString("DEPT_NAME"),rs.getInt("DEPT_CAPACITY"),
-						rs.getString("DEPT_INPUT_DATE"),rs.getString("DEPT_DELETE_FLAG"));
-			
-				//System.out.println(dVO);
+				dVO = new DeptVO(rs.getInt("DEPT_CODE"), rs.getString("DEPT_NAME"), rs.getInt("DEPT_CAPACITY"),
+						rs.getString("DEPT_INPUT_DATE"), rs.getString("DEPT_DELETE_FLAG"));
+
+				// System.out.println(dVO);
 
 				list.add(dVO);
-			
-				
-			
-			
+
 			}
-			
-			
 
 		} finally {
 
 			dbCon.dbClose(null, pstmt, con);
 		} // end finally
 
-		
 		return list;
-		
-		
-	}//slctAllDept
-	
-	
-	
-	
-	
-	
-	
+
+	}// slctAllDept
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * 관리자모드 모든 관리자들의 정보를 가져오기 위한 DAO
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<AdminVO> slctAllAdmin() throws SQLException {
+		List<AdminVO> listAdminVO = new ArrayList<AdminVO>();
+		AdminVO aVO = null;
+		DbConnection dbCon = DbConnection.getInstance();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			String id = "scott";
+			String pass = "tiger";
+
+			con = dbCon.getConnection(id, pass);
+
+			String selectAdminMgt = "SELECT ADMIN_ID,	ADMIN_PASSWORD , ADMIN_NAME, ADMIN_CHMOD from ADMIN  order by ADMIN_CHMOD";
+			pstmt = con.prepareStatement(selectAdminMgt);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				aVO = new AdminVO(rs.getString("ADMIN_ID"), rs.getString("ADMIN_PASSWORD"), rs.getString("ADMIN_NAME"),
+						rs.getInt("ADMIN_CHMOD"));
+				listAdminVO.add(aVO);
+
+			} // end while
+		} finally {
+			dbCon.dbClose(rs, pstmt, con);
+		} // end finally
+
+		return listAdminVO;
+	} // slctAdminfMgt
+
+	/**
+	 * 관리자모드 모든 과목의 정보를 가져오기 위한 DAO
+	 * 
+	 * @return 과목 정보를 담고 있는 CrsVO 객체의 리스트
+	 * @throws SQLException
+	 */
+	public List<CrsVO> slctAllCrs() throws SQLException {
+
+		List<CrsVO> courseList = new ArrayList<>();
+
+		Connection con = null;
+		DbConnection dbCon = DbConnection.getInstance();
+		PreparedStatement pstmt = null;
+
+		try {
+			String id = "scott";
+			String pass = "tiger";
+
+			con = dbCon.getConnection(id, pass);
+
+			
+			String slctAllCrs = "SELECT c.COURSE_CODE, c.COURSE_NAME, c.CREDIT_HOURS, c.COURSE_INPUT_DATE, c.COURSE_DELETE_FLAG, d.DEPT_CODE, d.DEPT_NAME	"
+					+ "FROM COURSE c, DEPT d " + "WHERE c.DEPT_CODE = d.DEPT_CODE AND COURSE_DELETE_FLAG = 'N'" + "ORDER BY COURSE_CODE";
+			pstmt = con.prepareStatement(slctAllCrs);
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				CrsVO course = new CrsVO(rs.getString("COURSE_CODE"), rs.getString("COURSE_NAME"),
+						rs.getInt("CREDIT_HOURS"), rs.getString("COURSE_INPUT_DATE"),
+						rs.getString("COURSE_DELETE_FLAG"), rs.getInt("DEPT_CODE"), rs.getString("DEPT_NAME"));
+				courseList.add(course);
+			}
+		} finally {
+			dbCon.dbClose(null, pstmt, null);
+			;
+		}
+
+		// 과목 정보가 담긴 리스트를 반환합니다.
+		return courseList;
+	}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+	 * 관리자모드 > 관리자 관리에서 관리자 정보 수정을 위한 method
+	 * 
+	 * @param aVO
+	 * @throws SQLException
+	 */
+	public void modifyAdmin(AdminVO aVO) throws SQLException {
+		DbConnection dbCon = DbConnection.getInstance();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			String id = "scott";
+			String pass = "tiger";
+
+			con = dbCon.getConnection(id, pass);
+
+			String modifyProf = "update ADMIN set ADMIN_NAME = ? , ADMIN_PASSWORD = ? where ADMIN_ID = ?";
+			pstmt = con.prepareStatement(modifyProf);
+
+			pstmt.setString(1, aVO.getAdmin_name());
+			pstmt.setString(2, aVO.getAdmin_password());
+			pstmt.setString(3, aVO.getAdmin_id());
+
+			pstmt.executeUpdate();
+		} finally {
+			dbCon.dbClose(null, pstmt, con);
+		} // end finally
+	} // modifyProf
+
 	public void addCrs(DeptVO dVO) throws SQLException {
 
 		DbConnection dbCon = DbConnection.getInstance();
@@ -199,22 +385,90 @@ public class AdminDAO {
 			String pass = "tiger";
 			con = dbCon.getConnection(id, pass);
 
-			
-			
-		
 			///////////////////////////////////////////////
-			/////////////////학과등록 구현부//////////////////
+			///////////////// 학과등록 구현부//////////////////
 			//////////////////////////////////////////////
-			
-			
-			
 
 		} finally {
 
 			dbCon.dbClose(null, pstmt, con);
 		} // end finally
 
-	}//addCrs
+	}// addCrs
+	
+	/**
+	 * 관리자 모드 > 학과 관리 > 학과 상세 조회, 교수 모드 > 학과 메인을 위한 method
+	 * @param crs_number
+	 * @return
+	 * @throws SQLException
+	 */
+	public CrsVO slctOneCrs(String crs_name) throws SQLException{
+		CrsVO cVO = null;
+		DbConnection dbCon = DbConnection.getInstance();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String id = "scott";
+			String pass = "tiger";
+			
+			con = dbCon.getConnection(id, pass);
+			
+			String selectCrs = "SELECT c.COURSE_CODE, c.COURSE_NAME, c.CREDIT_HOURS , d.DEPT_CODE ,d.DEPT_NAME	"
+					+ "	FROM  COURSE c , DEPT d	"
+					+ "	where  c. COURSE_NAME = ?  and c.DEPT_CODE = d.DEPT_CODE ";
+			pstmt = con.prepareStatement(selectCrs);
+			pstmt.setString(1, crs_name);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				cVO = new CrsVO(rs.getString("COURSE_CODE"), rs.getString("COURSE_NAME"), rs.getInt("CREDIT_HOURS"),rs.getInt("DEPT_CODE"),rs.getString("DEPT_NAME"));
+			} // end while
+		} finally {
+			dbCon.dbClose(rs, pstmt, con);
+		} // end finally
+		
+		return cVO;
+
+	} // slctOneCrs
+	//////////////////////////////////////////////////////////////////
+	/**
+	 * 관리자모드 > 과목 관리에서 과목 삭제를 위한 method
+	 * @param crs_name
+	 * @throws SQLException
+	 */
+	public void deleteCrs(String crs_name) throws SQLException {
+		DbConnection dbCon = DbConnection.getInstance();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			String id = "scott";
+			String pass = "tiger";
+			
+			con = dbCon.getConnection(id, pass);
+			
+			String deleteCrs = "update COURSE set COURSE_DELETE_FLAG = 'Y' where COURSE_NAME = ?";
+			pstmt = con.prepareStatement(deleteCrs);
+			
+			pstmt.setString(1, crs_name);
+			
+			pstmt.executeUpdate();
+		} finally {
+			dbCon.dbClose(null, pstmt, con);
+		} // end finally
+	} // deleteProf
+	
+	
+	
+	
+	
+	
+	
+	
+}
 	
 
-}

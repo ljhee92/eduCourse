@@ -10,6 +10,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+@SuppressWarnings("serial")
 public class AdminDeptMgtRegDesign extends JDialog {
 	private AdminDeptMgtDesign admd;
 	private JButton registerButton;// 등록버튼
