@@ -10,10 +10,10 @@ import javax.swing.JOptionPane;
 
 import eduCourse_prj.VO.LoginVO;
 
-public class ProfessorLoginEvent extends WindowAdapter implements ActionListener {
+public class ProfLoginEvent extends WindowAdapter implements ActionListener {
 	private ProfLoginDesign pld;
 
-	public ProfessorLoginEvent(ProfLoginDesign pld) {
+	public ProfLoginEvent(ProfLoginDesign pld) {
 		this.pld = pld;
 
 	}

@@ -97,7 +97,7 @@ public class ProfLoginDesign extends JFrame {
         
         //has a관계 설정
         
-        ProfessorLoginEvent ale = new ProfessorLoginEvent(this);
+        ProfLoginEvent ale = new ProfLoginEvent(this);
         
         
         
