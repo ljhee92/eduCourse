@@ -36,7 +36,7 @@ public class AdminAdminMgtDesign extends JDialog {
 
 	JLabel jlBack;// 배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
-
+	private JLabel adminMgt;
 
 
 	private JButton jbtnMdfy;
@@ -55,7 +55,14 @@ public class AdminAdminMgtDesign extends JDialog {
 
 		jlBack = new JLabel(new ImageIcon(commonPath + "back.png"));
 		jlBack.setBounds(0, 0, 984, 620);
+		add(jlBack);
+		
+		// 관리자관리, 등록 라벨 추가
+		adminMgt = new JLabel(new ImageIcon(adminPath + "adminMgt1.png"));
+		adminMgt.setBounds(10, 76, 967, 44);
+		add(adminMgt);
 
+		
 
 		// 우상단 로그인상태 확인창 추가
 		topLogin = new JLabel(awd.getlVO().getName() + " 관리자님 로그인 중");

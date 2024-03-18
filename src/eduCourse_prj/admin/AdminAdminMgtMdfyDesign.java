@@ -21,9 +21,12 @@ public class AdminAdminMgtMdfyDesign extends JDialog {
 	private JLabel jlBack; //배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
 	private JLabel adminMgt, adminMgtMdfy, photo, jlAdminId, jlAdminName, jlAdminPass, jlNecessary;
+
 	private JTextField jtfAdminId, jtfAdminName;
 	private JPasswordField jpfAdminPass;
 	private JButton jbtnMdfy, jbtnCancel;
+	
+	
 	
 	public AdminAdminMgtMdfyDesign(AdminAdminMgtDesign aamd, String title) {
 		super(aamd, title, true);
@@ -31,7 +34,7 @@ public class AdminAdminMgtMdfyDesign extends JDialog {
 		setLayout(null);
 		
 		String commonPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/common/";
-		String AdminPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/prof/";
+		String adminPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/admin/";
 		
 		// 우상단 로그인상태 확인창 추가
 		topLogin = new JLabel(aamd.getAwd().getlVO().getName() + " 관리자님 로그인 중");
@@ -41,8 +44,18 @@ public class AdminAdminMgtMdfyDesign extends JDialog {
 		topLogin.setBounds(670, 30, 200, 20);
 		add(topLogin);
 		
-		// 교수관리, 수정 라벨 추가
-		adminMgt = new JLabel(new ImageIcon(AdminPath + "AdminMgt.png"));
+		
+		// 관리자관리, 등록 라벨 추가
+		adminMgt = new JLabel(new ImageIcon(adminPath + "adminMgt1.png"));
+		adminMgt.setBounds(10, 76, 967, 44);
+		add(adminMgt);
+		
+		
+		
+		
+		
+		// 관리자관리, 수정 라벨 추가
+		adminMgt = new JLabel(new ImageIcon(adminPath + "AdminMgt.png"));
 		adminMgtMdfy = new JLabel(new ImageIcon(commonPath + "Mdfy_label.png"));
 		adminMgt.setBounds(10, 76, 967, 44);
 		adminMgtMdfy.setBounds(10, 120, 967, 44);
