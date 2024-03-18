@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import eduCourse_prj.VO.AdminVO;
-
+import eduCourse_prj.VO.CrsVO;
 import eduCourse_prj.admin.dao.AdminDAO;
 import eduCourse_prj.admin.event.AdminAdminMgtEvent;
 
@@ -121,7 +121,7 @@ public class AdminAdminMgtDesign extends JDialog {
 
 	/**
 	 * 
-	 * DB에서 아이디, 이름을 불러와 테이블에 넣는 method
+	 * DB에서 관리자의 아이디, 이름을 불러와 테이블에 넣는 method
 	 */
 	public void slctAdminMgt() {
 		AdminDAO aDAO = AdminDAO.getInstance();
@@ -136,7 +136,7 @@ public class AdminAdminMgtDesign extends JDialog {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} // end catch
-	} // slctProfMgt
+	} // slctAdminMgt
 
 	/**
 	 * 테이블의 컬럼을 가운데 정렬
