@@ -8,6 +8,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 
 import eduCourse_prj.login.SelectLoginDesign;
+import eduCourse_prj.student.design.StdntCrsRegDesign;
 import eduCourse_prj.student.design.StdntHomeDesign;
 import eduCourse_prj.student.design.StdntMdfyDesign;
 
@@ -38,7 +39,7 @@ public class StdntHomeEvent extends WindowAdapter  implements ActionListener {
 	public void actionPerformed(ActionEvent ae) {
 		
 		if (ae.getSource()==shd.getJbtnEnrollCour()) {
-			JOptionPane.showMessageDialog(shd, "수강 신청 클릭");
+			new StdntCrsRegDesign(shd, "수강 신청");
 		}
 		if (ae.getSource()==shd.getJbtnEnrollHist()) {
 			JOptionPane.showMessageDialog(shd, "수강 신청 내역 클릭");
@@ -50,7 +51,6 @@ public class StdntHomeEvent extends WindowAdapter  implements ActionListener {
 			JOptionPane.showMessageDialog(shd, "시험 정오표 클릭");
 		}
 		if (ae.getSource()==shd.getJbtnInfoUpda()) {
-			JOptionPane.showMessageDialog(shd, "정보 수정 클릭");
 			new StdntMdfyDesign(shd, "학생 정보 수정");
 		}
 
