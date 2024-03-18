@@ -9,6 +9,9 @@ import javax.swing.JOptionPane;
 import eduCourse_prj.admin.design.AdminDeptMgtDesign;
 import eduCourse_prj.admin.design.AdminDeptMgtRegDesign;
 
+
+@SuppressWarnings("serial")
+
 public class AdminDeptMgtEvent extends JDialog implements ActionListener{
 	private AdminDeptMgtDesign admd;
 	
