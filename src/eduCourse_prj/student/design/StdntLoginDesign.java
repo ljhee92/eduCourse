@@ -6,11 +6,11 @@ import java.awt.Font;
 import javax.swing.*;
 
 import eduCourse_prj.login.SelectLoginEvent;
-import eduCourse_prj.student.event.StudentLoginEvent;
+import eduCourse_prj.student.event.StdntLoginEvent;
 
 
 @SuppressWarnings("serial")
-public class StudentLoginDesign extends JFrame {
+public class StdntLoginDesign extends JFrame {
 	
 	private SelectLoginEvent sle;
     private JTextField jtfId;
@@ -28,7 +28,7 @@ public class StudentLoginDesign extends JFrame {
 
     
 
-   public  StudentLoginDesign(SelectLoginEvent sle) {
+   public  StdntLoginDesign(SelectLoginEvent sle) {
 
         super("학생 로그인");
         this.sle = sle;
@@ -98,7 +98,7 @@ public class StudentLoginDesign extends JFrame {
         
         //has a관계 설정
         
-        StudentLoginEvent ale = new StudentLoginEvent(this);
+        StdntLoginEvent ale = new StdntLoginEvent(this);
         
         
         

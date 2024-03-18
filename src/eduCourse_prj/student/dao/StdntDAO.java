@@ -7,19 +7,20 @@ import java.sql.SQLException;
 
 import eduCourse_prj.DbConnection;
 import eduCourse_prj.VO.LoginVO;
+import eduCourse_prj.VO.StdntVO;
 
 
 
-public class StudentLoginDAO {
-	private static StudentLoginDAO slDAO;
+public class StdntDAO {
+	private static StdntDAO slDAO;
 
-	private StudentLoginDAO() {
+	private StdntDAO() {
 
 	}
 
-	public static StudentLoginDAO getInstance() {
+	public static StdntDAO getInstance() {
 		if (slDAO == null) {
-			slDAO = new StudentLoginDAO();
+			slDAO = new StdntDAO();
 
 		} // end if
 
@@ -66,4 +67,44 @@ public class StudentLoginDAO {
 	  
 	    return lresultVO;
 	}
-}
+	
+	/**
+	 * 학생모드 > 학생 메인을 위한 method
+	 * @param prof_number
+	 * @return
+	 * @throws SQLException
+	 */
+	public StdntVO slctOneStdnt(int stdnt_number) throws SQLException{
+		StdntVO sVO = null;
+		DbConnection dbCon = DbConnection.getInstance();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String id = "scott";
+			String pass = "tiger";
+			
+			con = dbCon.getConnection(id, pass);
+			
+			String selectProf = "select s.std_number, s.std_name, s.std_email, s.std_addr, d.dept_name "
+								+ "from student s "
+								+ "join dept d on d.dept_code = s.dept_code "
+								+ "where s.std_number = ?";
+			pstmt = con.prepareStatement(selectProf);
+			pstmt.setInt(1, stdnt_number);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				sVO = new StdntVO(stdnt_number, null, rs.getString("std_name"), rs.getString("std_email"), rs.getString("std_addr"),
+						null, null, rs.getString("dept_name"));
+			} // end while
+		} finally {
+			dbCon.dbClose(rs, pstmt, con);
+		} // end finally
+		
+		return sVO;
+//		return listProfVO;
+	} // slctProfMgtSlct
+} // class

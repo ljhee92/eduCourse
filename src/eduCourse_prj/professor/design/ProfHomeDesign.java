@@ -36,8 +36,8 @@ public class ProfHomeDesign extends JFrame {
 
 		setLayout(null); // 수동 배치를 위해 레이아웃 매니저를 null로 설정
 		
-		String commonPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/common/";
-		String profPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/prof/";
+		String commonPath = "src/eduCourse_prj/image/common/";
+		String profPath = "src/eduCourse_prj/image/prof/";
 
 		back = new JLabel(new ImageIcon(commonPath+"back.png"));
 		role = new JLabel("권한 : 교수");
@@ -92,10 +92,10 @@ public class ProfHomeDesign extends JFrame {
 		
 		back.setBounds(0, 0, 984, 620);//성공
 		
-		role.setBounds(520,150,150,20);
-		showId.setBounds(520,190,150,20);
-		name.setBounds(520, 230, 150, 20);
-		dept.setBounds(520, 270, 150, 20);
+		role.setBounds(520,150,300,20);
+		showId.setBounds(520,190,300,20);
+		name.setBounds(520, 230, 300, 20);
+		dept.setBounds(520, 270, 300, 20);
 		email.setBounds(520, 310, 300, 20);
 		topLogin.setBounds(670,30,200,20);
 		img.setBounds(310, 150, 160, 188);
