@@ -39,7 +39,7 @@ public class AdminProfMgtEvent extends WindowAdapter implements ActionListener {
 				int prof_number = Integer.parseInt(apmd.getDtmProfMgt().getValueAt(index, 0).toString());
 				
 				ProfDAO pDAO = ProfDAO.getInstance();
-				ProfVO pVO = pDAO.slctProfMgsSlct(prof_number);
+				ProfVO pVO = pDAO.slctProfMgtSlct(prof_number);
 				
 				StringBuilder output = new StringBuilder();
 				output.append("교번: ").append(pVO.getProf_number()).append("\n");

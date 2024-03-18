@@ -46,7 +46,7 @@ public class ProfHomeDesign extends JFrame {
 		ProfVO pVO = null;
 		
 		try {
-			pVO = pDAO.slctProfMgsSlct(Integer.parseInt(lVO.getId()));
+			pVO = pDAO.slctProfMgtSlct(Integer.parseInt(lVO.getId()));
 			dept = new JLabel("소속학과 : " + pVO.getDept_name());
 			email = new JLabel("이메일 : " + (pVO.getProf_email() == null ? "" : pVO.getProf_email()));
 		} catch (NumberFormatException e) {
