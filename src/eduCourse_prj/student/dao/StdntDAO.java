@@ -93,7 +93,7 @@ public class StdntDAO {
 			
 			con = dbCon.getConnection(id, pass);
 			
-			String selectProf = "select s.std_number, s.std_name, s.std_email, s.std_addr, d.dept_name "
+			String selectProf = "select s.std_number, s.std_password, s.std_name, s.std_email, s.std_addr, d.dept_name "
 								+ "from student s "
 								+ "join dept d on d.dept_code = s.dept_code "
 								+ "where s.std_number = ?";
@@ -103,7 +103,7 @@ public class StdntDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				sVO = new StdntVO(stdnt_number, null, rs.getString("std_name"), rs.getString("std_email"), rs.getString("std_addr"),
+				sVO = new StdntVO(stdnt_number, rs.getString("std_password"), rs.getString("std_name"), rs.getString("std_email"), rs.getString("std_addr"),
 						null, null, rs.getString("dept_name"));
 			} // end while
 		} finally {
@@ -130,10 +130,15 @@ public class StdntDAO {
 			
 			con = dbCon.getConnection(id, pass);
 			
-			String modifyStdnt = "update student ";
+			String modifyStdnt = "update student set std_password = ?, std_email = ?, std_addr = ? where std_number = ?";
+			
 			pstmt = con.prepareStatement(modifyStdnt);
+			pstmt.setString(1, sVO.getStdnt_password());
+			pstmt.setString(2, sVO.getStdnt_email());
+			pstmt.setString(3, sVO.getStdnt_addr());
+			pstmt.setInt(4, sVO.getStdnt_number());
 			
-			
+			pstmt.executeUpdate();
 		} finally {
 			dbCon.dbClose(null, pstmt, con);
 		} // end finally

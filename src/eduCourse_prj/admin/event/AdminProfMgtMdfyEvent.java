@@ -23,7 +23,6 @@ public class AdminProfMgtMdfyEvent extends WindowAdapter implements ActionListen
 	public void actionPerformed(ActionEvent e) {
 		// 수정버튼 클릭
 		if(e.getSource() == apmmd.getJbtnMdfy()) {
-			JOptionPane.showMessageDialog(apmmd, "수정버튼 클릭");
 			ProfDAO pDAO = ProfDAO.getInstance();
 			
 			int profNum = Integer.parseInt(apmmd.getJtfProfNum().getText().trim());
