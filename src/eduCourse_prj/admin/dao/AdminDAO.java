@@ -10,8 +10,10 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import eduCourse_prj.DbConnection;
+import eduCourse_prj.VO.AdminVO;
 import eduCourse_prj.VO.DeptVO;
 import eduCourse_prj.VO.LoginVO;
+import eduCourse_prj.VO.ProfVO;
 
 public class AdminDAO {
 	private static AdminDAO alDAO;
@@ -28,6 +30,7 @@ public class AdminDAO {
 
 		return alDAO;
 	}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/**
 	 * 로그인 기능구현부
@@ -75,6 +78,7 @@ public class AdminDAO {
 		return lresultVO;
 	}// AdminLogin
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	/**
 	 * 학과 등록 구현부
 	 * 
@@ -124,12 +128,10 @@ public class AdminDAO {
 		} // end finally
 
 	}// addDepartment
-	
-	
-	
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	public List<DeptVO>  slctAllDept() throws SQLException {
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public List<DeptVO> slctAllDept() throws SQLException {
 
 		DbConnection dbCon = DbConnection.getInstance();
 		DeptVO dVO = null;
@@ -138,8 +140,7 @@ public class AdminDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
-		
+
 		try {
 
 			String id = "scott";
@@ -150,42 +151,100 @@ public class AdminDAO {
 					+ "	FROM DEPT ";
 			pstmt = con.prepareStatement(selectQuery);
 
-
 			// 5. 쿼리 실행 및 결과 처리
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				dVO = new DeptVO(rs.getInt("DEPT_CODE"),rs.getString("DEPT_NAME"),rs.getInt("DEPT_CAPACITY"),
-						rs.getString("DEPT_INPUT_DATE"),rs.getString("DEPT_DELETE_FLAG"));
-			
-				//System.out.println(dVO);
+				dVO = new DeptVO(rs.getInt("DEPT_CODE"), rs.getString("DEPT_NAME"), rs.getInt("DEPT_CAPACITY"),
+						rs.getString("DEPT_INPUT_DATE"), rs.getString("DEPT_DELETE_FLAG"));
+
+				// System.out.println(dVO);
 
 				list.add(dVO);
-			
-				
-			
-			
+
 			}
-			
-			
 
 		} finally {
 
 			dbCon.dbClose(null, pstmt, con);
 		} // end finally
 
-		
 		return list;
-		
-		
-	}//slctAllDept
-	
-	
-	
-	
-	
-	
-	
+
+	}// slctAllDept
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * 관리자모드 모든 관리자들의 정보를 가져오기 위한 DAO
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<AdminVO> slctAllAdmin() throws SQLException {
+		List<AdminVO> listAdminVO = new ArrayList<AdminVO>();
+		AdminVO aVO = null;
+		DbConnection dbCon = DbConnection.getInstance();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			String id = "scott";
+			String pass = "tiger";
+
+			con = dbCon.getConnection(id, pass);
+
+			String selectAdminMgt = "SELECT ADMIN_ID,	ADMIN_PASSWORD , ADMIN_NAME, ADMIN_CHMOD from ADMIN  order by ADMIN_CHMOD";
+			pstmt = con.prepareStatement(selectAdminMgt);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				aVO = new AdminVO(rs.getString("ADMIN_ID"), rs.getString("ADMIN_PASSWORD"), rs.getString("ADMIN_NAME"),
+						rs.getInt("ADMIN_CHMOD"));
+				listAdminVO.add(aVO);
+
+			} // end while
+		} finally {
+			dbCon.dbClose(rs, pstmt, con);
+		} // end finally
+
+		return listAdminVO;
+	} // slctAdminfMgt
+
+	/**
+	 * 관리자모드 > 관리자 관리에서 관리자 정보 수정을 위한 method
+	 * 
+	 * @param aVO
+	 * @throws SQLException
+	 */
+	public void modifyAdmin(AdminVO aVO) throws SQLException {
+		DbConnection dbCon = DbConnection.getInstance();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			String id = "scott";
+			String pass = "tiger";
+
+			con = dbCon.getConnection(id, pass);
+
+			String modifyProf = "update ADMIN set ADMIN_NAME = ? , ADMIN_PASSWORD = ? where ADMIN_ID = ?";
+			pstmt = con.prepareStatement(modifyProf);
+
+			pstmt.setString(1, aVO.getAdmin_name());
+			pstmt.setString(2, aVO.getAdmin_password());
+			pstmt.setString(3, aVO.getAdmin_id());
+
+			pstmt.executeUpdate();
+		} finally {
+			dbCon.dbClose(null, pstmt, con);
+		} // end finally
+	} // modifyProf
+
 	public void addCrs(DeptVO dVO) throws SQLException {
 
 		DbConnection dbCon = DbConnection.getInstance();
@@ -199,22 +258,15 @@ public class AdminDAO {
 			String pass = "tiger";
 			con = dbCon.getConnection(id, pass);
 
-			
-			
-		
 			///////////////////////////////////////////////
-			/////////////////학과등록 구현부//////////////////
+			///////////////// 학과등록 구현부//////////////////
 			//////////////////////////////////////////////
-			
-			
-			
 
 		} finally {
 
 			dbCon.dbClose(null, pstmt, con);
 		} // end finally
 
-	}//addCrs
-	
+	}// addCrs
 
 }
