@@ -17,6 +17,7 @@ import eduCourse_prj.VO.DeptVO;
 import eduCourse_prj.admin.dao.AdminDAO;
 import eduCourse_prj.admin.event.AdminProfMgtRegEvent;
 
+@SuppressWarnings("serial")
 public class AdminProfMgtRegDesign extends JDialog {
 	
 	private JLabel jlBack; //배경
