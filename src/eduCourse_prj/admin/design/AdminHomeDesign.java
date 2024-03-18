@@ -29,8 +29,8 @@ public class AdminHomeDesign extends JFrame {
 
 		setLayout(null); // 수동 배치를 위해 레이아웃 매니저를 null로 설정
 
-		String commonPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/common/";
-		String adminPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/admin/";
+		String commonPath = "src/eduCourse_prj/image/common/";
+		String adminPath = "src/eduCourse_prj/image/admin/";
 		
 		
 		back = new JLabel(new ImageIcon(commonPath+"Back.png"));

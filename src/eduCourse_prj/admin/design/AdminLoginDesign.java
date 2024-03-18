@@ -41,7 +41,7 @@ public class AdminLoginDesign extends JFrame {
         setLocationRelativeTo(null); // 화면 중앙배치
         
         //이미지 경로 변경
-        String loginPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/login/";
+        String loginPath = "src/eduCourse_prj/image/login/";
         
         
         
