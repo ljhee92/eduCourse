@@ -50,7 +50,7 @@ public class StdntCrsRegEvent extends WindowAdapter implements ActionListener {
 	} // actionPerformed
 	
 	/**
-	 * 선택한 과목이 수강바구니에 추가되고, 수강신청 가능 목록에서는 사라지는 method
+	 * Desc: 선택한 과목이 수강바구니에 추가되고, 수강신청 가능 목록에서는 사라지는 method
 	 */
 	public void addCart() {
 		int index = scrd.getJtbCrsReg().getSelectedRow();
@@ -66,11 +66,12 @@ public class StdntCrsRegEvent extends WindowAdapter implements ActionListener {
 			
 			int credit_hours = Integer.parseInt(scrd.getDtmCrsReg().getValueAt(index, 5).toString());
 			int sum_credit_hours = 0;
+			
 			for(int i = 0; i <= index; i++) {
 				sum_credit_hours = Integer.parseInt(scrd.getJlAllCreditHour().getText()) + credit_hours;
-			} // end while
+			} // end for
+			
 			scrd.getJlAllCreditHour().setText(Integer.toString(sum_credit_hours));
-
 			scrd.getDtmCrsReg().removeRow(index);
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(scrd, "SQL 문제가 발생했습니다.");
@@ -79,7 +80,7 @@ public class StdntCrsRegEvent extends WindowAdapter implements ActionListener {
 	} // addCart
 
 	/**
-	 * 선택한 과목이 수강바구니에서 제거되고, 수강신청 가능 목록에 추가되는 method
+	 * Desc: 선택한 과목이 수강바구니에서 제거되고, 수강신청 가능 목록에 추가되는 method
 	 */
 	public void removeCart() {
 		int index = scrd.getJtbCrsCart().getSelectedRow();
@@ -95,11 +96,12 @@ public class StdntCrsRegEvent extends WindowAdapter implements ActionListener {
 			
 			int credit_hours = Integer.parseInt(scrd.getDtmCrsCart().getValueAt(index, 5).toString());
 			int sum_credit_hours = 0;
+			
 			for(int i = 0; i <= index; i++) {
 				sum_credit_hours = Integer.parseInt(scrd.getJlAllCreditHour().getText()) - credit_hours;
-			} // end while
+			} // end for
+			
 			scrd.getJlAllCreditHour().setText(Integer.toString(sum_credit_hours));
-
 			scrd.getDtmCrsCart().removeRow(index);
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(scrd, "SQL 문제가 발생했습니다.");
