@@ -32,7 +32,7 @@ public class AdminStudMgtDesign extends JDialog {
 	private JLabel jlBack;// 배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
 	private JLabel adminMgt;
-	private JTable jtbCrsMgt;
+	private JTable jtbStdMgt;
 	private DefaultTableModel dtmAdminMgt;
 	
 	
@@ -169,10 +169,10 @@ public class AdminStudMgtDesign extends JDialog {
 				return false; // 테이블 셀 수정 불가하도록 설정
 			} // isCellEditable
 		};
-		jtbCrsMgt = new JTable(dtmCrsMgt);
-		JScrollPane jsp = new JScrollPane(jtbCrsMgt);
+		jtbStdMgt = new JTable(dtmCrsMgt);
+		JScrollPane jsp = new JScrollPane(jtbStdMgt);
 
-		jtbCrsMgt.setRowHeight(30); // 행 높이 조절
+		jtbStdMgt.setRowHeight(30); // 행 높이 조절
 		jsp.setBounds(10, 230, 967, 250);
 		add(jsp);
 
@@ -240,7 +240,7 @@ public class AdminStudMgtDesign extends JDialog {
 	public void setTbHorizontal() {
 		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
 		dtcr.setHorizontalAlignment(SwingConstants.CENTER);
-		TableColumnModel tcm = jtbCrsMgt.getColumnModel();
+		TableColumnModel tcm = jtbStdMgt.getColumnModel();
 		for (int i = 0; i < tcm.getColumnCount(); i++) {
 			tcm.getColumn(i).setCellRenderer(dtcr);
 		} // end for
@@ -272,8 +272,8 @@ public class AdminStudMgtDesign extends JDialog {
 	}
 
 
-	public JTable getJtbCrsMgt() {
-		return jtbCrsMgt;
+	public JTable getJtbStdMgt() {
+		return jtbStdMgt;
 	}
 
 
