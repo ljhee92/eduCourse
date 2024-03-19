@@ -49,8 +49,8 @@ public class AdminDeptMgtEvent extends JDialog implements ActionListener{
 				DeptDTO dDTO = null;
 				AdminDAO aDAO = AdminDAO.getInstance();
 				dDTO = aDAO.selectOneDept(deptCode);
-				
 				int profCnt = 1; //교수 앞에 붙일 숫자
+				
 				StringBuilder output = new StringBuilder();
 				output.append("학과 코드: ").append(dDTO.getDept_code()).append("\n");
 				output.append("학과: ").append(dDTO.getDept_name()).append("\n");
