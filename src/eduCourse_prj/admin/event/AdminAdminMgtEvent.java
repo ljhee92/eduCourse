@@ -27,7 +27,7 @@ public class AdminAdminMgtEvent extends WindowAdapter implements ActionListener 
 	public void actionPerformed(ActionEvent ae) {
 		if (ae.getSource() == aamd.getJbtnMdfy()) {
 
-			JOptionPane.showMessageDialog(aamd, "수정버튼 클릭");
+			//JOptionPane.showMessageDialog(aamd, "수정버튼 클릭");
 
 			try {
 				new AdminAdminMgtMdfyDesign(aamd, "관리자 수정");
