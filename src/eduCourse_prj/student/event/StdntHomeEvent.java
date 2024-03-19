@@ -12,6 +12,7 @@ import eduCourse_prj.student.design.StdntCrsRegDesign;
 import eduCourse_prj.student.design.StdntCrsSlctDesign;
 import eduCourse_prj.student.design.StdntHomeDesign;
 import eduCourse_prj.student.design.StdntMdfyDesign;
+import eduCourse_prj.student.design.StdntTestAnswerDesign;
 import eduCourse_prj.student.design.StdntTestSlctDesign;
 
 public class StdntHomeEvent extends WindowAdapter  implements ActionListener {
@@ -53,7 +54,7 @@ public class StdntHomeEvent extends WindowAdapter  implements ActionListener {
 		} // end if
 		
 		if (ae.getSource()==shd.getJbtnJbtnExamCorr()) {
-			JOptionPane.showMessageDialog(shd, "시험 정오표 클릭");
+			new StdntTestAnswerDesign(shd, "시험 정오표");
 		} // end if
 		
 		if (ae.getSource()==shd.getJbtnInfoUpda()) {
@@ -61,7 +62,6 @@ public class StdntHomeEvent extends WindowAdapter  implements ActionListener {
 		} // end if
 
 		if (ae.getSource()==shd.getJbtnLogout()) {
-			JOptionPane.showMessageDialog(shd, "로그아웃 버튼클릭");
 			new SelectLoginDesign();
 			shd.dispose();
 		} // end if

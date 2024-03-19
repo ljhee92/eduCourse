@@ -14,17 +14,16 @@ import javax.swing.JTextField;
 
 import eduCourse_prj.admin.design.AdminDeptMgtDesign;
 import eduCourse_prj.admin.event.AdminDeptMgtRegEvent;
+import eduCourse_prj.professor.event.ProfTestMdfyEvent;
 import eduCourse_prj.professor.event.ProfTestRegEvent;
 
-public class ProfTestRegDesign extends JDialog {
+public class ProfTestMdfyDesign extends JDialog {
 	private ProfTestMgtDesign ptmd;
-	public ProfTestMgtDesign getPtmd() {
-		return ptmd;
-	}
+	
 
 
 
-	private JButton registerButton;// 출제버튼
+	private JButton modifyButton;// 수정버튼
 	private JButton cancelButton;// 취소버튼
 	
 	private JComboBox<String> testNumberComboBox; //문제 번호 콤보박스
@@ -49,7 +48,7 @@ public class ProfTestRegDesign extends JDialog {
 	private JTextField answerTextField;// 정답
 	
 
-	public ProfTestRegDesign(ProfTestMgtDesign ptmd, String title) {
+	public ProfTestMdfyDesign(ProfTestMgtDesign ptmd, String title) {
 		super();
 		this.ptmd = this.ptmd;
 
@@ -66,7 +65,7 @@ public class ProfTestRegDesign extends JDialog {
 			jlBack = new JLabel(new ImageIcon(commonPath + "Back.png"));
 	        jlBack.setBounds(0,0,984,620);
 	        
-	        deptMgt = new JLabel(new ImageIcon(commonPath + "Reg_label.png"));
+	        deptMgt = new JLabel(new ImageIcon(commonPath + "Mdfy_label.png"));
 	        deptMgt.setBounds(10, 76, 967, 44);
 	        
 			
@@ -85,8 +84,8 @@ public class ProfTestRegDesign extends JDialog {
 	/////////////////////////////////////////////////////////////////////////////////        
 	//-------------------------------등록버튼 생성----------------------------------        
 	/////////////////////////////////////////////////////////////////////////////////        
-			registerButton = new JButton(new ImageIcon(commonPath + "Reg.png"));
-			registerButton.setBounds(720, 481, 60, 40);
+			modifyButton = new JButton(new ImageIcon(commonPath + "Mdfy.png"));
+			modifyButton.setBounds(720, 481, 60, 40);
 
 	/////////////////////////////////////////////////////////////////////////////////        
 	//-------------------------------취소버튼 생성----------------------------------        
@@ -157,7 +156,7 @@ public class ProfTestRegDesign extends JDialog {
 			add(answerLabel);
 			add(answerTextField);
 
-			add(registerButton);
+			add(modifyButton);
 			add(cancelButton);
 			
 			add(deptMgt);
@@ -167,16 +166,16 @@ public class ProfTestRegDesign extends JDialog {
 	//-------------------------------event관계 설정----------------------------------         
 	/////////////////////////////////////////////////////////////////////////////////
 
-			ProfTestRegEvent admre = new ProfTestRegEvent(this);
-			addWindowListener(admre);
-			registerButton.addActionListener(admre);
-			cancelButton.addActionListener(admre);
+			ProfTestMdfyEvent ptme = new ProfTestMdfyEvent(this);
+			addWindowListener(ptme);
+			modifyButton.addActionListener(ptme);
+			cancelButton.addActionListener(ptme);
 			
 			setVisible(true);
 	}
 	
 	public JButton getRegisterButton() {
-		return registerButton;
+		return modifyButton;
 	}
 
 
@@ -226,10 +225,13 @@ public class ProfTestRegDesign extends JDialog {
 	public JTextArea getTestQuestionContentTextArea() {
 		return testQuestionContentTextArea;
 	}
+	public ProfTestMgtDesign getPtmd() {
+		return ptmd;
+	}
 
 
 
 	public static void main(String[] args) {
-		ProfTestRegDesign ptrd = new ProfTestRegDesign(null, null);
+		ProfTestMdfyDesign ptrd = new ProfTestMdfyDesign(null, null);
 	}//main
 }

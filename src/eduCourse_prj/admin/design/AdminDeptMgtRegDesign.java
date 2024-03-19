@@ -42,7 +42,7 @@ public class AdminDeptMgtRegDesign extends JDialog {
 		jlBack = new JLabel(new ImageIcon(commonPath + "Back.png"));
         jlBack.setBounds(0,0,984,620);
         
-        deptMgt = new JLabel(new ImageIcon(commonPath + "Reg_label.png"));
+        deptMgt = new JLabel(new ImageIcon(commonPath + "RegBanner_new.png"));
         deptMgt.setBounds(10, 76, 967, 44);
         
 		
@@ -61,22 +61,24 @@ public class AdminDeptMgtRegDesign extends JDialog {
 /////////////////////////////////////////////////////////////////////////////////        
 //-------------------------------등록버튼 생성----------------------------------        
 /////////////////////////////////////////////////////////////////////////////////        
-		registerButton = new JButton(new ImageIcon(commonPath + "Reg.png"));
-		registerButton.setBounds(350, 481, 111, 59);
+		registerButton = new JButton(new ImageIcon(commonPath + "RegButton_new.png"));
+		registerButton.setBounds(370, 481, 90, 50);
 
 /////////////////////////////////////////////////////////////////////////////////        
 //-------------------------------취소버튼 생성----------------------------------        
 /////////////////////////////////////////////////////////////////////////////////   
-		cancelButton = new JButton(new ImageIcon(commonPath + "Cancel.png"));
-		cancelButton.setBounds(500, 481, 111, 59);
+		cancelButton = new JButton(new ImageIcon(commonPath + "CancelButton_new.png"));
+		cancelButton.setBounds(520, 481, 90, 50);
 		
 
 
 //--------------------------텍스트 필드 생성 및 추가----------------------------------
 		departmentNameLabel = new JLabel("학과");
-		departmentNameLabel.setBounds(372, 247, 100, 50);
+		Font basicfont = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 20);
+		departmentNameLabel.setFont(basicfont);
+		departmentNameLabel.setBounds(340, 225, 100, 50);
 		departmentNameTextField = new JTextField();//학과 텍스트필드
-		departmentNameTextField.setBounds(472, 247, 200, 40);
+		departmentNameTextField.setBounds(432, 227, 200, 40);
 
 //		
 //		departmentCodeLable = new JLabel("학과 코드");
@@ -86,9 +88,10 @@ public class AdminDeptMgtRegDesign extends JDialog {
 //		departmentCodeTextField.setEnabled(false);
 		
 		departmentCapacityLabel = new JLabel("정원");
-		departmentCapacityLabel.setBounds(372, 340, 100, 50);
+		departmentCapacityLabel.setFont(basicfont);
+		departmentCapacityLabel.setBounds(340, 316, 100, 50);
 		departmentCapacityTextField = new JTextField();
-		departmentCapacityTextField.setBounds(472, 340, 200, 40);
+		departmentCapacityTextField.setBounds(432, 320, 200, 40);
 
 		add(departmentNameLabel);
 		add(departmentNameTextField);
