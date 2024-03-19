@@ -18,13 +18,14 @@ public class AdminDeptMgtRegDesign extends JDialog {
 	
 	private JLabel departmentNameLabel;
 	private JLabel departmentCapacityLabel;
+	private JLabel departmentCodeLable;
 	private JLabel topLogin;
 	private JLabel deptRegLabel;
 	private JLabel jlBack;
 	private JLabel deptMgt;
 
 	private JTextField departmentNameTextField;// 학과
-	//JTextField departmentCodeTextField;// 학과코드
+//	private JTextField departmentCodeTextField; //학과코드
 	private JTextField departmentCapacityTextField;// 정원
 
 	public AdminDeptMgtRegDesign(AdminDeptMgtDesign admd, String title) {
@@ -32,7 +33,7 @@ public class AdminDeptMgtRegDesign extends JDialog {
 		this.admd = admd;
 		String commonPath = "src/eduCourse_prj/image/common/";
 		String deptPath = "src/eduCourse_prj/image/admin/";
-
+		
 		setSize(1000, 650);
 		setLocationRelativeTo(admd);
 		setModal(true);
@@ -73,21 +74,26 @@ public class AdminDeptMgtRegDesign extends JDialog {
 
 //--------------------------텍스트 필드 생성 및 추가----------------------------------
 		departmentNameLabel = new JLabel("학과");
-		departmentNameLabel.setBounds(372, 267, 100, 30);
+		departmentNameLabel.setBounds(372, 247, 100, 50);
 		departmentNameTextField = new JTextField();//학과 텍스트필드
-		departmentNameTextField.setBounds(472, 267, 200, 30);
+		departmentNameTextField.setBounds(472, 247, 200, 40);
 
-
-		//departmentCodeTextField = new JTextField();
-		//departmentCodeTextField.setBounds(50, 100, 200, 30);
+//		
+//		departmentCodeLable = new JLabel("학과 코드");
+//		departmentCodeLable.setBounds(372,293,100,50);
+//		departmentCodeTextField = new JTextField();
+//		departmentCodeTextField.setBounds(472, 293, 200, 40);
+//		departmentCodeTextField.setEnabled(false);
+		
 		departmentCapacityLabel = new JLabel("정원");
-		departmentCapacityLabel.setBounds(372, 320, 100, 30);
+		departmentCapacityLabel.setBounds(372, 340, 100, 50);
 		departmentCapacityTextField = new JTextField();
-		departmentCapacityTextField.setBounds(472, 320, 200, 30);
+		departmentCapacityTextField.setBounds(472, 340, 200, 40);
 
 		add(departmentNameLabel);
 		add(departmentNameTextField);
-		//add(departmentCodeTextField);
+//		add(departmentCodeLable);
+//		add(departmentCodeTextField);
 		add(departmentCapacityLabel);
 		add(departmentCapacityTextField);
 
