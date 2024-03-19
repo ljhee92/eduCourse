@@ -34,8 +34,7 @@ public class AdminStudMgtDesign extends JDialog {
 	private JLabel adminMgt;
 	private JTable jtbStdMgt;
 	private DefaultTableModel dtmAdminMgt;
-	
-	
+
 	private JButton jbtnSlct, jbtnSlctTop;
 
 	private JLabel jlDept;
@@ -60,7 +59,6 @@ public class AdminStudMgtDesign extends JDialog {
 		String commonPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/common/";
 		String adminPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/admin/";
 
-
 		jlBack = new JLabel(new ImageIcon(commonPath + "back.png"));
 		jlBack.setBounds(0, 0, 984, 620);
 		add(jlBack);
@@ -78,7 +76,6 @@ public class AdminStudMgtDesign extends JDialog {
 		topLogin.setBounds(670, 30, 200, 20);
 		add(topLogin);
 
-		
 		jlDept = new JLabel("학과");
 		jlDept.setFont(font);
 		jlDept.setBounds(240, 150, 50, 20);
@@ -109,24 +106,18 @@ public class AdminStudMgtDesign extends JDialog {
 		jtfStdNum.setBounds(280, 185, 200, 30);
 		add(jtfStdNum);
 
-		
-		
-		
-		
-		
 		///////////////////////////////////////////////////////////////////
-		///////////////////////초기 설정/////////////////////////////////////
+		/////////////////////// 초기 설정/////////////////////////////////////
 		////////////////////////////////////////////////////////////////////
-		
-		try {//학과
+
+		try {// 학과
 
 			// 모든 학과 정보 가져오기
 			lDept = aDAO.slctAllDept();
-			
-			//"전체 아이템 추가"
-				jcbDept.addItem("전체");
-				
-			
+
+			// "전체 아이템 추가"
+			jcbDept.addItem("전체");
+
 			// 학과명만 저장하는 리스트에 학과명 저장
 			for (DeptVO dept : lDept) {
 				jcbDept.addItem(dept.getDept_name());
@@ -136,32 +127,26 @@ public class AdminStudMgtDesign extends JDialog {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
 
-		
-	try {//과목
-		
-		
+		try {// 과목
 
-			//모든 과목 정보 가져오기
+			// 모든 과목 정보 가져오기
 
-		jcbCrs.addItem("전체");
+			jcbCrs.addItem("전체");
 
 			lCrs = aDAO.slctAllCrs();
 			// 과목명만 저장하는 리스트에 과목명 저장
 			for (CrsVO crs : lCrs) {
-			jcbCrs.addItem(crs.getCourName());
+				jcbCrs.addItem(crs.getCourName());
 
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	/////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////
-	
+		/////////////////////////////////////////////////////////////////////
+		/////////////////////////////////////////////////////////////////////
+
 		// 테이블 추가
 		String[] tempColumn = { "학과", "과목", "학번", "이름" };
 		dtmStdMgt = new DefaultTableModel(tempColumn, 0) {
@@ -188,7 +173,6 @@ public class AdminStudMgtDesign extends JDialog {
 		add(jbtnSlctTop);
 		////////////////////////////////////////////////////////////////////
 
-
 		// 테이블 컬럼 가운데 정렬
 		setTbHorizontal();
 
@@ -201,18 +185,11 @@ public class AdminStudMgtDesign extends JDialog {
 		jbtnSlct.addActionListener(asme);
 		jbtnSlctTop.addActionListener(asme);
 		jcbDept.addActionListener(asme);
-		
-		
-		
-		
-		
+
 		setLocationRelativeTo(null);
 
 		setVisible(true);
 	}
-	
-
-
 
 	/**
 	 * 테이블의 컬럼을 가운데 정렬
@@ -226,97 +203,76 @@ public class AdminStudMgtDesign extends JDialog {
 		} // end for
 	} // setTbHorizontal
 
-
 	public AdminHomeDesign getAwd() {
 		return awd;
 	}
-
 
 	public AdminDAO getaDAO() {
 		return aDAO;
 	}
 
-
 	public JLabel getJlBack() {
 		return jlBack;
 	}
-
 
 	public JLabel getTopLogin() {
 		return topLogin;
 	}
 
-
 	public JLabel getAdminMgt() {
 		return adminMgt;
 	}
-
 
 	public JTable getJtbStdMgt() {
 		return jtbStdMgt;
 	}
 
-
 	public DefaultTableModel getDtmAdminMgt() {
 		return dtmAdminMgt;
 	}
-
 
 	public JButton getJbtnSlct() {
 		return jbtnSlct;
 	}
 
-
 	public JButton getJbtnSlctTop() {
 		return jbtnSlctTop;
 	}
-
 
 	public JLabel getJlDept() {
 		return jlDept;
 	}
 
-
 	public JLabel getJlCrs() {
 		return jlCrs;
 	}
-
 
 	public JLabel getJlstdNum() {
 		return jlstdNum;
 	}
 
-
 	public JComboBox<String> getJcbDept() {
 		return jcbDept;
 	}
-
 
 	public JComboBox<String> getJcbCrs() {
 		return jcbCrs;
 	}
 
-
 	public JTextField getJtfStdNum() {
 		return jtfStdNum;
 	}
-
 
 	public List<DeptVO> getLDept() {
 		return lDept;
 	}
 
-
 	public List<CrsVO> getLCrs() {
 		return lCrs;
 	}
 
-
 	public DefaultTableModel getDtmStdMgt() {
 		return dtmStdMgt;
 	}
-	
-	
-	
-	
+
 }
