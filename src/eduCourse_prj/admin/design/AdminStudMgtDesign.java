@@ -167,7 +167,7 @@ public class AdminStudMgtDesign extends JDialog {
 		jbtnSlctTop = new JButton(new ImageIcon(commonPath + "search.png"));
 
 		jbtnSlct.setBounds(440, 500, 111, 59);
-		jbtnSlctTop.setBounds(800, 130, 89, 50);
+		jbtnSlctTop.setBounds(780, 145, 70, 30);
 
 		add(jbtnSlct);
 		add(jbtnSlctTop);
