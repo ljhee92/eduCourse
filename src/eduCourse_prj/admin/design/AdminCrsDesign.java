@@ -28,6 +28,7 @@ public class AdminCrsDesign extends JDialog {
 
 	JLabel jlBack;// 배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
+
 	private JLabel crsMgt;
 
 	private JTable jtbCrsMgt;
@@ -52,6 +53,7 @@ public class AdminCrsDesign extends JDialog {
 		add(jlBack);
 
 		// 관리자관리, 등록 라벨 추가
+
 		crsMgt = new JLabel(new ImageIcon(adminPath + "과목_관리.png"));
 		crsMgt.setBounds(10, 76, 967, 45);
 		add(crsMgt);

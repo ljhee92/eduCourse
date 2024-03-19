@@ -13,6 +13,24 @@ public class CrsVO {
 		super();
 	}
 
+	
+	
+	
+	
+	
+	
+	public CrsVO(String courCode, String courName) {
+		super();
+		this.courCode = courCode;
+		this.courName = courName;
+	}
+
+
+
+
+
+
+
 	public CrsVO(String courCode, String courName, int creditHour, int deptCode) {
 		super();
 		this.courCode = courCode;
@@ -33,8 +51,12 @@ public class CrsVO {
 	}
 	
 	
-	
-	
+
+
+
+
+
+
 
 	public CrsVO(String courCode, String courName, int creditHour, int deptCode, String deptName) {
 		super();
