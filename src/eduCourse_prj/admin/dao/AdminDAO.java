@@ -288,22 +288,39 @@ public class AdminDAO {
 			pstmt.setInt(1, deptCode);
 			rs = pstmt.executeQuery();
 			
-			List<String> professors =  new ArrayList<>(); // 교수 목록을 저장하기 위한 리스트 생성
-			while(rs.next()) {
-				  professors.add(rs.getString("PROF_NAME")); //리스트에 PROF_NAME 데이터 추가
-	              dDTO = new DeptDTO(
-	                        rs.getInt("DEPT_CODE"),
-	                        rs.getString("DEPT_NAME"),
-	                        professors, 	//DeptDTO에 리스트 전달
-	                        rs.getInt("DEPT_CAPACITY")
-	                );
-				} // end while
-			} finally {
-				dbCon.dbClose(rs, pstmt, con);
-			} // end finally
-			return dDTO;
-		}
+	        List<String> professors = new ArrayList<>(); // 교수 목록을 저장하기 위한 리스트 생성
+	        if (rs.next()) {
+	            professors.add(rs.getString("PROF_NAME"));
+	            dDTO = new DeptDTO(
+	                rs.getInt("DEPT_CODE"),
+	                rs.getString("DEPT_NAME"),
+	                professors,     // DeptDTO에 리스트 전달
+	                rs.getInt("DEPT_CAPACITY")
+	            );		        
+	        } else {
+	            // 교수명이 없는 경우 새로운 쿼리 실행
+	            selectQuery = "SELECT DEPT_CODE, DEPT_NAME, DEPT_CAPACITY "
+	                + "FROM DEPT d "    
+	                + "WHERE d.DEPT_CODE = ?";		
 
+	            pstmt = con.prepareStatement(selectQuery);
+	            pstmt.setInt(1, deptCode);
+	            rs = pstmt.executeQuery();
+
+	            if (rs.next()) {
+	                dDTO = new DeptDTO(
+	                    rs.getInt("DEPT_CODE"),
+	                    rs.getString("DEPT_NAME"),
+	                    professors,     // DeptDTO에 리스트 전달
+	                    rs.getInt("DEPT_CAPACITY")
+	                );
+	            }
+	        }
+	    } finally {
+	        dbCon.dbClose(rs, pstmt, con);
+	    } // end finally
+	    return dDTO;
+	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/**
 	 * 학과 삭제를 위한 메서드

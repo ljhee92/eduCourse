@@ -3,6 +3,7 @@ package eduCourse_prj.admin.event;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JDialog;
@@ -33,7 +34,7 @@ public class AdminDeptMgtEvent extends JDialog implements ActionListener{
 		if (ae.getSource()==admd.getJbtnDeptReg()) {
 			JOptionPane.showMessageDialog(admd, "등록버튼 클릭");
 			new AdminDeptMgtRegDesign(admd,"학과 등록");
-		}
+		}//getJbtnReg
 		
 		//////////조회버튼클릭////////////
 		if(ae.getSource() == admd.getJbtnSlct()) {
@@ -72,7 +73,8 @@ public class AdminDeptMgtEvent extends JDialog implements ActionListener{
 				e.printStackTrace();
 			}
 				
-			}
+			}//getJbtnSlct
+		
 		if(ae.getSource() == admd.getJbtnDel()) {
 		    int index = admd.getJtbDeptMgt().getSelectedRow();
 		    if(index == -1) {
@@ -98,7 +100,7 @@ public class AdminDeptMgtEvent extends JDialog implements ActionListener{
 		        e.printStackTrace();
 		    }
 			
-		}
+		}//getJbtnDel
 
 	}
 }
