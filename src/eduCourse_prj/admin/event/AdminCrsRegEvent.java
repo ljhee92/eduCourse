@@ -89,6 +89,13 @@ public class AdminCrsRegEvent extends WindowAdapter implements ActionListener {
 							JOptionPane.ERROR_MESSAGE);
 					return;
 				}
+				
+				if (se.getErrorCode() == 1438) {
+
+					JOptionPane.showMessageDialog(acrd, "학점은 2자리 정수까지 입력가능합니다.", "오류",
+							JOptionPane.ERROR_MESSAGE);
+					return;
+				}
 				se.printStackTrace();
 			}
 		}
