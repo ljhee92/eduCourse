@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eduCourse_prj.DbConnection;
+import eduCourse_prj.VO.AdminProfVO;
 import eduCourse_prj.VO.LoginVO;
 import eduCourse_prj.VO.ProfVO;
 
@@ -155,8 +156,8 @@ public class ProfDAO {
 	 * @return
 	 * @throws SQLException
 	 */
-	public ProfVO slctProfMgtSlct(int prof_number) throws SQLException{
-		ProfVO pVO = null;
+	public AdminProfVO slctProfMgtSlct(int prof_number) throws SQLException{
+		AdminProfVO apVO = null;
 		DbConnection dbCon = DbConnection.getInstance();
 		
 		Connection con = null;
@@ -169,22 +170,57 @@ public class ProfDAO {
 			
 			con = dbCon.getConnection(id, pass);
 			
-			String selectProf = "select distinct p.prof_number, p.prof_name, p.prof_email, d.dept_name "
-								+ "from professor p "
-								+ "join dept d on d.dept_code = p.dept_code "
-								+ "where p.prof_number = ?";
-			pstmt = con.prepareStatement(selectProf);
+			String selectProf = "SELECT p.PROF_NUMBER, p.PROF_NAME, p.PROF_EMAIL, d.DEPT_NAME, c.COURSE_NAME "
+                    + "FROM PROFESSOR p "
+                    + "JOIN DEPT d ON p.DEPT_CODE = d.DEPT_CODE "
+                    + "JOIN COURSE c ON d.DEPT_CODE = c.DEPT_CODE "
+                    + "WHERE p.PROF_NUMBER = ?";
+			pstmt = con.prepareStatement(selectProf,ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
 			pstmt.setInt(1, prof_number);
 			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				pVO = new ProfVO(prof_number, rs.getString("prof_name"), rs.getString("prof_email"), rs.getString("dept_name"));
-			} // end while
+
+			List<String> courses = new ArrayList<>();
+			///////////////////과목이 존재한다면//////////////////////////
+			if(rs.next()) {
+				rs.beforeFirst();
+				while(rs.next()) {
+					courses.add(rs.getString("course_name"));
+					apVO = new AdminProfVO(
+							prof_number,
+							rs.getString("prof_name"),
+							rs.getString("prof_email"),
+							rs.getString("dept_name"),
+							courses);
+				} // end while				
+			}//end if
+			else {
+				/////////////////과목이 없다면//////////////////////////
+				pstmt.close(); //닫기
+				rs.close(); // 닫기
+				
+				//새로운 쿼리 생성
+				selectProf = "SELECT p.PROF_NUMBER, p.PROF_NAME, p.PROF_EMAIL, d.DEPT_NAME "
+	                       + "FROM PROFESSOR p "
+	                       + "JOIN DEPT d ON p.DEPT_CODE = d.DEPT_CODE "
+						   + "WHERE p.PROF_NUMBER = ?";
+				pstmt = con.prepareStatement(selectProf);
+				pstmt.setInt(1, prof_number);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+				apVO = new AdminProfVO(
+						prof_number,
+						rs.getString("prof_name"),
+						rs.getString("prof_email"),
+						rs.getString("dept_name"),
+						courses);
+				}
+			}//end else
 		} finally {
 			dbCon.dbClose(rs, pstmt, con);
 		} // end finally
 		
-		return pVO;
+		return apVO;
 //		return listProfVO;
 	} // slctProfMgtSlct
 	

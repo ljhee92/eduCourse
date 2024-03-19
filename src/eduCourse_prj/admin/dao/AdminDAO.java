@@ -283,23 +283,32 @@ public class AdminDAO {
                     + "FROM DEPT d "
                     + "INNER JOIN PROFESSOR p ON d.DEPT_CODE = p.DEPT_CODE "
                     + "WHERE d.DEPT_CODE = ?";		
-
-			pstmt = con.prepareStatement(selectQuery);
+			//CURSOR를 양방향으로 전환가능하게 만듬
+			pstmt = con.prepareStatement(selectQuery,ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
 			pstmt.setInt(1, deptCode);
 			rs = pstmt.executeQuery();
 			
 	        List<String> professors = new ArrayList<>(); // 교수 목록을 저장하기 위한 리스트 생성
+	        
+	        ////////////////교수가 존재할떄/////////////////
 	        if (rs.next()) {
-	            professors.add(rs.getString("PROF_NAME"));
+	        	//커서를 처음으로 초기화
+	        	rs.beforeFirst();
+	        	while(rs.next()) {
+	        		professors.add(rs.getString("PROF_NAME"));
 	            dDTO = new DeptDTO(
-	                rs.getInt("DEPT_CODE"),
-	                rs.getString("DEPT_NAME"),
-	                professors,     // DeptDTO에 리스트 전달
-	                rs.getInt("DEPT_CAPACITY")
-	            );		        
-	        } else {
-	            // 교수명이 없는 경우 새로운 쿼리 실행
-	            selectQuery = "SELECT DEPT_CODE, DEPT_NAME, DEPT_CAPACITY "
+	                    rs.getInt("DEPT_CODE"),
+	                    rs.getString("DEPT_NAME"),
+	                    professors,     // DeptDTO에 리스트 전달
+	                    rs.getInt("DEPT_CAPACITY"));
+	        	}
+			} else {
+		        ////////////////교수가 존재하지 않을때/////////////////
+				pstmt.close(); //닫기
+				rs.close(); //닫기
+				
+				//새로운 쿼리 작성
+				selectQuery = "SELECT DEPT_CODE, DEPT_NAME, DEPT_CAPACITY "
 	                + "FROM DEPT d "    
 	                + "WHERE d.DEPT_CODE = ?";		
 

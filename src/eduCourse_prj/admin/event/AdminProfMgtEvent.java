@@ -4,12 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.sql.SQLException;
-
+import java.util.List;
 
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import eduCourse_prj.VO.AdminProfVO;
 import eduCourse_prj.VO.ProfVO;
 import eduCourse_prj.admin.design.AdminProfMgtDesign;
 import eduCourse_prj.admin.design.AdminProfMgtMdfyDesign;
@@ -40,15 +41,23 @@ public class AdminProfMgtEvent extends WindowAdapter implements ActionListener {
 			} // end if
 			try {
 				int prof_number = Integer.parseInt(apmd.getDtmProfMgt().getValueAt(index, 0).toString());
-				
 				ProfDAO pDAO = ProfDAO.getInstance();
-				ProfVO pVO = pDAO.slctProfMgtSlct(prof_number);
+				AdminProfVO apVO = pDAO.slctProfMgtSlct(prof_number);
+				int profCnt = 1;
 				
 				StringBuilder output = new StringBuilder();
-				output.append("교번: ").append(pVO.getProf_number()).append("\n");
-				output.append("이름: ").append(pVO.getProf_name()).append("\n");
-				output.append("이메일: ").append(pVO.getProf_email()!=null?pVO.getProf_email():"").append("\n");
-				output.append("소속학과: ").append(pVO.getDept_name()).append("\n");
+				output.append("교번: ").append(apVO.getProf_number()).append("\n");
+				output.append("이름: ").append(apVO.getProf_name()).append("\n");
+				output.append("이메일: ").append(apVO.getProf_email()!=null?apVO.getProf_email():"").append("\n");
+				output.append("소속학과: ").append(apVO.getDept_name()).append("\n");
+				
+				List<String> listCourse = apVO.getCourse_name();  	//과목 목록을 받기위한 리스트 생성
+				output.append("담당 과목: ");					
+				for(String courses : listCourse) { 
+				    output.append(profCnt).append(". ").append(courses).append(" ");
+				    profCnt++;
+				}
+				
 				JTextArea jta = new JTextArea(output.toString(), 8, 50);
 				JScrollPane jsp = new JScrollPane(jta);
 				jta.setEditable(false);

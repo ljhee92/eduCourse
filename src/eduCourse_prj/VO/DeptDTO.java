@@ -1,7 +1,10 @@
 package eduCourse_prj.VO;
 
 import java.util.List;
-
+/**
+ * 학과 관리를 위한 VO 
+ * 
+ */
 public class DeptDTO {
 	private int dept_code; // 학과 코드
 	private String dept_name; // 학과명

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import javax.swing.*;
 
+import eduCourse_prj.VO.AdminProfVO;
 import eduCourse_prj.VO.LoginVO;
 import eduCourse_prj.VO.ProfVO;
 import eduCourse_prj.professor.dao.ProfDAO;
@@ -45,12 +46,12 @@ public class ProfHomeDesign extends JFrame {
 		name = new JLabel("이름 : " + lVO.getName());
 		
 		ProfDAO pDAO = ProfDAO.getInstance();
-		ProfVO pVO = null;
+		AdminProfVO apVO = null;
 		
 		try {
-			pVO = pDAO.slctProfMgtSlct(Integer.parseInt(lVO.getId()));
-			dept = new JLabel("소속학과 : " + pVO.getDept_name());
-			email = new JLabel("이메일 : " + (pVO.getProf_email() == null ? "" : pVO.getProf_email()));
+			apVO = pDAO.slctProfMgtSlct(Integer.parseInt(lVO.getId()));
+			dept = new JLabel("소속학과 : " + apVO.getDept_name());
+			email = new JLabel("이메일 : " + (apVO.getProf_email() == null ? "" : apVO.getProf_email()));
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
