@@ -2,6 +2,8 @@ package eduCourse_prj.student.design;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.sql.SQLException;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -14,6 +16,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import eduCourse_prj.VO.RegVO;
+import eduCourse_prj.student.dao.CrsRegDAO;
 import eduCourse_prj.student.event.StdntCrsSlctEvent;
 
 public class StdntCrsSlctDesign extends JDialog {
@@ -86,6 +90,12 @@ public class StdntCrsSlctDesign extends JDialog {
 		jsp.setBounds(10, 110, 967, 330);
 		add(jsp);
 		
+		// 테이블에 DB 추가
+		searchAllReg();
+		
+		// 테이블에 추가된 DB를 기반으로 총 학점 계산
+		sumCredit();
+		
 		// 이벤트 클래스 연결
 		StdntCrsSlctEvent scse = new StdntCrsSlctEvent(this);
 		addWindowListener(scse);
@@ -111,6 +121,42 @@ public class StdntCrsSlctDesign extends JDialog {
 			tcm1.getColumn(i).setCellRenderer(dtcr);
 		} // end for
 	} // setTbHorizontal
+	
+	/**
+	 * DB에서 로그인한 학생이 수강신청 완료한 과목들을 가져와 테이블에 넣는 method
+	 */
+	public void searchAllReg() {
+		CrsRegDAO crDAO = CrsRegDAO.getInstance();
+
+		try {
+			List<RegVO> listRegVO = crDAO.slctAllReg(Integer.parseInt(shd.getlVO().getId()));
+			
+			for(RegVO rVO : listRegVO) {
+				Object[] row = {rVO.getDept_name(), rVO.getCourse_name(), rVO.getCourse_code(), rVO.getLect_room(),
+								rVO.getCapacity(), rVO.getCredit_hours(), rVO.getProf_name()};
+				dtmCrsSlct.addRow(row);
+			} // end for
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	} // searchAllReg
+	
+	/**
+	 * 수강신청한 과목들의 총 학점을 계산하는 method
+	 */
+	public void sumCredit() {
+		int index = jtbCrsSlct.getRowCount();
+		int credit_hours = 0, sum_credit_hours = 0;
+		
+		for(int i = 0; i < index; i++) {
+			credit_hours = Integer.parseInt(dtmCrsSlct.getValueAt(i, 5).toString());
+			sum_credit_hours += credit_hours;
+		} // end for
+		
+		jlAllCreditHour.setText(Integer.toString(sum_credit_hours));
+	} // sumCredit
 
 	public StdntHomeDesign getShd() {
 		return shd;
