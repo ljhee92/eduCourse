@@ -1,5 +1,7 @@
 package eduCourse_prj.admin.design;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.sql.SQLException;
 
 import java.util.List;
@@ -26,35 +28,41 @@ public class AdminCrsRegDisgn extends JDialog {
 	List<DeptVO> lDept;
 	List<ProfVO> lProf;
 
-	JComboBox<String> jcbDept;
-	JComboBox<String> jcbProf;
-	JTextField JtfCrsName;
-	JTextField JtfCrsCode;
-	JTextField JtfCredit;
-	JTextField JtfProfName;
+	JComboBox<String> jcbDept, jcbProf;
 
-	JButton jbtnRegister; // 등록버튼
-	JButton jbtnCancel; // 취소버튼
+	JTextField JtfCrsName, JtfCrsCode, JtfCredit, JtfProfName;
 
-	
-	JLabel jlBack; //배경라벨
-	JLabel jlDept, jlCrs, jlCrsCode, jlProf, jlCredit;
-	
+	JButton jbtnRegister, jbtnCancel;
+
+	JLabel jlBack, jlCrsMgtTitle , jlCrsReg;
+
+	JLabel jlDept, jlCrs, jlCrsCode, jlProf, jlCredit, jlNecessary;
+
 	public AdminCrsRegDisgn(AdminCrsDesign acd, String title) {
 		super(acd, title, true);
 		this.acd = acd;
-		
-		//공통경로
+
+		// 공통경로
 		String commonPath = "src/eduCourse_prj/image/common/";
+		String crsPath = "src/eduCourse_prj/image/crs/";
 
-		setLayout(null);
+
+		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
+
+
+
 		setSize(1000, 650);
+		setLayout(null);
+		setLocationRelativeTo(null);
 
-		// jcbDept 초기화
+		
+
+		jlDept = new JLabel("학과");
+		jlDept.setFont(font);
+		jlDept.setBounds(320, 200, 100, 30);
+		add(jlDept);
+		
 		jcbDept = new JComboBox<>();
-		jcbDept.setBounds(400, 100, 200, 30);
-		add(jcbDept);
-
 		try {
 
 			// 모든 학과 정보 가져오기
@@ -69,11 +77,41 @@ public class AdminCrsRegDisgn extends JDialog {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		jcbDept.setBounds(400, 200, 200, 30);
+		jcbDept.setFont(font);
+		add(jcbDept);
 
-		// JcbProf 초기화
+
+		
+		jlCrs = new JLabel("과목");
+		jlCrs.setFont(font);
+		jlCrs.setBounds(320, 250, 100, 30);
+		add(jlCrs);
+		
+		JtfCrsName = new JTextField();
+		JtfCrsName.setFont(font);
+		JtfCrsName.setBounds(400, 250, 200, 30);
+		add(JtfCrsName);
+		
+	
+		jlCrsCode = new JLabel("과목코드");
+		jlCrsCode.setFont(font);
+		jlCrsCode.setBounds(320, 300, 100, 30);
+		add(jlCrsCode);
+		
+		JtfCrsCode = new JTextField();
+		JtfCrsCode.setFont(font);
+		JtfCrsCode.setBounds(400, 300, 200, 30);
+		add(JtfCrsCode);
+		
+		
+		jlProf = new JLabel("교수");
+		jlProf.setFont(font);
+		jlProf.setBounds(320, 350, 200, 30);
+		add(jlProf);
+		
 		jcbProf = new JComboBox<>();
-		jcbProf.setBounds(400, 250, 200, 30);
-
 		try {
 
 			// 최초 선택된 학과에 소속되어있는 교수를 리스트에 저장
@@ -91,50 +129,57 @@ public class AdminCrsRegDisgn extends JDialog {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+		jcbProf.setBounds(400, 350, 200, 30);
+		jcbProf.setFont(font);
 		add(jcbProf);
 		
-		// 배경 추가
-        jlBack = new JLabel(new ImageIcon(commonPath + "Back.png"));
-        jlBack.setBounds(0,0,984,620);
-		setSize(1000,650);
-		setLayout(null);
-		setLocationRelativeTo(null);
 		
-		//라벨 추가
-		jlDept = new JLabel("학과");
-		jlCrs = new JLabel("과목");
-		jlCrsCode = new JLabel("과목코드");
-		jlProf = new JLabel("교수");
+		
+		
 		jlCredit = new JLabel("학점");
-
-		JtfCrsName = new JTextField("과목명");
-		jlCrs.setBounds(350, 150, 100, 30);
-		JtfCrsName.setBounds(400, 150, 200, 30);
-		add(jlCrs);
-		add(JtfCrsName);
-
-		JtfCrsCode = new JTextField("과목코드");
-		jlCrsCode.setBounds(350, 200, 100, 30);
-		JtfCrsCode.setBounds(400, 200, 200, 30);
-		add(jlCrsCode);
-		add(JtfCrsCode);
-
-		JtfCredit = new JTextField("학점");
-		jlCredit.setBounds(350, 300, 100, 30);
-		JtfCredit.setBounds(400, 300, 200, 30);
+		jlCredit.setFont(font);
+		jlCredit.setBounds(320, 400, 100, 30);
 		add(jlCredit);
+	
+		JtfCredit = new JTextField();
+		JtfCredit.setFont(font);
+		JtfCredit.setBounds(400, 400, 200, 30);
 		add(JtfCredit);
 
-		jbtnRegister = new JButton("등록");
-		jbtnRegister.setBounds(300, 400, 200, 30);
+		jbtnRegister = new JButton(new ImageIcon(commonPath + "Reg.png"));
+		jbtnRegister.setFont(font);
+		jbtnRegister.setBounds(345, 490, 111, 59);
 		add(jbtnRegister);
 
-		jbtnCancel = new JButton("취소");
-		jbtnCancel.setBounds(500, 400, 200, 30);
+		jbtnCancel = new JButton(new ImageIcon(commonPath + "Cancel.png"));
+		jbtnCancel.setFont(font);
+		jbtnCancel.setBounds(530, 490, 111, 59);
 		add(jbtnCancel);
+
+		Font sfont = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 10);
+		jlNecessary = new JLabel("과목 과목코드 학점은 필수 입력사항입니다.");
+		jlNecessary.setFont(sfont);
+		jlNecessary.setForeground(Color.RED);
+		jlNecessary.setBounds(470, 430, 300, 30);
+		add(jlNecessary);
+
+		// 배경 추가
+
 		
-		add(jlBack); //배경
+		jlCrsMgtTitle = new JLabel(new ImageIcon(crsPath + "crsMgtTitle.png"));
+		jlCrsMgtTitle.setBounds(10, 76, 967, 44);
+		add(jlCrsMgtTitle);
+
+		jlCrsReg = new JLabel(new ImageIcon(crsPath + "crsRegTitle.png"));
+		jlCrsReg.setBounds(10, 120, 967, 44);
+		add(jlCrsReg);
+		
+		jlBack = new JLabel(new ImageIcon(commonPath + "Back.png"));
+		jlBack.setBounds(0, 0, 984, 620);
+		add(jlBack); // 배경
+		
+		
+
 
 		AdminCrsRegEvent acre = new AdminCrsRegEvent(this);
 		addWindowListener(acre);
@@ -197,5 +242,6 @@ public class AdminCrsRegDisgn extends JDialog {
 	public JButton getJbtnCancel() {
 		return jbtnCancel;
 	}
+
 
 }
