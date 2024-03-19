@@ -17,10 +17,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import eduCourse_prj.VO.CrsRegVO;
-import eduCourse_prj.VO.CrsVO;
-import eduCourse_prj.VO.ProfVO;
-import eduCourse_prj.admin.event.AdminProfMgtEvent;
-import eduCourse_prj.professor.dao.ProfDAO;
 import eduCourse_prj.student.dao.CrsRegDAO;
 import eduCourse_prj.student.event.StdntCrsRegEvent;
 
