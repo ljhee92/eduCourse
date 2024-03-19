@@ -49,7 +49,7 @@ public class AdminStudMgtDesign extends JDialog {
 	List<DeptVO> lDept;
 	List<CrsVO> lCrs;
 
-	private DefaultTableModel dtmCrsMgt;
+	private DefaultTableModel dtmStdMgt;
 
 	public AdminStudMgtDesign(AdminHomeDesign awd, String title) {
 		super(awd, title, true);
@@ -164,12 +164,12 @@ public class AdminStudMgtDesign extends JDialog {
 	
 		// 테이블 추가
 		String[] tempColumn = { "학과", "과목", "학번", "이름" };
-		dtmCrsMgt = new DefaultTableModel(tempColumn, 0) {
+		dtmStdMgt = new DefaultTableModel(tempColumn, 0) {
 			public boolean isCellEditable(int row, int column) {
 				return false; // 테이블 셀 수정 불가하도록 설정
 			} // isCellEditable
 		};
-		jtbStdMgt = new JTable(dtmCrsMgt);
+		jtbStdMgt = new JTable(dtmStdMgt);
 		JScrollPane jsp = new JScrollPane(jtbStdMgt);
 
 		jtbStdMgt.setRowHeight(30); // 행 높이 조절
@@ -226,7 +226,7 @@ public class AdminStudMgtDesign extends JDialog {
 			for (CrsVO cVO : listCrsVO) {
 
 				Object[] row = { cVO.getDeptName(), cVO.getCourName() };
-				dtmCrsMgt.addRow(row);
+				dtmStdMgt.addRow(row);
 			} // end for
 
 		} catch (SQLException e) {
@@ -332,8 +332,8 @@ public class AdminStudMgtDesign extends JDialog {
 	}
 
 
-	public DefaultTableModel getDtmCrsMgt() {
-		return dtmCrsMgt;
+	public DefaultTableModel getDtmStdMgt() {
+		return dtmStdMgt;
 	}
 	
 	
