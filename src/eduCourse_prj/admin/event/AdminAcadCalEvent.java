@@ -4,7 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 
+import eduCourse_prj.admin.dao.AdminAcadCalDAO;
 import eduCourse_prj.admin.design.AdminAcadCalDesign;
 
 
@@ -12,6 +14,7 @@ public class AdminAcadCalEvent extends WindowAdapter implements ActionListener{
 	
 	AdminAcadCalDesign aacd;
 	int i=0;
+	
 	public AdminAcadCalEvent(AdminAcadCalDesign aacd) {
 		this.aacd = aacd;
 	}
@@ -26,8 +29,15 @@ public class AdminAcadCalEvent extends WindowAdapter implements ActionListener{
 			int selectedYear = (int)aacd.getYearCb().getSelectedItem();
 			int selectedMonth = (int)aacd.getMonthCb().getSelectedItem();			
 			int selectedDay = aacd.getDay();
-			System.out.println(selectedDay);
+			String dayMonthYear = selectedYear+""+selectedMonth+""+selectedDay;
 			String memoText = aacd.getMemoJtf().getText();
+			AdminAcadCalDAO aacDAO = AdminAcadCalDAO.getInstance();
+			try {
+				aacDAO.saveCal(memoText, dayMonthYear);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
 			
 //			CalenderVO cVO = new CalenderVO(selectedYear, selectedMonth, selectedDay, memoText);
 			String memoMapKey = selectedYear+""+selectedMonth+""+selectedDay;
