@@ -104,7 +104,7 @@ public class AdminCrsRegEvent extends WindowAdapter implements ActionListener {
 				// 해당 부서의 교수 목록 가져오기
 				List<ProfVO> lProf = pDAO.slctDeptProf(dept_code);
 				for (ProfVO dept : lProf) {
-					System.out.println(dept.getProf_name());
+					//System.out.println(dept.getProf_name());
 					acrd.getJcbProf().addItem(dept.getProf_name());
 				}
 			} catch (SQLException se) {
