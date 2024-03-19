@@ -65,7 +65,7 @@ public class StdntCrsRegDesign extends JDialog {
 		
 		// 총학점 하단 라벨 추가
 		jlAllCreditTxt = new JLabel("총 학점 : ");
-		jlAllCreditHour = new JLabel("6");	// 합계 구현 필요함
+		jlAllCreditHour = new JLabel("0");
 		
 		jlAllCreditTxt.setFont(font);
 		jlAllCreditHour.setFont(font);
@@ -195,6 +195,18 @@ public class StdntCrsRegDesign extends JDialog {
 
 	public DefaultTableModel getDtmCrsReg() {
 		return dtmCrsReg;
+	}
+	
+	public JTable getJtbCrsCart() {
+		return jtbCrsCart;
+	}
+	
+	public DefaultTableModel getDtmCrsCart() {
+		return dtmCrsCart;
+	}
+	
+	public JLabel getJlAllCreditHour() {
+		return jlAllCreditHour;
 	}
 
 	public StdntHomeDesign getShd() {
