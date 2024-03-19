@@ -38,8 +38,8 @@ public class AdminDeptMgtDesign extends JDialog {
 		this.awd = awd;
 		
 		//공통경로
-		String commonPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/common/";
-		String deptPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/admin/";
+		String commonPath = "src/eduCourse_prj/image/common/";
+		String deptPath = "src/eduCourse_prj/image/admin/";
 		
 		// 우상단 로그인상태 확인창 추가
 		topLogin = new JLabel(awd.getlVO().getName() + " 관리자님 로그인 중");
@@ -76,13 +76,13 @@ public class AdminDeptMgtDesign extends JDialog {
         
      
 		// 학과등록, 조회, 삭제 버튼 추가
-		jbtnDeptReg = new JButton(new ImageIcon(deptPath + "DeptReg.png"));
-		jbtnSlct = new JButton(new ImageIcon(commonPath + "Slct.png"));		
-		jbtnDel = new JButton(new ImageIcon(commonPath+ "Del.png"));
+		jbtnDeptReg = new JButton(new ImageIcon(deptPath + "DeptRegBanner_new.png"));//DeptReg
+		jbtnSlct = new JButton(new ImageIcon(commonPath + "SlctButton_new.png"));	//Slct	
+		jbtnDel = new JButton(new ImageIcon(commonPath+ "DelButton_new.png")); //Del
 		
-		jbtnDeptReg.setBounds(250, 500, 111, 59);
-		jbtnSlct.setBounds(400, 500, 111, 59);
-		jbtnDel.setBounds(550, 500, 111, 59);
+		jbtnDeptReg.setBounds(300, 500, 142, 50);
+		jbtnSlct.setBounds(500, 500, 90, 50);
+		jbtnDel.setBounds(620, 500, 90, 50);
 		
 		add(jbtnDeptReg);
 		add(jbtnSlct);

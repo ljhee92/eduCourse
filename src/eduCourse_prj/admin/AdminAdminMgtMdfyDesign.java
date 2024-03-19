@@ -46,7 +46,7 @@ public class AdminAdminMgtMdfyDesign extends JDialog {
 		
 		
 		// 관리자관리, 등록 라벨 추가
-		adminMgt = new JLabel(new ImageIcon(adminPath + "adminMgt_new.png"));
+		adminMgt = new JLabel(new ImageIcon(adminPath + "adminMgtBanner_new.png"));
 		adminMgt.setBounds(10, 76, 967, 44);
 		add(adminMgt);
 		
@@ -64,7 +64,7 @@ public class AdminAdminMgtMdfyDesign extends JDialog {
 		
 		// 프로필 사진 추가
 		photo = new JLabel(new ImageIcon(commonPath + "photo.png"));
-		photo.setBounds(215, 210, 198, 233);
+		photo.setBounds(200, 210, 198, 233);
 		add(photo);
 		
 		// 교번, 이름, PW, 이메일, 소속학과, 필수입력 라벨 추가
@@ -74,11 +74,11 @@ public class AdminAdminMgtMdfyDesign extends JDialog {
 
 		jlNecessary = new JLabel("이름, PW는 필수 입력사항입니다.");
 		
-		jlAdminId.setBounds(465, 255, 100, 30);
-		jlAdminName.setBounds(465, 310, 100, 30);
-		jlAdminPass.setBounds(465, 365, 100, 30);
+		jlAdminId.setBounds(450, 255, 100, 30);
+		jlAdminName.setBounds(450, 310, 100, 30);
+		jlAdminPass.setBounds(450, 365, 100, 30);
 
-		jlNecessary.setBounds(695, 390, 300, 30);
+		jlNecessary.setBounds(680, 390, 300, 30);
 		
 		// 폰트 설정
 		Font labelFont = new Font("나눔스퀘어라운드 ExtraBold", Font.PLAIN, 20);
@@ -109,9 +109,9 @@ public class AdminAdminMgtMdfyDesign extends JDialog {
 
 		jtfAdminId.setEditable(false);
 
-		jtfAdminId.setBounds(535, 255, 300, 30);
-		jtfAdminName.setBounds(535, 310, 300, 30);
-		jpfAdminPass.setBounds(535, 365, 300, 30);
+		jtfAdminId.setBounds(520, 255, 300, 30);
+		jtfAdminName.setBounds(520, 310, 300, 30);
+		jpfAdminPass.setBounds(520, 365, 300, 30);
 
 		add(jtfAdminId);
 		add(jtfAdminName);

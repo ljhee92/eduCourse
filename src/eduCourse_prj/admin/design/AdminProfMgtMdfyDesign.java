@@ -89,8 +89,8 @@ public class AdminProfMgtMdfyDesign extends JDialog {
 		add(topLogin);
 		
 		// 교수관리, 수정 라벨 추가
-		profMgt = new JLabel(new ImageIcon(profPath + "ProfMgt.png"));
-		profMgtMdfy = new JLabel(new ImageIcon(commonPath + "Mdfy_label.png"));
+		profMgt = new JLabel(new ImageIcon(profPath + "ProfMgtBanner_new.png"));
+		profMgtMdfy = new JLabel(new ImageIcon(commonPath + "MdfyBanner_new.png"));
 		profMgt.setBounds(10, 76, 967, 44);
 		profMgtMdfy.setBounds(10, 120, 967, 44);
 		add(profMgt);
@@ -114,14 +114,15 @@ public class AdminProfMgtMdfyDesign extends JDialog {
 		jlProfPass.setBounds(410, 310, 100, 30);
 		jlProfEmail.setBounds(410, 350, 100, 30);
 		jlDept.setBounds(410, 390, 100, 30);
-		jlNecessary.setBounds(600, 435, 300, 30);
+		jlNecessary.setBounds(670, 420, 300, 30);
 		
 		jlProfNum.setFont(font);
 		jlProfName.setFont(font);
 		jlProfPass.setFont(font);
 		jlProfEmail.setFont(font);
 		jlDept.setFont(font);
-		jlNecessary.setFont(font);
+		Font sfont = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 10);
+		jlNecessary.setFont(sfont);
 		jlNecessary.setForeground(Color.RED);
 		
 		add(jlProfNum);

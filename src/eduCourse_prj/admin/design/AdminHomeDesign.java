@@ -38,19 +38,19 @@ public class AdminHomeDesign extends JFrame {
 		showId = new JLabel("ID : " + lVO.getId());
 		name = new JLabel("이름 : " + lVO.getName());
 		topLogin = new JLabel(lVO.getName() + " 관리자님 로그인 중");
-		img = new JLabel(new ImageIcon(commonPath+"Img.png"));
+		img = new JLabel(new ImageIcon(commonPath+"Img_new.png"));
 
-		jbtAdminMgt = new JButton(new ImageIcon(adminPath+"AdminMgt.png"));
-		jbtProfMgt = new JButton(new ImageIcon(adminPath+"ProfMgt.png"));
-		jbtDeptMgt = new JButton(new ImageIcon(adminPath+"DeptMgt.png"));
-		jbtStudMgt = new JButton(new ImageIcon(adminPath+"StudMgt.png"));
-		jbtCourMgt = new JButton(new ImageIcon(adminPath+"CourMgt.png"));
-		jbtSchedMgt = new JButton(new ImageIcon(adminPath+"SchedMgt.png"));
-		jbtLogout = new JButton(new ImageIcon(commonPath+"Logout.png"));
+		jbtAdminMgt = new JButton(new ImageIcon(adminPath+"AdminMgt_new.png"));//AdminMgt
+		jbtProfMgt = new JButton(new ImageIcon(adminPath+"ProfMgt_new.png"));//ProfMgt
+		jbtDeptMgt = new JButton(new ImageIcon(adminPath+"DeptMgt_new.png"));//DeptMgt
+		jbtStudMgt = new JButton(new ImageIcon(adminPath+"StudMgt_new.png"));//StudMgt
+		jbtCourMgt = new JButton(new ImageIcon(adminPath+"CourMgt_new.png"));//CourMgt
+		jbtSchedMgt = new JButton(new ImageIcon(adminPath+"SchedMgt_new.png"));//SchedMgt
+		jbtLogout = new JButton(new ImageIcon(commonPath+"Logout.png"));//
 
 		/////////////////////////////////////////////////
 		// 요소에 추가선언
-		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
+		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 17);
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.RED);
 
@@ -64,12 +64,12 @@ public class AdminHomeDesign extends JFrame {
 
 		back.setBounds(0, 0, 984, 620);// 성공
 
-		role.setBounds(520, 200, 150, 20);
-		showId.setBounds(520, 230, 150, 20);
-		name.setBounds(520, 260, 200, 20);
+		role.setBounds(530, 220, 150, 20);
+		showId.setBounds(530, 260, 150, 20);
+		name.setBounds(530, 300, 200, 20);
 		topLogin.setBounds(670, 30, 200, 20);
 
-		img.setBounds(310, 150, 160, 188);
+		img.setBounds(270, 150, 198, 233);
 
 		jbtAdminMgt.setBounds(50, 450, 120, 50);
 		jbtProfMgt.setBounds(200, 450, 120, 50);
