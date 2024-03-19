@@ -50,15 +50,15 @@ public class AdminAdminMgtDesign extends JDialog {
 
 		setLayout(null);
 
-		String commonPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/common/";
-		String adminPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/admin/";
+		String commonPath = "src/eduCourse_prj/image/common/";
+		String adminPath = "src/eduCourse_prj/image/admin/";
 
 		jlBack = new JLabel(new ImageIcon(commonPath + "back.png"));
 		jlBack.setBounds(0, 0, 984, 620);
 		add(jlBack);
 		
 		// 관리자관리, 등록 라벨 추가
-		adminMgt = new JLabel(new ImageIcon(adminPath + "adminMgt1.png"));
+		adminMgt = new JLabel(new ImageIcon(adminPath + "adminMgtBanner_new.png"));
 		adminMgt.setBounds(10, 76, 967, 44);
 		add(adminMgt);
 

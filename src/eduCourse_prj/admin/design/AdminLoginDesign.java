@@ -67,7 +67,7 @@ public class AdminLoginDesign extends JFrame {
         
         
         JSeparator horizontalLine = new JSeparator(SwingConstants.HORIZONTAL);
-        horizontalLine.setBounds(350,280,300,40);
+        horizontalLine.setBounds(350,280,298,40);
 
         
         
@@ -76,22 +76,22 @@ public class AdminLoginDesign extends JFrame {
         
         
         JLabel jlLoginTitle = new JLabel("관리자 로그인:");
-        jlLoginTitle.setBounds(350, 230, 300, 40);
+        jlLoginTitle.setBounds(350, 230, 298, 40);
         jlLoginTitle.setFont(new Font("나눔스퀘어라운드 ExtraBold",Font.BOLD,25));
 
         // 사용자 ID 입력 필드
         jtfId = new JTextField("admin",20);
-        jtfId.setBounds(350, 300, 300, 40);
+        jtfId.setBounds(350, 300, 298, 40);
         jtfId.setFont(new Font("나눔스퀘어라운드 ExtraBold",Font.BOLD,30));
 
         // PW 입력 필드
         jpfPass = new JPasswordField("master",20);
-        jpfPass.setBounds(350, 350, 300, 40);
+        jpfPass.setBounds(350, 350, 298, 40);
         jpfPass.setFont(new Font("나눔스퀘어라운드 ExtraBold",Font.BOLD,30));
 
         // 로그인 버튼
-        loginButton = new JButton(new ImageIcon(loginPath+"login.png"));
-        loginButton.setBounds(350, 400, 300, 40);
+        loginButton = new JButton(new ImageIcon(loginPath+"Loginbutton_new.png")); //298*40 사이즈 변경
+        loginButton.setBounds(350, 400, 298, 40);
         
    
         

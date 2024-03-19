@@ -28,7 +28,7 @@ public class AdminCrsDesign extends JDialog {
 
 	JLabel jlBack;// 배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
-	private JLabel adminMgt;
+	private JLabel crsMgt;
 
 	private JTable jtbCrsMgt;
 	private DefaultTableModel dtmAdminMgt;
@@ -43,18 +43,18 @@ public class AdminCrsDesign extends JDialog {
 		setLayout(null);
 		setSize(1000, 650);
 
-		String commonPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/common/";
-		String adminPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/admin/";
-		String srsPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/crs/";
+		String commonPath = "src/eduCourse_prj/image/common/";
+		String adminPath = "src/eduCourse_prj/image/admin/";
+		String crsPath = "src/eduCourse_prj/image/crs/";
 
 		jlBack = new JLabel(new ImageIcon(commonPath + "back.png"));
 		jlBack.setBounds(0, 0, 984, 620);
 		add(jlBack);
 
 		// 관리자관리, 등록 라벨 추가
-		adminMgt = new JLabel(new ImageIcon(adminPath + "adminMgt1.png"));
-		adminMgt.setBounds(10, 76, 967, 44);
-		add(adminMgt);
+		crsMgt = new JLabel(new ImageIcon(adminPath + "과목_관리.png"));
+		crsMgt.setBounds(10, 76, 967, 45);
+		add(crsMgt);
 
 		// 우상단 로그인상태 확인창 추가
 		topLogin = new JLabel(awd.getlVO().getName() + " 관리자님 로그인 중");
@@ -80,13 +80,13 @@ public class AdminCrsDesign extends JDialog {
 
 		// 과목등록, 조회, 삭제 버튼 추가
 
-		jbtnCrsReg = new JButton(new ImageIcon(srsPath + "CrsReg.png"));
-		jbtnSlct = new JButton(new ImageIcon(commonPath + "Slct.png"));
-		jbtnDel = new JButton(new ImageIcon(commonPath + "Del.png"));
+		jbtnCrsReg = new JButton(new ImageIcon(crsPath + "crsRegBanner_new.png"));
+		jbtnSlct = new JButton(new ImageIcon(commonPath + "SlctButton_new.png"));
+		jbtnDel = new JButton(new ImageIcon(commonPath + "DelButton_new.png"));
 
-		jbtnCrsReg.setBounds(150, 500, 168, 59);
-		jbtnSlct.setBounds(400, 500, 111, 59);
-		jbtnDel.setBounds(700, 500, 111, 59);
+		jbtnCrsReg.setBounds(300, 500, 142, 50);
+		jbtnSlct.setBounds(500, 500, 90, 50);
+		jbtnDel.setBounds(620, 500, 90, 50);
 
 		add(jbtnCrsReg);
 		add(jbtnSlct);
@@ -157,7 +157,7 @@ public class AdminCrsDesign extends JDialog {
 	}
 
 	public JLabel getAdminMgt() {
-		return adminMgt;
+		return crsMgt;
 	}
 
 	public JTable getJtbCrsMgt() {

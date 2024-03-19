@@ -4,9 +4,11 @@ import java.sql.SQLException;
 
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import eduCourse_prj.VO.DeptVO;
@@ -34,9 +36,16 @@ public class AdminCrsRegDisgn extends JDialog {
 	JButton jbtnRegister; // 등록버튼
 	JButton jbtnCancel; // 취소버튼
 
+	
+	JLabel jlBack; //배경라벨
+	JLabel jlDept, jlCrs, jlCrsCode, jlProf, jlCredit;
+	
 	public AdminCrsRegDisgn(AdminCrsDesign acd, String title) {
 		super(acd, title, true);
 		this.acd = acd;
+		
+		//공통경로
+		String commonPath = "src/eduCourse_prj/image/common/";
 
 		setLayout(null);
 		setSize(1000, 650);
@@ -84,17 +93,37 @@ public class AdminCrsRegDisgn extends JDialog {
 		}
 
 		add(jcbProf);
+		
+		// 배경 추가
+        jlBack = new JLabel(new ImageIcon(commonPath + "Back.png"));
+        jlBack.setBounds(0,0,984,620);
+		setSize(1000,650);
+		setLayout(null);
+		setLocationRelativeTo(null);
+		
+		//라벨 추가
+		jlDept = new JLabel("학과");
+		jlCrs = new JLabel("과목");
+		jlCrsCode = new JLabel("과목코드");
+		jlProf = new JLabel("교수");
+		jlCredit = new JLabel("학점");
 
 		JtfCrsName = new JTextField("과목명");
+		jlCrs.setBounds(350, 150, 100, 30);
 		JtfCrsName.setBounds(400, 150, 200, 30);
+		add(jlCrs);
 		add(JtfCrsName);
 
 		JtfCrsCode = new JTextField("과목코드");
+		jlCrsCode.setBounds(350, 200, 100, 30);
 		JtfCrsCode.setBounds(400, 200, 200, 30);
+		add(jlCrsCode);
 		add(JtfCrsCode);
 
 		JtfCredit = new JTextField("학점");
+		jlCredit.setBounds(350, 300, 100, 30);
 		JtfCredit.setBounds(400, 300, 200, 30);
+		add(jlCredit);
 		add(JtfCredit);
 
 		jbtnRegister = new JButton("등록");
@@ -104,6 +133,8 @@ public class AdminCrsRegDisgn extends JDialog {
 		jbtnCancel = new JButton("취소");
 		jbtnCancel.setBounds(500, 400, 200, 30);
 		add(jbtnCancel);
+		
+		add(jlBack); //배경
 
 		AdminCrsRegEvent acre = new AdminCrsRegEvent(this);
 		addWindowListener(acre);
