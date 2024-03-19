@@ -45,13 +45,15 @@ public class CrsRegDAO {
 			
 			con = dbCon.getConnection(id, pass);
 			
-			String selectAllCrsReg = "select d.dept_name, c.course_name, c.course_code, l.lect_room, l.capacity, c.credit_hours "
-									+ "from dept d "
-									+ "join student s on s.dept_code = d.dept_code "
-									+ "right outer join course c on c.dept_code = d.dept_code "
-									+ "join lecture l on l.course_code = c.course_code "
-									+ "where s.std_number = ?";
-			pstmt = con.prepareStatement(selectAllCrsReg);
+			StringBuilder selectAllCrsReg = new StringBuilder();
+			selectAllCrsReg.append("select d.dept_name, c.course_name, c.course_code, l.lect_room, l.capacity, c.credit_hours ")
+							.append("from dept d ")
+							.append("join student s on s.dept_code = d.dept_code ")
+							.append("right outer join course c on c.dept_code = d.dept_code ")
+							.append("join lecture l on l.course_code = c.course_code ")
+							.append("where s.std_number = ?");
+			
+			pstmt = con.prepareStatement(selectAllCrsReg.toString());
 			pstmt.setInt(1, stdnt_number);
 			
 			rs = pstmt.executeQuery();
@@ -73,7 +75,7 @@ public class CrsRegDAO {
 	 * @return
 	 * @throws SQLException
 	 */
-	public CrsRegVO slctOneCrsReg(int stdnt_number, String crs_code) throws SQLException {
+	public CrsRegVO slctOneCrsReg(String crs_code) throws SQLException {
 		CrsRegVO crVO = null;
 		DbConnection dbCon = DbConnection.getInstance();
 		
@@ -87,19 +89,15 @@ public class CrsRegDAO {
 			
 			con = dbCon.getConnection(id, pass);
 			
-			String selectOneCrsReg = "select dept_name, course_name, course_code, lect_room, capacity, credit_hours "
-					+ "from( "
-					+ "		select d.dept_name, c.course_name, c.course_code, l.lect_room, l.capacity, c.credit_hours "
-					+ "		from dept d "
-					+ "		join student s on s.dept_code = d.dept_code "
-					+ "		right outer join course c on c.dept_code = d.dept_code "
-					+ "		join lecture l on l.course_code = c.course_code "
-					+ "		where s.std_number = ? "
-					+ "		) "
-					+ "where course_code = ?";
-			pstmt = con.prepareStatement(selectOneCrsReg);
-			pstmt.setInt(1, stdnt_number);
-			pstmt.setString(2, crs_code);
+			StringBuilder selectOneCrsReg = new StringBuilder();
+			selectOneCrsReg.append("select d.dept_name, c.course_name, c.course_code, l.lect_room, l.capacity, c.credit_hours ")
+							.append("from dept d ")
+							.append("join course c on c.dept_code = d.dept_code ")
+							.append("join lecture l on l.course_code = c.course_code ")
+							.append("where c.course_code = ?");
+			
+			pstmt = con.prepareStatement(selectOneCrsReg.toString());
+			pstmt.setString(1, crs_code);
 			
 			rs = pstmt.executeQuery();
 			
