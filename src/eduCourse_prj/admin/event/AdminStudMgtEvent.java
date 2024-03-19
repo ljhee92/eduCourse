@@ -9,11 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 import eduCourse_prj.VO.CrsVO;
 import eduCourse_prj.VO.SlctStdVO;
+import eduCourse_prj.VO.StdntVO;
 import eduCourse_prj.admin.dao.AdminDAO;
 import eduCourse_prj.admin.design.AdminStudMgtDesign;
+import eduCourse_prj.student.dao.StdntDAO;
 
 public class AdminStudMgtEvent extends WindowAdapter implements ActionListener {
 
@@ -33,14 +37,11 @@ public class AdminStudMgtEvent extends WindowAdapter implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent ae) {
-		if (ae.getSource() == asmd.getJbtnSlct()) {
-			JOptionPane.showMessageDialog(asmd, "하단 조회버튼 클릭");
-
-		}
+		
 
 		if (ae.getSource() == asmd.getJbtnSlctTop()) {
 			
-			asmd.getDtmCrsMgt().setRowCount(0);
+			asmd.getDtmStdMgt().setRowCount(0);
 			//JOptionPane.showMessageDialog(asmd, "상단 조회버튼 클릭");
 
 			int dept_code = 0; // 학과 코드
@@ -101,20 +102,55 @@ public class AdminStudMgtEvent extends WindowAdapter implements ActionListener {
 			for (SlctStdVO ssVO : listSlctStdVO) {
 
 				Object[] row = { ssVO.getDept_name(), ssVO.getCrs_name(), ssVO.getStd_num(), ssVO.getStd_name() };
-				asmd.getDtmCrsMgt().addRow(row);
+				asmd.getDtmStdMgt().addRow(row);
 			} // end for
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} // end catch
 
-	
-	
-	
-	
+
 	
 	
 	}
+		
+		if (ae.getSource() == asmd.getJbtnSlct()) {
+			//JOptionPane.showMessageDialog(asmd, "하단 조회버튼 클릭");
+			
+			// 학생 정보 상세 조회 클릭
+			if(ae.getSource() == asmd.getJbtnSlct()) {
+				int index = asmd.getJtbStdMgt().getSelectedRow();
+				if(index == -1) {
+					JOptionPane.showMessageDialog(asmd, "조회할 학생을 선택해주세요.");
+					return;
+				} // end if
+				try {
+					int stud_number = Integer.parseInt(asmd.getDtmStdMgt().getValueAt(index, 2).toString());
+					String dept_name = asmd.getDtmStdMgt().getValueAt(index, 0).toString();
+					StdntDAO sDAO = StdntDAO.getInstance();
+					StdntVO sVO = sDAO.slctOneStdnt(stud_number);
+
+					
+					StringBuilder output = new StringBuilder();
+					output.append("학과: ").append(dept_name).append("\n");
+					output.append("학번: ").append(stud_number).append("\n");
+					output.append("이름: ").append(sVO.getStdnt_name()).append("\n");
+					output.append("이메일: ").append(sVO.getStdnt_email()!=null?sVO.getStdnt_email():"").append("\n");
+					output.append("주소: ").append(sVO.getStdnt_addr());					
+					
+					
+					JTextArea jta = new JTextArea(output.toString(), 8, 50);
+					JScrollPane jsp = new JScrollPane(jta);
+					jta.setEditable(false);
+					JOptionPane.showMessageDialog(asmd, jsp, "학생 상세 조회", JOptionPane.INFORMATION_MESSAGE);
+				} catch (SQLException e1) {
+					JOptionPane.showMessageDialog(asmd, "SQL 문제가 발생했습니다.");
+					e1.printStackTrace();
+				} // end catch
+			} // end if
+			
+
+		}	
 	
 	
 	
@@ -180,11 +216,4 @@ public class AdminStudMgtEvent extends WindowAdapter implements ActionListener {
 
 	}
 
-	
-	
-	
-	
-	
-	
-	
 }
