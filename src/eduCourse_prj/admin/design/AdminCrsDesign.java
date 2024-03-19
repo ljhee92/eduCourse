@@ -33,20 +33,10 @@ public class AdminCrsDesign extends JDialog {
 
 	private JTable jtbCrsMgt;
 	private DefaultTableModel dtmAdminMgt;
-	
-
-	
-	
-	
 
 	private JButton jbtnCrsReg, jbtnSlct, jbtnDel;
 
 	private DefaultTableModel dtmCrsMgt;
-	
-	
-	
-	
-	
 
 	public AdminCrsDesign(AdminHomeDesign awd, String title) {
 		super(awd, title, true);
@@ -68,7 +58,6 @@ public class AdminCrsDesign extends JDialog {
 		crsMgt.setBounds(10, 76, 967, 45);
 		add(crsMgt);
 
-
 		// 우상단 로그인상태 확인창 추가
 		topLogin = new JLabel(awd.getlVO().getName() + " 관리자님 로그인 중");
 		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
@@ -77,11 +66,6 @@ public class AdminCrsDesign extends JDialog {
 		topLogin.setBounds(670, 30, 200, 20);
 		add(topLogin);
 
-
-		
-		
-		
-		
 		// 테이블 추가
 		String[] tempColumn = { "학과", "과목" };
 		dtmCrsMgt = new DefaultTableModel(tempColumn, 0) {
