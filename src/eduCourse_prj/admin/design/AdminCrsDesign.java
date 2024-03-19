@@ -29,13 +29,22 @@ public class AdminCrsDesign extends JDialog {
 	JLabel jlBack;// 배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
 	private JLabel adminMgt;
-
 	private JTable jtbCrsMgt;
 	private DefaultTableModel dtmAdminMgt;
+	
+
+	
+	
+	
 
 	private JButton jbtnCrsReg, jbtnSlct, jbtnDel;
 
 	private DefaultTableModel dtmCrsMgt;
+	
+	
+	
+	
+	
 
 	public AdminCrsDesign(AdminHomeDesign awd, String title) {
 		super(awd, title, true);
@@ -52,7 +61,7 @@ public class AdminCrsDesign extends JDialog {
 		add(jlBack);
 
 		// 관리자관리, 등록 라벨 추가
-		adminMgt = new JLabel(new ImageIcon(adminPath + "adminMgt1.png"));
+		adminMgt = new JLabel(new ImageIcon(adminPath + "crsTitle.png"));
 		adminMgt.setBounds(10, 76, 967, 44);
 		add(adminMgt);
 
@@ -64,6 +73,11 @@ public class AdminCrsDesign extends JDialog {
 		topLogin.setBounds(670, 30, 200, 20);
 		add(topLogin);
 
+
+		
+		
+		
+		
 		// 테이블 추가
 		String[] tempColumn = { "학과", "과목" };
 		dtmCrsMgt = new DefaultTableModel(tempColumn, 0) {

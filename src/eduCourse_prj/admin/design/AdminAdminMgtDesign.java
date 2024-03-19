@@ -97,6 +97,29 @@ public class AdminAdminMgtDesign extends JDialog {
 		jsp.setBounds(10, 120, 967, 350);
 		add(jsp);
 
+		JLabel jlDept = new JLabel("학과");
+		jlDept.setFont(font);
+		jlDept.setBounds(20, 20, 50, 20);
+		add(jlDept);
+		
+		
+		JLabel jlSrc = new JLabel("과목");
+		jlSrc.setFont(font);
+		jlSrc.setBounds(20, 40, 50, 20);
+		add(jlSrc);
+		
+		JLabel jlstdNumber = new JLabel("학번");
+		jlstdNumber.setFont(font);
+		jlstdNumber.setBounds(20, 60, 50, 20);
+		add(jlstdNumber);
+		
+		
+		
+		
+		
+		
+		
+		
 		// 테이블에 DB 추가
 		slctAdminMgt();
 
