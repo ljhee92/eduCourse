@@ -35,26 +35,27 @@ public class ProfScoreDesign extends JDialog{
 	
     //
 	private ScoreDAO sDAO = ScoreDAO.getInstance();
+	private AdminDAO aDAO = AdminDAO.getInstance();
 	private JLabel jlBack;// 배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
 	private JLabel adminMgt;
-	private JTable jtbStdMgt;
+	private JTable jtbScore;
 	private DefaultTableModel dtmAdminMgt;
 
 	private JButton jbtnSlct, jbtnSlctTop;
 
 	private JLabel jlCrs;
-	private JLabel jlstdNum;
+	private JLabel jlstdntNum;
 
 	private JComboBox<String> jcbDept;
 	private JComboBox<String> jcbCrs;
 	private JTextField jtfStdNum;
 
-	List<ScoreVO> stdntNumber, ;
+	List<CrsVO> lCrs;
  
 
 
-	private DefaultTableModel dtmStdMgt;
+	private DefaultTableModel dtmScore;
 	public ProfScoreDesign(ProfHomeDesign phd, String title) {
 		super(phd,title, true);
 		this.phd = phd;
@@ -63,7 +64,7 @@ public class ProfScoreDesign extends JDialog{
 		setSize(1000, 650);
 
 		String commonPath = "src/eduCourse_prj/image/common/";
-		String ScorePath = "src/eduCourse_prj/image/prof/StdntScore.png/";
+		String ScorePath = "src/eduCourse_prj/image/prof/";
 
 		jlBack = new JLabel(new ImageIcon(commonPath + "back.png"));
 		jlBack.setBounds(0, 0, 984, 620);
@@ -75,10 +76,11 @@ public class ProfScoreDesign extends JDialog{
 		add(adminMgt);
 
 		// 우상단 로그인상태 확인창 추가
-		topLogin = new JLabel(phd.getlVO().getName() + " 관리자님 로그인 중");
+//		topLogin = new JLabel(phd.getlVO().getName() + " 교수 로그인 중");
+		topLogin = new JLabel("~~ 교수 로그인 중");
 		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
 		topLogin.setFont(font);
-		topLogin.setForeground(Color.RED);
+		topLogin.setForeground(Color.GREEN);
 		topLogin.setBounds(670, 30, 200, 20);
 		add(topLogin);
 
@@ -86,103 +88,60 @@ public class ProfScoreDesign extends JDialog{
 
 		jlCrs = new JLabel("과목");
 		jlCrs.setFont(font);
-		jlCrs.setBounds(500, 150, 50, 20);
+		jlCrs.setBounds(240, 150, 50, 20);
 		add(jlCrs);
 
-		jlstdNum = new JLabel("학번");
-		jlstdNum.setFont(font);
-		jlstdNum.setBounds(240, 190, 50, 20);
-		add(jlstdNum);
+		jlstdntNum = new JLabel("학번");
+		jlstdntNum.setFont(font);
+		jlstdntNum.setBounds(500, 150, 50, 20);
+		add(jlstdntNum);
 
-		jcbDept = new JComboBox<String>();
-		jcbDept.setFont(font);
-		jcbDept.setBounds(280, 145, 200, 30);
-		add(jcbDept);
 
 		jcbCrs = new JComboBox<String>();
 		jcbCrs.setFont(font);
-		jcbCrs.setBounds(540, 145, 200, 30);
+		jcbCrs.setBounds(280, 145, 200, 30);
 		add(jcbCrs);
 
 		jtfStdNum = new JTextField();
 		jtfStdNum.setFont(font);
-		jtfStdNum.setBounds(280, 185, 200, 30);
+		jtfStdNum.setBounds(540, 145, 200, 30);
 		add(jtfStdNum);
 
 		///////////////////////////////////////////////////////////////////
 		/////////////////////// 초기 설정/////////////////////////////////////
 		////////////////////////////////////////////////////////////////////
 
-		try {// 학번
-
-			stdntNumber = sDAO.slctAllScore();
-
-			// "전체 아이템 추가"
-			jcbDept.addItem("전체");
-
-			// 학과명만 저장하는 리스트에 학과명 저장
-			for (ScoreVO dept : lDept) {
-				jcbDept.addItem(dept.getReg_number());
-
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		try {// 이름
-
-			// 모든 과목 정보 가져오기
-
-			stdntName.addItem("전체");
-
-			lCrs = sDAO.slctAllScore();
-			// 과목명만 저장하는 리스트에 과목명 저장
-			for (CrsVO crs : lCrs) {
-				jcbCrs.addItem(crs.getCourName());
-
-			}
-		try {// 학과
+		try {// 과목
 
 			// 모든 과목 정보 가져오기
 
 			jcbCrs.addItem("전체");
 
-			lCrs = sDAO.slctAllScore();
+			lCrs = aDAO.slctAllCrs();
 			// 과목명만 저장하는 리스트에 과목명 저장
 			for (CrsVO crs : lCrs) {
 				jcbCrs.addItem(crs.getCourName());
 
 			}
-		try {// 성취도
-
-			// 모든 과목 정보 가져오기
-
-			jcbCrs.addItem("전체");
-
-			lCrs = sDAO.slctAllScore();
-			// 과목명만 저장하는 리스트에 과목명 저장
-			for (CrsVO crs : lCrs) {
-				jcbCrs.addItem(crs.getCourName());
-
-			}
-		} catch (SQLException e) {
+		}catch (SQLException e) {
 			e.printStackTrace();
 		}
+
+
 		/////////////////////////////////////////////////////////////////////
 		/////////////////////////////////////////////////////////////////////
 
 		// 테이블 추가
-		String[] tempColumn = { "학과", "과목", "학번", "이름" };
-		dtmStdMgt = new DefaultTableModel(tempColumn, 0) {
+		String[] tempColumn = { "학번", "이름", "학과", "성취도" };
+		dtmScore = new DefaultTableModel(tempColumn, 0) {
 			public boolean isCellEditable(int row, int column) {
 				return false; // 테이블 셀 수정 불가하도록 설정
 			} // isCellEditable
 		};
-		jtbStdMgt = new JTable(dtmStdMgt);
-		JScrollPane jsp = new JScrollPane(jtbStdMgt);
+		jtbScore = new JTable(dtmScore);
+		JScrollPane jsp = new JScrollPane(jtbScore);
 
-		jtbStdMgt.setRowHeight(30); // 행 높이 조절
+		jtbScore.setRowHeight(30); // 행 높이 조절
 		jsp.setBounds(10, 230, 967, 250);
 		add(jsp);
 
@@ -209,7 +168,6 @@ public class ProfScoreDesign extends JDialog{
 		addWindowListener(asme);
 		jbtnSlct.addActionListener(asme);
 		jbtnSlctTop.addActionListener(asme);
-		jcbDept.addActionListener(asme);
 
 		setLocationRelativeTo(null);
 
@@ -222,7 +180,7 @@ public class ProfScoreDesign extends JDialog{
 	public void setTbHorizontal() {
 		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
 		dtcr.setHorizontalAlignment(SwingConstants.CENTER);
-		TableColumnModel tcm = jtbStdMgt.getColumnModel();
+		TableColumnModel tcm = jtbScore.getColumnModel();
 		for (int i = 0; i < tcm.getColumnCount(); i++) {
 			tcm.getColumn(i).setCellRenderer(dtcr);
 		} // end for
@@ -232,7 +190,7 @@ public class ProfScoreDesign extends JDialog{
 		return phd;
 	}
 
-	public AdminDAO getsDAO() {
+	public ScoreDAO getsDAO() {
 		return sDAO;
 	}
 
@@ -248,8 +206,8 @@ public class ProfScoreDesign extends JDialog{
 		return adminMgt;
 	}
 
-	public JTable getJtbStdMgt() {
-		return jtbStdMgt;
+	public JTable getJtbScore() {
+		return jtbScore;
 	}
 
 	public DefaultTableModel getDtmAdminMgt() {
@@ -264,16 +222,14 @@ public class ProfScoreDesign extends JDialog{
 		return jbtnSlctTop;
 	}
 
-	public JLabel getJlDept() {
-		return jlDept;
-	}
+
 
 	public JLabel getJlCrs() {
 		return jlCrs;
 	}
 
 	public JLabel getJlstdNum() {
-		return jlstdNum;
+		return jlstdntNum;
 	}
 
 	public JComboBox<String> getJcbDept() {
@@ -288,16 +244,18 @@ public class ProfScoreDesign extends JDialog{
 		return jtfStdNum;
 	}
 
-	public List<DeptVO> getLDept() {
-		return lDept;
-	}
+
 
 	public List<CrsVO> getLCrs() {
 		return lCrs;
 	}
 
-	public DefaultTableModel getDtmStdMgt() {
-		return dtmStdMgt;
+	public DefaultTableModel getDtmScore() {
+		return dtmScore;
 	}
+	
+	public static void main(String[] args) {
+		new ProfScoreDesign(null, null);
+	}//main
 
 }
