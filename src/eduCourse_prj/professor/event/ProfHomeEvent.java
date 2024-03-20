@@ -10,6 +10,8 @@ import javax.swing.JOptionPane;
 import eduCourse_prj.login.SelectLoginDesign;
 import eduCourse_prj.professor.design.ProfHomeDesign;
 import eduCourse_prj.professor.design.ProfMdfyDesign;
+import eduCourse_prj.professor.design.ProfTestMgtDesign;
+
 
 public class ProfHomeEvent extends WindowAdapter  implements ActionListener {
 	private ProfHomeDesign pwd;
