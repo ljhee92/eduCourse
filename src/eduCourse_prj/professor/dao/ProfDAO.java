@@ -9,6 +9,7 @@ import java.util.List;
 
 import eduCourse_prj.DbConnection;
 import eduCourse_prj.VO.AdminProfVO;
+import eduCourse_prj.VO.CrsVO;
 import eduCourse_prj.VO.LoginVO;
 import eduCourse_prj.VO.ProfVO;
 import eduCourse_prj.VO.SlctStdVO;
@@ -346,6 +347,51 @@ public class ProfDAO {
 		} // end finally
 	} // modifyProf
 	
+	/**
+	 * 교수  > 해당 교수의 강의 과목을 조회하기 위한 메서드
+	 * @param prof_number
+	 * @throws SQLException
+	 */
+	public List<CrsVO> slctProfLec(int prof_number)throws SQLException{
+		DbConnection dbCon = DbConnection.getInstance();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		CrsVO cVO = null;
+		List<CrsVO>courses = null;
+		try {
+
+			String id = "scott";
+			String pass = "tiger";
+
+			con = dbCon.getConnection(id, pass);
+
+			StringBuilder sb = new StringBuilder();
+			sb.append("SELECT d.dept_name, c.course_name ");
+			sb.append("FROM professor p ");
+			sb.append("JOIN dept d ON p.dept_code = d.dept_code ");
+			sb.append("JOIN course c ON d.dept_code = c.dept_code ");
+			sb.append("WHERE p.prof_number = ?");
+			String slctLecQuery = sb.toString();
+	        pstmt = con.prepareStatement(slctLecQuery);
+	        pstmt.setInt(1, prof_number);
+	        rs = pstmt.executeQuery();
+	        String deptCode = "";
+	        String courseName="";
+	        courses = new ArrayList<CrsVO>();
+	        while (rs.next()) {
+	        	deptCode = rs.getString("dept_name");
+	        	courseName = rs.getString("course_name");     
+	        	cVO = new CrsVO();
+	        	cVO.profCrsVO(deptCode, courseName);
+	        	courses.add(cVO);
+	        }
+		} finally {
+			dbCon.dbClose(null, pstmt, con);
+		}
+		return courses;
+	}//slctProfLect
 	
 	/**
 	 * 관리자모드에서  학과,교번으로 교수를 검색하는 DAO
