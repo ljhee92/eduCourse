@@ -3,6 +3,7 @@ package eduCourse_prj.student.design;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -17,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import eduCourse_prj.VO.CrsRegVO;
+import eduCourse_prj.VO.RegVO;
 import eduCourse_prj.student.dao.CrsRegDAO;
 import eduCourse_prj.student.event.StdntCrsRegEvent;
 
@@ -141,14 +143,27 @@ public class StdntCrsRegDesign extends JDialog {
 	 */
 	public void searchAllCrsReg() {
 		CrsRegDAO crDAO = CrsRegDAO.getInstance();
+
+		int stdnt_number = Integer.parseInt(shd.getlVO().getId());
 		
 		try {
-			List<CrsRegVO> listCrsRegVO = crDAO.slctAllCrsReg(Integer.parseInt(shd.getlVO().getId()));
+			List<RegVO> listAllRegVO =	crDAO.slctAllReg(stdnt_number); // 학생의 수강신청완료 과목 리스트
 			
-			for(CrsRegVO crVO : listCrsRegVO) {
-				Object[] row = {crVO.getDept_name(), crVO.getCourse_name(), crVO.getCourse_code(), crVO.getLect_room(), crVO.getCapacity(), crVO.getCredit_hours()};
-				dtmCrsReg.addRow(row);
+			List<CrsRegVO> listCrsRegVO = crDAO.slctAllCrsReg(stdnt_number); // 학생이 속한 학과의 수강신청가능 과목 리스트
+			
+			CrsRegVO crVO = null;
+			for(int i = 0; i < listCrsRegVO.size(); i++) {
+				if(listCrsRegVO.get(i).getCourse_code().equals(listAllRegVO.get(i).getCourse_code())) {
+					// 수강신청완료 과목의 과목코드와 학생이 속한 학과의 수강신청가능 과목 리스트의 과목코드가 같다면
+					// 아무 일도 하지 않는다 !!!!!! 나도 안 할래
+				} else {
+					crVO = listCrsRegVO.get(i);
+					Object[] row = {crVO.getDept_name(), crVO.getCourse_name(), crVO.getCourse_code(), 
+							crVO.getLect_room(), crVO.getCapacity(), crVO.getCredit_hours()};
+					dtmCrsReg.addRow(row);
+				} // end else
 			} // end for
+			
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
