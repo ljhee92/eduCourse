@@ -64,7 +64,7 @@ public class ProfHomeDesign extends JFrame {
 		
 		jbtnCourMgt = new JButton(new ImageIcon(profPath+"CourMgt.png"));
 		jbtnExamMgtGrad = new JButton(new ImageIcon(profPath+"ExamMgtGrad.png"));
-		jbtnStudMgt = new JButton(new ImageIcon(profPath+"StudMgt.png"));
+		jbtnStudMgt = new JButton(new ImageIcon(profPath+"StdntSlct.png"));
 		jbtnStudySucc = new JButton(new ImageIcon(profPath+"StudySucc.png"));
 		jbtnInfoUpda = new JButton(new ImageIcon(commonPath+"InfoUpda.png"));
 		jbtnLogout = new JButton(new ImageIcon(commonPath+"logout.png"));
@@ -75,7 +75,7 @@ public class ProfHomeDesign extends JFrame {
 		//요소에 추가선언
 		Font font = new Font("나눔스퀘어라운드 ExtraBold",Font.BOLD,15);
 		topLogin.setFont(font);
-		topLogin.setForeground(Color.RED);
+		topLogin.setForeground(Color.WHITE);
 		
 		role.setFont(font);
 		showId.setFont(font);

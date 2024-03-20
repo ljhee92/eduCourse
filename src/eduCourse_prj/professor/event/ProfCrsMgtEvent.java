@@ -19,13 +19,16 @@ public class ProfCrsMgtEvent extends WindowAdapter implements ActionListener{
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getSource() == pcmd.getJbtnLecReg()) {
 			
-		}
+		} // end if
+		
 		if(ae.getSource() == pcmd.getJbtnSlct()) {
 			
 		}
+		
 		if(ae.getSource() == pcmd.getJbtnMdfy()) {
 			
 		}
+		
 		if(ae.getSource() == pcmd.getJbtnDel()) {
 			
 		}

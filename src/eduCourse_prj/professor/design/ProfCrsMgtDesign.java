@@ -37,9 +37,9 @@ public class ProfCrsMgtDesign extends JDialog {
 		super(phd,title,true);
 		this.phd = phd;
 
-		String commonPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/common/";
-		String profPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/prof/";
-		String srsPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/crs/";
+		String commonPath = "src/eduCourse_prj/image/common/";
+		String profPath = "src/eduCourse_prj/image/prof/";
+		String crsPath = "src/eduCourse_prj/image/crs/";
 
 		jlBack = new JLabel(new ImageIcon(commonPath + "back.png"));
 		jlBack.setBounds(0, 0, 984, 620);
@@ -51,10 +51,10 @@ public class ProfCrsMgtDesign extends JDialog {
 		add(adminMgt);
 
 		// 우상단 로그인상태 확인창 추가
-		topLogin = new JLabel(phd.getlVO().getName() + " 관리자님 로그인 중");
+		topLogin = new JLabel(phd.getlVO().getName() + " 교수님 로그인 중");
 		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
 		topLogin.setFont(font);
-		topLogin.setForeground(Color.RED);
+		topLogin.setForeground(Color.WHITE);
 		topLogin.setBounds(670, 30, 200, 20);
 		add(topLogin);
 
@@ -74,8 +74,7 @@ public class ProfCrsMgtDesign extends JDialog {
 		add(jsp);
 
 		// 과목등록, 조회, 삭제 버튼 추가
-
-		jbtnLecReg = new JButton(new ImageIcon(srsPath + "crsRegBanner_new.png"));
+		jbtnLecReg = new JButton(new ImageIcon(crsPath + "crsRegBtn_new.png"));
 		jbtnSlct = new JButton(new ImageIcon(commonPath + "Slct.png"));
 		jbtnMdfy = new JButton(new ImageIcon(commonPath +"Mdfy.png"));
 		jbtnDel = new JButton(new ImageIcon(commonPath + "Del.png"));
@@ -118,7 +117,6 @@ public class ProfCrsMgtDesign extends JDialog {
 		ProfDAO pDAO = ProfDAO.getInstance(); 
 		try {
 			String strProf_number = phd.getlVO().getId();
-			System.out.println(strProf_number);
 			int prof_number = Integer.parseInt(strProf_number);
 			List<CrsVO> listCrsVO= pDAO.slctProfLec(prof_number);			
 			for (CrsVO cVO1 : listCrsVO) {
