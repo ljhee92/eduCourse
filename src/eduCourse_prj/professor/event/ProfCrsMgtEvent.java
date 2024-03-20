@@ -28,10 +28,12 @@ public class ProfCrsMgtEvent extends WindowAdapter implements ActionListener{
 		if(ae.getSource() == pcmd.getJbtnSlct()) {
 			JOptionPane.showMessageDialog(pcmd, "조회버튼 클릭");						
 		}
+		
 		if(ae.getSource() == pcmd.getJbtnMdfy()) {
 			JOptionPane.showMessageDialog(pcmd, "수정버튼 클릭");
 			new ProfCrsMgtMdfyDesign();			
 		}
+		
 		if(ae.getSource() == pcmd.getJbtnDel()) {
 			JOptionPane.showMessageDialog(pcmd, "삭제버튼 클릭");
 			
