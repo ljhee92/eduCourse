@@ -20,100 +20,93 @@ import javax.swing.table.TableColumnModel;
 
 import eduCourse_prj.VO.CrsVO;
 import eduCourse_prj.VO.DeptVO;
-import eduCourse_prj.VO.LoginVO;
-import eduCourse_prj.VO.ProfVO;
-import eduCourse_prj.VO.ScoreVO;
+
 import eduCourse_prj.admin.dao.AdminDAO;
-import eduCourse_prj.admin.design.AdminHomeDesign;
+
 import eduCourse_prj.admin.event.AdminStudMgtEvent;
 import eduCourse_prj.professor.dao.ProfDAO;
-import eduCourse_prj.professor.dao.ScoreDAO;
-import eduCourse_prj.professor.event.ProfScoreEvent;
+import eduCourse_prj.professor.event.ProfStudMgtEvent;
 
-public class ProfScoreDesign extends JDialog{
+@SuppressWarnings("serial")
+public class ProfStudMgtDesign extends JDialog {
 	private ProfHomeDesign phd;
-	
-    //
-	private ScoreDAO sDAO = ScoreDAO.getInstance();
 	private AdminDAO aDAO = AdminDAO.getInstance();
+	private ProfDAO pDAO = ProfDAO.getInstance();
+	
+	
 	private JLabel jlBack;// 배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
 	private JLabel adminMgt;
-	private JTable jtbScore;
-	private DefaultTableModel dtmAdminMgt;
+	private JTable jtbStdMgt;
+
 
 	private JButton jbtnSlct, jbtnSlctTop;
 
-	private JLabel jlCrs;
-	private JLabel jlstdntNum;
 
-	private JComboBox<String> jcbDept;
+	private JLabel jlCrs;
+	private JLabel jlstdNum;
+
+
 	private JComboBox<String> jcbCrs;
 	private JTextField jtfStdNum;
 
 
-	List<ScoreVO> stdntNumber ;
+	private List<CrsVO> lCrs;
 
-	List<CrsVO> lCrs;
+	private DefaultTableModel dtmStdMgt;
 
- 
-
-
-	private DefaultTableModel dtmScore;
-	public ProfScoreDesign(ProfHomeDesign phd, String title) {
-		super(phd,title, true);
+	public ProfStudMgtDesign(ProfHomeDesign phd, String title) {
+		super(phd, title, true);
 		this.phd = phd;
-		
 		setLayout(null);
 		setSize(1000, 650);
 
-		String commonPath = "src/eduCourse_prj/image/common/";
-		String ScorePath = "src/eduCourse_prj/image/prof/";
+		String commonPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/common/";
+		String adminPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/admin/";
 
 		jlBack = new JLabel(new ImageIcon(commonPath + "back.png"));
 		jlBack.setBounds(0, 0, 984, 620);
 		add(jlBack);
 
 		// 관리자관리, 등록 라벨 추가
-		adminMgt = new JLabel(new ImageIcon(ScorePath + "StdntScore.png"));
+		adminMgt = new JLabel(new ImageIcon(adminPath + "studentTitle.png"));
 		adminMgt.setBounds(10, 76, 967, 44);
 		add(adminMgt);
 
 		// 우상단 로그인상태 확인창 추가
-//		topLogin = new JLabel(phd.getlVO().getName() + " 교수 로그인 중");
-		topLogin = new JLabel("~~ 교수 로그인 중");
+		topLogin = new JLabel(phd.getlVO().getName() + " 교수님 로그인 중");
 		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
 		topLogin.setFont(font);
-		topLogin.setForeground(Color.GREEN);
+		topLogin.setForeground(Color.RED);
 		topLogin.setBounds(670, 30, 200, 20);
 		add(topLogin);
 
 
-
 		jlCrs = new JLabel("과목");
 		jlCrs.setFont(font);
-		jlCrs.setBounds(240, 150, 50, 20);
+		jlCrs.setBounds(500, 150, 50, 20);
 		add(jlCrs);
 
-		jlstdntNum = new JLabel("학번");
-		jlstdntNum.setFont(font);
-		jlstdntNum.setBounds(500, 150, 50, 20);
-		add(jlstdntNum);
+		jlstdNum = new JLabel("학번");
+		jlstdNum.setFont(font);
+		jlstdNum.setBounds(240, 190, 50, 20);
+		add(jlstdNum);
 
-
+	
 		jcbCrs = new JComboBox<String>();
 		jcbCrs.setFont(font);
-		jcbCrs.setBounds(280, 145, 200, 30);
+		jcbCrs.setBounds(540, 145, 200, 30);
 		add(jcbCrs);
 
 		jtfStdNum = new JTextField();
 		jtfStdNum.setFont(font);
-		jtfStdNum.setBounds(540, 145, 200, 30);
+		jtfStdNum.setBounds(280, 185, 200, 30);
 		add(jtfStdNum);
 
 		///////////////////////////////////////////////////////////////////
 		/////////////////////// 초기 설정/////////////////////////////////////
 		////////////////////////////////////////////////////////////////////
+
 
 		try {// 과목
 
@@ -121,44 +114,49 @@ public class ProfScoreDesign extends JDialog{
 
 			jcbCrs.addItem("전체");
 
-			lCrs = aDAO.slctAllCrs();
+			
+			//접속된 교수가 강의중인 과목리스트 받아오기
+			
+			//System.out.println(Integer.parseInt(phd.getlVO().getId()) );
+			int prof_num = Integer.parseInt(phd.getlVO().getId());
+			lCrs = pDAO.slctProfLectList(prof_num);
 			// 과목명만 저장하는 리스트에 과목명 저장
 			for (CrsVO crs : lCrs) {
+
 				jcbCrs.addItem(crs.getCourName());
 
 			}
-		}catch (SQLException e) {
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-
 		/////////////////////////////////////////////////////////////////////
 		/////////////////////////////////////////////////////////////////////
 
 		// 테이블 추가
-		String[] tempColumn = { "학번", "이름", "학과", "성취도" };
-		dtmScore = new DefaultTableModel(tempColumn, 0) {
+		String[] tempColumn = { "학과", "과목", "학번", "이름" };
+		dtmStdMgt = new DefaultTableModel(tempColumn, 0) {
 			public boolean isCellEditable(int row, int column) {
 				return false; // 테이블 셀 수정 불가하도록 설정
 			} // isCellEditable
 		};
-		jtbScore = new JTable(dtmScore);
-		JScrollPane jsp = new JScrollPane(jtbScore);
+		jtbStdMgt = new JTable(dtmStdMgt);
+		JScrollPane jsp = new JScrollPane(jtbStdMgt);
 
-		jtbScore.setRowHeight(30); // 행 높이 조절
+		jtbStdMgt.setRowHeight(30); // 행 높이 조절
 		jsp.setBounds(10, 230, 967, 250);
 		add(jsp);
 
 		/////////////////////////////////////////////////////////////
-		// 조회, 버튼 추가
-		jbtnSlct = new JButton(new ImageIcon(commonPath + "Slct.png"));
+		// 조회 버튼 추가
 		jbtnSlctTop = new JButton(new ImageIcon(commonPath + "search.png"));
-
-		jbtnSlct.setBounds(440, 500, 111, 59);
 		jbtnSlctTop.setBounds(780, 145, 70, 30);
-
-		add(jbtnSlct);
 		add(jbtnSlctTop);
+		
+		jbtnSlct = new JButton(new ImageIcon(commonPath + "Slct.png"));
+		jbtnSlct.setBounds(440, 500, 111, 59);
+		add(jbtnSlct);
+		
 		////////////////////////////////////////////////////////////////////
 
 		// 테이블 컬럼 가운데 정렬
@@ -168,10 +166,11 @@ public class ProfScoreDesign extends JDialog{
 
 		add(jlBack);
 
-		ProfScoreEvent asme = new ProfScoreEvent(this, title);
-		addWindowListener(asme);
-		jbtnSlct.addActionListener(asme);
-		jbtnSlctTop.addActionListener(asme);
+		ProfStudMgtEvent psme = new ProfStudMgtEvent(this);
+		addWindowListener(psme);
+		jbtnSlct.addActionListener(psme);
+		jbtnSlctTop.addActionListener(psme);
+
 
 		setLocationRelativeTo(null);
 
@@ -184,18 +183,22 @@ public class ProfScoreDesign extends JDialog{
 	public void setTbHorizontal() {
 		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
 		dtcr.setHorizontalAlignment(SwingConstants.CENTER);
-		TableColumnModel tcm = jtbScore.getColumnModel();
+		TableColumnModel tcm = jtbStdMgt.getColumnModel();
 		for (int i = 0; i < tcm.getColumnCount(); i++) {
 			tcm.getColumn(i).setCellRenderer(dtcr);
 		} // end for
 	} // setTbHorizontal
 
-	public ProfHomeDesign getphd() {
+	public ProfHomeDesign getPhd() {
 		return phd;
 	}
 
-	public ScoreDAO getsDAO() {
-		return sDAO;
+	public AdminDAO getaDAO() {
+		return aDAO;
+	}
+
+	public ProfDAO getpDAO() {
+		return pDAO;
 	}
 
 	public JLabel getJlBack() {
@@ -210,13 +213,10 @@ public class ProfScoreDesign extends JDialog{
 		return adminMgt;
 	}
 
-	public JTable getJtbScore() {
-		return jtbScore;
+	public JTable getJtbStdMgt() {
+		return jtbStdMgt;
 	}
 
-	public DefaultTableModel getDtmAdminMgt() {
-		return dtmAdminMgt;
-	}
 
 	public JButton getJbtnSlct() {
 		return jbtnSlct;
@@ -226,18 +226,12 @@ public class ProfScoreDesign extends JDialog{
 		return jbtnSlctTop;
 	}
 
-
-
 	public JLabel getJlCrs() {
 		return jlCrs;
 	}
 
 	public JLabel getJlstdNum() {
-		return jlstdntNum;
-	}
-
-	public JComboBox<String> getJcbDept() {
-		return jcbDept;
+		return jlstdNum;
 	}
 
 	public JComboBox<String> getJcbCrs() {
@@ -248,18 +242,15 @@ public class ProfScoreDesign extends JDialog{
 		return jtfStdNum;
 	}
 
-
-
 	public List<CrsVO> getLCrs() {
 		return lCrs;
 	}
 
-	public DefaultTableModel getDtmScore() {
-		return dtmScore;
+	public DefaultTableModel getDtmStdMgt() {
+		return dtmStdMgt;
 	}
-	
-	public static void main(String[] args) {
-		new ProfScoreDesign(null, null);
-	}//main
+
+
+
 
 }
