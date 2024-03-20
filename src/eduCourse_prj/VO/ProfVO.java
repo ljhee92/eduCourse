@@ -18,6 +18,16 @@ public class ProfVO {
 		this.prof_name = prof_name;
 	}
 	
+	
+	
+	
+	public ProfVO(int prof_number, String prof_name, String dept_name) {
+		super();
+		this.prof_number = prof_number;
+		this.prof_name = prof_name;
+		this.dept_name = dept_name;
+	}
+
 	public ProfVO(int prof_number, String prof_name, String prof_email, String dept_name) {
 		this.prof_number = prof_number;
 		this.prof_name = prof_name;
