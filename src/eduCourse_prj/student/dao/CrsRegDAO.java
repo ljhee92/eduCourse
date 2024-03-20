@@ -190,10 +190,10 @@ public class CrsRegDAO {
 			con = dbCon.getConnection(id, pass);
 			
 			StringBuilder selectAllReg = new StringBuilder();
-			selectAllReg.append("select distinct d.dept_name, c.course_name, c.course_code, l.lect_room, l.capacity, c.credit_hours, p.prof_name, ")
-							.append("r.std_number, r.prof_number ")
+			selectAllReg.append("select distinct r.register_number, d.dept_name, c.course_name, c.course_code, l.lect_room, l.capacity, ")
+							.append("c.credit_hours, p.prof_name, r.std_number, r.prof_number ")
 							.append("from register r ")
-							.append("join lecture l on l.prof_number = r.prof_number ")
+							.append("join lecture l on l.course_code = r.course_code ")
 							.append("join professor p on p.prof_number = l.prof_number ")
 							.append("join course c on c.course_code = l.course_code ")
 							.append("join dept d on d.dept_code = c.dept_code ")
