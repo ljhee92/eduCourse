@@ -3,6 +3,7 @@ package eduCourse_prj.student.design;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -17,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import eduCourse_prj.VO.CrsRegVO;
+import eduCourse_prj.VO.RegVO;
 import eduCourse_prj.student.dao.CrsRegDAO;
 import eduCourse_prj.student.event.StdntCrsRegEvent;
 
@@ -141,14 +143,38 @@ public class StdntCrsRegDesign extends JDialog {
 	 */
 	public void searchAllCrsReg() {
 		CrsRegDAO crDAO = CrsRegDAO.getInstance();
+
+		int stdnt_number = Integer.parseInt(shd.getlVO().getId());
 		
 		try {
-			List<CrsRegVO> listCrsRegVO = crDAO.slctAllCrsReg(Integer.parseInt(shd.getlVO().getId()));
+			List<RegVO> listAllRegVO = crDAO.slctAllReg(stdnt_number); // 학생의 수강신청완료 과목 리스트
 			
-			for(CrsRegVO crVO : listCrsRegVO) {
-				Object[] row = {crVO.getDept_name(), crVO.getCourse_name(), crVO.getCourse_code(), crVO.getLect_room(), crVO.getCapacity(), crVO.getCredit_hours()};
+			List<CrsRegVO> listAllCrsRegVO = crDAO.slctAllCrsReg(stdnt_number); // 학생이 속한 학과의 수강신청가능 과목 리스트
+
+			List<CrsRegVO> listToRemove = new ArrayList<CrsRegVO>(); // 학생의 수강신청완료 과목 리스트를 지우기 위해
+			String crsRegCrsCode = "", regCrsCode = "";
+			
+			for(CrsRegVO crsRegVO : listAllCrsRegVO) {
+			    crsRegCrsCode = crsRegVO.getCourse_code(); // CrsRegVO의 course_code
+			    for(RegVO regVO : listAllRegVO) {
+			        regCrsCode = regVO.getCourse_code(); // RegVO의 course_code
+			        if (crsRegCrsCode.equals(regCrsCode)) { // 두 객체의 course_code가 같은 경우
+			            listToRemove.add(crsRegVO);
+			            break;
+			        } // end if
+			    } // end for
+			} // end for
+
+			listAllCrsRegVO.removeAll(listToRemove);
+			
+			CrsRegVO crVO = null;
+			for(int i = 0; i < listAllCrsRegVO.size(); i++) {
+				crVO = listAllCrsRegVO.get(i);
+				Object[] row = {crVO.getDept_name(), crVO.getCourse_name(), crVO.getCourse_code(), 
+						crVO.getLect_room(), crVO.getCapacity(), crVO.getCredit_hours()};
 				dtmCrsReg.addRow(row);
 			} // end for
+			
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

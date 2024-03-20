@@ -53,7 +53,8 @@ public class CrsRegDAO {
 							.append("join student s on s.dept_code = d.dept_code ")
 							.append("right outer join course c on c.dept_code = d.dept_code ")
 							.append("join lecture l on l.course_code = c.course_code ")
-							.append("where s.std_number = ?");
+							.append("where s.std_number = ? ")
+							.append("order by c.course_code");
 			
 			pstmt = con.prepareStatement(selectAllCrsReg.toString());
 			pstmt.setInt(1, stdnt_number);
@@ -189,13 +190,15 @@ public class CrsRegDAO {
 			con = dbCon.getConnection(id, pass);
 			
 			StringBuilder selectAllReg = new StringBuilder();
-			selectAllReg.append("select d.dept_name, c.course_name, c.course_code, l.lect_room, l.capacity, c.credit_hours, p.prof_name ")
+			selectAllReg.append("select distinct r.register_number, d.dept_name, c.course_name, c.course_code, l.lect_room, l.capacity, ")
+							.append("c.credit_hours, p.prof_name, r.std_number, r.prof_number ")
 							.append("from register r ")
-							.append("join lecture l on l.prof_number = r.prof_number ")
+							.append("join lecture l on l.course_code = r.course_code ")
 							.append("join professor p on p.prof_number = l.prof_number ")
 							.append("join course c on c.course_code = l.course_code ")
 							.append("join dept d on d.dept_code = c.dept_code ")
-							.append("where std_number = ?");
+							.append("where std_number = ? ")
+							.append("order by c.course_code");
 			
 			pstmt = con.prepareStatement(selectAllReg.toString());
 			pstmt.setInt(1, stdnt_number);
@@ -204,6 +207,7 @@ public class CrsRegDAO {
 			while(rs.next()) {
 				rVO = new RegVO(rs.getString("dept_name"), rs.getString("course_name"), rs.getString("lect_room"),
 								rs.getInt("capacity"), rs.getInt("credit_hours"), rs.getString("prof_name"),
+								rs.getInt("std_number"), rs.getInt("prof_number"),
 								rs.getString("course_code"));
 				listRegVO.add(rVO);
 			} // end while
@@ -263,4 +267,49 @@ public class CrsRegDAO {
 			dbCon.dbClose(null, pstmt2, con);
 		} // end finally
 	} // updateCapacited
+	
+	/**
+	 * 이미 수강신청을 완료한 학생이 수강신청 버튼을 클릭했을 때 <br>
+	 * 수강신청 완료한 과목을 제외하고 보여주기 위해 DB의 Register 존재여부를 확인하는 method
+	 * @param stdnt_number
+	 * @param crs_code
+	 * @throws SQLException 
+	 */
+//	public List<RegVO> slctStdntReg(int stdnt_number, String crs_code) throws SQLException {
+//		List<RegVO> listRegVO = new ArrayList<RegVO>();
+//		RegVO rVO = null;
+//		DbConnection dbCon = DbConnection.getInstance();
+//		
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		
+//		try {
+//			String id = "scott";
+//			String pass = "tiger";
+//			
+//			con = dbCon.getConnection(id, pass);
+//			
+//			StringBuilder selectStdntReg = new StringBuilder();
+//			selectStdntReg.append("select * ")
+//							.append("from register ")
+//							.append("where std_number = ? and course_code = ?");
+//			
+//			pstmt = con.prepareStatement(selectStdntReg.toString());
+//			pstmt.setInt(1, stdnt_number);
+//			pstmt.setString(2, crs_code);
+//			
+//			rs = pstmt.executeQuery();
+//			
+//			while(rs.next()) {
+//				rVO = new RegVO(rs.getInt("register_number"), rs.getInt("std_number"), rs.getInt("prof_number"), rs.getString("course_code"));
+//				listRegVO.add(rVO);
+//			} // end while
+//		} finally {
+//			dbCon.dbClose(rs, pstmt, con);
+//		} // end finally
+//		
+//		return listRegVO;
+//	} // slctStdntReg
+	
 } // CrsRegDAO

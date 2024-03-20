@@ -1,7 +1,7 @@
 package eduCourse_prj.VO;
 
 public class ProfVO {
-	
+
 	private int prof_number;
 	private String prof_password;
 	private String prof_name;
@@ -9,7 +9,7 @@ public class ProfVO {
 	private String prof_delete_flag;
 	private String prof_input_date;
 	private String dept_name;
-	
+
 	public ProfVO() {
 	}
 
@@ -17,22 +17,39 @@ public class ProfVO {
 		this.prof_number = prof_number;
 		this.prof_name = prof_name;
 	}
-	
+
+	public ProfVO(int prof_number, String prof_name, String dept_name) {
+		super();
+		this.prof_number = prof_number;
+		this.prof_name = prof_name;
+		this.dept_name = dept_name;
+	}
+
 	public ProfVO(int prof_number, String prof_name, String prof_email, String dept_name) {
 		this.prof_number = prof_number;
 		this.prof_name = prof_name;
 		this.prof_email = prof_email;
 		this.dept_name = dept_name;
 	}
-	
+
 	public ProfVO(String prof_password, String prof_name, String prof_email, String dept_name) {
 		this.prof_password = prof_password;
 		this.prof_name = prof_name;
 		this.prof_email = prof_email;
 		this.dept_name = dept_name;
 	}
-	
-	public ProfVO(int prof_number, String prof_password, String prof_name, String prof_email, String prof_delete_flag, String prof_input_date, String dept_name) {
+
+	public ProfVO(int prof_number, String prof_password, String prof_name, String prof_email, String dept_name) {
+		super();
+		this.prof_number = prof_number;
+		this.prof_password = prof_password;
+		this.prof_name = prof_name;
+		this.prof_email = prof_email;
+		this.dept_name = dept_name;
+	}
+
+	public ProfVO(int prof_number, String prof_password, String prof_name, String prof_email, String prof_delete_flag,
+			String prof_input_date, String dept_name) {
 		this.prof_number = prof_number;
 		this.prof_password = prof_password;
 		this.prof_name = prof_name;
@@ -72,9 +89,9 @@ public class ProfVO {
 
 	@Override
 	public String toString() {
-		return "ProfVO [prof_number=" + prof_number + ", prof_name=" + prof_name + ", prof_email=" + prof_email
-				+ ", prof_delete_flag=" + prof_delete_flag + ", prof_input_date=" + prof_input_date + ", dept_name=" + dept_name
-				+ "]";
+		return "ProfVO [prof_number=" + prof_number + ", prof_password=" + prof_password + ", prof_name=" + prof_name
+				+ ", prof_email=" + prof_email + ", prof_delete_flag=" + prof_delete_flag + ", prof_input_date="
+				+ prof_input_date + ", dept_name=" + dept_name + "]";
 	}
 
 } // class

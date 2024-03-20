@@ -62,7 +62,7 @@ public class AdminDeptMgtEvent extends JDialog implements ActionListener{
 				}
 				output.append("\n정원: ").append(dDTO.getDept_capacity()).append("\n");
 				
-				System.out.println(output);
+;
 				JTextArea jta = new JTextArea(output.toString(), 8, 50);
 				JScrollPane jsp = new JScrollPane(jta);
 				jta.setEditable(false);				

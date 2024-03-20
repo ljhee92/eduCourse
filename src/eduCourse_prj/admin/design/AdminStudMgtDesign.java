@@ -162,15 +162,15 @@ public class AdminStudMgtDesign extends JDialog {
 		add(jsp);
 
 		/////////////////////////////////////////////////////////////
-		// 조회, 버튼 추가
-		jbtnSlct = new JButton(new ImageIcon(commonPath + "Slct.png"));
+		// 조회 버튼 추가
 		jbtnSlctTop = new JButton(new ImageIcon(commonPath + "search.png"));
-
-		jbtnSlct.setBounds(440, 500, 111, 59);
 		jbtnSlctTop.setBounds(780, 145, 70, 30);
-
-		add(jbtnSlct);
 		add(jbtnSlctTop);
+		
+		jbtnSlct = new JButton(new ImageIcon(commonPath + "Slct.png"));
+		jbtnSlct.setBounds(440, 500, 111, 59);
+		add(jbtnSlct);
+		
 		////////////////////////////////////////////////////////////////////
 
 		// 테이블 컬럼 가운데 정렬

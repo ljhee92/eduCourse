@@ -54,7 +54,7 @@ public class AdminProfMgtMdfyEvent extends WindowAdapter implements ActionListen
 			
 			try {
 				ProfVO pVO = new ProfVO(profNum, profPass, profName, profEmail, null, null, deptName);
-				pDAO.modifyProf(pVO);
+				pDAO.adminModifyProf(pVO);
 				JOptionPane.showMessageDialog(null, pVO.getProf_name() + " 교수님 정보가 성공적으로 수정되었습니다.\n등록된 정보를 확인하시려면 교수관리 창을 종료 후 재실행해주세요.");
 				apmmd.dispose();
 			} catch (SQLException e1) {

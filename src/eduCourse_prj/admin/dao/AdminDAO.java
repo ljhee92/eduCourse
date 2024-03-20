@@ -640,7 +640,7 @@ public class AdminDAO {
 			//1 전체 전체 비어있음
 			if(dept_code==0 && crs_code.equals("") && std_num==0) {
 				
-				String selectDeptCrs = "SELECT d.dept_name, c.course_name, s.std_number, s.std_name	"
+				String selectStd = "SELECT d.dept_name, c.course_name, s.std_number, s.std_name	"
 						+ "	FROM REGISTER r	"
 						+ "	JOIN student s ON r.std_number = s.std_number	"
 						+ "	JOIN dept d ON s.dept_code = d.dept_code	"
@@ -649,14 +649,14 @@ public class AdminDAO {
 				
 				
 				
-				pstmt = con.prepareStatement(selectDeptCrs);
+				pstmt = con.prepareStatement(selectStd);
 				
 			}
 			
 			//2 전체 전체 비어X
 			else if(dept_code==0 && crs_code.equals("") && std_num!=0) {
 				
-				String selectDeptCrs = "SELECT d.dept_name, c.course_name, s.std_number, s.std_name	"
+				String selectStd = "SELECT d.dept_name, c.course_name, s.std_number, s.std_name	"
 						+ "	FROM REGISTER r	"
 						+ "	JOIN student s ON r.std_number = s.std_number	"
 						+ "	JOIN dept d ON s.dept_code = d.dept_code	"
@@ -664,14 +664,14 @@ public class AdminDAO {
 						+ "	WHERE s.std_number = ?	";
 				
 
-				pstmt = con.prepareStatement(selectDeptCrs);
+				pstmt = con.prepareStatement(selectStd);
 				pstmt.setInt(1,std_num);
 			}
 			
 			//3 전체 일부 비어있음
 			else if(dept_code==0 && !crs_code.equals("") && std_num==0) {
 				
-				String selectDeptCrs = "SELECT d.dept_name, c.course_name, s.std_number, s.std_name	"
+				String selectStd = "SELECT d.dept_name, c.course_name, s.std_number, s.std_name	"
 						+ "	FROM REGISTER r	"
 						+ "	JOIN student s ON r.std_number = s.std_number	"
 						+ "	JOIN dept d ON s.dept_code = d.dept_code	"
@@ -679,7 +679,7 @@ public class AdminDAO {
 						+ "	WHERE c.course_code = ?	";
 				
 
-				pstmt = con.prepareStatement(selectDeptCrs);
+				pstmt = con.prepareStatement(selectStd);
 				pstmt.setString(1,crs_code);
 			}
 			
@@ -689,7 +689,7 @@ public class AdminDAO {
 			
 			else if(dept_code==0 && !crs_code.equals("") && std_num!=0) {
 				
-				String selectDeptCrs = "SELECT d.dept_name, c.course_name, s.std_number, s.std_name	"
+				String selectStd = "SELECT d.dept_name, c.course_name, s.std_number, s.std_name	"
 						+ "	FROM REGISTER r	"
 						+ "	JOIN student s ON r.std_number = s.std_number	"
 						+ "	JOIN dept d ON s.dept_code = d.dept_code	"
@@ -698,7 +698,7 @@ public class AdminDAO {
 						+ "	AND c.course_code = ?	";
 				
 
-				pstmt = con.prepareStatement(selectDeptCrs);
+				pstmt = con.prepareStatement(selectStd);
 				pstmt.setInt(1,std_num);
 				pstmt.setString(2,crs_code);
 			}
@@ -722,7 +722,7 @@ public class AdminDAO {
 			
 			else if(dept_code!=0 && crs_code.equals("") && std_num!=0) {
 				
-				String selectDeptCrs = "SELECT d.dept_name, c.course_name, s.std_number, s.std_name	"
+				String selectStd = "SELECT d.dept_name, c.course_name, s.std_number, s.std_name	"
 						+ "	FROM REGISTER r	"
 						+ "	JOIN student s ON r.std_number = s.std_number	"
 						+ "	JOIN dept d ON s.dept_code = d.dept_code	"
@@ -731,14 +731,14 @@ public class AdminDAO {
 						+ "	AND s.std_number = ?	";
 				
 
-				pstmt = con.prepareStatement(selectDeptCrs);
+				pstmt = con.prepareStatement(selectStd);
 				pstmt.setInt(1,dept_code);
 				pstmt.setInt(2,std_num);
 			}
 			//7 일부 일부 비어있음 
 			else if(dept_code!=0 && !crs_code.equals("") && std_num==0) {
 				
-				String selectDeptCrs = "SELECT d.dept_name, c.course_name, s.std_number, s.std_name	"
+				String selectStd = "SELECT d.dept_name, c.course_name, s.std_number, s.std_name	"
 						+ "	FROM REGISTER r	"
 						+ "	JOIN student s ON r.std_number = s.std_number	"
 						+ "	JOIN dept d ON s.dept_code = d.dept_code	"
@@ -747,7 +747,7 @@ public class AdminDAO {
 						+ "	AND c.course_code = ?	";
 				
 
-				pstmt = con.prepareStatement(selectDeptCrs);
+				pstmt = con.prepareStatement(selectStd);
 				
 				pstmt.setInt(1,dept_code);
 				pstmt.setString(2,crs_code);
@@ -757,7 +757,7 @@ public class AdminDAO {
 			//8 일부 일부 비어X
 			else if(dept_code!=0 && !crs_code.equals("") && std_num!=0) {
 				
-				String selectDeptCrs = "SELECT d.dept_name, c.course_name, s.std_number, s.std_name	"
+				String selectStd = "SELECT d.dept_name, c.course_name, s.std_number, s.std_name	"
 						+ "	FROM REGISTER r	"
 						+ "	JOIN student s ON r.std_number = s.std_number	"
 						+ "	JOIN dept d ON s.dept_code = d.dept_code	"
@@ -767,7 +767,7 @@ public class AdminDAO {
 						+ "	AND s.std_number = ?	";
 				
 
-				pstmt = con.prepareStatement(selectDeptCrs);
+				pstmt = con.prepareStatement(selectStd);
 				pstmt.setInt(1,dept_code);
 				pstmt.setString(2,crs_code);
 				pstmt.setInt(3,std_num);
@@ -789,6 +789,115 @@ public class AdminDAO {
 		
 		return listSlctStdVO;
 	} // slctDeptProf
+
+	/**
+	 * 관리자모드에서  학과,과목명으로 과목을 검색하는 DAO
+	 * @param dept_code //학번코드
+	 * @param crs_code //과목명
+	 * @return 선택된 학과명 과목명을 가진 CrsVO를 가지고있는 리스트
+	 * @throws SQLException
+	 */
+	public List<CrsVO> slctCrs(int dept_code,String crs_name) throws SQLException {
+		List<CrsVO> listCrsVO = new ArrayList<CrsVO>();
+		CrsVO cVO = null;
+		DbConnection dbCon = DbConnection.getInstance();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String id = "scott";
+			String pass = "tiger";
+			
+			con = dbCon.getConnection(id, pass);
+			
+			
+			//1 전체 비어있음
+			if(dept_code==0  && crs_name.isEmpty()) {
+				
+				String selectCrs = "SELECT c.COURSE_CODE, c.COURSE_NAME, d.DEPT_NAME	"
+						+ "				FROM COURSE  c	"
+						+ "				JOIN dept d ON c.dept_code = d.dept_code	"
+						+ "				WHERE c.COURSE_DELETE_FLAG = 'N'	"
+						+ "				order by dept_name	";
+				
+				
+				
+				
+				pstmt = con.prepareStatement(selectCrs);
+				
+			}
+			
+			//2 전체 비어X
+			else if(dept_code==0 && !crs_name.isEmpty()) {
+				
+				String selectCrs = "SELECT c.COURSE_CODE, c.COURSE_NAME, d.DEPT_NAME	"
+						+ "				FROM COURSE  c	"
+						+ "				JOIN dept d ON c.dept_code = d.dept_code	"
+						+ "				WHERE c.COURSE_DELETE_FLAG = 'N'	"
+						+ "				AND c.COURSE_NAME = ?	"
+						+ "				order by dept_name	";
+
+				
+
+				pstmt = con.prepareStatement(selectCrs);
+				pstmt.setString(1,crs_name);
+			}
+			
+			//3 일부 비어있음
+			else if(dept_code!=0  && crs_name.isEmpty()) {
+				
+				String selectCrs =  "SELECT c.COURSE_CODE, c.COURSE_NAME, d.DEPT_NAME	"
+						+ "				FROM COURSE  c	"
+						+ "				JOIN dept d ON c.dept_code = d.dept_code	"
+						+ "				WHERE c.COURSE_DELETE_FLAG = 'N'	"
+						+ "				AND c.dept_code = ?	"						
+						+ "				order by dept_name	";
+
+				
+
+				pstmt = con.prepareStatement(selectCrs);
+				pstmt.setInt(1,dept_code);
+			}
+			
+			
+			//4 일부 비어X
+			
+			else if(dept_code!=0 && !crs_name.isEmpty()) {
+				
+				String selectCrs = "SELECT c.COURSE_CODE, c.COURSE_NAME, d.DEPT_NAME	"
+						+ "				FROM COURSE  c	"
+						+ "				JOIN dept d ON c.dept_code = d.dept_code	"
+						+ "				WHERE c.COURSE_DELETE_FLAG = 'N'	"
+						+ "				AND c.dept_code = ?	"	
+						+ "				AND c.COURSE_NAME = ?	"
+						+ "				order by dept_name	";
+				
+
+				pstmt = con.prepareStatement(selectCrs);
+				pstmt.setInt(1,dept_code);
+				pstmt.setString(2,crs_name);
+			}
+
+			
+
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				cVO = new CrsVO(rs.getString("COURSE_CODE"), rs.getString("COURSE_NAME"),rs.getString("DEPT_NAME"));
+
+				listCrsVO.add(cVO);
+				
+				
+			} // end while
+		} finally {
+			dbCon.dbClose(rs, pstmt, con);
+		} // end finally
+		
+		return listCrsVO;
+	} // slctDeptProf
+	
 	
 	
 	
