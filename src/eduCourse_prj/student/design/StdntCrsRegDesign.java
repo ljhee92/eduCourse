@@ -147,21 +147,32 @@ public class StdntCrsRegDesign extends JDialog {
 		int stdnt_number = Integer.parseInt(shd.getlVO().getId());
 		
 		try {
-			List<RegVO> listAllRegVO =	crDAO.slctAllReg(stdnt_number); // 학생의 수강신청완료 과목 리스트
+			List<RegVO> listAllRegVO = crDAO.slctAllReg(stdnt_number); // 학생의 수강신청완료 과목 리스트
 			
-			List<CrsRegVO> listCrsRegVO = crDAO.slctAllCrsReg(stdnt_number); // 학생이 속한 학과의 수강신청가능 과목 리스트
+			List<CrsRegVO> listAllCrsRegVO = crDAO.slctAllCrsReg(stdnt_number); // 학생이 속한 학과의 수강신청가능 과목 리스트
+
+			List<CrsRegVO> listToRemove = new ArrayList<CrsRegVO>(); // 학생의 수강신청완료 과목 리스트를 지우기 위해
+			String crsRegCrsCode = "", regCrsCode = "";
+			
+			for(CrsRegVO crsRegVO : listAllCrsRegVO) {
+			    crsRegCrsCode = crsRegVO.getCourse_code(); // CrsRegVO의 course_code
+			    for(RegVO regVO : listAllRegVO) {
+			        regCrsCode = regVO.getCourse_code(); // RegVO의 course_code
+			        if (crsRegCrsCode.equals(regCrsCode)) { // 두 객체의 course_code가 같은 경우
+			            listToRemove.add(crsRegVO);
+			            break;
+			        } // end if
+			    } // end for
+			} // end for
+
+			listAllCrsRegVO.removeAll(listToRemove);
 			
 			CrsRegVO crVO = null;
-			for(int i = 0; i < listCrsRegVO.size(); i++) {
-				if(listCrsRegVO.get(i).getCourse_code().equals(listAllRegVO.get(i).getCourse_code())) {
-					// 수강신청완료 과목의 과목코드와 학생이 속한 학과의 수강신청가능 과목 리스트의 과목코드가 같다면
-					// 아무 일도 하지 않는다 !!!!!! 나도 안 할래
-				} else {
-					crVO = listCrsRegVO.get(i);
-					Object[] row = {crVO.getDept_name(), crVO.getCourse_name(), crVO.getCourse_code(), 
-							crVO.getLect_room(), crVO.getCapacity(), crVO.getCredit_hours()};
-					dtmCrsReg.addRow(row);
-				} // end else
+			for(int i = 0; i < listAllCrsRegVO.size(); i++) {
+				crVO = listAllCrsRegVO.get(i);
+				Object[] row = {crVO.getDept_name(), crVO.getCourse_name(), crVO.getCourse_code(), 
+						crVO.getLect_room(), crVO.getCapacity(), crVO.getCredit_hours()};
+				dtmCrsReg.addRow(row);
 			} // end for
 			
 		} catch (NumberFormatException e) {
