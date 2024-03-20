@@ -10,6 +10,7 @@ import java.util.List;
 import eduCourse_prj.DbConnection;
 import eduCourse_prj.VO.AdminProfVO;
 import eduCourse_prj.VO.CrsVO;
+import eduCourse_prj.VO.LectureVO;
 import eduCourse_prj.VO.LoginVO;
 import eduCourse_prj.VO.ProfVO;
 import eduCourse_prj.VO.SlctStdVO;
@@ -499,8 +500,12 @@ public class ProfDAO {
 		return listProfVO;
 	} // slctDeptProf
 	
-	
-	
+//	
+//	public LectureVO slctAllprofSlct() {
+//		
+//		
+//		return 
+//	}
 	
 	
 	
