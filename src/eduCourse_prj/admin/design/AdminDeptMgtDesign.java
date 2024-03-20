@@ -22,6 +22,7 @@ import eduCourse_prj.admin.dao.AdminDAO;
 import eduCourse_prj.admin.event.AdminDeptMgtEvent;
 import eduCourse_prj.professor.dao.ProfDAO;
 
+@SuppressWarnings("serial")
 public class AdminDeptMgtDesign extends JDialog {
 	private AdminHomeDesign awd;
 	private JLabel jlBack; // 배경
