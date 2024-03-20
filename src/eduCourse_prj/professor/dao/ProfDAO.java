@@ -11,6 +11,7 @@ import eduCourse_prj.DbConnection;
 import eduCourse_prj.VO.AdminProfVO;
 import eduCourse_prj.VO.LoginVO;
 import eduCourse_prj.VO.ProfVO;
+import eduCourse_prj.VO.SlctStdVO;
 
 public class ProfDAO {
 	private static ProfDAO pDAO;
@@ -115,7 +116,7 @@ public class ProfDAO {
 
 	
 	/**
-	 * 관리자모드 교수관리의 교번, 이름을 가져오기 위한 DAO
+	 * 관리자모드 교수관리의 교번, 이름, 학과 번호를 가져오기 위한 DAO
 	 * @return
 	 * @throws SQLException
 	 */
@@ -134,13 +135,16 @@ public class ProfDAO {
 			
 			con = dbCon.getConnection(id, pass);
 			
-			String selectProfMgt = "select prof_number, prof_name from professor where prof_delete_flag = 'N' order by prof_number";
+			String selectProfMgt = "	select p.prof_number, p.prof_name , d.dept_name	"
+					+ "	from professor p	"
+					+ "	JOIN dept d ON p.dept_code = d.dept_code	"
+					+ "	where prof_delete_flag = 'N' order by dept_name	";
 			pstmt = con.prepareStatement(selectProfMgt);
 			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				pVO = new ProfVO(rs.getInt("prof_number"), rs.getString("prof_name"));
+				pVO = new ProfVO(rs.getInt("prof_number"), rs.getString("prof_name"), rs.getString("dept_name"));
 				listProfVO.add(pVO);
 			} // end while
 		} finally {
@@ -339,4 +343,119 @@ public class ProfDAO {
 			dbCon.dbClose(null, pstmt, con);
 		} // end finally
 	} // modifyProf
+	
+	
+	/**
+	 * 관리자모드에서  학과,교번으로 교수를 검색하는 DAO
+	 * @param dept_code //학번코드
+	 * @param prof_num //학번
+	 * @return 선택된 학과,교번,교수명을 가진 ProfVO를 가지고있는 리스트
+	 * @throws SQLException
+	 */
+	public List<ProfVO> slctProf(int dept_code ,int prof_num) throws SQLException {
+		List<ProfVO> listProfVO = new ArrayList<ProfVO>();
+		ProfVO pVO = null;
+		DbConnection dbCon = DbConnection.getInstance();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String id = "scott";
+			String pass = "tiger";
+			
+			con = dbCon.getConnection(id, pass);
+			
+			
+			//1 전체 비어있음
+			if(dept_code==0  && prof_num==0) {
+				
+				String selectDeptCrs = "SELECT d.dept_name, p.PROF_NUMBER, p.PROF_NAME	"
+						+ "						FROM PROFESSOR p	"
+						+ "						JOIN dept d ON p.dept_code = d.dept_code	"
+						+ "						order by dept_name	";
+				
+				
+				
+				
+				pstmt = con.prepareStatement(selectDeptCrs);
+				
+			}
+			
+			//2 전체 비어X
+			else if(dept_code==0 && prof_num!=0) {
+				
+				String selectDeptCrs = "SELECT d.dept_name, p.PROF_NUMBER, p.PROF_NAME	"
+						+ "						FROM PROFESSOR p	"
+						+ "						JOIN dept d ON p.dept_code = d.dept_code	"
+						+ "						WHERE p.prof_number = ?	"					
+						+ "						order by dept_name	";
+
+				
+
+				pstmt = con.prepareStatement(selectDeptCrs);
+				pstmt.setInt(1,prof_num);
+			}
+			
+			//3 일부 비어있음
+			else if(dept_code!=0  && prof_num==0) {
+				
+				String selectDeptCrs =  "SELECT d.dept_name, p.PROF_NUMBER, p.PROF_NAME	"
+						+ "						FROM PROFESSOR p	"
+						+ "						JOIN dept d ON p.dept_code = d.dept_code	"
+						+ "						WHERE d.dept_code = ?	"						
+						+ "						order by dept_name	";
+
+				
+
+				pstmt = con.prepareStatement(selectDeptCrs);
+				pstmt.setInt(1,dept_code);
+			}
+			
+			
+			//4 일부 비어X
+			
+			else if(dept_code!=0 && prof_num!=0) {
+				
+				String selectDeptCrs = "SELECT d.dept_name, p.PROF_NUMBER, p.PROF_NAME	"
+						+ "						FROM PROFESSOR p	"
+						+ "						JOIN dept d ON p.dept_code = d.dept_code	"
+						+ "						WHERE d.dept_code = ?	"				
+						+ "						AND p.prof_number = ?	"							
+						+ "						order by dept_name	";
+				
+
+				pstmt = con.prepareStatement(selectDeptCrs);
+				pstmt.setInt(1,dept_code);
+				pstmt.setInt(2,prof_num);
+			}
+
+			
+
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				pVO = new ProfVO(rs.getInt("prof_number"), rs.getString("prof_name"),rs.getString("dept_name"));
+
+				listProfVO.add(pVO);
+				
+				
+			} // end while
+		} finally {
+			dbCon.dbClose(rs, pstmt, con);
+		} // end finally
+		
+		return listProfVO;
+	} // slctDeptProf
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 } // class

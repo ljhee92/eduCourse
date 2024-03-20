@@ -77,7 +77,7 @@ public class AdminCrsDesign extends JDialog {
 		JScrollPane jsp = new JScrollPane(jtbCrsMgt);
 
 		jtbCrsMgt.setRowHeight(30); // 행 높이 조절
-		jsp.setBounds(10, 120, 967, 350);
+		jsp.setBounds(10, 230, 967, 250);
 		add(jsp);
 
 		// 과목등록, 조회, 삭제 버튼 추가

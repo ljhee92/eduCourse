@@ -112,7 +112,7 @@ public class AdminStudMgtEvent extends WindowAdapter implements ActionListener {
 
 	
 	
-	}
+	}//end if
 		
 		if (ae.getSource() == asmd.getJbtnSlct()) {
 			//JOptionPane.showMessageDialog(asmd, "하단 조회버튼 클릭");
