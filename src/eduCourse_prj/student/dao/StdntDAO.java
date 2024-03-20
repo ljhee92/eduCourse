@@ -75,7 +75,7 @@ public class StdntDAO {
 	
 	/**
 	 * 학생모드 > 학생 메인을 위한 method
-	 * @param prof_number
+	 * @param stdnt_number
 	 * @return
 	 * @throws SQLException
 	 */
@@ -112,6 +112,9 @@ public class StdntDAO {
 		
 		return sVO;
 	} // slctOneStdnt
+	
+	
+	
 	
 	/**
 	 * 학생모드 > 학생 정보 수정을 위한 method

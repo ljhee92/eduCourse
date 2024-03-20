@@ -12,6 +12,7 @@ import eduCourse_prj.VO.AdminProfVO;
 import eduCourse_prj.VO.LoginVO;
 import eduCourse_prj.VO.ProfVO;
 import eduCourse_prj.VO.SlctStdVO;
+import eduCourse_prj.VO.StdntVO;
 
 public class ProfDAO {
 	private static ProfDAO pDAO;
@@ -159,8 +160,9 @@ public class ProfDAO {
 	 * @param prof_number
 	 * @return
 	 * @throws SQLException
-	 */
+	 *  */
 	public AdminProfVO slctProfMgtSlct(int prof_number) throws SQLException{
+	
 		AdminProfVO apVO = null;
 		DbConnection dbCon = DbConnection.getInstance();
 		
@@ -316,7 +318,7 @@ public class ProfDAO {
 	 * @param pVO
 	 * @throws SQLException
 	 */
-	public void modifyProf(ProfVO pVO) throws SQLException {
+	public void adminModifyProf(ProfVO pVO) throws SQLException {
 		DbConnection dbCon = DbConnection.getInstance();
 		
 		Connection con = null;
@@ -453,11 +455,81 @@ public class ProfDAO {
 		return listProfVO;
 	} // slctDeptProf
 	
+	/**
+	 * 교수모드 > 교수 메인 정보호출을 위한 method
+	 * @param prof_number
+	 * @return
+	 * @throws SQLException
+	 */
+	public ProfVO slctOneProf(int prof_number) throws SQLException{
+		ProfVO pVO = null;
+		DbConnection dbCon = DbConnection.getInstance();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String id = "scott";
+			String pass = "tiger";
+			
+			con = dbCon.getConnection(id, pass);
+			
+			String selectProf = "select p.PROF_NUMBER, p.PROF_PASSWORD, p.PROF_NAME, p.PROF_EMAIL, d.dept_name "
+								+ "	from PROFESSOR p "
+								+ "	join dept d on p.dept_code = d.dept_code "
+								+ "	WHERE p.prof_number = ?";
+			
+			pstmt = con.prepareStatement(selectProf);
+			pstmt.setInt(1, prof_number);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+
+				pVO = new ProfVO(rs.getInt("PROF_NUMBER"),
+						rs.getString("PROF_PASSWORD"),
+						rs.getString("PROF_NAME"),
+						rs.getString("PROF_EMAIL"),
+						rs.getString("DEPT_NAME"));
+			
+			
+			} // end while
+		} finally {
+			dbCon.dbClose(rs, pstmt, con);
+		} // end finally
+		
+		return pVO;
+	} // slctOneProf
 	
-	
-	
-	
-	
+	/**
+	 * 교수모드 > 교수 정보 수정을 위한 method
+	 * @param pVO
+	 * @throws SQLException
+	 */
+	public void modifyProf(ProfVO pVO) throws SQLException {
+		DbConnection dbCon = DbConnection.getInstance();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			String id = "scott";
+			String pass = "tiger";
+			
+			con = dbCon.getConnection(id, pass);
+			
+			String modifyProf = "update PROFESSOR set PROF_PASSWORD = ?, PROF_EMAIL = ? where PROF_NUMBER = ?";
+			
+			pstmt = con.prepareStatement(modifyProf);
+			pstmt.setString(1, pVO.getProf_password());
+			pstmt.setString(2, pVO.getProf_email());
+			pstmt.setInt(3, pVO.getProf_number());
+			
+			pstmt.executeUpdate();
+		} finally {
+			dbCon.dbClose(null, pstmt, con);
+		} // end finally
+	} // modifyStdnt
+
 	
 	
 	
