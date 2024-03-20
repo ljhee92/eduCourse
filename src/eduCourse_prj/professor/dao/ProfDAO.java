@@ -371,7 +371,7 @@ public class ProfDAO {
 			//1 전체 비어있음
 			if(dept_code==0  && prof_num==0) {
 				
-				String selectDeptCrs = "SELECT d.dept_name, p.PROF_NUMBER, p.PROF_NAME	"
+				String selectProf = "SELECT d.dept_name, p.PROF_NUMBER, p.PROF_NAME	"
 						+ "						FROM PROFESSOR p	"
 						+ "						JOIN dept d ON p.dept_code = d.dept_code	"
 						+ "						where p.PROF_DELETE_FLAG = 'N'	"
@@ -380,14 +380,14 @@ public class ProfDAO {
 				
 				
 				
-				pstmt = con.prepareStatement(selectDeptCrs);
+				pstmt = con.prepareStatement(selectProf);
 				
 			}
 			
 			//2 전체 비어X
 			else if(dept_code==0 && prof_num!=0) {
 				
-				String selectDeptCrs = "SELECT d.dept_name, p.PROF_NUMBER, p.PROF_NAME	"
+				String selectProf = "SELECT d.dept_name, p.PROF_NUMBER, p.PROF_NAME	"
 						+ "						FROM PROFESSOR p	"
 						+ "						JOIN dept d ON p.dept_code = d.dept_code	"
 						+ "						WHERE p.prof_number = ?	"	
@@ -396,14 +396,14 @@ public class ProfDAO {
 
 				
 
-				pstmt = con.prepareStatement(selectDeptCrs);
+				pstmt = con.prepareStatement(selectProf);
 				pstmt.setInt(1,prof_num);
 			}
 			
 			//3 일부 비어있음
 			else if(dept_code!=0  && prof_num==0) {
 				
-				String selectDeptCrs =  "SELECT d.dept_name, p.PROF_NUMBER, p.PROF_NAME	"
+				String selectProf =  "SELECT d.dept_name, p.PROF_NUMBER, p.PROF_NAME	"
 						+ "						FROM PROFESSOR p	"
 						+ "						JOIN dept d ON p.dept_code = d.dept_code	"
 						+ "						WHERE d.dept_code = ?	"
@@ -412,7 +412,7 @@ public class ProfDAO {
 
 				
 
-				pstmt = con.prepareStatement(selectDeptCrs);
+				pstmt = con.prepareStatement(selectProf);
 				pstmt.setInt(1,dept_code);
 			}
 			
@@ -421,7 +421,7 @@ public class ProfDAO {
 			
 			else if(dept_code!=0 && prof_num!=0) {
 				
-				String selectDeptCrs = "SELECT d.dept_name, p.PROF_NUMBER, p.PROF_NAME	"
+				String selectProf = "SELECT d.dept_name, p.PROF_NUMBER, p.PROF_NAME	"
 						+ "						FROM PROFESSOR p	"
 						+ "						JOIN dept d ON p.dept_code = d.dept_code	"
 						+ "						WHERE d.dept_code = ?	"				
@@ -430,7 +430,7 @@ public class ProfDAO {
 						+ "						order by dept_name	";
 				
 
-				pstmt = con.prepareStatement(selectDeptCrs);
+				pstmt = con.prepareStatement(selectProf);
 				pstmt.setInt(1,dept_code);
 				pstmt.setInt(2,prof_num);
 			}
