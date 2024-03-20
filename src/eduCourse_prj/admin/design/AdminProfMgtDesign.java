@@ -19,10 +19,10 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import eduCourse_prj.VO.DeptVO;
-import eduCourse_prj.VO.ProfVO;
+
 import eduCourse_prj.admin.dao.AdminDAO;
 import eduCourse_prj.admin.event.AdminProfMgtEvent;
-import eduCourse_prj.professor.dao.ProfDAO;
+
 
 @SuppressWarnings("serial")
 public class AdminProfMgtDesign extends JDialog {
@@ -77,8 +77,6 @@ public class AdminProfMgtDesign extends JDialog {
 		jtbProfMgt = new JTable(dtmProfMgt);
 		JScrollPane jsp = new JScrollPane(jtbProfMgt);
 
-		// 테이블에 DB 추가
-		//slctProfMgt();
 
 		// 테이블 컬럼 가운데 정렬
 		setTbHorizontal();
@@ -175,23 +173,6 @@ public class AdminProfMgtDesign extends JDialog {
 	}
 	
 	
-	/**
-	 * DB에서 교번, 이름을 불러와 테이블에 넣는 method
-	 */
-	public void slctProfMgt() {
-		ProfDAO pDAO = ProfDAO.getInstance();
-		try {
-			List<ProfVO> listProfVO = pDAO.slctProfMgt();
-
-			for (ProfVO pVO : listProfVO) {
-				Object[] row = { pVO.getDept_name(), pVO.getProf_number(), pVO.getProf_name() };
-				dtmProfMgt.addRow(row);
-			} // end for
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} // end catch
-	} // slctProfMgt
 
 	/**
 	 * 테이블의 컬럼을 가운데 정렬
