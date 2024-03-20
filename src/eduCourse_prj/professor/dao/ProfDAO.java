@@ -374,6 +374,7 @@ public class ProfDAO {
 				String selectDeptCrs = "SELECT d.dept_name, p.PROF_NUMBER, p.PROF_NAME	"
 						+ "						FROM PROFESSOR p	"
 						+ "						JOIN dept d ON p.dept_code = d.dept_code	"
+						+ "						where p.PROF_DELETE_FLAG = 'N'	"
 						+ "						order by dept_name	";
 				
 				
@@ -389,7 +390,8 @@ public class ProfDAO {
 				String selectDeptCrs = "SELECT d.dept_name, p.PROF_NUMBER, p.PROF_NAME	"
 						+ "						FROM PROFESSOR p	"
 						+ "						JOIN dept d ON p.dept_code = d.dept_code	"
-						+ "						WHERE p.prof_number = ?	"					
+						+ "						WHERE p.prof_number = ?	"	
+						+ "						AND p.PROF_DELETE_FLAG = 'N'	"
 						+ "						order by dept_name	";
 
 				
@@ -404,7 +406,8 @@ public class ProfDAO {
 				String selectDeptCrs =  "SELECT d.dept_name, p.PROF_NUMBER, p.PROF_NAME	"
 						+ "						FROM PROFESSOR p	"
 						+ "						JOIN dept d ON p.dept_code = d.dept_code	"
-						+ "						WHERE d.dept_code = ?	"						
+						+ "						WHERE d.dept_code = ?	"
+						+ "						AND p.PROF_DELETE_FLAG = 'N'	"
 						+ "						order by dept_name	";
 
 				
@@ -422,7 +425,8 @@ public class ProfDAO {
 						+ "						FROM PROFESSOR p	"
 						+ "						JOIN dept d ON p.dept_code = d.dept_code	"
 						+ "						WHERE d.dept_code = ?	"				
-						+ "						AND p.prof_number = ?	"							
+						+ "						AND p.prof_number = ?	"	
+						+ "						AND p.PROF_DELETE_FLAG = 'N'	"
 						+ "						order by dept_name	";
 				
 
