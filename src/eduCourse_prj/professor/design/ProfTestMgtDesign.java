@@ -2,6 +2,8 @@ package eduCourse_prj.professor.design;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.sql.SQLException;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,6 +17,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import eduCourse_prj.VO.DeptVO;
+import eduCourse_prj.admin.dao.AdminDAO;
 import eduCourse_prj.professor.event.ProfTestMgtEvent;
 
 public class ProfTestMgtDesign extends JDialog{
@@ -56,7 +60,7 @@ public class ProfTestMgtDesign extends JDialog{
 		add(topLogin);
 		
 		// 테이블 추가
-		String[] tempColumn = { "학과", "과목" };
+		String[] tempColumn = { "과목", "시험 활성화 여부" };
 		dtmTestMgt = new DefaultTableModel(tempColumn, 0) {
 			public boolean isCellEditable(int row, int column) {
 				return false; // 테이블 셀 수정 불가하도록 설정
@@ -93,27 +97,40 @@ public class ProfTestMgtDesign extends JDialog{
 		add(jrbtnDisable);
 
 		// 테이블에 DB 추가
-//		slctLecMgt();
+		slctTestMgt();
 
 		// 테이블 컬럼 가운데 정렬
 		setTbHorizontal();
 
 		// 이벤트 클래스 연결
-
-		add(jlBack);
-
 		ProfTestMgtEvent pme = new ProfTestMgtEvent(this);
 		addWindowListener(pme);
 		jbtnTestReg.addActionListener(pme);
 		jbtnTestMdfy.addActionListener(pme);
+		jrbtnEnable.addActionListener(pme);
+		jrbtnDisable.addActionListener(pme);
 		
 		setLayout(null);
 		setSize(1000,650);		
 		setLocationRelativeTo(null);
 		setVisible(true);
 		
-		
 	}
+	
+	public void slctTestMgt() {
+		AdminDAO aDAO= AdminDAO.getInstance();
+		try {
+			List<DeptVO> listDeptVO = aDAO.slctAllDept();
+			
+			for(DeptVO dVO : listDeptVO) {
+				Object[] row = {dVO.getDept_code(), dVO.getDept_name()};
+				dtmTestMgt.addRow(row);
+			} // end for
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} // end catch
+	} // slctTestMgt
 	
 	/**
 	 * 테이블의 컬럼을 가운데 정렬
