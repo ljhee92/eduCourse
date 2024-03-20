@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 
 import eduCourse_prj.login.SelectLoginDesign;
 import eduCourse_prj.professor.design.ProfHomeDesign;
+import eduCourse_prj.professor.design.ProfTestMgtDesign;
 
 public class ProfHomeEvent extends WindowAdapter  implements ActionListener {
 	private ProfHomeDesign pwd;
@@ -38,6 +39,7 @@ public class ProfHomeEvent extends WindowAdapter  implements ActionListener {
 		
 		if (ae.getSource()==pwd.getJbtnCourMgt()) {
 			JOptionPane.showMessageDialog(pwd, "과목 관리 클릭");
+			new ProfTestMgtDesign(pwd, null);
 		}
 		if (ae.getSource()==pwd.getJbtnExamMgtGrad()) {
 			JOptionPane.showMessageDialog(pwd, "시험 관리 및 채점 클릭");
