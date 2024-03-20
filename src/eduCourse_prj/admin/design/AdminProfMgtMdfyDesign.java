@@ -134,8 +134,8 @@ public class AdminProfMgtMdfyDesign extends JDialog {
 		
 		// JTable에서 선택된 교번, 이름 가져오기
 		int index = apmd.getJtbProfMgt().getSelectedRow();
-		String prof_number = apmd.getDtmProfMgt().getValueAt(index, 0).toString();
-		String prof_name = apmd.getDtmProfMgt().getValueAt(index, 1).toString();
+		String prof_number = apmd.getDtmProfMgt().getValueAt(index, 1).toString();
+		String prof_name = apmd.getDtmProfMgt().getValueAt(index, 2).toString();
 
 		// 교번, 이름, PW, 이메일, 소속학과 JTF, JPF, ComboBox 추가
 		jtfProfNum = new JTextField(prof_number);
