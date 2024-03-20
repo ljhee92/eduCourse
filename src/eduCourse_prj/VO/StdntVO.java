@@ -12,6 +12,18 @@ public class StdntVO {
 	private String dept_name;
 	
 	public StdntVO() {
+		
+		
+		
+		
+	}
+
+	public StdntVO(int stdnt_number, String stdnt_password, String stdnt_name, String stdnt_email) {
+
+		this.stdnt_number = stdnt_number;
+		this.stdnt_password = stdnt_password;
+		this.stdnt_name = stdnt_name;
+		this.stdnt_email = stdnt_email;
 	}
 
 	public StdntVO(int stdnt_number, String stdnt_password, String stdnt_name, String stdnt_email, String stdnt_addr,
