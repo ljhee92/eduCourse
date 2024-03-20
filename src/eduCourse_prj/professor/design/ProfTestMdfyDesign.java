@@ -105,6 +105,7 @@ public class ProfTestMdfyDesign extends JDialog {
 			testQuestionContentLabel = new JLabel("내용");
 			testQuestionContentLabel.setBounds(80, 230, 50, 30);
 			testQuestionContentTextArea = new JTextArea();
+			testQuestionContentTextArea.setText(testPath);
 			testQuestionContentTextArea.setBounds(150, 230, 300, 300);
 			testQuestionContentTextArea.setLineWrap(true);
 			testQuestionContentTextArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));

@@ -70,7 +70,6 @@ public class ProfTestMdfyEvent extends WindowAdapter implements ActionListener {
 			        return;
 			    }
 			    
-			    
 			    tqVO = new TestQustVO(questionNumber, "내용", answer,100403140, "M0001");
 			    tDAO.insertTest(tqVO);
 			}catch (SQLException se) {
