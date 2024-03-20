@@ -15,6 +15,7 @@ public class LectureVO {
 	public LectureVO(String course_code) {
 		this.course_code = course_code;
 	}
+	
 
 	public LectureVO(int prof_number, String course_code, int capacity, int capacited, String lect_delete_flag,
 			String lect_room) {

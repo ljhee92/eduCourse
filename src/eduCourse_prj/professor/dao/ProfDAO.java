@@ -10,12 +10,14 @@ import java.util.List;
 import eduCourse_prj.DbConnection;
 import eduCourse_prj.VO.AdminProfVO;
 import eduCourse_prj.VO.CrsVO;
+import eduCourse_prj.VO.DeptVO;
 import eduCourse_prj.VO.LectureVO;
 import eduCourse_prj.VO.LoginVO;
 import eduCourse_prj.VO.ProfLectStudVO;
 import eduCourse_prj.VO.ProfVO;
 import eduCourse_prj.VO.SlctStdVO;
 import eduCourse_prj.VO.StdntVO;
+import eduCourse_prj.VO.TestListVO;
 
 public class ProfDAO {
 	private static ProfDAO pDAO;
@@ -113,8 +115,6 @@ public class ProfDAO {
 		
 		return listProfVO;
 	} // slctDeptProf
-	
-	
 	
 	
 
@@ -764,7 +764,42 @@ public class ProfDAO {
 		return lSlctProfStud;
 	}//slctProfLect
 	
-	
+	public List<TestListVO> slctAllTest(int prof_number) throws SQLException {
+		DbConnection dbCon = DbConnection.getInstance();
+		TestListVO tlVO = null;
+		List<TestListVO> testList = new ArrayList<TestListVO>();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			String id = "scott";
+			String pass = "tiger";
+			con = dbCon.getConnection(id, pass);
+
+			StringBuilder slctQuery = new StringBuilder();
+			slctQuery.append("SELECT c.course_name, l.lect_delete_flag ");
+			slctQuery.append("FROM lecture l ");
+			slctQuery.append("JOIN course c ON c.course_code = l.course_code ");
+			slctQuery.append("WHERE l.prof_number = ?");
+
+			String slctTestQuery = slctQuery.toString();
+			pstmt = con.prepareStatement(slctTestQuery);
+			pstmt.setInt(1,prof_number);
+			// 5. 쿼리 실행 및 결과 처리
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				tlVO = new TestListVO(rs.getString("course_name"),rs.getString("lect_delete_flag"));
+				testList.add(tlVO);
+			}
+		} finally {
+			dbCon.dbClose(null, pstmt, con);
+		} // end finally
+		return testList;		
+	}//slctAllTest
 	
 	
 	

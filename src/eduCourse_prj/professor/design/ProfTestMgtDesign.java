@@ -18,14 +18,17 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import eduCourse_prj.VO.DeptVO;
+import eduCourse_prj.VO.LectureVO;
+import eduCourse_prj.VO.TestListVO;
 import eduCourse_prj.admin.dao.AdminDAO;
+import eduCourse_prj.professor.dao.ProfDAO;
 import eduCourse_prj.professor.event.ProfTestMgtEvent;
 
 public class ProfTestMgtDesign extends JDialog{
 	ProfHomeDesign phd;
-	private	JLabel jlBack;// 배경
+	JLabel jlBack;// 배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
-	private JLabel adminMgt;
+	private JLabel TestMgt;
 
 	private DefaultTableModel dtmTestMgt;
 	private JTable jtbTestMgt;
@@ -44,12 +47,11 @@ public class ProfTestMgtDesign extends JDialog{
 		
 		jlBack = new JLabel(new ImageIcon(commonPath + "back.png"));
 		jlBack.setBounds(0, 0, 984, 620);
-		add(jlBack);
 		
 		// 강의 과목 관리 라벨 추가
-		adminMgt = new JLabel(new ImageIcon(profPath + "TestMgt.png"));
-		adminMgt.setBounds(10, 76, 967, 44);
-		add(adminMgt);
+		TestMgt = new JLabel(new ImageIcon(profPath + "TestMgt2.png"));
+		TestMgt.setBounds(10, 76, 967, 44);
+		add(TestMgt);
 
 		// 우상단 로그인상태 확인창 추가
 		topLogin = new JLabel(phd.getlVO().getName() + " 관리자님 로그인 중");
@@ -95,6 +97,7 @@ public class ProfTestMgtDesign extends JDialog{
 		add(jbtnTestMdfy);
 		add(jrbtnEnable);
 		add(jrbtnDisable);
+		add(jlBack);
 
 		// 테이블에 DB 추가
 		slctTestMgt();
@@ -118,15 +121,15 @@ public class ProfTestMgtDesign extends JDialog{
 	}
 	
 	public void slctTestMgt() {
-		AdminDAO aDAO= AdminDAO.getInstance();
+		ProfDAO pDAO= ProfDAO.getInstance();
 		try {
-			List<DeptVO> listDeptVO = aDAO.slctAllDept();
+			int prof_number = Integer.parseInt(phd.getlVO().getId());
+			List<TestListVO> testListVO = pDAO.slctAllTest(prof_number);
 			
-			for(DeptVO dVO : listDeptVO) {
-				Object[] row = {dVO.getDept_code(), dVO.getDept_name()};
+			for(TestListVO lVO : testListVO) {
+				Object[] row = {lVO.getCourse_name(),lVO.getLect_delete_flag()};
 				dtmTestMgt.addRow(row);
-			} // end for
-			
+			} // end for			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} // end catch
