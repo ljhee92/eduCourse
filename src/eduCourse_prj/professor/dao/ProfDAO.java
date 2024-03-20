@@ -162,9 +162,8 @@ public class ProfDAO {
 	 * @param prof_number
 	 * @return
 	 * @throws SQLException
-	 *  */
+	 */
 	public AdminProfVO slctProfMgtSlct(int prof_number) throws SQLException{
-	
 		AdminProfVO apVO = null;
 		DbConnection dbCon = DbConnection.getInstance();
 		
@@ -178,12 +177,16 @@ public class ProfDAO {
 			
 			con = dbCon.getConnection(id, pass);
 			
-			String selectProf = "SELECT p.PROF_NUMBER, p.PROF_NAME, p.PROF_EMAIL, d.DEPT_NAME, c.COURSE_NAME "
-                    + "FROM PROFESSOR p "
-                    + "JOIN DEPT d ON p.DEPT_CODE = d.DEPT_CODE "
-                    + "JOIN COURSE c ON d.DEPT_CODE = c.DEPT_CODE "
-                    + "WHERE p.PROF_NUMBER = ?";
-			pstmt = con.prepareStatement(selectProf,ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+	        StringBuilder slcQuery = new StringBuilder();
+	        slcQuery.append("SELECT p.PROF_NUMBER, p.PROF_NAME, p.PROF_EMAIL, d.dept_name, c.COURSE_NAME ");
+	        slcQuery.append("FROM PROFESSOR p ");
+	        slcQuery.append("JOIN lecture s ON p.PROF_NUMBER = s.PROF_NUMBER ");
+	        slcQuery.append("JOIN COURSE c ON s.COURSE_code = c.COURSE_code ");
+	        slcQuery.append("JOIN dept d ON d.dept_code = p.dept_code ");
+	        slcQuery.append("WHERE p.PROF_NUMBER = ?");
+	        String slcProfQuery = slcQuery.toString();
+	        
+			pstmt = con.prepareStatement(slcProfQuery,ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
 			pstmt.setInt(1, prof_number);
 			rs = pstmt.executeQuery();
 
@@ -194,7 +197,7 @@ public class ProfDAO {
 				while(rs.next()) {
 					courses.add(rs.getString("course_name"));
 					apVO = new AdminProfVO(
-							prof_number,
+							rs.getInt("prof_number"),
 							rs.getString("prof_name"),
 							rs.getString("prof_email"),
 							rs.getString("dept_name"),
@@ -203,25 +206,29 @@ public class ProfDAO {
 			}//end if
 			else {
 				/////////////////과목이 없다면//////////////////////////
+				rs.beforeFirst();
 				pstmt.close(); //닫기
 				rs.close(); // 닫기
 				
 				//새로운 쿼리 생성
-				selectProf = "SELECT p.PROF_NUMBER, p.PROF_NAME, p.PROF_EMAIL, d.DEPT_NAME "
-	                       + "FROM PROFESSOR p "
-	                       + "JOIN DEPT d ON p.DEPT_CODE = d.DEPT_CODE "
-						   + "WHERE p.PROF_NUMBER = ?";
-				pstmt = con.prepareStatement(selectProf);
+				slcQuery.delete(0, slcQuery.length());
+				slcQuery.append("SELECT p.PROF_NUMBER, p.PROF_NAME, p.PROF_EMAIL, d.DEPT_NAME ");
+				slcQuery.append("FROM PROFESSOR p ");
+				slcQuery.append("JOIN DEPT d ON p.DEPT_CODE = d.DEPT_CODE ");
+				slcQuery.append("WHERE p.PROF_NUMBER = ?");
+				slcProfQuery = slcQuery.toString();
+				pstmt = con.prepareStatement(slcProfQuery);
 				pstmt.setInt(1, prof_number);
 				rs = pstmt.executeQuery();
 				
 				if(rs.next()) {
 				apVO = new AdminProfVO(
-						prof_number,
+						rs.getInt("prof_number"),
 						rs.getString("prof_name"),
 						rs.getString("prof_email"),
 						rs.getString("dept_name"),
 						courses);
+
 				}
 			}//end else
 		} finally {
@@ -231,6 +238,8 @@ public class ProfDAO {
 		return apVO;
 //		return listProfVO;
 	} // slctProfMgtSlct
+	
+
 	
 	
 	
