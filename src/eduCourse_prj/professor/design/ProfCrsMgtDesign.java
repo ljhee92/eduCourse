@@ -25,7 +25,7 @@ public class ProfCrsMgtDesign extends JDialog {
 
 	JLabel jlBack;// 배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
-	private JLabel adminMgt;
+	private JLabel profCrsMgt;
 
 	private JTable jtbLecMgt;
 	private DefaultTableModel dtmProfMgt;
@@ -46,9 +46,9 @@ public class ProfCrsMgtDesign extends JDialog {
 		add(jlBack);
 
 		// 강의 과목 관리 라벨 추가
-		adminMgt = new JLabel(new ImageIcon(profPath + "ProfCrsMgt.png"));
-		adminMgt.setBounds(10, 76, 967, 44);
-		add(adminMgt);
+		profCrsMgt = new JLabel(new ImageIcon(profPath + "ProfCrsMgt_Label.png"));
+		profCrsMgt.setBounds(10, 76, 967, 44);
+		add(profCrsMgt);
 
 		// 우상단 로그인상태 확인창 추가
 		topLogin = new JLabel(phd.getlVO().getName() + " 교수님 로그인 중");
@@ -70,7 +70,7 @@ public class ProfCrsMgtDesign extends JDialog {
 		JScrollPane jsp = new JScrollPane(jtbLecMgt);
 
 		jtbLecMgt.setRowHeight(30); // 행 높이 조절
-		jsp.setBounds(10, 120, 967, 350);
+		jsp.setBounds(10, 118, 967, 350);
 		add(jsp);
 
 		// 과목등록, 조회, 삭제 버튼 추가
