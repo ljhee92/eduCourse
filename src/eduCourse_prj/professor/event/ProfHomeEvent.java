@@ -12,6 +12,7 @@ import eduCourse_prj.professor.design.ProfCrsMgtDesign;
 import eduCourse_prj.professor.design.ProfHomeDesign;
 
 import eduCourse_prj.professor.design.ProfMdfyDesign;
+import eduCourse_prj.professor.design.ProfStudMgtDesign;
 import eduCourse_prj.professor.design.ProfTestMgtDesign;
 
 
@@ -52,6 +53,7 @@ public class ProfHomeEvent extends WindowAdapter  implements ActionListener {
 		}
 		if (ae.getSource()==pwd.getJbtnStudMgt()) {
 			JOptionPane.showMessageDialog(pwd, "학생 관리 클릭");
+			new ProfStudMgtDesign(pwd,"학생 관리" );
 		}
 		if (ae.getSource()==pwd.getJbtnStudySucc()) {
 			JOptionPane.showMessageDialog(pwd, "학습 성취도 클릭");
