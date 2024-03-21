@@ -159,7 +159,5 @@ public class AdminDeptMgtDesign extends JDialog {
 	public DefaultTableModel getDtmDeptMgt() {
 		return dtmDeptMgt;
 	}
-	public static void main(String[] args) {
-		new AdminDeptMgtDesign();
-	}
+
 }

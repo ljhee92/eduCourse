@@ -194,4 +194,14 @@ public class AdminAdminMgtDesign extends JDialog {
 		return dtmAdminMgt;
 	}
 
+	public JLabel getTopLogin() {
+		return topLogin;
+	}
+
+	public JLabel getAdminMgt() {
+		return adminMgt;
+	}
+
+	
+	
 }

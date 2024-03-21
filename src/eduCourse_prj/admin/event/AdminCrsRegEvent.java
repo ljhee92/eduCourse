@@ -81,6 +81,10 @@ public class AdminCrsRegEvent extends WindowAdapter implements ActionListener {
 				// 과목 등록
 				aDAO.addcourse(cVO);
 
+				updateTable();
+				acrd.dispose();
+				
+
 			} catch (SQLException se) {
 
 				if (se.getErrorCode() == 12899) {
@@ -106,4 +110,59 @@ public class AdminCrsRegEvent extends WindowAdapter implements ActionListener {
 		
 	}
 
+	
+	
+	public void updateTable() {
+		
+		acrd.getAcd().getDtmCrsMgt().setRowCount(0);
+
+		int dept_code = 0; // 학과 코드
+
+		String crs_name = ""; // 과목명
+
+		// 학과가 "전체"일 경우
+		if (acrd.getAcd().getJcbDept().getSelectedItem().equals("전체")) {
+
+			// 과목명이 존재하는 경우
+			if (!acrd.getAcd().getJtfCrsName().getText().isEmpty()) {
+
+				crs_name = acrd.getAcd().getJtfCrsName().getText();
+
+			}
+
+		} else {// 학과가 "전체"가 아닌 모든 경우
+			dept_code = acrd.getAcd().getLDept().get((acrd.getAcd().getJcbDept().getSelectedIndex() - 1)).getDept_code();
+			// 과목명이 존재하는 경우
+			if (!acrd.getAcd().getJtfCrsName().getText().isEmpty()) {
+
+				crs_name = acrd.getAcd().getJtfCrsName().getText();
+
+			}
+
+		}
+
+		@SuppressWarnings("unused")
+		List<CrsVO> lCrsVO;
+
+		try {
+			List<CrsVO> listCrsVO = aDAO.slctCrs(dept_code,crs_name);
+
+			for (CrsVO cVO : listCrsVO) {
+
+				Object[] row = { cVO.getDeptName(), cVO.getCourName()};
+				acrd.getAcd().getDtmCrsMgt().addRow(row);
+			} // end for
+
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} // end catch
+		
+		
+	}
+	
+	
+	
+	
+	
+	
 }
