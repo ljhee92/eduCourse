@@ -67,7 +67,7 @@ public class AdminCrsDesign extends JDialog {
 
 		// 관리자관리, 등록 라벨 추가
 
-		crsMgt = new JLabel(new ImageIcon(adminPath + "과목_관리.png"));
+		crsMgt = new JLabel(new ImageIcon(adminPath + "CourMgtBanner_new.png"));
 		crsMgt.setBounds(10, 76, 967, 45);
 		add(crsMgt);
 
@@ -90,36 +90,36 @@ public class AdminCrsDesign extends JDialog {
 		JScrollPane jsp = new JScrollPane(jtbCrsMgt);
 
 		jtbCrsMgt.setRowHeight(30); // 행 높이 조절
-		jsp.setBounds(10, 230, 967, 250);
+		jsp.setBounds(10, 200, 967, 250);
 		add(jsp);
 
 		
 		// 학과 라벨,콤보박스 // 교번 라벨,텍스트필드 추가
 		jlDept = new JLabel("학과");
 		jlDept.setFont(font);
-		jlDept.setBounds(235, 150, 50, 20);
+		jlDept.setBounds(180, 150, 50, 20);
 		add(jlDept);
 
 		jcbDept = new JComboBox<String>();
 		jcbDept.setFont(font);
-		jcbDept.setBounds(280, 145, 200, 30);
+		jcbDept.setBounds(230, 145, 200, 30);
 		add(jcbDept);
 		
 		seltAllDept();
 
 		jlCrsName = new JLabel("과목명");
 		jlCrsName.setFont(font);
-		jlCrsName.setBounds(235, 190, 50, 20);
+		jlCrsName.setBounds(480, 150, 50, 20);
 		add(jlCrsName);
 
 		jtfCrsName = new JTextField();
 		jtfCrsName.setFont(font);
-		jtfCrsName.setBounds(280, 185, 200, 30);
+		jtfCrsName.setBounds(530, 145, 200, 30);
 		add(jtfCrsName);
 		
 		// 상단 조회버튼 추가
-		jbtnSlctTop = new JButton(new ImageIcon(commonPath + "search.png"));
-		jbtnSlctTop.setBounds(780, 145, 70, 30);
+		jbtnSlctTop = new JButton(new ImageIcon(commonPath + "searchButton_new.png"));
+		jbtnSlctTop.setBounds(750, 145, 55, 30);
 		add(jbtnSlctTop);
 		
 		
@@ -131,9 +131,9 @@ public class AdminCrsDesign extends JDialog {
 		jbtnSlct = new JButton(new ImageIcon(commonPath + "SlctButton_new.png"));
 		jbtnDel = new JButton(new ImageIcon(commonPath + "DelButton_new.png"));
 
-		jbtnCrsReg.setBounds(300, 500, 142, 50);
-		jbtnSlct.setBounds(500, 500, 90, 50);
-		jbtnDel.setBounds(620, 500, 90, 50);
+		jbtnCrsReg.setBounds(280, 490, 142, 50);
+		jbtnSlct.setBounds(480, 490, 90, 50);
+		jbtnDel.setBounds(600, 490, 90, 50);
 
 		add(jbtnCrsReg);
 		add(jbtnSlct);
