@@ -104,35 +104,8 @@ public class AdminCrsRegDisgn extends JDialog {
 		JtfCrsCode.setFont(font);
 		JtfCrsCode.setBounds(400, 300, 200, 30);
 		add(JtfCrsCode);
-		
-		
-		jlProf = new JLabel("교수");
-		jlProf.setFont(font);
-		jlProf.setBounds(320, 350, 200, 30);
-		add(jlProf);
-		
-		jcbProf = new JComboBox<>();
-		try {
 
-			// 최초 선택된 학과에 소속되어있는 교수를 리스트에 저장
 
-			int dept_code = lDept.get(jcbDept.getSelectedIndex()).getDept_code();
-
-			lProf = pDAO.slctDeptProf(dept_code);
-
-			// 교수명만 저장하는 리스트에 교수명 저장
-			for (ProfVO prof : lProf) {
-				jcbProf.addItem(prof.getProf_name());
-
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		jcbProf.setBounds(400, 350, 200, 30);
-		jcbProf.setFont(font);
-		add(jcbProf);
-		
 		
 		
 		
