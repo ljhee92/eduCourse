@@ -60,19 +60,9 @@ public class TestDAO {
 			String id = "scott";
 			String pass = "tiger";
 			con = dbCon.getConnection(id, pass);
+			List<Integer> qustNum = new ArrayList<Integer>();
 
-			// 0. 동일한 과목코드와 문제번호 검증
-			String checkTestCode = "select 	TEST_QUESTION_ID 		from	 TEST_QUESTION	where QUESTION_NUMBER = ? AND COURSE_CODE = ?";
-			pstmt = con.prepareStatement(checkTestCode);
-			pstmt.setInt(1,tqVO.getQust_number());
-			pstmt.setString(2, tqVO.getCrs_code());
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				JOptionPane.showMessageDialog(null, "이미 입력하신 문항입니다", "오류",
-						JOptionPane.ERROR_MESSAGE);
-				return;
 
-			}
 			// 1. 문제 id 삽입
 
 			int test_id = 0;
@@ -84,9 +74,17 @@ public class TestDAO {
 				int lastTestid = rs.getInt(1);
 				test_id = lastTestid + 1;
 			}
+			//----------------------------------
+			String checkTestCode = "select 	QUESTION_NUMBER 		from	 TEST_QUESTION	where COURSE_CODE = ?";
+			pstmt = con.prepareStatement(checkTestCode);
+			pstmt.setString(1,tqVO.getCrs_code());
+			rs = pstmt.executeQuery();
+			
+			
 
-
+            //----------------------------------
 			String addTest = "insert into TEST_QUESTION(TEST_QUESTION_ID,QUESTION_NUMBER, QUESTION_CONTENT, ANSWER, PROF_NUMBER, COURSE_CODE) values(?,?,?,?,?,?)";
+			
 			pstmt = con.prepareStatement(addTest);
 
 			pstmt.setInt(1, test_id);
@@ -96,6 +94,13 @@ public class TestDAO {
 			pstmt.setInt(5, tqVO.getProf_number());
 			pstmt.setString(6, tqVO.getCrs_code());
 
+			while(rs.next()) {
+				if (rs.getInt("QUESTION_NUMBER")==tqVO.getQust_number()) {
+					JOptionPane.showMessageDialog(null, addTest);
+					return;
+				}
+			}
+			
 			pstmt.executeUpdate();
 			JOptionPane.showMessageDialog(null, "시험이 성공적으로 등록되엇습니다.");
 

@@ -39,6 +39,7 @@ public class ScoreDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+	
 
 		try {
 
@@ -73,7 +74,7 @@ public class ScoreDAO {
 
 	}// slctAllScore
 	
-	public List<ScoreVO> slctOneScore(int stdnt_num) throws SQLException {//학번으로 검색
+	public List<ScoreVO> slctOneScore(int stdnt_num, int prof_id) throws SQLException {//학번으로 검색
 
 		DbConnection dbCon = DbConnection.getInstance();
 		ScoreVO sVO = null;
@@ -94,10 +95,11 @@ public class ScoreDAO {
 					+ "JOIN dept d ON s.dept_code = d.dept_code "
 					+ "JOIN register r ON s.std_number = r.std_number "
 					+ "JOIN score sc ON r.register_number = sc.register_number "
-					+ "WHERE s.std_number = ?";
+					+ "WHERE s.std_number = ? and where r.PROF_NUMBER = ?";
 
 			pstmt = con.prepareStatement(selectQuery);
 			pstmt.setInt(1, stdnt_num);
+			pstmt.setInt(2, prof_id);
 
 			// 5. 쿼리 실행 및 결과 처리
 			rs = pstmt.executeQuery();
@@ -118,7 +120,7 @@ public class ScoreDAO {
 
 	}// slctOneScore 학번
 	
-	public List<ScoreVO> slctOneScore(String crs_code) throws SQLException {//과목코드로 찾기
+	public List<ScoreVO> slctOneScore(String crs_code, int prof_id) throws SQLException {//과목코드로 찾기
 
 		DbConnection dbCon = DbConnection.getInstance();
 		ScoreVO sVO = null;
@@ -140,11 +142,11 @@ public class ScoreDAO {
 					+ "JOIN register r ON s.std_number = r.std_number "
 					+ "JOIN score sc ON r.register_number = sc.register_number "
 					+ "JOIN course c ON r.course_code = c.course_code "
-					+ "WHERE c.course_code = ?";
+					+ "WHERE c.course_code = ? and where r.PROF_NUMBER = ?";
 
 			pstmt = con.prepareStatement(selectQuery);
 			pstmt.setString(1, crs_code);
-
+			pstmt.setInt(2, prof_id);
 			// 5. 쿼리 실행 및 결과 처리
 			rs = pstmt.executeQuery();
 
@@ -165,10 +167,8 @@ public class ScoreDAO {
 
 	}// slctOneScore
 	
-	public List<ScoreVO> slctOneScore(int stdnt_num, String crs_code) throws SQLException {//학번, 과목코드로 검색
+	public List<ScoreVO> slctOneScore(int stdnt_num, String crs_code, int prof_id) throws SQLException {//학번, 과목코드로 검색
 
-		System.out.println("sydnt_num: " +stdnt_num);
-		System.out.println("crs_code: " +crs_code);
 		DbConnection dbCon = DbConnection.getInstance();
 		ScoreVO sVO = null;
 		List<ScoreVO> list = new ArrayList<ScoreVO>();
@@ -189,11 +189,12 @@ public class ScoreDAO {
 					+ "		JOIN register r ON s.std_number = r.std_number	 "
 					+ "		JOIN score sc ON r.register_number = sc.register_number 	"
 					+ "		JOIN course c ON r.course_code = c.course_code	 "
-					+ "		WHERE c.course_code = ? and s.std_number = ?	";
+					+ "		WHERE c.course_code = ? and s.std_number = ? and where r.PROF_NUMBER = ?	";
 
 			pstmt = con.prepareStatement(selectQuery);
 			pstmt.setString(1, crs_code);
 			pstmt.setInt(2, stdnt_num);
+			pstmt.setInt(3, prof_id);
 
 			// 5. 쿼리 실행 및 결과 처리
 			rs = pstmt.executeQuery();
