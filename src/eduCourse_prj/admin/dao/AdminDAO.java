@@ -236,7 +236,8 @@ public class AdminDAO {
 			con = dbCon.getConnection(id, pass);
 
 			String selectQuery = "SELECT DEPT_CODE, DEPT_NAME,	DEPT_CAPACITY, DEPT_INPUT_DATE,	DEPT_DELETE_FLAG	"
-					+ "	FROM DEPT where DEPT_DELETE_FLAG = 'N'";
+					+ "	FROM DEPT where DEPT_DELETE_FLAG = 'N'"
+					+ "	Order By DEPT_CODE ";
 			pstmt = con.prepareStatement(selectQuery);
 
 			// 5. 쿼리 실행 및 결과 처리
@@ -282,9 +283,10 @@ public class AdminDAO {
 			con = dbCon.getConnection(id, pass);
 
 			String selectQuery =   "SELECT d.DEPT_CODE, d.DEPT_NAME, p.PROF_NAME, d.DEPT_CAPACITY "
-                    + "FROM DEPT d "
-                    + "INNER JOIN PROFESSOR p ON d.DEPT_CODE = p.DEPT_CODE "
-                    + "WHERE d.DEPT_CODE = ?";		
+                    + "	FROM DEPT d "
+                    + "	INNER JOIN PROFESSOR p ON d.DEPT_CODE = p.DEPT_CODE "
+                    + "	WHERE d.DEPT_CODE = ?	"		
+                    + "	AND d.DEPT_DELETE_FLAG = 'N'	";		
 			
 			//CURSOR를 양방향으로 전환가능하게 만듬
 			pstmt = con.prepareStatement(selectQuery,ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
@@ -352,7 +354,9 @@ public class AdminDAO {
 	        
 	        con = dbCon.getConnection(id, pass);
 	        
-	        String deleteDept = "DELETE FROM DEPT WHERE DEPT_CODE = ?";
+	        String deleteDept =   "	UPDATE DEPT "
+	        					+ "	SET DEPT_DELETE_FLAG = 'Y'	"
+	        					+ "	WHERE DEPT_CODE = ?";
 	        pstmt = con.prepareStatement(deleteDept);
 	        
 	        pstmt.setInt(1, deptCode);

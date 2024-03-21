@@ -38,48 +38,7 @@ public class AdminCrsEvent extends WindowAdapter implements ActionListener {
 
 		if (ae.getSource() == acd.getJbtnSlctTop()) {
 			JOptionPane.showMessageDialog(acd, "상단 조회버튼 클릭");
-			acd.getDtmCrsMgt().setRowCount(0);
-
-			int dept_code = 0; // 학과 코드
-
-			String crs_name = ""; // 과목명
-
-			// 학과가 "전체"일 경우
-			if (acd.getJcbDept().getSelectedItem().equals("전체")) {
-
-				// 과목명이 존재하는 경우
-				if (!acd.getJtfCrsName().getText().isEmpty()) {
-
-					crs_name = acd.getJtfCrsName().getText();
-
-				}
-
-			} else {// 학과가 "전체"가 아닌 모든 경우
-				dept_code = acd.getLDept().get((acd.getJcbDept().getSelectedIndex() - 1)).getDept_code();
-				// 과목명이 존재하는 경우
-				if (!acd.getJtfCrsName().getText().isEmpty()) {
-
-					crs_name = acd.getJtfCrsName().getText();
-
-				}
-
-			}
-
-			@SuppressWarnings("unused")
-			List<CrsVO> lCrsVO;
-
-			try {
-				List<CrsVO> listCrsVO = aDAO.slctCrs(dept_code,crs_name);
-
-				for (CrsVO cVO : listCrsVO) {
-
-					Object[] row = { cVO.getDeptName(), cVO.getCourName()};
-					acd.getDtmCrsMgt().addRow(row);
-				} // end for
-
-			} catch (SQLException se) {
-				se.printStackTrace();
-			} // end catch
+			updateTable();
 
 		}
 
@@ -137,7 +96,14 @@ public class AdminCrsEvent extends WindowAdapter implements ActionListener {
 
 					aDAO.deleteCrs(crs_name);
 					JOptionPane.showMessageDialog(acd, acd.getDtmCrsMgt().getValueAt(index, 1).toString()
-							+ " 과목 정보 삭제 성공\n변경된 정보를 확인하시려면 교수관리 창을 종료 후 재실행해주세요.");
+							+ " 과목 정보 삭제 성공");
+
+					updateTable();
+					
+					
+					
+					
+					
 				} catch (SQLException e1) {
 					JOptionPane.showMessageDialog(acd, "SQL 문제가 발생했습니다.");
 					e1.printStackTrace();
@@ -148,4 +114,61 @@ public class AdminCrsEvent extends WindowAdapter implements ActionListener {
 
 	}
 
+	/**
+	 * 우상단 조회버튼 및 삭제버튼 클릭시 사용되는 메서드
+	 */
+	public void updateTable() {
+		acd.getDtmCrsMgt().setRowCount(0);
+
+		int dept_code = 0; // 학과 코드
+
+		String crs_name = ""; // 과목명
+
+		// 학과가 "전체"일 경우
+		if (acd.getJcbDept().getSelectedItem().equals("전체")) {
+
+			// 과목명이 존재하는 경우
+			if (!acd.getJtfCrsName().getText().isEmpty()) {
+
+				crs_name = acd.getJtfCrsName().getText();
+
+			}
+
+		} else {// 학과가 "전체"가 아닌 모든 경우
+			dept_code = acd.getLDept().get((acd.getJcbDept().getSelectedIndex() - 1)).getDept_code();
+			// 과목명이 존재하는 경우
+			if (!acd.getJtfCrsName().getText().isEmpty()) {
+
+				crs_name = acd.getJtfCrsName().getText();
+
+			}
+
+		}
+
+		@SuppressWarnings("unused")
+		List<CrsVO> lCrsVO;
+
+		try {
+			List<CrsVO> listCrsVO = aDAO.slctCrs(dept_code,crs_name);
+
+			for (CrsVO cVO : listCrsVO) {
+
+				Object[] row = { cVO.getDeptName(), cVO.getCourName()};
+				acd.getDtmCrsMgt().addRow(row);
+			} // end for
+
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} // end catch
+
+		
+		
+	}
+	
+
+	
+	
+	
+	
+	
 }

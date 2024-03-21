@@ -32,51 +32,7 @@ public class AdminProfMgtEvent extends WindowAdapter implements ActionListener {
 
 		if (e.getSource() == apmd.getJbtnSlctTop()) {
 			JOptionPane.showMessageDialog(apmd, "상단 조회버튼 클릭");
-			apmd.getDtmProfMgt().setRowCount(0);
-
-			int dept_code = 0; // 학과 코드
-
-			int prof_num = 0; // 교번
-
-			// 학과가 "전체"일 경우
-			if (apmd.getJcbDept().getSelectedItem().equals("전체")) {
-
-			} else {// 학과가 "전체"가 아닌 모든 경우
-				dept_code = apmd.getLDept().get((apmd.getJcbDept().getSelectedIndex() - 1)).getDept_code();
-
-			}
-
-			// 교번 입력 유무 체크
-			if (!(apmd.getJtfProfNum().getText().isEmpty())) {
-				try {
-
-					prof_num = Integer.parseInt(apmd.getJtfProfNum().getText());
-				} catch (Exception ee) {
-					ee.printStackTrace();
-					JOptionPane.showMessageDialog(apmd, "숫자만 입력가능 9자리");
-					return;
-				}
-			}
-
-			
-			
-			@SuppressWarnings("unused")
-			List<ProfVO> lProfVO;
-
-		try {
-			List<ProfVO> listProfVO = pDAO.slctProf(dept_code ,prof_num);
-
-			for (ProfVO pVO : listProfVO) {
-
-				Object[] row = { pVO.getDept_name(), pVO.getProf_number(), pVO.getProf_name()};
-				apmd.getDtmProfMgt().addRow(row);
-			} // end for
-
-		} catch (SQLException se) {
-			se.printStackTrace();
-		} // end catch
-			
-			
+			updateTable();
 			
 
 		}
@@ -148,11 +104,14 @@ public class AdminProfMgtEvent extends WindowAdapter implements ActionListener {
 			case JOptionPane.OK_OPTION:
 				try {
 					ProfDAO pDAO = ProfDAO.getInstance();
-					int prof_number = Integer.parseInt(apmd.getDtmProfMgt().getValueAt(index, 0).toString());
+					int prof_number = Integer.parseInt(apmd.getDtmProfMgt().getValueAt(index, 1).toString());
 
 					pDAO.deleteProf(prof_number);
-					JOptionPane.showMessageDialog(apmd, apmd.getDtmProfMgt().getValueAt(index, 1).toString()
-							+ " 교수님 정보 삭제 성공\n변경된 정보를 확인하시려면 교수관리 창을 종료 후 재실행해주세요.");
+					JOptionPane.showMessageDialog(apmd, apmd.getDtmProfMgt().getValueAt(index, 2).toString()
+							+ " 교수님 정보 삭제 성공");
+					
+					updateTable();
+					
 				} catch (SQLException e1) {
 					JOptionPane.showMessageDialog(apmd, "SQL 문제가 발생했습니다.");
 					e1.printStackTrace();
@@ -162,4 +121,64 @@ public class AdminProfMgtEvent extends WindowAdapter implements ActionListener {
 		} // end if
 	} // actionPerformed
 
+	
+	
+	/**
+	 * 조회버튼, 삭제버튼 클릭 시 테이블 최신화
+	 */
+	public void updateTable() {
+
+		apmd.getDtmProfMgt().setRowCount(0);
+
+		int dept_code = 0; // 학과 코드
+
+		int prof_num = 0; // 교번
+
+		// 학과가 "전체"일 경우
+		if (apmd.getJcbDept().getSelectedItem().equals("전체")) {
+
+		} else {// 학과가 "전체"가 아닌 모든 경우
+			dept_code = apmd.getLDept().get((apmd.getJcbDept().getSelectedIndex() - 1)).getDept_code();
+
+		}
+
+		// 교번 입력 유무 체크
+		if (!(apmd.getJtfProfNum().getText().isEmpty())) {
+			try {
+
+				prof_num = Integer.parseInt(apmd.getJtfProfNum().getText());
+			} catch (Exception ee) {
+				ee.printStackTrace();
+				JOptionPane.showMessageDialog(apmd, "숫자만 입력가능 9자리");
+				return;
+			}
+		}
+
+		
+		
+		@SuppressWarnings("unused")
+		List<ProfVO> lProfVO;
+
+	try {
+		List<ProfVO> listProfVO = pDAO.slctProf(dept_code ,prof_num);
+
+		for (ProfVO pVO : listProfVO) {
+
+			Object[] row = { pVO.getDept_name(), pVO.getProf_number(), pVO.getProf_name()};
+			apmd.getDtmProfMgt().addRow(row);
+		} // end for
+
+	} catch (SQLException se) {
+		se.printStackTrace();
+	} // end catch
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
 } // class

@@ -19,7 +19,7 @@ import eduCourse_prj.admin.event.AdminProfMgtMdfyEvent;
 
 @SuppressWarnings("serial")
 public class AdminProfMgtMdfyDesign extends JDialog {
-	
+	private AdminProfMgtDesign apmd;
 	private JLabel jlBack; //배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
 	private JLabel profMgt, profMgtMdfy, photo, jlProfNum, jlProfName, jlProfPass, jlProfEmail, jlDept, jlNecessary;
@@ -74,7 +74,7 @@ public class AdminProfMgtMdfyDesign extends JDialog {
 
 	public AdminProfMgtMdfyDesign(AdminProfMgtDesign apmd, String title) {
 		super(apmd, title, true);
-		
+		this.apmd = apmd;
 		setLayout(null);
 		
 		String commonPath = "src/eduCourse_prj/image/common/";
@@ -222,8 +222,11 @@ public class AdminProfMgtMdfyDesign extends JDialog {
 	public JComboBox<String> getJcbDept() {
 		return jcbDept;
 	}
-//	public static void main(String[] args) {
-//		AdminProfMgtMdfyDesign apmme = new AdminProfMgtMdfyDesign(null, "test");
-//	}//main
+
+	public AdminProfMgtDesign getApmd() {
+		return apmd;
+	}
+	
+	
 
 } // class
