@@ -79,8 +79,8 @@ public class ProfScoreDesign extends JDialog{
 		add(adminMgt);
 
 		// 우상단 로그인상태 확인창 추가
-//		topLogin = new JLabel(phd.getlVO().getName() + " 교수 로그인 중");
-		topLogin = new JLabel("~~ 교수 로그인 중");
+		topLogin = new JLabel(phd.getlVO().getName() + " 교수 로그인 중");
+//		topLogin = new JLabel("~~ 교수 로그인 중");
 		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.GREEN);
@@ -189,9 +189,11 @@ public class ProfScoreDesign extends JDialog{
 		} // end for
 	} // setTbHorizontal
 
-	public ProfHomeDesign getphd() {
+	public ProfHomeDesign getPhd() {
 		return phd;
 	}
+	
+	
 
 	public ScoreDAO getsDAO() {
 		return sDAO;
@@ -247,8 +249,8 @@ public class ProfScoreDesign extends JDialog{
 		return dtmScore;
 	}
 	
-	public static void main(String[] args) {
-		new ProfScoreDesign(null, null);
-	}//main
+//	public static void main(String[] args) {
+//		new ProfScoreDesign(null, null);
+//	}//main
 
 }
