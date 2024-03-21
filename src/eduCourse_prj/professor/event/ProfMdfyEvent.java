@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import eduCourse_prj.VO.ProfVO;
 import eduCourse_prj.VO.StdntVO;
+import eduCourse_prj.login.SelectLoginDesign;
 import eduCourse_prj.professor.dao.ProfDAO;
 import eduCourse_prj.professor.design.ProfMdfyDesign;
 import eduCourse_prj.student.dao.StdntDAO;
@@ -66,8 +67,10 @@ public class ProfMdfyEvent extends WindowAdapter implements ActionListener {
 			try {
 				ProfVO pVO = new ProfVO(profNum, profPass, pmd.getPhd().getlVO().getName(), profEmail,  null, null, null);
 				pDAO.modifyProf(pVO);
-				JOptionPane.showMessageDialog(pmd, pVO.getProf_name() + " 교수님 정보가 성공적으로 수정되었습니다.");
+				JOptionPane.showMessageDialog(pmd, pVO.getProf_name() + " 교수님 정보가 성공적으로 수정되었습니다.\n 최신정보를 갱신하기위해 로그아웃됩니다.");
+				new SelectLoginDesign();
 				pmd.dispose();
+				pmd.getPhd().dispose();
 			} catch (SQLException e1) {
 				JOptionPane.showMessageDialog(pmd, "SQL 문제가 발생했습니다.");
 				e1.printStackTrace();
