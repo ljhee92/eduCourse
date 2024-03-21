@@ -127,7 +127,7 @@ public class AdminCrsDesign extends JDialog {
 		
 		// 과목등록, 조회, 삭제 버튼 추가
 
-		jbtnCrsReg = new JButton(new ImageIcon(crsPath + "crsRegBanner_new.png"));
+		jbtnCrsReg = new JButton(new ImageIcon(crsPath + "crsRegBtn_new.png"));
 		jbtnSlct = new JButton(new ImageIcon(commonPath + "SlctButton_new.png"));
 		jbtnDel = new JButton(new ImageIcon(commonPath + "DelButton_new.png"));
 
