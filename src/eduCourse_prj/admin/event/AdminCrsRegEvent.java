@@ -99,28 +99,11 @@ public class AdminCrsRegEvent extends WindowAdapter implements ActionListener {
 				se.printStackTrace();
 			}
 		}
-		if (ae.getSource() == acrd.getJbtnCancel()) {
-			// 취소 버튼 클릭 시 다이얼로그 닫기
+		
+		if (ae.getSource()==acrd.getJbtnCancel()) {
 			acrd.dispose();
 		}
-		if (ae.getSource() == acrd.getJcbDept()) {
-			// 부서 콤보박스 클릭 시 처리
-			int dept_code = acrd.getlDept().get(acrd.getJcbDept().getSelectedIndex()).getDept_code();
-			acrd.getJcbProf().removeAllItems();
-			try {
-				// 해당 부서의 교수 목록 가져오기
-				List<ProfVO> lProf = pDAO.slctDeptProf(dept_code);
-				for (ProfVO dept : lProf) {
-					//System.out.println(dept.getProf_name());
-					acrd.getJcbProf().addItem(dept.getProf_name());
-				}
-			} catch (SQLException se) {
-
-				// se.printStackTrace();
-				// JOptionPane.showMessageDialog(acrd, "교수 목록을 가져오는 중 오류가 발생했습니다.", "오류",
-				// JOptionPane.ERROR_MESSAGE);
-			}
-		}
+		
 	}
 
 }
