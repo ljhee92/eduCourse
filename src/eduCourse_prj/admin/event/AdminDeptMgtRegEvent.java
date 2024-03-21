@@ -50,6 +50,9 @@ public class AdminDeptMgtRegEvent extends WindowAdapter implements ActionListene
 			    
 			    dVO = new DeptVO(departmentName, capacity);
 			    aDAO.addDepartment(dVO);
+			    admrd.getAdmd().getDtmDeptMgt().setRowCount(0);
+			    admrd.getAdmd().slctDeptMgt();
+			    admrd.dispose();
 			} catch (NumberFormatException nfe) {
 			    JOptionPane.showMessageDialog(admrd, "정원은 숫자만 입력 가능합니다.");
 			   // nfe.printStackTrace();

@@ -38,6 +38,8 @@ public class AdminDeptMgtEvent extends JDialog implements ActionListener{
 		
 		//////////조회버튼클릭////////////
 		if(ae.getSource() == admd.getJbtnSlct()) {
+			
+
 			int index = admd.getJtbDeptMgt().getSelectedRow();
 			
 			if(index == -1) {
@@ -74,7 +76,7 @@ public class AdminDeptMgtEvent extends JDialog implements ActionListener{
 			}
 				
 			}//getJbtnSlct
-		
+		////////////삭제버튼 클릭///////////
 		if(ae.getSource() == admd.getJbtnDel()) {
 		    int index = admd.getJtbDeptMgt().getSelectedRow();
 		    if(index == -1) {
@@ -87,11 +89,13 @@ public class AdminDeptMgtEvent extends JDialog implements ActionListener{
 		        // 학과 삭제 메서드 호출
 		        boolean success = aDAO.deleteDept(deptCode);
 		        if(success) {
+		        	
+		        	//adme 테이블 업데이트
 		            JOptionPane.showMessageDialog(admd, "학과 삭제가 완료되었습니다.");
-		            // 새로운 화면을 생성하여 학과 목록을 다시 표시
-		            AdminDeptMgtDesign newAdmd = new AdminDeptMgtDesign();
-		            newAdmd.setVisible(true);
-		            admd.dispose(); // 현재 화면을 닫음
+		            admd.getDtmDeptMgt().setRowCount(0);
+		            admd.slctDeptMgt();
+		            
+
 		        } else {
 		            JOptionPane.showMessageDialog(admd, "학과 삭제에 실패했습니다.");
 		        }

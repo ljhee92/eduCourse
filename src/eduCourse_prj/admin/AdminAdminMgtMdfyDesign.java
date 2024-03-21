@@ -17,6 +17,7 @@ import eduCourse_prj.admin.design.AdminAdminMgtDesign;
 
 @SuppressWarnings("serial")
 public class AdminAdminMgtMdfyDesign extends JDialog {
+	private AdminAdminMgtDesign aamd;
 	
 	private JLabel jlBack; //배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
@@ -30,7 +31,7 @@ public class AdminAdminMgtMdfyDesign extends JDialog {
 	
 	public AdminAdminMgtMdfyDesign(AdminAdminMgtDesign aamd, String title) {
 		super(aamd, title, true);
-		
+		this.aamd = aamd;
 		setLayout(null);
 		
 		String commonPath = "src/eduCourse_prj/image/common/";
@@ -196,6 +197,10 @@ public class AdminAdminMgtMdfyDesign extends JDialog {
 
 	public JButton getJbtnCancel() {
 		return jbtnCancel;
+	}
+
+	public AdminAdminMgtDesign getAamd() {
+		return aamd;
 	}
 
 

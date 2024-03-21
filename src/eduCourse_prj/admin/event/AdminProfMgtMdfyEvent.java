@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -14,6 +15,7 @@ import eduCourse_prj.professor.dao.ProfDAO;
 public class AdminProfMgtMdfyEvent extends WindowAdapter implements ActionListener {
 
 	private AdminProfMgtMdfyDesign apmmd;
+	private ProfDAO pDAO = ProfDAO.getInstance();
 	
 	public AdminProfMgtMdfyEvent(AdminProfMgtMdfyDesign apmmd) {
 		this.apmmd = apmmd;
@@ -55,7 +57,11 @@ public class AdminProfMgtMdfyEvent extends WindowAdapter implements ActionListen
 			try {
 				ProfVO pVO = new ProfVO(profNum, profPass, profName, profEmail, null, null, deptName);
 				pDAO.adminModifyProf(pVO);
-				JOptionPane.showMessageDialog(null, pVO.getProf_name() + " 교수님 정보가 성공적으로 수정되었습니다.\n등록된 정보를 확인하시려면 교수관리 창을 종료 후 재실행해주세요.");
+				JOptionPane.showMessageDialog(null, pVO.getProf_name() + " 교수님 정보가 성공적으로 수정되었습니다.");
+				
+				updateTable();
+				
+				
 				apmmd.dispose();
 			} catch (SQLException e1) {
 				JOptionPane.showMessageDialog(apmmd, "SQL 문제가 발생했습니다.");
@@ -68,5 +74,60 @@ public class AdminProfMgtMdfyEvent extends WindowAdapter implements ActionListen
 			apmmd.dispose();
 		} // end if
 	} // actionPerformed
+	
+	
+	
+	/**
+	 * 교수정보 수정시 테이블 업데이트
+	 */
+	public void updateTable() {
+		apmmd.getApmd().getDtmProfMgt().setRowCount(0);
+
+		int dept_code = 0; // 학과 코드
+
+		int prof_num = 0; // 교번
+
+		// 학과가 "전체"일 경우
+		if (apmmd.getApmd().getJcbDept().getSelectedItem().equals("전체")) {
+
+		} else {// 학과가 "전체"가 아닌 모든 경우
+			dept_code = apmmd.getApmd().getLDept().get((apmmd.getApmd().getJcbDept().getSelectedIndex() - 1))
+					.getDept_code();
+
+		}
+
+		// 교번 입력 유무 체크
+		if (!(apmmd.getApmd().getJtfProfNum().getText().isEmpty())) {
+			try {
+
+				prof_num = Integer.parseInt(apmmd.getApmd().getJtfProfNum().getText());
+			} catch (Exception ee) {
+				ee.printStackTrace();
+				JOptionPane.showMessageDialog(apmmd.getApmd(), "숫자만 입력가능 9자리");
+				return;
+			}
+		}
+
+		@SuppressWarnings("unused")
+		List<ProfVO> lProfVO;
+
+		try {
+			List<ProfVO> listProfVO = pDAO.slctProf(dept_code, prof_num);
+
+			for (ProfVO pVO : listProfVO) {
+
+				Object[] row = { pVO.getDept_name(), pVO.getProf_number(), pVO.getProf_name() };
+				apmmd.getApmd().getDtmProfMgt().addRow(row);
+			} // end for
+
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} // end catch
+
+	}
+	
+	
+	
+	
 	
 } // class

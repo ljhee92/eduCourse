@@ -32,6 +32,7 @@ public class AdminAdminMgtMdfyEvent extends WindowAdapter implements ActionListe
 
 		// 수정버튼 클릭
 		if (ae.getSource() == aammd.getJbtnMdfy()) {
+
 			JOptionPane.showMessageDialog(aammd, "수정버튼 클릭");
 			AdminDAO aDAO = AdminDAO.getInstance();
 
@@ -54,12 +55,22 @@ public class AdminAdminMgtMdfyEvent extends WindowAdapter implements ActionListe
 				return;
 			} // end if
 
+			
+			
+			
+			
 			try {
 				AdminVO aVO = new AdminVO(adminId, adminPass, adminName, 1);
 				aDAO.modifyAdmin(aVO);
 				JOptionPane.showMessageDialog(null,
-						aVO.getAdmin_name() + " 관리자님 정보가 성공적으로 수정되었습니다.\n등록된 정보를 확인하시려면 관리자관리 창을 종료 후 재실행해주세요.");
+						aVO.getAdmin_name() + " 관리자님 정보가 성공적으로 수정되었습니다.");
+				
+				
+				//관리자 정보 수정시 테이블 최신화
+				aammd.getAamd().getDtmAdminMgt().setRowCount(0);
+				aammd.getAamd().slctAdminMgt();
 				aammd.dispose();
+
 			} catch (SQLException e1) {
 				JOptionPane.showMessageDialog(aammd, "SQL 문제가 발생했습니다.");
 				e1.printStackTrace();

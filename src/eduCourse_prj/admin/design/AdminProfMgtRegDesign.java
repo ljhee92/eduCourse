@@ -19,6 +19,7 @@ import eduCourse_prj.admin.event.AdminProfMgtRegEvent;
 
 @SuppressWarnings("serial")
 public class AdminProfMgtRegDesign extends JDialog {
+	private AdminProfMgtDesign apmd;
 	
 	private JLabel jlBack; //배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
@@ -30,6 +31,7 @@ public class AdminProfMgtRegDesign extends JDialog {
 	
 	public AdminProfMgtRegDesign(AdminProfMgtDesign apmd, String title) {
 		super(apmd, title, true);
+		this.apmd = apmd;
 		
 		setLayout(null);
 		
@@ -170,5 +172,58 @@ public class AdminProfMgtRegDesign extends JDialog {
 	public JComboBox<String> getJcbDept() {
 		return jcbDept;
 	}
+
+	public AdminProfMgtDesign getApmd() {
+		return apmd;
+	}
+
+	public JLabel getJlBack() {
+		return jlBack;
+	}
+
+	public JLabel getTopLogin() {
+		return topLogin;
+	}
+
+	public JLabel getProfMgt() {
+		return profMgt;
+	}
+
+	public JLabel getProfMgtReg() {
+		return profMgtReg;
+	}
+
+	public JLabel getPhoto() {
+		return photo;
+	}
+
+	public JLabel getJlProfNum() {
+		return jlProfNum;
+	}
+
+	public JLabel getJlProfName() {
+		return jlProfName;
+	}
+
+	public JLabel getJlProfPass() {
+		return jlProfPass;
+	}
+
+	public JLabel getJlProfEmail() {
+		return jlProfEmail;
+	}
+
+	public JLabel getJlDept() {
+		return jlDept;
+	}
+
+	public JLabel getJlNecessary() {
+		return jlNecessary;
+	}
+
+	public JTextField getJtfProfNum() {
+		return jtfProfNum;
+	}
+	
 
 } // class
