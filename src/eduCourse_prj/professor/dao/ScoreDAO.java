@@ -51,12 +51,14 @@ public class ScoreDAO {
 					+ "FROM STUDENT s "
 					+ "JOIN DEPT d ON s.DEPT_CODE = d.DEPT_CODE "
 					+ "JOIN REGISTER r ON s.STD_NUMBER = r.STD_NUMBER "
-					+ "JOIN SCORE sc ON r.REGISTER_NUMBER = sc.REGISTER_NUMBER";
+					+ "JOIN SCORE sc ON r.REGISTER_NUMBER = sc.REGISTER_NUMBER"
+					+ " Where r.prof_number = ?";
 			pstmt = con.prepareStatement(selectQuery);
+			pstmt.setInt(1, prof_id);
 
 			// 5. 쿼리 실행 및 결과 처리
 			rs = pstmt.executeQuery();
-
+			
 			while (rs.next()) {
 				sVO = new ScoreVO(rs.getInt("STD_NUMBER"), rs.getString("STD_NAME"), rs.getString("DEPT_NAME"),  rs.getInt("SCORE"));
 
