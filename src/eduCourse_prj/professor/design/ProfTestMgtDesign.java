@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -18,38 +19,39 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import eduCourse_prj.VO.DeptVO;
+import eduCourse_prj.VO.LectureVO;
+import eduCourse_prj.VO.TestListVO;
 import eduCourse_prj.admin.dao.AdminDAO;
+import eduCourse_prj.professor.dao.ProfDAO;
 import eduCourse_prj.professor.event.ProfTestMgtEvent;
 
-public class ProfTestMgtDesign extends JDialog{
+public class ProfTestMgtDesign extends JDialog {
 	ProfHomeDesign phd;
-	private	JLabel jlBack;// 배경
+	JLabel jlBack;// 배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
-	private JLabel adminMgt;
+	private JLabel TestMgt;
 
 	private DefaultTableModel dtmTestMgt;
 	private JTable jtbTestMgt;
 
-	private JRadioButton jrbtnEnable , jrbtnDisable;
-	private JButton jbtnTestMdfy,jbtnTestReg;
+	private JRadioButton jrbtnEnable, jrbtnDisable;
+	private JButton jbtnTestMdfy, jbtnTestReg;
 
-	
 	public ProfTestMgtDesign(ProfHomeDesign phd, String title) {
-		super(phd,title,true);
+		super(phd, title, true);
 		this.phd = phd;
-		
+
 		String commonPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/common/";
 		String profPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/prof/";
 		String srsPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/crs/";
-		
+
 		jlBack = new JLabel(new ImageIcon(commonPath + "back.png"));
 		jlBack.setBounds(0, 0, 984, 620);
-		add(jlBack);
-		
+
 		// 강의 과목 관리 라벨 추가
-		adminMgt = new JLabel(new ImageIcon(profPath + "TestMgt.png"));
-		adminMgt.setBounds(10, 76, 967, 44);
-		add(adminMgt);
+		TestMgt = new JLabel(new ImageIcon(profPath + "TestMgt2.png"));
+		TestMgt.setBounds(10, 76, 967, 44);
+		add(TestMgt);
 
 		// 우상단 로그인상태 확인창 추가
 		topLogin = new JLabel(phd.getlVO().getName() + " 관리자님 로그인 중");
@@ -58,7 +60,7 @@ public class ProfTestMgtDesign extends JDialog{
 		topLogin.setForeground(Color.RED);
 		topLogin.setBounds(670, 30, 200, 20);
 		add(topLogin);
-		
+
 		// 테이블 추가
 		String[] tempColumn = { "과목", "시험 활성화 여부" };
 		dtmTestMgt = new DefaultTableModel(tempColumn, 0) {
@@ -66,28 +68,31 @@ public class ProfTestMgtDesign extends JDialog{
 				return false; // 테이블 셀 수정 불가하도록 설정
 			} // isCellEditable
 		};
-		
+
 		jtbTestMgt = new JTable(dtmTestMgt);
 		JScrollPane jsp = new JScrollPane(jtbTestMgt);
 
 		jtbTestMgt.setRowHeight(30); // 행 높이 조절
 		jsp.setBounds(10, 120, 967, 350);
 		add(jsp);
-		
 
 		////////////////////////////////////////////////////////////////////
-		//시험 활성화,비활성화, 출제, 수정버튼 추가
+		// 시험 활성화,비활성화, 출제, 수정버튼 추가
 		jbtnTestReg = new JButton(new ImageIcon(srsPath + "CrsReg.png"));
-		jbtnTestMdfy = new JButton(new ImageIcon(commonPath +"Mdfy.png"));
-		
+		jbtnTestMdfy = new JButton(new ImageIcon(commonPath + "Mdfy.png"));
+
 		jrbtnEnable = new JRadioButton("활성화");
 		jrbtnDisable = new JRadioButton("비활성화");
-		
-		
-		jbtnTestReg.setBounds(550,500,111,59);
+		jrbtnDisable.setSelected(true);
+
+		ButtonGroup buttonGroup = new ButtonGroup();
+		buttonGroup.add(jrbtnEnable);
+		buttonGroup.add(jrbtnDisable);
+
+		jbtnTestReg.setBounds(550, 500, 111, 59);
 		jbtnTestMdfy.setBounds(700, 500, 111, 59);
-		jrbtnEnable.setBounds(200, 500, 120,80);
-		jrbtnDisable.setBounds(350, 500,120,80 );
+		jrbtnEnable.setBounds(200, 500, 120, 80);
+		jrbtnDisable.setBounds(350, 500, 120, 80);
 		jrbtnEnable.setBackground(Color.WHITE); // 활성화된 라디오 버튼의 배경색을 흰색으로 설정
 		jrbtnDisable.setBackground(Color.WHITE); // 활성화된 라디오 버튼의 배경색을 흰색으로 설정
 
@@ -95,6 +100,7 @@ public class ProfTestMgtDesign extends JDialog{
 		add(jbtnTestMdfy);
 		add(jrbtnEnable);
 		add(jrbtnDisable);
+		add(jlBack);
 
 		// 테이블에 DB 추가
 		slctTestMgt();
@@ -109,29 +115,28 @@ public class ProfTestMgtDesign extends JDialog{
 		jbtnTestMdfy.addActionListener(pme);
 		jrbtnEnable.addActionListener(pme);
 		jrbtnDisable.addActionListener(pme);
-		
+
 		setLayout(null);
-		setSize(1000,650);		
+		setSize(1000, 650);
 		setLocationRelativeTo(null);
 		setVisible(true);
-		
+
 	}
-	
+
 	public void slctTestMgt() {
-		AdminDAO aDAO= AdminDAO.getInstance();
+		ProfDAO pDAO = ProfDAO.getInstance();
 		try {
-			List<DeptVO> listDeptVO = aDAO.slctAllDept();
-			
-			for(DeptVO dVO : listDeptVO) {
-				Object[] row = {dVO.getDept_code(), dVO.getDept_name()};
+			int prof_number = Integer.parseInt(phd.getlVO().getId());
+			List<TestListVO> testListVO = pDAO.slctAllTest(prof_number);
+			for (TestListVO lVO : testListVO) {
+				Object[] row = { lVO.getCourse_name(), lVO.getLect_delete_flag() };
 				dtmTestMgt.addRow(row);
 			} // end for
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} // end catch
 	} // slctTestMgt
-	
+
 	/**
 	 * 테이블의 컬럼을 가운데 정렬
 	 */
@@ -159,8 +164,29 @@ public class ProfTestMgtDesign extends JDialog{
 	public JButton getJbtnTestReg() {
 		return jbtnTestReg;
 	}
-	
-	
-	
-	
+
+	public JTable getJtbTestMgt() {
+		return jtbTestMgt;
+	}
+
+	public DefaultTableModel getDtmTestMgt() {
+		return dtmTestMgt;
+	}
+
+	public ProfHomeDesign getPhd() {
+		return phd;
+	}
+
+	public JLabel getJlBack() {
+		return jlBack;
+	}
+
+	public JLabel getTopLogin() {
+		return topLogin;
+	}
+
+	public JLabel getTestMgt() {
+		return TestMgt;
+	}
+
 }
