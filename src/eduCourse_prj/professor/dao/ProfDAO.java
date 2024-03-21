@@ -764,6 +764,12 @@ public class ProfDAO {
 		return lSlctProfStud;
 	}//slctProfLect
 	
+	/**
+	 * 로그인한 교수의 강의 과목을 불러오는 메서든
+	 * @param prof_number
+	 * @return
+	 * @throws SQLException
+	 */
 	public List<TestListVO> slctAllTest(int prof_number) throws SQLException {
 		DbConnection dbCon = DbConnection.getInstance();
 		TestListVO tlVO = null;
@@ -800,6 +806,38 @@ public class ProfDAO {
 		} // end finally
 		return testList;		
 	}//slctAllTest
+	
+	/**
+	 * 시험 활성화 여부를 업데이트하는 메서드 
+	 * @throws SQLException 
+	 */
+	public void updateTestFlag(String course_name ,String clickBtn) throws SQLException {
+		DbConnection dbCon = DbConnection.getInstance();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			String id = "scott";
+			String pass = "tiger";
+			con = dbCon.getConnection(id, pass);
+
+			StringBuilder updateQuery = new StringBuilder();
+			updateQuery.append("UPDATE lecture l ");
+			updateQuery.append("SET l.lect_delete_flag = ? ");
+			updateQuery.append("WHERE EXISTS (SELECT 1 FROM course c WHERE l.course_code = c.course_code AND c.course_name = ?)");
+			String updateTestQuery = updateQuery.toString();
+			pstmt = con.prepareStatement(updateTestQuery);
+			pstmt.setString(1,clickBtn);
+			pstmt.setString(2,course_name);
+			pstmt.executeUpdate();
+		} finally {
+			dbCon.dbClose(null, pstmt, con);
+		} // end finally
+	}//updateTestFlag
+
+	
 	
 	
 	
