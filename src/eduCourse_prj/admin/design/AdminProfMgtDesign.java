@@ -82,46 +82,46 @@ public class AdminProfMgtDesign extends JDialog {
 		setTbHorizontal();
 
 		jtbProfMgt.setRowHeight(30); // 행 높이 조절
-		jsp.setBounds(10, 230, 967, 250);
+		jsp.setBounds(10, 200, 967, 250);
 		add(jsp);
 
 		// 학과 라벨,콤보박스 // 교번 라벨,텍스트필드 추가
 		jlDept = new JLabel("학과");
 		jlDept.setFont(font);
-		jlDept.setBounds(240, 150, 50, 20);
+		jlDept.setBounds(180, 150, 50, 20);
 		add(jlDept);
 
 		jcbDept = new JComboBox<String>();
 		jcbDept.setFont(font);
-		jcbDept.setBounds(280, 145, 200, 30);
+		jcbDept.setBounds(230, 145, 200, 30);
 		add(jcbDept);
 		
 		seltAllDept();
 
 		jlProfNum = new JLabel("교번");
 		jlProfNum.setFont(font);
-		jlProfNum.setBounds(240, 190, 50, 20);
+		jlProfNum.setBounds(480, 150, 50, 20);
 		add(jlProfNum);
 
 		jtfProfNum = new JTextField();
 		jtfProfNum.setFont(font);
-		jtfProfNum.setBounds(280, 185, 200, 30);
+		jtfProfNum.setBounds(530, 145, 200, 30);
 		add(jtfProfNum);
 
 		// 상단 조회버튼 추가
-		jbtnSlctTop = new JButton(new ImageIcon(commonPath + "search.png"));
-		jbtnSlctTop.setBounds(780, 145, 70, 30);
+		jbtnSlctTop = new JButton(new ImageIcon(commonPath + "searchButton_new.png"));
+		jbtnSlctTop.setBounds(750, 145, 55, 30);
 		add(jbtnSlctTop);
 
 		// 교수등록, 조회, 수정, 삭제 버튼 추가
-		jbtnProfReg = new JButton(new ImageIcon(profPath + "ProfReg.png"));
-		jbtnSlct = new JButton(new ImageIcon(commonPath + "Slct.png"));
-		jbtnMdfy = new JButton(new ImageIcon(commonPath + "Mdfy.png"));
-		jbtnDel = new JButton(new ImageIcon(commonPath + "Del.png"));
-		jbtnProfReg.setBounds(150, 500, 168, 59);
-		jbtnSlct.setBounds(400, 500, 111, 59);
-		jbtnMdfy.setBounds(550, 500, 111, 59);
-		jbtnDel.setBounds(700, 500, 111, 59);
+		jbtnProfReg = new JButton(new ImageIcon(profPath + "ProfRegButton_new.png"));
+		jbtnSlct = new JButton(new ImageIcon(commonPath + "SlctButton_new.png"));
+		jbtnMdfy = new JButton(new ImageIcon(commonPath + "MdfyButton_new.png"));
+		jbtnDel = new JButton(new ImageIcon(commonPath + "DelButton_new.png"));
+		jbtnProfReg.setBounds(220, 490, 142, 50);
+		jbtnSlct.setBounds(440, 490, 90, 50);
+		jbtnMdfy.setBounds(560, 490, 90, 50);
+		jbtnDel.setBounds(680, 490, 90, 50);
 		add(jbtnProfReg);
 		add(jbtnSlct);
 		add(jbtnMdfy);
