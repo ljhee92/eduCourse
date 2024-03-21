@@ -4,9 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
+import eduCourse_prj.professor.dao.ProfDAO;
 import eduCourse_prj.professor.design.ProfTestMdfyDesign;
 import eduCourse_prj.professor.design.ProfTestMgtDesign;
 import eduCourse_prj.professor.design.ProfTestRegDesign;
@@ -29,6 +31,48 @@ public class ProfTestMgtEvent extends WindowAdapter implements ActionListener{
 		if(ae.getSource() == ptmd.getJbtnTestReg()) {
 			JOptionPane.showMessageDialog(ptmd, "등록버튼 클릭");
 			new ProfTestRegDesign(ptmd, null);
+		}
+		//////////////////////////활성화 버튼 클릭시///////////////////////////
+		if(ae.getSource() == ptmd.getJrbtnEnable()) {
+			JOptionPane.showMessageDialog(ptmd, "활성화 버튼 클릭");
+			int index = ptmd.getJtbTestMgt().getSelectedRow();
+			if (index == -1) {
+				JOptionPane.showMessageDialog(ptmd, "과목을 선택해주세요.");
+				return;
+			} // end if
+			String course_name = ptmd.getDtmTestMgt().getValueAt(index, 0).toString();
+			
+			ProfDAO pDAO = ProfDAO.getInstance();
+			try {
+				pDAO.updateTestFlag(course_name, "Y");
+				
+				ptmd.getDtmTestMgt().setRowCount(0); 
+				ptmd.slctTestMgt();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}			
+			ptmd.paint(ptmd.getGraphics());// 컨테이너 다시 그리기
+		}
+		//////////////////////////비활성화 버튼 클릭시///////////////////////////
+		if(ae.getSource() == ptmd.getJrbtnDisable()) {
+			JOptionPane.showMessageDialog(ptmd, "비활성화 등록버튼 클릭");
+			int index = ptmd.getJtbTestMgt().getSelectedRow();
+			if (index == -1) {
+				JOptionPane.showMessageDialog(ptmd, "과목을 선택해주세요.");
+				return;
+			} // end if
+			String course_name = ptmd.getDtmTestMgt().getValueAt(index, 0).toString();
+			
+			ProfDAO pDAO = ProfDAO.getInstance();
+			try {
+				pDAO.updateTestFlag(course_name, "N");
+				
+				ptmd.getDtmTestMgt().setRowCount(0);				
+				ptmd.slctTestMgt();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}			
 		}
 	}
 

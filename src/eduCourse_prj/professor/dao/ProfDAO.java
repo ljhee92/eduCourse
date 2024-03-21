@@ -10,12 +10,14 @@ import java.util.List;
 import eduCourse_prj.DbConnection;
 import eduCourse_prj.VO.AdminProfVO;
 import eduCourse_prj.VO.CrsVO;
+import eduCourse_prj.VO.DeptVO;
 import eduCourse_prj.VO.LectureVO;
 import eduCourse_prj.VO.LoginVO;
 import eduCourse_prj.VO.ProfLectStudVO;
 import eduCourse_prj.VO.ProfVO;
 import eduCourse_prj.VO.SlctStdVO;
 import eduCourse_prj.VO.StdntVO;
+import eduCourse_prj.VO.TestListVO;
 
 public class ProfDAO {
 	private static ProfDAO pDAO;
@@ -115,8 +117,6 @@ public class ProfDAO {
 	} // slctDeptProf
 	
 	
-	
-	
 
 	
 	/**
@@ -163,9 +163,8 @@ public class ProfDAO {
 	 * @param prof_number
 	 * @return
 	 * @throws SQLException
-	 *  */
+	 */
 	public AdminProfVO slctProfMgtSlct(int prof_number) throws SQLException{
-	
 		AdminProfVO apVO = null;
 		DbConnection dbCon = DbConnection.getInstance();
 		
@@ -179,12 +178,16 @@ public class ProfDAO {
 			
 			con = dbCon.getConnection(id, pass);
 			
-			String selectProf = "SELECT p.PROF_NUMBER, p.PROF_NAME, p.PROF_EMAIL, d.DEPT_NAME, c.COURSE_NAME "
-                    + "FROM PROFESSOR p "
-                    + "JOIN DEPT d ON p.DEPT_CODE = d.DEPT_CODE "
-                    + "JOIN COURSE c ON d.DEPT_CODE = c.DEPT_CODE "
-                    + "WHERE p.PROF_NUMBER = ?";
-			pstmt = con.prepareStatement(selectProf,ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+	        StringBuilder slcQuery = new StringBuilder();
+	        slcQuery.append("SELECT p.PROF_NUMBER, p.PROF_NAME, p.PROF_EMAIL, d.dept_name, c.COURSE_NAME ");
+	        slcQuery.append("FROM PROFESSOR p ");
+	        slcQuery.append("JOIN lecture s ON p.PROF_NUMBER = s.PROF_NUMBER ");
+	        slcQuery.append("JOIN COURSE c ON s.COURSE_code = c.COURSE_code ");
+	        slcQuery.append("JOIN dept d ON d.dept_code = p.dept_code ");
+	        slcQuery.append("WHERE p.PROF_NUMBER = ?");
+	        String slcProfQuery = slcQuery.toString();
+	        
+			pstmt = con.prepareStatement(slcProfQuery,ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
 			pstmt.setInt(1, prof_number);
 			rs = pstmt.executeQuery();
 
@@ -195,7 +198,7 @@ public class ProfDAO {
 				while(rs.next()) {
 					courses.add(rs.getString("course_name"));
 					apVO = new AdminProfVO(
-							prof_number,
+							rs.getInt("prof_number"),
 							rs.getString("prof_name"),
 							rs.getString("prof_email"),
 							rs.getString("dept_name"),
@@ -204,25 +207,29 @@ public class ProfDAO {
 			}//end if
 			else {
 				/////////////////과목이 없다면//////////////////////////
+				rs.beforeFirst();
 				pstmt.close(); //닫기
 				rs.close(); // 닫기
 				
 				//새로운 쿼리 생성
-				selectProf = "SELECT p.PROF_NUMBER, p.PROF_NAME, p.PROF_EMAIL, d.DEPT_NAME "
-	                       + "FROM PROFESSOR p "
-	                       + "JOIN DEPT d ON p.DEPT_CODE = d.DEPT_CODE "
-						   + "WHERE p.PROF_NUMBER = ?";
-				pstmt = con.prepareStatement(selectProf);
+				slcQuery.delete(0, slcQuery.length());
+				slcQuery.append("SELECT p.PROF_NUMBER, p.PROF_NAME, p.PROF_EMAIL, d.DEPT_NAME ");
+				slcQuery.append("FROM PROFESSOR p ");
+				slcQuery.append("JOIN DEPT d ON p.DEPT_CODE = d.DEPT_CODE ");
+				slcQuery.append("WHERE p.PROF_NUMBER = ?");
+				slcProfQuery = slcQuery.toString();
+				pstmt = con.prepareStatement(slcProfQuery);
 				pstmt.setInt(1, prof_number);
 				rs = pstmt.executeQuery();
 				
 				if(rs.next()) {
 				apVO = new AdminProfVO(
-						prof_number,
+						rs.getInt("prof_number"),
 						rs.getString("prof_name"),
 						rs.getString("prof_email"),
 						rs.getString("dept_name"),
 						courses);
+
 				}
 			}//end else
 		} finally {
@@ -232,6 +239,8 @@ public class ProfDAO {
 		return apVO;
 //		return listProfVO;
 	} // slctProfMgtSlct
+	
+
 	
 	
 	
@@ -755,6 +764,79 @@ public class ProfDAO {
 		return lSlctProfStud;
 	}//slctProfLect
 	
+	/**
+	 * 로그인한 교수의 강의 과목을 불러오는 메서든
+	 * @param prof_number
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<TestListVO> slctAllTest(int prof_number) throws SQLException {
+		DbConnection dbCon = DbConnection.getInstance();
+		TestListVO tlVO = null;
+		List<TestListVO> testList = new ArrayList<TestListVO>();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			String id = "scott";
+			String pass = "tiger";
+			con = dbCon.getConnection(id, pass);
+
+			StringBuilder slctQuery = new StringBuilder();
+			slctQuery.append("SELECT c.course_name, l.lect_delete_flag ");
+			slctQuery.append("FROM lecture l ");
+			slctQuery.append("JOIN course c ON c.course_code = l.course_code ");
+			slctQuery.append("WHERE l.prof_number = ?");
+
+			String slctTestQuery = slctQuery.toString();
+			pstmt = con.prepareStatement(slctTestQuery);
+			pstmt.setInt(1,prof_number);
+			// 5. 쿼리 실행 및 결과 처리
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				tlVO = new TestListVO(rs.getString("course_name"),rs.getString("lect_delete_flag"));
+				testList.add(tlVO);
+			}
+		} finally {
+			dbCon.dbClose(null, pstmt, con);
+		} // end finally
+		return testList;		
+	}//slctAllTest
+	
+	/**
+	 * 시험 활성화 여부를 업데이트하는 메서드 
+	 * @throws SQLException 
+	 */
+	public void updateTestFlag(String course_name ,String clickBtn) throws SQLException {
+		DbConnection dbCon = DbConnection.getInstance();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			String id = "scott";
+			String pass = "tiger";
+			con = dbCon.getConnection(id, pass);
+
+			StringBuilder updateQuery = new StringBuilder();
+			updateQuery.append("UPDATE lecture l ");
+			updateQuery.append("SET l.lect_delete_flag = ? ");
+			updateQuery.append("WHERE EXISTS (SELECT 1 FROM course c WHERE l.course_code = c.course_code AND c.course_name = ?)");
+			String updateTestQuery = updateQuery.toString();
+			pstmt = con.prepareStatement(updateTestQuery);
+			pstmt.setString(1,clickBtn);
+			pstmt.setString(2,course_name);
+			pstmt.executeUpdate();
+		} finally {
+			dbCon.dbClose(null, pstmt, con);
+		} // end finally
+	}//updateTestFlag
+
 	
 	
 	
