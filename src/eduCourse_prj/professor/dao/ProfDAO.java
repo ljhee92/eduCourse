@@ -836,6 +836,67 @@ public class ProfDAO {
 			dbCon.dbClose(null, pstmt, con);
 		} // end finally
 	}//updateTestFlag
+	
+	
+	/**
+	 * 시험출제여부를 판단하는 메서드
+	 * @throws SQLException 
+	 */
+	public void selectExaming(int question_number, String course_code) throws SQLException {
+		DbConnection dbCon = DbConnection.getInstance();
+		TestListVO tlVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+
+			String id = "scott";
+			String pass = "tiger";
+			con = dbCon.getConnection(id, pass);
+
+			String slctQuery = "SELECT * FROM test_question WHERE course_code = ?";
+			pstmt = con.prepareStatement(slctQuery);
+			pstmt.setString(1, course_code);
+			rs = pstmt.executeQuery();
+
+			boolean hasValue = false; // 값이 있는지 여부를 나타내는 플래그
+			int examStatus = 0;
+			while (rs.next()) {
+				// ResultSet에 값이 있을 때 처리
+				hasValue = true; // 값이 있음을 표시
+				// 필요한 필드를 확인하여 처리
+				if (rs.getString("test_question_id") == null) {
+				} else if (rs.getString("question_number") == null){
+				}
+				else if (rs.getString("question_content") == null){
+				}
+				else if (rs.getString("answer") == null){
+				}
+				else if (rs.getString("prof_number") == null){
+				}
+				else if (rs.getString("course_code") == null){
+				}
+			}
+
+			if (!hasValue) {
+				// ResultSet에 결과가 없는 경우
+				tlVO = new TestListVO("없음");
+			} else {
+				// ResultSet에 결과가 있는 경우
+				tlVO = new TestListVO("미완성");
+			}
+			if (!rs.next()) {
+				tlVO = new TestListVO("제출전");
+			} else {
+				tlVO = new TestListVO("제출완료");
+
+			}
+		} finally {
+			dbCon.dbClose(rs, pstmt, con);
+		} // end finally
+	}// selectExaming
+	
+	
 
 	
 	

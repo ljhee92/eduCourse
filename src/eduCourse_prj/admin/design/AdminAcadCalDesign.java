@@ -150,7 +150,7 @@ public class AdminAcadCalDesign extends JDialog {
 		add(yearSelectJP);
 		add(monthSelectJP);
 		add(searchBtn);
-
+		
 		setLayout(null);
 
 		setSize(1000, 650);
@@ -303,8 +303,8 @@ public class AdminAcadCalDesign extends JDialog {
 		return deleteBtn;
 	}
 
-	public static void main(String[] args) {
-		new AdminAcadCalDesign(null, null);
-	}
+//	public static void main(String[] args) {
+//		new AdminAcadCalDesign(null, null);
+//	}
 
 }

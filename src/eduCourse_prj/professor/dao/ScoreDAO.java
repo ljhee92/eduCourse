@@ -30,7 +30,7 @@ public class ScoreDAO {
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<ScoreVO> slctAllScore() throws SQLException {
+	public List<ScoreVO> slctAllScore(int prof_id) throws SQLException {
 
 		DbConnection dbCon = DbConnection.getInstance();
 		ScoreVO sVO = null;
@@ -95,7 +95,7 @@ public class ScoreDAO {
 					+ "JOIN dept d ON s.dept_code = d.dept_code "
 					+ "JOIN register r ON s.std_number = r.std_number "
 					+ "JOIN score sc ON r.register_number = sc.register_number "
-					+ "WHERE s.std_number = ? and where r.PROF_NUMBER = ?";
+					+ "WHERE s.std_number = ? and r.PROF_NUMBER = ?";
 
 			pstmt = con.prepareStatement(selectQuery);
 			pstmt.setInt(1, stdnt_num);
@@ -142,7 +142,7 @@ public class ScoreDAO {
 					+ "JOIN register r ON s.std_number = r.std_number "
 					+ "JOIN score sc ON r.register_number = sc.register_number "
 					+ "JOIN course c ON r.course_code = c.course_code "
-					+ "WHERE c.course_code = ? and where r.PROF_NUMBER = ?";
+					+ "WHERE c.course_code = ? and r.PROF_NUMBER = ?";
 
 			pstmt = con.prepareStatement(selectQuery);
 			pstmt.setString(1, crs_code);
@@ -189,7 +189,7 @@ public class ScoreDAO {
 					+ "		JOIN register r ON s.std_number = r.std_number	 "
 					+ "		JOIN score sc ON r.register_number = sc.register_number 	"
 					+ "		JOIN course c ON r.course_code = c.course_code	 "
-					+ "		WHERE c.course_code = ? and s.std_number = ? and where r.PROF_NUMBER = ?	";
+					+ "		WHERE c.course_code = ? and s.std_number = ? and r.PROF_NUMBER = ?	";
 
 			pstmt = con.prepareStatement(selectQuery);
 			pstmt.setString(1, crs_code);

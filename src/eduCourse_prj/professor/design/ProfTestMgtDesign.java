@@ -41,9 +41,9 @@ public class ProfTestMgtDesign extends JDialog {
 		super(phd, title, true);
 		this.phd = phd;
 
-		String commonPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/common/";
-		String profPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/prof/";
-		String srsPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/crs/";
+		String commonPath = "src/eduCourse_prj/image/common/";
+		String profPath = "src/eduCourse_prj/image/prof/";
+		String srsPath = "src/eduCourse_prj/image/crs/";
 
 		jlBack = new JLabel(new ImageIcon(commonPath + "back.png"));
 		jlBack.setBounds(0, 0, 984, 620);
@@ -62,12 +62,13 @@ public class ProfTestMgtDesign extends JDialog {
 		add(topLogin);
 
 		// 테이블 추가
-		String[] tempColumn = { "과목", "시험 활성화 여부" };
+		String[] tempColumn = { "과목", "시험 활성화 여부","시험 출제 여부" };
 		dtmTestMgt = new DefaultTableModel(tempColumn, 0) {
 			public boolean isCellEditable(int row, int column) {
 				return false; // 테이블 셀 수정 불가하도록 설정
 			} // isCellEditable
 		};
+		
 
 		jtbTestMgt = new JTable(dtmTestMgt);
 		JScrollPane jsp = new JScrollPane(jtbTestMgt);
@@ -78,7 +79,7 @@ public class ProfTestMgtDesign extends JDialog {
 
 		////////////////////////////////////////////////////////////////////
 		// 시험 활성화,비활성화, 출제, 수정버튼 추가
-		jbtnTestReg = new JButton(new ImageIcon(srsPath + "CrsReg.png"));
+		jbtnTestReg = new JButton(new ImageIcon(profPath + "test.png"));
 		jbtnTestMdfy = new JButton(new ImageIcon(commonPath + "Mdfy.png"));
 
 		jrbtnEnable = new JRadioButton("활성화");
@@ -129,13 +130,14 @@ public class ProfTestMgtDesign extends JDialog {
 			int prof_number = Integer.parseInt(phd.getlVO().getId());
 			List<TestListVO> testListVO = pDAO.slctAllTest(prof_number);
 			for (TestListVO lVO : testListVO) {
-				Object[] row = { lVO.getCourse_name(), lVO.getLect_delete_flag() };
+				Object[] row = { lVO.getCourse_name(), lVO.getLect_delete_flag(),lVO.getIsExaming() };
 				dtmTestMgt.addRow(row);
 			} // end for
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} // end catch
 	} // slctTestMgt
+	
 
 	/**
 	 * 테이블의 컬럼을 가운데 정렬
@@ -188,5 +190,6 @@ public class ProfTestMgtDesign extends JDialog {
 	public JLabel getTestMgt() {
 		return TestMgt;
 	}
+	
 
 }
