@@ -51,7 +51,11 @@ public class ProfScoreDesign extends JDialog{
 	private JComboBox<String> jcbCrs;
 	private JTextField jtfStdNum;
 
+
+	List<ScoreVO> stdntNumber ;
+
 	List<CrsVO> lCrs;
+
  
 
 
