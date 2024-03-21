@@ -40,9 +40,9 @@ public class ProfScoreDesign extends JDialog{
 	private JLabel topLogin; // 우상단 로그인상태 확인창
 	private JLabel adminMgt;
 	private JTable jtbScore;
-	private DefaultTableModel dtmAdminMgt;
+	private DefaultTableModel dtmScore;
 
-	private JButton jbtnSlct, jbtnSlctTop;
+	private JButton jbtnCnfrm, jbtnSlctTop;
 
 	private JLabel jlCrs;
 	private JLabel jlstdntNum;
@@ -55,7 +55,6 @@ public class ProfScoreDesign extends JDialog{
  
 
 
-	private DefaultTableModel dtmScore;
 	public ProfScoreDesign(ProfHomeDesign phd, String title) {
 		super(phd,title, true);
 		this.phd = phd;
@@ -147,13 +146,13 @@ public class ProfScoreDesign extends JDialog{
 
 		/////////////////////////////////////////////////////////////
 		// 조회, 버튼 추가
-		jbtnSlct = new JButton(new ImageIcon(commonPath + "Slct.png"));
+		jbtnCnfrm = new JButton(new ImageIcon(commonPath + "Ok_s.png"));
 		jbtnSlctTop = new JButton(new ImageIcon(commonPath + "search.png"));
 
-		jbtnSlct.setBounds(440, 500, 111, 59);
+		jbtnCnfrm.setBounds(440, 500, 95, 50);
 		jbtnSlctTop.setBounds(780, 145, 70, 30);
 
-		add(jbtnSlct);
+		add(jbtnCnfrm);
 		add(jbtnSlctTop);
 		////////////////////////////////////////////////////////////////////
 
@@ -166,7 +165,7 @@ public class ProfScoreDesign extends JDialog{
 
 		ProfScoreEvent asme = new ProfScoreEvent(this, title);
 		addWindowListener(asme);
-		jbtnSlct.addActionListener(asme);
+		jbtnCnfrm.addActionListener(asme);
 		jbtnSlctTop.addActionListener(asme);
 
 		setLocationRelativeTo(null);
@@ -194,28 +193,18 @@ public class ProfScoreDesign extends JDialog{
 		return sDAO;
 	}
 
-	public JLabel getJlBack() {
-		return jlBack;
-	}
-
-	public JLabel getTopLogin() {
-		return topLogin;
-	}
-
-	public JLabel getAdminMgt() {
-		return adminMgt;
-	}
+	
 
 	public JTable getJtbScore() {
 		return jtbScore;
 	}
 
 	public DefaultTableModel getDtmAdminMgt() {
-		return dtmAdminMgt;
+		return dtmScore;
 	}
 
-	public JButton getJbtnSlct() {
-		return jbtnSlct;
+	public JButton getJbtnCnfrm() {
+		return jbtnCnfrm;
 	}
 
 	public JButton getJbtnSlctTop() {
