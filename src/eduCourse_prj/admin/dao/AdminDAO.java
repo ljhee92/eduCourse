@@ -285,6 +285,7 @@ public class AdminDAO {
                     + "FROM DEPT d "
                     + "INNER JOIN PROFESSOR p ON d.DEPT_CODE = p.DEPT_CODE "
                     + "WHERE d.DEPT_CODE = ?";		
+			
 			//CURSOR를 양방향으로 전환가능하게 만듬
 			pstmt = con.prepareStatement(selectQuery,ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
 			pstmt.setInt(1, deptCode);

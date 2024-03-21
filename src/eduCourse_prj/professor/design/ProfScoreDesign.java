@@ -36,6 +36,7 @@ public class ProfScoreDesign extends JDialog{
     //
 	private ScoreDAO sDAO = ScoreDAO.getInstance();
 	private AdminDAO aDAO = AdminDAO.getInstance();
+	private ProfDAO pDAO = ProfDAO.getInstance();
 	private JLabel jlBack;// 배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
 	private JLabel adminMgt;
@@ -119,8 +120,8 @@ public class ProfScoreDesign extends JDialog{
 			// 모든 과목 정보 가져오기
 
 			jcbCrs.addItem("전체");
-
-			lCrs = aDAO.slctAllCrs();
+			int prof_num = Integer.parseInt(phd.getlVO().getId());
+			lCrs = pDAO.slctProfLectList(prof_num);
 			// 과목명만 저장하는 리스트에 과목명 저장
 			for (CrsVO crs : lCrs) {
 				jcbCrs.addItem(crs.getCourName());
