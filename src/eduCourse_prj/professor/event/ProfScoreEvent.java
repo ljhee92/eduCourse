@@ -39,7 +39,6 @@ public class ProfScoreEvent extends WindowAdapter implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent ae) {
-		String prof_id = psd.getPhd().getlVO().getId();
 		
 	    if (ae.getSource() == psd.getJbtnSlctTop()) {
 	    	JOptionPane.showMessageDialog(psd, "상단 조회버튼 클릭");
@@ -78,13 +77,13 @@ public class ProfScoreEvent extends WindowAdapter implements ActionListener {
 
 	        try {
 	            if (std_number != 0 && !crs_code.equals("")) { //학번, 과목으로 찾음
-	                listScoreVO = sDAO.slctOneScore(std_number, crs_code, prof_id);
+	                listScoreVO = sDAO.slctOneScore(std_number, crs_code, prof_number);
 	            } else if (std_number != 0 && crs_code.equals("")) { // 학번으로 찾음
-	                listScoreVO = sDAO.slctOneScore(std_number, prof_id);
+	                listScoreVO = sDAO.slctOneScore(std_number, prof_number);
 	            } else if (std_number == 0 && !crs_code.equals("")) { // 과목으로 찾음
-	                listScoreVO = sDAO.slctOneScore(crs_code, prof_id);
+	                listScoreVO = sDAO.slctOneScore(crs_code, prof_number);
 	            } else if (std_number == 0 && crs_code.equals("")) { // 전체 검색
-	                listScoreVO = sDAO.slctAllScore(prof_id);
+	                listScoreVO = sDAO.slctAllScore(prof_number);
 	            }
 	            
 //	        	listScoreVO = sDAO.slctAllScore();
