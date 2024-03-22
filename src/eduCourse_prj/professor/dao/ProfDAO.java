@@ -359,7 +359,7 @@ public class ProfDAO {
 	} // modifyProf
 	
 	/**
-	 * 교수  > 해당 교수의 강의 과목을 조회하기 위한 메서드
+	 * 교수  > 교수가 속한 학과의 과목을 조회하기 위한 메서드
 	 * @param prof_number
 	 * @throws SQLException
 	 */
@@ -403,7 +403,7 @@ public class ProfDAO {
 			dbCon.dbClose(rs, pstmt, con);
 		}
 		return courses;
-	}//slctProfLect
+	}//slctProfCrs
 	
 	/**
 	 * 관리자모드에서  학과,교번으로 교수를 검색하는 DAO

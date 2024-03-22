@@ -98,7 +98,7 @@ public class ProfHomeDesign extends JFrame {
 		name.setBounds(520, 230, 300, 20);
 		dept.setBounds(520, 270, 300, 20);
 		email.setBounds(520, 310, 300, 20);
-		topLogin.setBounds(670,30,200,20);
+		topLogin.setBounds(600,30,300,20);
 		img.setBounds(310, 150, 160, 188);
 		
 		
