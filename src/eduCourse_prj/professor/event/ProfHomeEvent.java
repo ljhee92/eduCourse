@@ -46,11 +46,11 @@ public class ProfHomeEvent extends WindowAdapter  implements ActionListener {
 		
 		if (ae.getSource()==pwd.getJbtnCourMgt()) {
 			JOptionPane.showMessageDialog(pwd, "과목 관리 클릭");
-			new ProfCrsMgtDesign(pwd, null);
+			new ProfCrsMgtDesign(pwd, "강의 과목 관리");
 		}
 		if (ae.getSource()==pwd.getJbtnExamMgtGrad()) {
 			JOptionPane.showMessageDialog(pwd, "시험 관리 및 채점 클릭");
-			new ProfTestMgtDesign(pwd, null);
+			new ProfTestMgtDesign(pwd, "시험 관리 및 채점");
 		}
 		if (ae.getSource()==pwd.getJbtnStudMgt()) {
 			JOptionPane.showMessageDialog(pwd, "학생 관리 클릭");
