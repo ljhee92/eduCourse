@@ -3,7 +3,9 @@ package eduCourse_prj.admin.design;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -12,13 +14,17 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 
 import eduCourse_prj.admin.dao.AdminAcadCalDAO;
 import eduCourse_prj.admin.event.AdminAcadCalEvent;
@@ -31,8 +37,9 @@ public class AdminAcadCalDesign extends JDialog {
 	private JButton[] calBtn;
 	private JComboBox<Integer> yearCb, monthCb;
 	private DefaultComboBoxModel<Integer> yearCbm, monthCbm;
-	private JTextField memoJtf, timeJtf;
-	private JLabel yearJb, monthJb;
+	private JTextField timeJtf;
+	private JTextArea memoJta;
+	private JLabel yearJb, monthJb, jlBack, jlBanner;
 	private JPanel calJp;
 
 	private Map<String, String> memoMap;
@@ -72,12 +79,19 @@ public class AdminAcadCalDesign extends JDialog {
 		monthJb = new JLabel("월");
 
 		// 콤보박스와 레이블에 대한 최소 크기 설정
-		Dimension comboBoxDimension = new Dimension(80, 40); // 콤보박스 크기 설정
+		Dimension comboBoxDimension = new Dimension(70, 30); // 콤보박스 크기 설정
 		yearCb.setPreferredSize(comboBoxDimension); // 콤보박스에 최소 크기 설정
 		monthCb.setPreferredSize(comboBoxDimension); // 콤보박스에 최소 크기 설정
-		yearJb.setPreferredSize(new Dimension(30, 40)); // 레이블 크기 설정
-		monthJb.setPreferredSize(new Dimension(30, 40)); // 레이블 크기 설정
-		searchBtn = new JButton("조회");
+		yearJb.setPreferredSize(new Dimension(30, 30)); // 레이블 크기 설정
+		monthJb.setPreferredSize(new Dimension(30, 30)); // 레이블 크기 설정
+		
+		//폰트 설정
+		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
+		yearJb.setFont(font);
+		monthJb.setFont(font);
+		yearCb.setFont(font);
+		monthCb.setFont(font);
+		
 
 		// 달력
 		calJp = new JPanel(new GridLayout(7, 7));
@@ -85,6 +99,10 @@ public class AdminAcadCalDesign extends JDialog {
 		for (int i = 0; i < 49; i++) {
 			int clickBtnIndex = i;
 			calBtn[i] = new JButton();
+			Font calFont = new Font("나눔스퀘어라운드 ExtraBold", Font.PLAIN, 20);
+			calBtn[i].setFont(calFont);
+			Insets insets = new Insets(1, 1, 1, 1); // top, left, bottom, right
+	        calBtn[i].setMargin(insets);
 			calJp.add(calBtn[i]);
 			// 달력 버튼 하나당 ActionLinstner 추가
 			calBtn[i].addActionListener(new ActionListener() {
@@ -105,23 +123,32 @@ public class AdminAcadCalDesign extends JDialog {
 		}
 		calSet();
 
-		calJp.setBounds(30, 150, 400, 400);
+		calJp.setBounds(70, 220, 350, 280);
+		
 		// 메모
 		JPanel memoJp = new JPanel(new BorderLayout());
-		memoJtf = new JTextField();
-		memoJtf.setPreferredSize(new Dimension(300, 300));
+		memoJta = new JTextArea();
+		memoJta.setPreferredSize(new Dimension(300, 300));
+		Border border = BorderFactory.createLineBorder(Color.gray, 2);
+		memoJta.setBorder(border); // JTextArea에 Border를 추가
 
+		String adminPath = "src/eduCourse_prj/image/admin/";
+		String commonPath = "src/eduCourse_prj/image/common/";
 		JPanel memoBtnJp = new JPanel();
-		saveBtn = new JButton("저장");
-		deleteBtn = new JButton("삭제");
+		saveBtn = new JButton(new ImageIcon(commonPath + "저장.png"));
+		deleteBtn = new JButton(new ImageIcon(commonPath + "삭제.png"));
+		saveBtn.setPreferredSize(new Dimension(75, 40));
+		deleteBtn.setPreferredSize(new Dimension(75, 40));
 
-		memoJp.add(new JLabel("메모"), BorderLayout.NORTH);
-		memoJp.add(memoJtf, BorderLayout.CENTER);
+		JLabel memoJl = new JLabel("메모");
+		memoJl.setFont(font);
+		memoJp.add(memoJl, BorderLayout.NORTH);
+		memoJp.add(memoJta, BorderLayout.CENTER);
 		memoBtnJp.add(saveBtn);
 		memoBtnJp.add(deleteBtn);
 		memoJp.add(memoBtnJp, BorderLayout.SOUTH);
 
-		memoJp.setBounds(450, 150, 250, 250);
+		memoJp.setBounds(530, 200, 350, 300);
 
 		// 메모 Map 초기화
 		memoMap = new HashMap<String, String>();
@@ -130,26 +157,48 @@ public class AdminAcadCalDesign extends JDialog {
 		JPanel yearSelectJP = new JPanel();
 		JPanel monthSelectJP = new JPanel();
 
+		//패널 배경 설정
+		memoBtnJp.setBackground(Color.white); //버튼 패널
+		memoJp.setBackground(Color.white); //메모 패널
+		yearSelectJP.setBackground(Color.white); //년 패널
+		monthSelectJP.setBackground(Color.white); //달 패널
+		
+		// 버튼 설정
+		searchBtn = new JButton(new ImageIcon(commonPath + "ConfirmButtonSmall_new.png"));
+		searchBtn.setBounds(335, 150, 75, 40);
+
+		// 배너 삽입
+		jlBanner = new JLabel(new ImageIcon(adminPath + "SchedMgtBanner_new.png"));
+		jlBanner.setBounds(10, 76, 967, 45);
+
+		// 배경 삽입
+		jlBack = new JLabel(new ImageIcon(commonPath + "back.png"));
+		jlBack.setBounds(0, 0, 984, 620);
+		
 		// 배치
 		yearSelectJP.add(yearJb);
 		yearSelectJP.add(yearCb);
 		monthSelectJP.add(monthJb);
 		monthSelectJP.add(monthCb);
+		
+		add(calJp);
+		add(memoJp);
+		add(yearSelectJP);
+		add(monthSelectJP);
+		
+		add(searchBtn);
+    
+		add(jlBanner);
+		add(jlBack);
 
-		yearSelectJP.setBounds(160, 20, 150, 200);
-		monthSelectJP.setBounds(295, 20, 150, 200);
-		searchBtn.setBounds(460, 25, 60, 40);
-
+		yearSelectJP.setBounds(60, 150, 120, 200);
+		monthSelectJP.setBounds(190, 150, 120, 200);
+		
 		AdminAcadCalEvent aace = new AdminAcadCalEvent(this);
 		searchBtn.addActionListener(aace);
 		saveBtn.addActionListener(aace);
 		deleteBtn.addActionListener(aace);
 
-		add(calJp);
-		add(memoJp);
-		add(yearSelectJP);
-		add(monthSelectJP);
-		add(searchBtn);
 		
 		setLayout(null);
 
@@ -243,8 +292,8 @@ public class AdminAcadCalDesign extends JDialog {
 		return monthCbm;
 	}
 
-	public JTextField getMemoJtf() {
-		return memoJtf;
+	public JTextArea getMemoJta() {
+		return memoJta;
 	}
 
 	public JTextField getTimeJtf() {

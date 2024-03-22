@@ -30,7 +30,7 @@ public class AdminAcadCalEvent extends WindowAdapter implements ActionListener{
 			int selectedMonth = (int)aacd.getMonthCb().getSelectedItem();			
 			int selectedDay = aacd.getDay();
 			String dayMonthYear = selectedYear+""+selectedMonth+""+selectedDay;
-			String memoText = aacd.getMemoJtf().getText();
+			String memoText = aacd.getMemoJta().getText();
 			AdminAcadCalDAO aacDAO = AdminAcadCalDAO.getInstance();
 			try {
 				aacDAO.saveCal(memoText, dayMonthYear);
@@ -43,7 +43,7 @@ public class AdminAcadCalEvent extends WindowAdapter implements ActionListener{
 			String memoMapKey = selectedYear+""+selectedMonth+""+selectedDay;
 			
 			aacd.getMemoMap().put(memoMapKey, memoText);
-			aacd.getMemoJtf().setText("");	
+			aacd.getMemoJta().setText("");	
 			
 			for(String str : aacd.getMemoMap().values()) {
 				System.out.println(str);
