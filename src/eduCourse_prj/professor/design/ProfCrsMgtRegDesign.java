@@ -2,6 +2,8 @@ package eduCourse_prj.professor.design;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.sql.SQLException;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -10,8 +12,14 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import eduCourse_prj.VO.CrsVO;
+import eduCourse_prj.professor.dao.CrsMgtRegDAO;
+import eduCourse_prj.professor.dao.ProfDAO;
+import eduCourse_prj.professor.event.ProfCrsMgtRegEvent;
+
 public class ProfCrsMgtRegDesign extends JDialog {
 	
+	private ProfCrsMgtDesign pcmd;
 	private JLabel jlBack;// 배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
 	private JLabel jlprofCrsMgt, jlprofCrsMgtReg; // 상단 라벨
@@ -24,12 +32,12 @@ public class ProfCrsMgtRegDesign extends JDialog {
 	
 	public ProfCrsMgtRegDesign(ProfCrsMgtDesign pcmd, String title) {
 		super(pcmd, title, true);
+		this.pcmd = pcmd;
 		
 		setLayout(null);
 		
 		String commonPath = "src/eduCourse_prj/image/common/";
 		String profPath = "src/eduCourse_prj/image/prof/";
-		String crsPath = "src/eduCourse_prj/image/crs/";
 		
 		// 우상단 로그인상태 확인창 추가
 		topLogin = new JLabel(pcmd.getPhd().getlVO().getName() + " 교수님 로그인 중");
@@ -94,14 +102,27 @@ public class ProfCrsMgtRegDesign extends JDialog {
 		// 과목, 과목 코드, 학과, 학과 코드, 담당 교수, 강의실, 학점, 정원 콤보박스, JTF 추가
 		String[] lectRooms = {"A0527", "A0528", "A0529"};
 		
-		jcbCrsName = new JComboBox<String>();
-		jtfCrsCode = new JTextField();
-		jtfDeptName = new JTextField();
-		jtfDeptCode = new JTextField();
-		jtfProfName = new JTextField(pcmd.getPhd().getlVO().getName());
-		jcbLectRoom = new JComboBox<String>(lectRooms);
-		jtfCredit = new JTextField();
-		jtfCapa = new JTextField();
+		ProfDAO pDAO = ProfDAO.getInstance();
+		try {
+			List<CrsVO> listCVO = pDAO.slctProfCrs(Integer.parseInt(pcmd.getPhd().getlVO().getId()));
+			jcbCrsName = new JComboBox<String>();
+			
+			for(CrsVO cVO : listCVO) {
+				jcbCrsName.addItem(cVO.getCourName());
+			} // end for
+			
+			jtfCrsCode = new JTextField();
+			jtfDeptName = new JTextField(listCVO.get(0).getDeptName());
+			jtfDeptCode = new JTextField(Integer.toString(listCVO.get(0).getDeptCode()));
+			jtfProfName = new JTextField(pcmd.getPhd().getlVO().getName());
+			jcbLectRoom = new JComboBox<String>(lectRooms);
+			jtfCredit = new JTextField();
+			jtfCapa = new JTextField();
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} // end catch
 		
 		jcbCrsName.setBounds(220, 215, 220, 30);
 		jtfCrsCode.setBounds(220, 275, 220, 30);
@@ -136,6 +157,13 @@ public class ProfCrsMgtRegDesign extends JDialog {
 		add(jbtnReg);
 		add(jbtnCancel);
 		
+		// 이벤트 클래스 연결
+		ProfCrsMgtRegEvent pcmre = new ProfCrsMgtRegEvent(this);
+		addWindowListener(pcmre);
+		jcbCrsName.addActionListener(pcmre);
+		jbtnReg.addActionListener(pcmre);
+		jbtnCancel.addActionListener(pcmre);
+		
 		// 배경 추가
         jlBack = new JLabel(new ImageIcon(commonPath + "Back.png"));
         jlBack.setBounds(0,0,984,620);
@@ -144,5 +172,37 @@ public class ProfCrsMgtRegDesign extends JDialog {
 		setLocationRelativeTo(null);
 		setVisible(true);
 	} // ProfCrsMgtRegDesign
+
+	public JComboBox<String> getJcbCrsName() {
+		return jcbCrsName;
+	}
+
+	public JTextField getJtfCrsCode() {
+		return jtfCrsCode;
+	}
+
+	public JComboBox<String> getJcbLectRoom() {
+		return jcbLectRoom;
+	}
+
+	public JTextField getJtfCapa() {
+		return jtfCapa;
+	}
+
+	public JTextField getJtfCredit() {
+		return jtfCredit;
+	}
+
+	public JButton getJbtnReg() {
+		return jbtnReg;
+	}
+
+	public JButton getJbtnCancel() {
+		return jbtnCancel;
+	}
+
+	public ProfCrsMgtDesign getPcmd() {
+		return pcmd;
+	}
 	
 } // class

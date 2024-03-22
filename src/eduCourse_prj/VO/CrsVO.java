@@ -25,8 +25,15 @@ public class CrsVO {
 		this.courName = courName;
 		this.deptName = deptName;
 	}
-
-
+	
+	public CrsVO(String courCode, String courName, String deptName, int deptCode) {
+		super();
+		this.courCode = courCode;
+		this.courName = courName;
+		this.deptName = deptName;
+		this.deptCode = deptCode;
+	}
+	
 	public CrsVO(String courCode, String courName, int creditHour, int deptCode) {
 		super();
 		this.courCode = courCode;
@@ -66,6 +73,13 @@ public class CrsVO {
 		CourDelFlag = courDelFlag;
 		this.deptCode = deptCode;
 		this.deptName = deptName;
+	}
+	
+	public CrsVO(String courCode, String courName, int creditHour) {
+		super();
+		this.courCode = courCode;
+		this.courName = courName;
+		this.creditHour = creditHour;
 	}
 	
 	public void profCrsVO(String deptName, String courName) {

@@ -118,7 +118,7 @@ public class ProfCrsMgtDesign extends JDialog {
 		try {
 			String strProf_number = phd.getlVO().getId();
 			int prof_number = Integer.parseInt(strProf_number);
-			List<CrsVO> listCrsVO= pDAO.slctProfLec(prof_number);			
+			List<CrsVO> listCrsVO= pDAO.slctProfCrs(prof_number);			
 			for (CrsVO cVO1 : listCrsVO) {
 				Object[] row = { cVO1.getDeptName(), cVO1.getCourName() };
 				dtmProfMgt.addRow(row);
