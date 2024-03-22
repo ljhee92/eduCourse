@@ -363,7 +363,7 @@ public class ProfDAO {
 	 * @param prof_number
 	 * @throws SQLException
 	 */
-	public List<CrsVO> slctProfLec(int prof_number)throws SQLException{
+	public List<CrsVO> slctProfCrs(int prof_number)throws SQLException{
 		DbConnection dbCon = DbConnection.getInstance();
 
 		Connection con = null;
@@ -379,27 +379,28 @@ public class ProfDAO {
 			con = dbCon.getConnection(id, pass);
 
 			StringBuilder sb = new StringBuilder();
-			sb.append("SELECT d.dept_name, c.course_name ");
+			sb.append("SELECT d.dept_name, d.dept_code, c.course_name, c.course_code ");
 			sb.append("FROM professor p ");
 			sb.append("JOIN dept d ON p.dept_code = d.dept_code ");
 			sb.append("JOIN course c ON d.dept_code = c.dept_code ");
-			sb.append("WHERE p.prof_number = ?");
-			String slctLecQuery = sb.toString();
-	        pstmt = con.prepareStatement(slctLecQuery);
+			sb.append("WHERE p.prof_number = ? and course_delete_flag = 'N'");
+			String slctCrsQuery = sb.toString();
+	        pstmt = con.prepareStatement(slctCrsQuery);
 	        pstmt.setInt(1, prof_number);
 	        rs = pstmt.executeQuery();
-	        String deptCode = "";
-	        String courseName="";
+	        String deptName = "", courseName="", courseCode = "";
+	        int deptCode = 0;
 	        courses = new ArrayList<CrsVO>();
 	        while (rs.next()) {
-	        	deptCode = rs.getString("dept_name");
-	        	courseName = rs.getString("course_name");     
-	        	cVO = new CrsVO();
-	        	cVO.profCrsVO(deptCode, courseName);
+	        	deptName = rs.getString("dept_name");
+	        	deptCode = rs.getInt("dept_code");
+	        	courseName = rs.getString("course_name");
+	        	courseCode = rs.getString("course_code");
+	        	cVO = new CrsVO(courseCode, courseName, deptName, deptCode);
 	        	courses.add(cVO);
 	        }
 		} finally {
-			dbCon.dbClose(null, pstmt, con);
+			dbCon.dbClose(rs, pstmt, con);
 		}
 		return courses;
 	}//slctProfLect
