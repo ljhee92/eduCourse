@@ -53,7 +53,7 @@ public class CrsRegDAO {
 							.append("join student s on s.dept_code = d.dept_code ")
 							.append("right outer join course c on c.dept_code = d.dept_code ")
 							.append("join lecture l on l.course_code = c.course_code ")
-							.append("where s.std_number = ? ")
+							.append("where s.std_number = ? and l.lect_delete_flag = 'N'")
 							.append("order by c.course_code");
 			
 			pstmt = con.prepareStatement(selectAllCrsReg.toString());
@@ -197,7 +197,7 @@ public class CrsRegDAO {
 							.append("join professor p on p.prof_number = l.prof_number ")
 							.append("join course c on c.course_code = l.course_code ")
 							.append("join dept d on d.dept_code = c.dept_code ")
-							.append("where std_number = ? ")
+							.append("where std_number = ? and l.lect_delete_flag = 'N'")
 							.append("order by c.course_code");
 			
 			pstmt = con.prepareStatement(selectAllReg.toString());
@@ -267,49 +267,5 @@ public class CrsRegDAO {
 			dbCon.dbClose(null, pstmt2, con);
 		} // end finally
 	} // updateCapacited
-	
-	/**
-	 * 이미 수강신청을 완료한 학생이 수강신청 버튼을 클릭했을 때 <br>
-	 * 수강신청 완료한 과목을 제외하고 보여주기 위해 DB의 Register 존재여부를 확인하는 method
-	 * @param stdnt_number
-	 * @param crs_code
-	 * @throws SQLException 
-	 */
-//	public List<RegVO> slctStdntReg(int stdnt_number, String crs_code) throws SQLException {
-//		List<RegVO> listRegVO = new ArrayList<RegVO>();
-//		RegVO rVO = null;
-//		DbConnection dbCon = DbConnection.getInstance();
-//		
-//		Connection con = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		
-//		try {
-//			String id = "scott";
-//			String pass = "tiger";
-//			
-//			con = dbCon.getConnection(id, pass);
-//			
-//			StringBuilder selectStdntReg = new StringBuilder();
-//			selectStdntReg.append("select * ")
-//							.append("from register ")
-//							.append("where std_number = ? and course_code = ?");
-//			
-//			pstmt = con.prepareStatement(selectStdntReg.toString());
-//			pstmt.setInt(1, stdnt_number);
-//			pstmt.setString(2, crs_code);
-//			
-//			rs = pstmt.executeQuery();
-//			
-//			while(rs.next()) {
-//				rVO = new RegVO(rs.getInt("register_number"), rs.getInt("std_number"), rs.getInt("prof_number"), rs.getString("course_code"));
-//				listRegVO.add(rVO);
-//			} // end while
-//		} finally {
-//			dbCon.dbClose(rs, pstmt, con);
-//		} // end finally
-//		
-//		return listRegVO;
-//	} // slctStdntReg
 	
 } // CrsRegDAO
