@@ -116,6 +116,8 @@ public class ProfTestMgtDesign extends JDialog {
 		jbtnTestMdfy.addActionListener(pme);
 		jrbtnEnable.addActionListener(pme);
 		jrbtnDisable.addActionListener(pme);
+		
+		jtbTestMgt.getSelectionModel().addListSelectionListener(pme);
 
 		setLayout(null);
 		setSize(1000, 650);
