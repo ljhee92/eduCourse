@@ -6,6 +6,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
+
 import eduCourse_prj.admin.dao.AdminAcadCalDAO;
 import eduCourse_prj.admin.design.AdminAcadCalDesign;
 
@@ -33,24 +35,21 @@ public class AdminAcadCalEvent extends WindowAdapter implements ActionListener{
 			String memoText = aacd.getMemoJta().getText();
 			AdminAcadCalDAO aacDAO = AdminAcadCalDAO.getInstance();
 			try {
-				aacDAO.saveCal(memoText, dayMonthYear);
+				if(aacd.getMemoJta().getText().isEmpty()) {
+					JOptionPane.showMessageDialog(aacd, "내용을 입력해주세요");
+					return;
+				}
+				if(aacDAO.selectOneCal(dayMonthYear).equals("")) {
+					aacDAO.saveCal(memoText, dayMonthYear);	
+					JOptionPane.showMessageDialog(aacd, "저장이 성공으로 끝났습니다");
+				}else {
+					aacDAO.updateCal(memoText, dayMonthYear);					
+					JOptionPane.showMessageDialog(aacd, "저장이 성공으로 끝났습니다");
+				}					
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			
-			
-//			CalenderVO cVO = new CalenderVO(selectedYear, selectedMonth, selectedDay, memoText);
-			String memoMapKey = selectedYear+""+selectedMonth+""+selectedDay;
-			
-			aacd.getMemoMap().put(memoMapKey, memoText);
-			aacd.getMemoJta().setText("");	
-			
-			for(String str : aacd.getMemoMap().values()) {
-				System.out.println(str);
-			}
-			for(String str : aacd.getMemoMap().keySet()) {
-				System.out.println(str);
-			}
+					
 		}
 		if(ae.getSource() == aacd.getDeleteBtn()) {
 			

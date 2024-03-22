@@ -151,7 +151,7 @@ public class AdminAcadCalDesign extends JDialog {
 					String dayMonthYear = year+""+month+""+day;
 					AdminAcadCalDAO aacDAO = AdminAcadCalDAO.getInstance();
 					try {
-						aacDAO.selectOneCal(dayMonthYear);
+						memoJta.setText(aacDAO.selectOneCal(dayMonthYear));
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
