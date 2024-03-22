@@ -48,10 +48,10 @@ public class ProfTestMgtEvent extends WindowAdapter implements ActionListener{
 				
 				ptmd.getDtmTestMgt().setRowCount(0); 
 				ptmd.slctTestMgt();
+				ptmd.getJrbtnEnable().setSelected(false);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}			
-			ptmd.paint(ptmd.getGraphics());// 컨테이너 다시 그리기
 		}
 		//////////////////////////비활성화 버튼 클릭시///////////////////////////
 		if(ae.getSource() == ptmd.getJrbtnDisable()) {
@@ -65,15 +65,16 @@ public class ProfTestMgtEvent extends WindowAdapter implements ActionListener{
 			
 			ProfDAO pDAO = ProfDAO.getInstance();
 			try {
-				pDAO.updateTestFlag(course_name, "N");
-				
+				pDAO.updateTestFlag(course_name, "N");	
 				ptmd.getDtmTestMgt().setRowCount(0);				
 				ptmd.slctTestMgt();
-
+				ptmd.getJrbtnEnable().setSelected(true);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}			
 		}
+
+
 	}
 
 	@Override

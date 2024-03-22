@@ -14,9 +14,7 @@ import javax.swing.JOptionPane;
 import eduCourse_prj.DbConnection;
 import eduCourse_prj.VO.AdminVO;
 import eduCourse_prj.VO.CrsVO;
-import eduCourse_prj.VO.DeptDTO;
 import eduCourse_prj.VO.DeptVO;
-import eduCourse_prj.VO.LoginVO;
 import eduCourse_prj.VO.TestQustVO;
 
 

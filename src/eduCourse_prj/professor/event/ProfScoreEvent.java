@@ -9,18 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 
-import eduCourse_prj.VO.CrsVO;
 import eduCourse_prj.VO.ScoreVO;
-import eduCourse_prj.VO.SlctStdVO;
-import eduCourse_prj.VO.StdntVO;
-import eduCourse_prj.admin.dao.AdminDAO;
-import eduCourse_prj.admin.design.AdminStudMgtDesign;
 import eduCourse_prj.professor.dao.ScoreDAO;
 import eduCourse_prj.professor.design.ProfScoreDesign;
-import eduCourse_prj.student.dao.StdntDAO;
 
 public class ProfScoreEvent extends WindowAdapter implements ActionListener {
 	ProfScoreDesign psd;

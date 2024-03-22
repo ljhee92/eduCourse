@@ -786,7 +786,7 @@ public class ProfDAO {
 			con = dbCon.getConnection(id, pass);
 
 			StringBuilder slctQuery = new StringBuilder();
-			slctQuery.append("SELECT c.course_name, l.lect_delete_flag ");
+			slctQuery.append("SELECT c.course_name, l.lect_delete_flag,c.course_code ");
 			slctQuery.append("FROM lecture l ");
 			slctQuery.append("JOIN course c ON c.course_code = l.course_code ");
 			slctQuery.append("WHERE l.prof_number = ?");
@@ -798,7 +798,7 @@ public class ProfDAO {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				tlVO = new TestListVO(rs.getString("course_name"),rs.getString("lect_delete_flag"));
+				tlVO = new TestListVO(rs.getString("course_name"),rs.getString("lect_delete_flag"),rs.getString("course_code"));
 				testList.add(tlVO);
 			}
 		} finally {
@@ -836,6 +836,49 @@ public class ProfDAO {
 			dbCon.dbClose(null, pstmt, con);
 		} // end finally
 	}//updateTestFlag
+	
+	
+	/**
+	 * 시험출제여부를 판단하는 메서드
+	 * @throws SQLException 
+	 */
+	public String selectExaming(String course_code) throws SQLException {
+		DbConnection dbCon = DbConnection.getInstance();
+		TestListVO tlVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String examStatus = "";
+		try {
+
+			String id = "scott";
+			String pass = "tiger";
+			con = dbCon.getConnection(id, pass);
+			
+			String slctQuery = "SELECT COUNT(*) AS count FROM test_question WHERE course_code = ?";
+			pstmt = con.prepareStatement(slctQuery);
+			pstmt.setString(1, course_code);
+			rs = pstmt.executeQuery();
+			int examCount = 0;
+			while(rs.next()) {
+				examCount = rs.getInt("count");	
+			}			
+			if(examCount > 0 && examCount < 10) {
+				examStatus = "출제중";
+			}
+			if(examCount == 0) {
+				examStatus = "출제전";
+			}
+			if(examCount == 10) {
+				examStatus = "출제완료";
+			}
+		} finally {
+			dbCon.dbClose(rs, pstmt, con);
+		} // end finally
+		return examStatus;
+	}// selectExaming
+	
+	
 
 	
 	

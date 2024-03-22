@@ -187,6 +187,7 @@ public class AdminAcadCalDesign extends JDialog {
 		add(monthSelectJP);
 		
 		add(searchBtn);
+    
 		add(jlBanner);
 		add(jlBack);
 
@@ -198,7 +199,6 @@ public class AdminAcadCalDesign extends JDialog {
 		saveBtn.addActionListener(aace);
 		deleteBtn.addActionListener(aace);
 
-		
 		
 		setLayout(null);
 
@@ -352,8 +352,8 @@ public class AdminAcadCalDesign extends JDialog {
 		return deleteBtn;
 	}
 
-	public static void main(String[] args) {
-		new AdminAcadCalDesign(null, null);
-	}
+//	public static void main(String[] args) {
+//		new AdminAcadCalDesign(null, null);
+//	}
 
 }
