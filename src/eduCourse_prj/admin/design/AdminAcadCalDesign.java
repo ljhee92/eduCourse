@@ -39,7 +39,8 @@ public class AdminAcadCalDesign extends JDialog {
 	private DefaultComboBoxModel<Integer> yearCbm, monthCbm;
 	private JTextField timeJtf;
 	private JTextArea memoJta;
-	private JLabel yearJb, monthJb, jlBack, jlBanner;
+	private JLabel yearJb, monthJb, jlBack, jlBanner, 
+			yearJl, yearJl2, monthJl, monthJl2, dayJl, dayJl2;
 	private JPanel calJp;
 
 	private Map<String, String> memoMap;
@@ -77,6 +78,40 @@ public class AdminAcadCalDesign extends JDialog {
 		
 		yearJb = new JLabel("년");
 		monthJb = new JLabel("월");
+		
+		// 라벨 설정
+		JPanel labelPanel = new JPanel(new GridLayout(1, 4, 5, 5)); // 1행 4열의 GridLayout, 간격은 5로 설정
+
+        yearJl = new JLabel();
+        yearJl2 = new JLabel("년");
+        monthJl = new JLabel(); // 긴 텍스트
+        monthJl2 = new JLabel("월");
+        dayJl = new JLabel();
+        dayJl2 = new JLabel("일");
+
+        // 각 라벨에 border 설정
+        Border labelBorder = BorderFactory.createLineBorder(Color.GRAY, 1);
+        yearJl.setBorder(labelBorder);
+        monthJl.setBorder(labelBorder);
+        dayJl.setBorder(labelBorder);
+
+        // 각 라벨의 크기 설정
+        yearJl.setPreferredSize(new Dimension(70, 30));
+        monthJl.setPreferredSize(new Dimension(30, 30));
+        dayJl.setPreferredSize(new Dimension(30, 30));
+        yearJl2.setPreferredSize(new Dimension(30, 30));
+        monthJl.setPreferredSize(new Dimension(30, 30));
+        dayJl.setPreferredSize(new Dimension(30, 30));
+        
+        labelPanel.add(yearJl);
+        labelPanel.add(yearJl2);
+        labelPanel.add(monthJl);
+        labelPanel.add(monthJl2);
+        labelPanel.add(dayJl);
+        labelPanel.add(dayJl2);
+        
+        labelPanel.setBounds(530, 160, 350, 30);
+        labelPanel.setBackground(Color.white);
 
 		// 콤보박스와 레이블에 대한 최소 크기 설정
 		Dimension comboBoxDimension = new Dimension(70, 30); // 콤보박스 크기 설정
@@ -91,7 +126,9 @@ public class AdminAcadCalDesign extends JDialog {
 		monthJb.setFont(font);
 		yearCb.setFont(font);
 		monthCb.setFont(font);
-		
+		yearJl2.setFont(font);
+		monthJl2.setFont(font);
+		dayJl2.setFont(font);
 
 		// 달력
 		calJp = new JPanel(new GridLayout(7, 7));
@@ -123,7 +160,7 @@ public class AdminAcadCalDesign extends JDialog {
 		}
 		calSet();
 
-		calJp.setBounds(70, 220, 350, 280);
+		calJp.setBounds(70, 240, 350, 280);
 		
 		// 메모
 		JPanel memoJp = new JPanel(new BorderLayout());
@@ -148,7 +185,7 @@ public class AdminAcadCalDesign extends JDialog {
 		memoBtnJp.add(deleteBtn);
 		memoJp.add(memoBtnJp, BorderLayout.SOUTH);
 
-		memoJp.setBounds(530, 200, 350, 300);
+		memoJp.setBounds(530, 220, 350, 300);
 
 		// 메모 Map 초기화
 		memoMap = new HashMap<String, String>();
@@ -165,7 +202,7 @@ public class AdminAcadCalDesign extends JDialog {
 		
 		// 버튼 설정
 		searchBtn = new JButton(new ImageIcon(commonPath + "ConfirmButtonSmall_new.png"));
-		searchBtn.setBounds(335, 150, 75, 40);
+		searchBtn.setBounds(335, 160, 75, 40);
 
 		// 배너 삽입
 		jlBanner = new JLabel(new ImageIcon(adminPath + "SchedMgtBanner_new.png"));
@@ -185,14 +222,15 @@ public class AdminAcadCalDesign extends JDialog {
 		add(memoJp);
 		add(yearSelectJP);
 		add(monthSelectJP);
+		add(labelPanel);
 		
 		add(searchBtn);
     
 		add(jlBanner);
 		add(jlBack);
 
-		yearSelectJP.setBounds(60, 150, 120, 200);
-		monthSelectJP.setBounds(190, 150, 120, 200);
+		yearSelectJP.setBounds(60, 160, 120, 200);
+		monthSelectJP.setBounds(190, 160, 120, 200);
 		
 		AdminAcadCalEvent aace = new AdminAcadCalEvent(this);
 		searchBtn.addActionListener(aace);
@@ -225,6 +263,7 @@ public class AdminAcadCalDesign extends JDialog {
 		// 일요일~토요일까지
 		for (int i = 0; i < 7; i++) {
 			calBtn[i].setText(days[i]);
+			calBtn[i].setBorderPainted(false); //테두리 해제
 			calBtn[i].setForeground(Color.red);
 			calBtn[i].setEnabled(false);
 			calBtn[i].setBackground(Color.white);
@@ -233,6 +272,10 @@ public class AdminAcadCalDesign extends JDialog {
 		// 달력 버튼 초기화
 		for (int i = 7; i < calBtn.length; i++) {
 			calBtn[i].setEnabled(false);
+			calBtn[i].setBorderPainted(true); //테두리 해제
+			calBtn[i].setBorder(BorderFactory.createLineBorder(Color.white));
+			calBtn[i].setContentAreaFilled(true); //기본 배경색 해제
+			calBtn[i].setBackground(Color.white);
 			calBtn[i].setText("");
 		}
 
@@ -241,11 +284,14 @@ public class AdminAcadCalDesign extends JDialog {
 			int currentDayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
 			buttonIndex = i + 6 + cnt;
 			if (currentDayOfWeek == Calendar.SUNDAY) {
-				calBtn[buttonIndex].setForeground(new Color(255, 0, 0));
+				calBtn[buttonIndex].setForeground(new Color(255, 91, 87)); // 폰트 색상 변경
+	            calBtn[buttonIndex].setBackground(new Color(217, 217, 217)); // 배경 색상 변경
 			} else if (currentDayOfWeek == Calendar.SATURDAY) {
-				calBtn[buttonIndex].setForeground(new Color(0, 0, 255));
+				calBtn[buttonIndex].setForeground(new Color(52, 143, 226)); // 폰트 색상 변경
+	            calBtn[buttonIndex].setBackground(new Color(217, 217, 217)); // 배경 색상 변경
 			} else {
-				calBtn[buttonIndex].setForeground(new Color(0, 0, 0));
+				calBtn[buttonIndex].setForeground(Color.GRAY); // 폰트 색상 변경
+	            calBtn[buttonIndex].setBackground(new Color(217, 217, 217));
 			}
 			calBtn[buttonIndex].setText(String.valueOf(i));
 
@@ -352,8 +398,8 @@ public class AdminAcadCalDesign extends JDialog {
 		return deleteBtn;
 	}
 
-//	public static void main(String[] args) {
-//		new AdminAcadCalDesign(null, null);
-//	}
+	public static void main(String[] args) {
+		new AdminAcadCalDesign(null, null);
+	}
 
 }
