@@ -41,6 +41,12 @@ public class ProfCrsMgtRegEvent extends WindowAdapter implements ActionListener 
 			
 			int prof_number = Integer.parseInt(pcmrd.getPcmd().getPhd().getlVO().getId());
 			String course_code = pcmrd.getJtfCrsCode().getText();
+			
+			if(pcmrd.getJtfCapa().getText().isEmpty()) {
+				JOptionPane.showMessageDialog(pcmrd, "정원은 필수 입력사항입니다.");
+				return;
+			} // end if
+			
 			int capacity = Integer.parseInt(pcmrd.getJtfCapa().getText().trim());
 			String lect_room = pcmrd.getJcbLectRoom().getSelectedItem().toString();
 			

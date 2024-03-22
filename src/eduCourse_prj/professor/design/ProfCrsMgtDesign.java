@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import eduCourse_prj.VO.CrsVO;
+import eduCourse_prj.professor.dao.CrsMgtRegDAO;
 import eduCourse_prj.professor.dao.ProfDAO;
 import eduCourse_prj.professor.event.ProfCrsMgtEvent;
 
@@ -55,7 +56,7 @@ public class ProfCrsMgtDesign extends JDialog {
 		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.WHITE);
-		topLogin.setBounds(670, 30, 200, 20);
+		topLogin.setBounds(670, 30, 300, 20);
 		add(topLogin);
 
 		// 테이블 추가
@@ -114,11 +115,11 @@ public class ProfCrsMgtDesign extends JDialog {
 
 	//학과와 과목을 테이블에 보여주는 메서드
 	public void slctLecMgt() {
-		ProfDAO pDAO = ProfDAO.getInstance(); 
+		CrsMgtRegDAO cmrDAO = CrsMgtRegDAO.getInstance(); 
 		try {
 			String strProf_number = phd.getlVO().getId();
 			int prof_number = Integer.parseInt(strProf_number);
-			List<CrsVO> listCrsVO= pDAO.slctProfCrs(prof_number);			
+			List<CrsVO> listCrsVO= cmrDAO.slctProfLect(prof_number);			
 			for (CrsVO cVO1 : listCrsVO) {
 				Object[] row = { cVO1.getDeptName(), cVO1.getCourName() };
 				dtmProfMgt.addRow(row);
@@ -158,6 +159,14 @@ public class ProfCrsMgtDesign extends JDialog {
 
 	public JButton getJbtnDel() {
 		return jbtnDel;
+	}
+
+	public JTable getJtbLecMgt() {
+		return jtbLecMgt;
+	}
+
+	public DefaultTableModel getDtmProfMgt() {
+		return dtmProfMgt;
 	}
 	
 	

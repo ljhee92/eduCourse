@@ -44,7 +44,7 @@ public class ProfCrsMgtRegDesign extends JDialog {
 		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.WHITE);
-		topLogin.setBounds(670, 30, 200, 20);
+		topLogin.setBounds(670, 30, 300, 20);
 		add(topLogin);
 		
 		// 강의 과목 관리, 등록 상단 라벨 추가
@@ -66,7 +66,7 @@ public class ProfCrsMgtRegDesign extends JDialog {
 		jlLectRoom = new JLabel("강의실");
 		jlCredit = new JLabel("학점");
 		jlCapa = new JLabel("정원");
-		jlNecessary = new JLabel("학점은 필수입력사항입니다.");
+		jlNecessary = new JLabel("정원은 필수입력사항입니다.");
 		
 		jlCrsName.setBounds(120, 220, 100, 20);
 		jlCrsCode.setBounds(120, 280, 100, 20);
@@ -113,7 +113,7 @@ public class ProfCrsMgtRegDesign extends JDialog {
 			
 			jtfCrsCode = new JTextField();
 			jtfDeptName = new JTextField(listCVO.get(0).getDeptName());
-			jtfDeptCode = new JTextField(Integer.toString(listCVO.get(0).getDeptCode()));
+			jtfDeptCode = new JTextField(String.valueOf(listCVO.get(0).getDeptCode()));
 			jtfProfName = new JTextField(pcmd.getPhd().getlVO().getName());
 			jcbLectRoom = new JComboBox<String>(lectRooms);
 			jtfCredit = new JTextField();
@@ -137,6 +137,7 @@ public class ProfCrsMgtRegDesign extends JDialog {
 		jtfDeptName.setEditable(false);
 		jtfDeptCode.setEditable(false);
 		jtfProfName.setEditable(false);
+		jtfCredit.setEditable(false);
 		
 		add(jcbCrsName);
 		add(jtfCrsCode);
