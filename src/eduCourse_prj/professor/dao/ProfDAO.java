@@ -786,7 +786,7 @@ public class ProfDAO {
 			con = dbCon.getConnection(id, pass);
 
 			StringBuilder slctQuery = new StringBuilder();
-			slctQuery.append("SELECT c.course_name, l.lect_delete_flag ");
+			slctQuery.append("SELECT c.course_name, l.lect_delete_flag,c.course_code ");
 			slctQuery.append("FROM lecture l ");
 			slctQuery.append("JOIN course c ON c.course_code = l.course_code ");
 			slctQuery.append("WHERE l.prof_number = ?");
@@ -798,7 +798,7 @@ public class ProfDAO {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				tlVO = new TestListVO(rs.getString("course_name"),rs.getString("lect_delete_flag"));
+				tlVO = new TestListVO(rs.getString("course_name"),rs.getString("lect_delete_flag"),rs.getString("course_code"));
 				testList.add(tlVO);
 			}
 		} finally {
@@ -842,58 +842,40 @@ public class ProfDAO {
 	 * 시험출제여부를 판단하는 메서드
 	 * @throws SQLException 
 	 */
-	public void selectExaming(int question_number, String course_code) throws SQLException {
+	public String selectExaming(String course_code) throws SQLException {
 		DbConnection dbCon = DbConnection.getInstance();
 		TestListVO tlVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		String examStatus = "";
 		try {
 
 			String id = "scott";
 			String pass = "tiger";
 			con = dbCon.getConnection(id, pass);
-
-			String slctQuery = "SELECT * FROM test_question WHERE course_code = ?";
+			
+			String slctQuery = "SELECT COUNT(*) AS count FROM test_question WHERE course_code = ?";
 			pstmt = con.prepareStatement(slctQuery);
 			pstmt.setString(1, course_code);
 			rs = pstmt.executeQuery();
-
-			boolean hasValue = false; // 값이 있는지 여부를 나타내는 플래그
-			int examStatus = 0;
-			while (rs.next()) {
-				// ResultSet에 값이 있을 때 처리
-				hasValue = true; // 값이 있음을 표시
-				// 필요한 필드를 확인하여 처리
-				if (rs.getString("test_question_id") == null) {
-				} else if (rs.getString("question_number") == null){
-				}
-				else if (rs.getString("question_content") == null){
-				}
-				else if (rs.getString("answer") == null){
-				}
-				else if (rs.getString("prof_number") == null){
-				}
-				else if (rs.getString("course_code") == null){
-				}
+			int examCount = 0;
+			while(rs.next()) {
+				examCount = rs.getInt("count");	
+			}			
+			if(examCount > 0 && examCount < 10) {
+				examStatus = "출제중";
 			}
-
-			if (!hasValue) {
-				// ResultSet에 결과가 없는 경우
-				tlVO = new TestListVO("없음");
-			} else {
-				// ResultSet에 결과가 있는 경우
-				tlVO = new TestListVO("미완성");
+			if(examCount == 0) {
+				examStatus = "출제전";
 			}
-			if (!rs.next()) {
-				tlVO = new TestListVO("제출전");
-			} else {
-				tlVO = new TestListVO("제출완료");
-
+			if(examCount == 10) {
+				examStatus = "출제완료";
 			}
 		} finally {
 			dbCon.dbClose(rs, pstmt, con);
 		} // end finally
+		return examStatus;
 	}// selectExaming
 	
 	

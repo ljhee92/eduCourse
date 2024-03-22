@@ -130,7 +130,8 @@ public class ProfTestMgtDesign extends JDialog {
 			int prof_number = Integer.parseInt(phd.getlVO().getId());
 			List<TestListVO> testListVO = pDAO.slctAllTest(prof_number);
 			for (TestListVO lVO : testListVO) {
-				Object[] row = { lVO.getCourse_name(), lVO.getLect_delete_flag(),lVO.getIsExaming() };
+				String examStatus = pDAO.selectExaming(lVO.course_code());
+				Object[] row = { lVO.getCourse_name(), lVO.getLect_delete_flag(),examStatus };
 				dtmTestMgt.addRow(row);
 			} // end for
 		} catch (SQLException e) {
