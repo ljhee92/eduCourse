@@ -68,6 +68,12 @@ public class ProfCrsMgtEvent extends WindowAdapter implements ActionListener{
 		
 		// 수정 버튼 클릭 시
 		if(ae.getSource() == pcmd.getJbtnMdfy()) {
+			int index = pcmd.getJtbLecMgt().getSelectedRow();
+			if(index == -1) {
+				JOptionPane.showMessageDialog(pcmd, "수정할 과목을 선택해주세요.");
+				return;
+			} // end if
+			
 			new ProfCrsMgtMdfyDesign(pcmd, "강의 과목 수정");
 		} // end if
 		
@@ -75,7 +81,7 @@ public class ProfCrsMgtEvent extends WindowAdapter implements ActionListener{
 		if(ae.getSource() == pcmd.getJbtnDel()) {
 			int index = pcmd.getJtbLecMgt().getSelectedRow();
 			if (index == -1) {
-				JOptionPane.showMessageDialog(pcmd, "삭제할 교수님을 선택해주세요.");
+				JOptionPane.showMessageDialog(pcmd, "삭제할 과목을 선택해주세요.");
 				return;
 			} // end if
 

@@ -23,6 +23,7 @@ public class ProfCrsMgtMdfyEvent extends WindowAdapter implements ActionListener
 	public void actionPerformed(ActionEvent e) {
 		// 수정 버튼 클릭 시
 		if(e.getSource() == pcmmd.getJbtnMdfy()) {
+			
 			if(pcmmd.getJtfCapa().getText().isEmpty()) {
 				JOptionPane.showMessageDialog(pcmmd, "정원은 필수 입력사항입니다.");
 				return;
