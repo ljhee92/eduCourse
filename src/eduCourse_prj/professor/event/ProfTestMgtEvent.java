@@ -7,6 +7,8 @@ import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import eduCourse_prj.professor.dao.ProfDAO;
 import eduCourse_prj.professor.design.ProfTestMdfyDesign;
@@ -14,7 +16,7 @@ import eduCourse_prj.professor.design.ProfTestMgtDesign;
 import eduCourse_prj.professor.design.ProfTestRegDesign;
 
 
-public class ProfTestMgtEvent extends WindowAdapter implements ActionListener{
+public class ProfTestMgtEvent extends WindowAdapter implements ActionListener, ListSelectionListener{
 	ProfTestMgtDesign ptmd;
 	
 	public ProfTestMgtEvent(ProfTestMgtDesign ptmd) {
@@ -81,7 +83,30 @@ public class ProfTestMgtEvent extends WindowAdapter implements ActionListener{
 	public void windowClosing(WindowEvent e) {
 		super.windowClosing(e);
 	}
+
+	@Override
+	public void valueChanged(ListSelectionEvent event) {
 	
+	        if (!event.getValueIsAdjusting()) {
+	            int selectedRow = ptmd.getJtbTestMgt().getSelectedRow();
+	            if (selectedRow != -1) {
+	                JOptionPane.showMessageDialog(null, "테이블의 행이 클릭되었습니다." );
+	                String check = (String) ptmd.getJtbTestMgt().getValueAt(selectedRow, 1);
+	                
+	                if (check.equals("Y")) {
+						ptmd.getJrbtnEnable().setSelected(true);
+					}else {
+						ptmd.getJrbtnDisable().setSelected(true);
+						
+					}
+	                
+	                
+	            }
+	        
+
+	        }
+	
+	}
 	
 	
 }
