@@ -32,7 +32,7 @@ public class StdntHomeDesign extends JFrame {
 	JLabel dept, email, addr;
 	
 	public StdntHomeDesign(LoginVO lVO) {
-		super("학생 작업창");
+		super("학생");
 
 		this.lVO = lVO;
 
@@ -77,7 +77,7 @@ public class StdntHomeDesign extends JFrame {
 		//요소에 추가선언
 		Font font = new Font("나눔스퀘어라운드 ExtraBold",Font.BOLD,15);
 		topLogin.setFont(font);
-		topLogin.setForeground(Color.RED);
+		topLogin.setForeground(Color.WHITE);
 		
 		role.setFont(font);
 		showId.setFont(font);
