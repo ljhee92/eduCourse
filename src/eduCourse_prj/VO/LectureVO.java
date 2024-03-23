@@ -50,7 +50,12 @@ public class LectureVO {
 	public String getLect_room() {
 		return lect_room;
 	}
-	
-	
 
+	@Override
+	public String toString() {
+		return "LectureVO [prof_number=" + prof_number + ", course_code=" + course_code + ", capacity=" + capacity
+				+ ", capacited=" + capacited + ", lect_delete_flag=" + lect_delete_flag + ", lect_room=" + lect_room
+				+ "]";
+	}
+	
 } // class

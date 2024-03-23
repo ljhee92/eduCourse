@@ -787,7 +787,7 @@ public class ProfDAO {
 			con = dbCon.getConnection(id, pass);
 
 			StringBuilder slctQuery = new StringBuilder();
-			slctQuery.append("SELECT c.course_name, l.lect_delete_flag,c.course_code ");
+			slctQuery.append("SELECT c.course_name, l.test_flag,c.course_code ");
 			slctQuery.append("FROM lecture l ");
 			slctQuery.append("JOIN course c ON c.course_code = l.course_code ");
 			slctQuery.append("WHERE l.prof_number = ?");
@@ -799,7 +799,7 @@ public class ProfDAO {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				tlVO = new TestListVO(rs.getString("course_name"),rs.getString("lect_delete_flag"),rs.getString("course_code"));
+				tlVO = new TestListVO(rs.getString("course_name"),rs.getString("test_flag"),rs.getString("course_code"));
 				testList.add(tlVO);
 			}
 		} finally {
@@ -826,7 +826,7 @@ public class ProfDAO {
 
 			StringBuilder updateQuery = new StringBuilder();
 			updateQuery.append("UPDATE lecture l ");
-			updateQuery.append("SET l.lect_delete_flag = ? ");
+			updateQuery.append("SET l.test_flag = ? ");
 			updateQuery.append("WHERE EXISTS (SELECT 1 FROM course c WHERE l.course_code = c.course_code AND c.course_name = ?)");
 			String updateTestQuery = updateQuery.toString();
 			pstmt = con.prepareStatement(updateTestQuery);
