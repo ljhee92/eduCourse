@@ -20,11 +20,16 @@ public class StdntTestSlctEvent extends WindowAdapter implements ActionListener 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == stsd.getJbtnTest()) {
-//			int index = stsd.getJtbTestSlct().getSelectedRow();
-//			if(index == -1) {
-//				JOptionPane.showMessageDialog(stsd, "응시할 과목을 선택해주세요.");
-//				return;
-//			} // end if
+			int index = stsd.getJtbTestSlct().getSelectedRow();
+			if(index == -1) {
+				JOptionPane.showMessageDialog(stsd, "응시할 과목을 선택해주세요.");
+				return;
+			} // end if
+			
+			if(stsd.getDtmTestSlct().getValueAt(index, 4).equals("N")) {
+				JOptionPane.showMessageDialog(stsd, "시험 활성화가 되지 않은 과목입니다.");
+				return;
+			} // end if
 			new StdntTestPageDesign(stsd, "시험 응시");
 		} // end if
 

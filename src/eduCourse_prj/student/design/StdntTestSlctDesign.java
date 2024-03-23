@@ -2,6 +2,8 @@ package eduCourse_prj.student.design;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.sql.SQLException;
+import java.util.List;
 
 import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
@@ -9,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -17,6 +20,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
+import eduCourse_prj.VO.StdntTestVO;
+import eduCourse_prj.student.dao.StdntTestDAO;
 import eduCourse_prj.student.event.StdntTestSlctEvent;
 
 public class StdntTestSlctDesign extends JDialog {
@@ -42,7 +47,7 @@ public class StdntTestSlctDesign extends JDialog {
 		topLogin = new JLabel(shd.getlVO().getName() + " 학생님 로그인 중");
 		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
 		topLogin.setFont(font);
-		topLogin.setForeground(Color.RED);
+		topLogin.setForeground(Color.WHITE);
 		topLogin.setBounds(670, 30, 200, 20);
 		add(topLogin);
 		
@@ -94,6 +99,9 @@ public class StdntTestSlctDesign extends JDialog {
 		jsp.setBounds(10, 110, 967, 330);
 		add(jsp);
 		
+		// 테이블에 DB 추가
+		slctTestReg();
+		
 		// 이벤트 클래스 연결
 		StdntTestSlctEvent stsc = new StdntTestSlctEvent(this);
 		addWindowListener(stsc);
@@ -120,6 +128,53 @@ public class StdntTestSlctDesign extends JDialog {
    			tcm1.getColumn(i).setCellRenderer(dtcr);
    		} // end for
    	} // setTbHorizontal
+   	
+   	/**
+   	 * 테이블에 시험 응시를 위한 수강 과목을 추가하는 일
+   	 */
+   	public void slctTestReg() {
+   		StdntTestDAO stDAO = StdntTestDAO.getInstance();
+   		
+   		int stdnt_number = Integer.parseInt(shd.getlVO().getId());
+   		
+   		try {
+			List<StdntTestVO> listSTVO = stDAO.slctAllStdntTestList(stdnt_number);
+			
+			Object rowGrade;
+			for(StdntTestVO stVO : listSTVO) {
+				
+				if(stVO.getScore() >= 95) {
+					rowGrade = "A+";
+				} else if(stVO.getScore() >= 90) {
+					rowGrade = "A";
+				} else if(stVO.getScore() >= 85) {
+					rowGrade = "B+";
+				} else if(stVO.getScore() >= 80) {
+					rowGrade = "B";
+				} else if(stVO.getScore() >= 75) {
+					rowGrade = "C+";
+				} else if(stVO.getScore() >= 70) {
+					rowGrade = "C";
+				} else if(stVO.getScore() >= 65) {
+					rowGrade = "D+";
+				} else if(stVO.getScore() >= 60) {
+					rowGrade = "D";
+				} else if(stVO.getTest_flag().equals("N")) {
+					rowGrade = "";
+				} else {
+					rowGrade = "F";
+				} // end else
+				
+				Object[] row = {stVO.getDept_name(), stVO.getCourse_name(), stVO.getCourse_code(), stVO.getProf_name(), 
+								stVO.getTest_flag(), stVO.getScore() == 0 ? "" : stVO.getScore(), rowGrade};
+
+				dtmTestSlct.addRow(row);
+			} // end for
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(shd, "SQL 문제가 발생했습니다.");
+			e.printStackTrace();
+		} // end catch
+   	} // slctTestReg
 
 	public StdntHomeDesign getShd() {
 		return shd;
