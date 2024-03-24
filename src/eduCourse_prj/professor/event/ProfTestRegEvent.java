@@ -80,11 +80,13 @@ public class ProfTestRegEvent extends WindowAdapter implements ActionListener {
 				System.out.println(seletedValue);
 				cVO = cmrDAO.slctOneCrsCode(seletedValue);
 				
+				int profId = Integer.parseInt(ptrd.getPtmd().getPhd().getlVO().getId());
+				String courCode = cVO.getCourCode();
 				
-				System.out.println("questionNumber : " + questionNumber + " content : " + content 
-						+ " answer : " + answer + " 교수 이름 : " + Integer.parseInt(ptrd.getPtmd().getPhd().getlVO().getId()) 
-						+ " 코스 코드  : " + cVO.getCourCode());
-			    tqVO = new TestQustVO(questionNumber, content, answer,Integer.parseInt(ptrd.getPtmd().getPhd().getlVO().getId()), cVO.getCourCode());
+//				System.out.println("questionNumber : " + questionNumber + " content : " + content 
+//						+ " answer : " + answer + " 교수 이름 : " + Integer.parseInt(ptrd.getPtmd().getPhd().getlVO().getId()) 
+//						+ " 코스 코드  : " + cVO.getCourCode());
+			    tqVO = new TestQustVO(questionNumber, content, answer, profId, courCode);
 			    tDAO.insertTest(tqVO);
 			}catch (SQLException se) {
 				JOptionPane.showMessageDialog(ptrd, "SQL예외가 발생했습니다.");

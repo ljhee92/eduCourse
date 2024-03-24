@@ -95,6 +95,44 @@ public class TestDAO {
 
 	}// addtest
 	
+	public List<Integer> selectValidTestNumber(String courseName) throws SQLException {
+		DbConnection dbCon = DbConnection.getInstance();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Integer> qustNum = new ArrayList<Integer>();
+		try {
+
+			String id = "scott";
+			String pass = "tiger";
+			con = dbCon.getConnection(id, pass);
+			
+
+
+			// 1. 문제 id 삽입
+
+//			
+			//----------------------------------
+			String checkTestCode = "SELECT t.question_number"
+					+ "	FROM test_question t"
+					+ "	JOIN course c ON t.course_code = c.course_code"
+					+ "	WHERE c.course_name = ?";
+			pstmt = con.prepareStatement(checkTestCode);
+			pstmt.setString(1,courseName);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				qustNum.add(rs.getInt("QUESTION_NUMBER"));
+			}
+			
+		} finally {
+
+			dbCon.dbClose(null, pstmt, con);
+		} // end finally
+		return qustNum;
+	}// addtest
+	
+	
 	@SuppressWarnings("resource")
 	public void selectAllTest(TestQustVO tqVO) throws SQLException {
 
