@@ -52,7 +52,31 @@ public class AdminAcadCalEvent extends WindowAdapter implements ActionListener{
 					
 		}
 		if(ae.getSource() == aacd.getDeleteBtn()) {
+			AdminAcadCalDAO aacDAO = AdminAcadCalDAO.getInstance();
+			int selectedYear = (int)aacd.getYearCb().getSelectedItem();
+			int selectedMonth = (int)aacd.getMonthCb().getSelectedItem();			
+			int selectedDay = aacd.getDay();
+			String dayMonthYear = selectedYear+""+selectedMonth+""+selectedDay;
 			
+			try {
+				if(aacd.getMemoJta().getText().isEmpty()) {
+					JOptionPane.showMessageDialog(aacd,"삭제할 내용이 없습니다");
+					return;
+				}
+				 int result = JOptionPane.showConfirmDialog(aacd, "삭제하시겠습니까?", "확인", JOptionPane.YES_NO_OPTION);
+			        
+			        if (result == JOptionPane.YES_OPTION) {
+			            aacDAO.deleteCal(dayMonthYear);
+			            JOptionPane.showMessageDialog(aacd, "삭제완료 되었습니다");
+			            aacd.getMemoJta().setText("");
+			            aacd.calSet();
+			        } else if (result == JOptionPane.NO_OPTION) {
+			            System.out.println("삭제를 취소합니다.");
+			            return;
+			        }
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

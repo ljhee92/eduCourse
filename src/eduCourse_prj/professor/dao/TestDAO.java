@@ -214,38 +214,38 @@ public class TestDAO {
 		} // end finally
 	} // modifyProf
 	
-	public TestQustVO selectOneDept(int testQuestionId) throws SQLException {
-        TestQustVO tqVO = null;
-        DbConnection dbCon = DbConnection.getInstance();
-
-        Connection con = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-
-        try {
-            String id = "scott";
-            String pass = "tiger";
-
-            con = dbCon.getConnection(id, pass);
-
-            String selectQuery = "SELECT Question_Content, Answer FROM Test_Question WHERE Test_Question_Id = ?";
-
-            pstmt = con.prepareStatement(selectQuery);
-            pstmt.setInt(1, testQuestionId);
-            rs = pstmt.executeQuery();
-            
-            if (rs.next()) {
-                String questionContent = rs.getString("Question_Content");
-                int answer = rs.getInt("Answer");
-                // 여기서 TestQustVO 생성자에 맞게 파라미터를 전달하여 객체를 생성합니다.
-                tqVO = new TestQustVO(testQuestionId, questionContent, answer, 0, null); // 교수 번호와 과목 코드는 null 또는 0으로 초기화합니다.
-            }
-        } finally {
-            dbCon.dbClose(rs, pstmt, con);
-        }
-
-        return tqVO;
-    }
+//	public TestQustVO selectOneDept(int testQuestionId) throws SQLException {
+//        TestQustVO tqVO = null;
+//        DbConnection dbCon = DbConnection.getInstance();
+//
+//        Connection con = null;
+//        PreparedStatement pstmt = null;
+//        ResultSet rs = null;
+//
+//        try {
+//            String id = "scott";
+//            String pass = "tiger";
+//
+//            con = dbCon.getConnection(id, pass);
+//
+//            String selectQuery = "SELECT Question_Content, Answer FROM Test_Question WHERE Test_Question_Id = ?";
+//
+//            pstmt = con.prepareStatement(selectQuery);
+//            pstmt.setInt(1, testQuestionId);
+//            rs = pstmt.executeQuery();
+//            
+//            if (rs.next()) {
+//                String questionContent = rs.getString("Question_Content");
+//                int answer = rs.getInt("Answer");
+//                // 여기서 TestQustVO 생성자에 맞게 파라미터를 전달하여 객체를 생성합니다.
+//                tqVO = new TestQustVO(testQuestionId, questionContent, answer, 0, null); // 교수 번호와 과목 코드는 null 또는 0으로 초기화합니다.
+//            }
+//        } finally {
+//            dbCon.dbClose(rs, pstmt, con);
+//        }
+//
+//        return tqVO;
+//    }
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

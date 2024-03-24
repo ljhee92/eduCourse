@@ -88,7 +88,7 @@ public class AdminAcadCalDesign extends JDialog {
         monthJl2 = new JLabel("월");
         dayJl = new JLabel();
         dayJl2 = new JLabel("일");
-
+        
         // 각 라벨에 border 설정
         Border labelBorder = BorderFactory.createLineBorder(Color.GRAY, 1);
         yearJl.setBorder(labelBorder);
@@ -100,8 +100,8 @@ public class AdminAcadCalDesign extends JDialog {
         monthJl.setPreferredSize(new Dimension(30, 30));
         dayJl.setPreferredSize(new Dimension(30, 30));
         yearJl2.setPreferredSize(new Dimension(30, 30));
-        monthJl.setPreferredSize(new Dimension(30, 30));
-        dayJl.setPreferredSize(new Dimension(30, 30));
+        monthJl2.setPreferredSize(new Dimension(30, 30));
+        dayJl2.setPreferredSize(new Dimension(30, 30));
         
         labelPanel.add(yearJl);
         labelPanel.add(yearJl2);
@@ -148,6 +148,11 @@ public class AdminAcadCalDesign extends JDialog {
 					year = (int) yearCb.getSelectedItem();
 					month = (int) monthCb.getSelectedItem();
 					selectDay(clickBtnIndex - (6 + cnt));
+					
+				    // 선택된 날짜를 yearJl, monthJl, dayJl에 설정
+				    yearJl.setText(Integer.toString(year));
+				    monthJl.setText(Integer.toString(month));
+				    dayJl.setText(Integer.toString(day));
 					String dayMonthYear = year+""+month+""+day;
 					AdminAcadCalDAO aacDAO = AdminAcadCalDAO.getInstance();
 					try {
@@ -187,8 +192,6 @@ public class AdminAcadCalDesign extends JDialog {
 
 		memoJp.setBounds(530, 220, 350, 300);
 
-		// 메모 Map 초기화
-		memoMap = new HashMap<String, String>();
 
 		// 년도,월 선택
 		JPanel yearSelectJP = new JPanel();
