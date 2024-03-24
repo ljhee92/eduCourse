@@ -28,6 +28,7 @@ public class ProfTestMgtEvent extends WindowAdapter implements ActionListener, L
 		if(ae.getSource() == ptmd.getJbtnTestMdfy()) {
 			JOptionPane.showMessageDialog(ptmd, "수정버튼 클릭");
 			new ProfTestMdfyDesign(ptmd, null);
+			
 		}
 		
 		if(ae.getSource() == ptmd.getJbtnTestReg()) {

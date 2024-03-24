@@ -115,8 +115,24 @@ public class AdminAcadCalDAO {
 		} // end finally
 	}
 	
-	public void deleteCal(String yearMonthDay) {
+	public void deleteCal(String yearMonthDay) throws SQLException {
+		DbConnection dbCon = DbConnection.getInstance();
+		Connection con = null;
+		PreparedStatement pstmt = null;
 		
+		try {
+			String id = "scott";
+			String pass = "tiger";
+			
+			con = dbCon.getConnection(id, pass);
+			
+			String deleteSql = "delete from schedule where schedule_input_date = ?";
+			pstmt = con.prepareStatement(deleteSql);
+			pstmt.setString(1, yearMonthDay);
+			pstmt.executeUpdate();
+		}finally {
+			dbCon.dbClose(null, pstmt, con);
+		}
 	}
 	
 	

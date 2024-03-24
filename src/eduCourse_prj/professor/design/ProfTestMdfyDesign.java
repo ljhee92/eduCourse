@@ -173,6 +173,7 @@ public class ProfTestMdfyDesign extends JDialog {
 			cancelButton.addActionListener(ptme);
 			
 			setVisible(true);
+			
 	}
 	
 	public JButton getRegisterButton() {
@@ -229,7 +230,6 @@ public class ProfTestMdfyDesign extends JDialog {
 	public ProfTestMgtDesign getPtmd() {
 		return ptmd;
 	}
-
 
 
 	public static void main(String[] args) {
