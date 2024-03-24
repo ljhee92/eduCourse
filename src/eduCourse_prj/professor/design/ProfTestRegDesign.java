@@ -2,6 +2,8 @@ package eduCourse_prj.professor.design;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.sql.SQLException;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -12,15 +14,16 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import eduCourse_prj.VO.CrsVO;
 import eduCourse_prj.admin.design.AdminDeptMgtDesign;
 import eduCourse_prj.admin.event.AdminDeptMgtRegEvent;
+import eduCourse_prj.professor.dao.TestDAO;
 import eduCourse_prj.professor.event.ProfTestRegEvent;
 
 public class ProfTestRegDesign extends JDialog {
 	private ProfTestMgtDesign ptmd;
-	public ProfTestMgtDesign getPtmd() {
-		return ptmd;
-	}
+	TestDAO tDAO = TestDAO.getInstance();
+	
 
 
 
@@ -74,7 +77,7 @@ public class ProfTestRegDesign extends JDialog {
 			
 	//===============================라벨 추가======================================
 	//------------------------------header Label------------------------------------		
-			topLogin = new JLabel("~~ 교수 로그인 중");
+			topLogin = new JLabel(ptmd.getPhd().getlVO().getName() + " 교수 로그인 중");
 			Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
 			topLogin.setFont(font);
 			topLogin.setForeground(Color.GREEN);
@@ -96,9 +99,39 @@ public class ProfTestRegDesign extends JDialog {
 			
 	//----------------------------좌측 인터페이스-----------------------------------------
 			testNumberComboBox = new JComboBox<>();
-			for (int i = 1; i <= 10; i++) {
-				testNumberComboBox.addItem(String.valueOf(i)); // 숫자를 문자열로 변환하여 콤보 박스에 추가
+			List<Integer> courNum;
+			
+			try {
+				int seletedRow = ptmd.getJtbTestMgt().getSelectedRow();
+				String seletedValue = (String) ptmd.getJtbTestMgt().getValueAt(seletedRow,0); //과목 이름
+				
+				
+				courNum = tDAO.selectValidTestNumber(seletedValue);
+				for (int i = 1; i <= 10; i++) {
+				    boolean skipNumber = false;
+				    for (Integer num : courNum) {
+				        if (i == num) {
+				            skipNumber = true;
+				            break;
+				        }
+				    }
+				    if (!skipNumber) {
+				        testNumberComboBox.addItem(String.valueOf(i)); // 숫자를 문자열로 변환하여 콤보 박스에 추가
+				    }
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
+			
+//			for (CrsVO crs : lCrs) {
+//
+//				jcbCrs.addItem(crs.getCourName());
+//
+//			}
+			
+			
+
+
 			testNumberComboBox.setBounds(150, 180, 50, 30);
 			testNumberLabel = new JLabel("문제 번호");
 			testNumberLabel.setBounds(80, 180, 60, 30);
@@ -226,10 +259,14 @@ public class ProfTestRegDesign extends JDialog {
 	public JTextArea getTestQuestionContentTextArea() {
 		return testQuestionContentTextArea;
 	}
+	
+	public ProfTestMgtDesign getPtmd() {
+		return ptmd;
+	}
 
 
 
-	public static void main(String[] args) {
-		ProfTestRegDesign ptrd = new ProfTestRegDesign(null, null);
-	}//main
+//	public static void main(String[] args) {
+//		ProfTestRegDesign ptrd = new ProfTestRegDesign(null, null);
+//	}//main
 }

@@ -7,15 +7,18 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
+import eduCourse_prj.VO.CrsVO;
 import eduCourse_prj.VO.DeptVO;
 import eduCourse_prj.VO.TestQustVO;
 import eduCourse_prj.admin.dao.AdminDAO;
 import eduCourse_prj.admin.design.AdminDeptMgtRegDesign;
+import eduCourse_prj.professor.dao.CrsMgtRegDAO;
 import eduCourse_prj.professor.dao.TestDAO;
 import eduCourse_prj.professor.design.ProfTestRegDesign;
 
 public class ProfTestRegEvent extends WindowAdapter implements ActionListener {
 	ProfTestRegDesign ptrd;
+	CrsVO cVO = null;
 
 	public ProfTestRegEvent(ProfTestRegDesign ptrd) {
 		this.ptrd = ptrd;
@@ -26,6 +29,7 @@ public class ProfTestRegEvent extends WindowAdapter implements ActionListener {
 		// TODO Auto-generated method stub
 		if (ae.getSource() == ptrd.getRegisterButton()) {
 			TestDAO tDAO = TestDAO.getInstance();
+			CrsMgtRegDAO cmrDAO = CrsMgtRegDAO.getInstance();
 			JOptionPane.showMessageDialog(ptrd, "출제버튼 클릭");
 			TestQustVO tqVO;
 			
@@ -71,8 +75,18 @@ public class ProfTestRegEvent extends WindowAdapter implements ActionListener {
 			        return;
 			    }
 			    
-			    
-			    tqVO = new TestQustVO(questionNumber, content, answer,100403140, "M0001");
+			    int seletedRow = ptrd.getPtmd().getJtbTestMgt().getSelectedRow();
+				String seletedValue = (String) ptrd.getPtmd().getJtbTestMgt().getValueAt(seletedRow,0);
+				System.out.println(seletedValue);
+				cVO = cmrDAO.slctOneCrsCode(seletedValue);
+				
+				int profId = Integer.parseInt(ptrd.getPtmd().getPhd().getlVO().getId());
+				String courCode = cVO.getCourCode();
+				
+//				System.out.println("questionNumber : " + questionNumber + " content : " + content 
+//						+ " answer : " + answer + " 교수 이름 : " + Integer.parseInt(ptrd.getPtmd().getPhd().getlVO().getId()) 
+//						+ " 코스 코드  : " + cVO.getCourCode());
+			    tqVO = new TestQustVO(questionNumber, content, answer, profId, courCode);
 			    tDAO.insertTest(tqVO);
 			}catch (SQLException se) {
 				JOptionPane.showMessageDialog(ptrd, "SQL예외가 발생했습니다.");
