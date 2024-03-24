@@ -18,9 +18,7 @@ import eduCourse_prj.professor.event.ProfTestRegEvent;
 
 public class ProfTestRegDesign extends JDialog {
 	private ProfTestMgtDesign ptmd;
-	public ProfTestMgtDesign getPtmd() {
-		return ptmd;
-	}
+	
 
 
 
@@ -74,7 +72,7 @@ public class ProfTestRegDesign extends JDialog {
 			
 	//===============================라벨 추가======================================
 	//------------------------------header Label------------------------------------		
-			topLogin = new JLabel("~~ 교수 로그인 중");
+			topLogin = new JLabel(ptmd.getPhd().getlVO().getName() + " 교수 로그인 중");
 			Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
 			topLogin.setFont(font);
 			topLogin.setForeground(Color.GREEN);
@@ -226,10 +224,14 @@ public class ProfTestRegDesign extends JDialog {
 	public JTextArea getTestQuestionContentTextArea() {
 		return testQuestionContentTextArea;
 	}
+	
+	public ProfTestMgtDesign getPtmd() {
+		return ptmd;
+	}
 
 
 
-	public static void main(String[] args) {
-		ProfTestRegDesign ptrd = new ProfTestRegDesign(null, null);
-	}//main
+//	public static void main(String[] args) {
+//		ProfTestRegDesign ptrd = new ProfTestRegDesign(null, null);
+//	}//main
 }

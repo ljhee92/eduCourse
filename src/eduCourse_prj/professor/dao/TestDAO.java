@@ -38,12 +38,7 @@ public class TestDAO {
 	
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	/**
-	 * 학과 등록 구현부
-	 * 
-	 * @param dVO
-	 * @throws SQLException
-	 */
+	
 	@SuppressWarnings("resource")
 	public void insertTest(TestQustVO tqVO) throws SQLException {
 
@@ -63,15 +58,7 @@ public class TestDAO {
 
 			// 1. 문제 id 삽입
 
-			int test_id = 0;
-			String checkDept = "select 	max(TEST_QUESTION_ID) 		from	 TEST_QUESTION";
-			pstmt = con.prepareStatement(checkDept);
-			rs = pstmt.executeQuery();
-			//auto increment
-			if (rs.next()) {
-				int lastTestid = rs.getInt(1);
-				test_id = lastTestid + 1;
-			}
+//			
 			//----------------------------------
 			String checkTestCode = "select 	QUESTION_NUMBER 		from	 TEST_QUESTION	where COURSE_CODE = ?";
 			pstmt = con.prepareStatement(checkTestCode);
@@ -81,20 +68,74 @@ public class TestDAO {
 			
 
             //----------------------------------
-			String addTest = "insert into TEST_QUESTION(TEST_QUESTION_ID,QUESTION_NUMBER, QUESTION_CONTENT, ANSWER, PROF_NUMBER, COURSE_CODE) values(?,?,?,?,?,?)";
+			String addTest = "insert into TEST_QUESTION(QUESTION_NUMBER, QUESTION_CONTENT, ANSWER, PROF_NUMBER, COURSE_CODE) values(?,?,?,?,?)";
 			
 			pstmt = con.prepareStatement(addTest);
 
-			pstmt.setInt(1, test_id);
-			pstmt.setInt(2, tqVO.getQust_number());
-			pstmt.setString(3, tqVO.getQust_content());
-			pstmt.setInt(4, tqVO.getAnswer());
-			pstmt.setInt(5, tqVO.getProf_number());
-			pstmt.setString(6, tqVO.getCrs_code());
+			pstmt.setInt(1, tqVO.getQust_number());
+			pstmt.setString(2, tqVO.getQust_content());
+			pstmt.setInt(3, tqVO.getAnswer());
+			pstmt.setInt(4, tqVO.getProf_number());
+			pstmt.setString(5, tqVO.getCrs_code());
 
 			while(rs.next()) {
 				if (rs.getInt("QUESTION_NUMBER")==tqVO.getQust_number()) {
-					JOptionPane.showMessageDialog(null, addTest);
+					JOptionPane.showMessageDialog(null, "이미 출제된 번호입니다 번호 " + tqVO.getQust_number()+"번");
+					return;
+				}
+			}
+			
+			pstmt.executeUpdate();
+			JOptionPane.showMessageDialog(null, "시험이 성공적으로 등록되엇습니다.");
+
+		} finally {
+
+			dbCon.dbClose(null, pstmt, con);
+		} // end finally
+
+	}// addtest
+	
+	@SuppressWarnings("resource")
+	public void selectAllTest(TestQustVO tqVO) throws SQLException {
+
+		DbConnection dbCon = DbConnection.getInstance();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			String id = "scott";
+			String pass = "tiger";
+			con = dbCon.getConnection(id, pass);
+			List<Integer> qustNum = new ArrayList<Integer>();
+
+
+			// 1. 문제 id 삽입
+
+//			
+			//----------------------------------
+			String checkTestCode = "select 	QUESTION_NUMBER 		from	 TEST_QUESTION	where COURSE_CODE = ?";
+			pstmt = con.prepareStatement(checkTestCode);
+			pstmt.setString(1,tqVO.getCrs_code());
+			rs = pstmt.executeQuery();
+			
+			
+
+            //----------------------------------
+			String addTest = "select QUESTION_NUMBER from TEST_QUESTION "
+					+ "where prof_number = ? and course_code = ?";
+			
+			pstmt = con.prepareStatement(addTest);
+
+			pstmt.setInt(1, tqVO.getProf_number());
+			pstmt.setString(2, tqVO.getCrs_code());
+
+
+			while(rs.next()) {
+				if (rs.getInt("QUESTION_NUMBER")==tqVO.getQust_number()) {
+					JOptionPane.showMessageDialog(null, "이미 출제된 번호입니다 번호 " + tqVO.getQust_number()+"번");
 					return;
 				}
 			}
