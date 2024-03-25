@@ -116,7 +116,7 @@ public class StdntTestPageEvent extends WindowAdapter implements ActionListener 
 	 * 얻어진 점수를 계산하여 TestPage 테이블의 성취도에 표시하기
 	 * @param score
 	 */
-	public String showGrade(int score) {
+	private String showGrade(int score) {
 		String grade = "";
 		
 		if(score >= 95) {

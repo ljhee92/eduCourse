@@ -20,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
+import eduCourse_prj.VO.ScoreVO;
 import eduCourse_prj.VO.StdntTestVO;
 import eduCourse_prj.student.dao.StdntTestDAO;
 import eduCourse_prj.student.event.StdntTestSlctEvent;
@@ -139,35 +140,16 @@ public class StdntTestSlctDesign extends JDialog {
    		
    		try {
 			List<StdntTestVO> listSTVO = stDAO.slctAllStdntTestList(stdnt_number);
-//			Object rowGrade;
+			Object rowGrade, rowTestFlag;
 			int totalCredit = 0;
 			
 			for(StdntTestVO stVO : listSTVO) {
-//				if(stVO.getScore() >= 95) {
-//					rowGrade = "A+";
-//				} else if(stVO.getScore() >= 90) {
-//					rowGrade = "A";
-//				} else if(stVO.getScore() >= 85) {
-//					rowGrade = "B+";
-//				} else if(stVO.getScore() >= 80) {
-//					rowGrade = "B";
-//				} else if(stVO.getScore() >= 75) {
-//					rowGrade = "C+";
-//				} else if(stVO.getScore() >= 70) {
-//					rowGrade = "C";
-//				} else if(stVO.getScore() >= 65) {
-//					rowGrade = "D+";
-//				} else if(stVO.getScore() >= 60) {
-//					rowGrade = "D";
-//				} else if(stVO.getTest_flag().equals("N") || 
-//						(stVO.getTest_flag().equals("Y") && stVO.getScore() == 0)) {
-//					rowGrade = "";
-//				} else {
-//					rowGrade = "F";
-//				} // end else
+						
+				rowTestFlag = showTestFlag(stdnt_number, stVO); // 점수 유무에 따른 시험활성화 유무
+				rowGrade = showGrade(stVO); // 점수에 따른 성취도 확인
 				
 				Object[] row = {stVO.getDept_name(), stVO.getCourse_name(), stVO.getCourse_code(), stVO.getProf_name(), 
-								stVO.getTest_flag(), stVO.getScore() == 0 ? "" : stVO.getScore(), /*rowGrade*/};
+								rowTestFlag, stVO.getScore() == 0 ? "" : stVO.getScore(), rowGrade};
 
 				dtmTestSlct.addRow(row);
 				
@@ -179,6 +161,59 @@ public class StdntTestSlctDesign extends JDialog {
 			e.printStackTrace();
 		} // end catch
    	} // slctTestReg
+   	
+   	/**
+   	 * 시험에 응시했는지 여부를 판단하여 TestFlag를 결정하는 method
+   	 * @param course_codes
+   	 * @return
+   	 * @throws SQLException 
+   	 */
+   	private Object showTestFlag(int stdnt_number, StdntTestVO stVO) throws SQLException {
+   		Object rowTestFlag = stVO.getTest_flag();
+   		
+   		StdntTestDAO stDAO = StdntTestDAO.getInstance();
+   		
+   		ScoreVO sVO = stDAO.slctScore(stdnt_number, stVO.getCourse_code());
+   		if(sVO != null) {
+   			rowTestFlag = "N";
+   		} // end rowTestFlag
+   		
+   		return rowTestFlag;
+   	} // showTestFlag
+   	
+   	/**
+   	 * VO의 점수에 따라 성취도를 결정하는 method
+   	 * @param stVO
+   	 * @return
+   	 */
+   	private Object showGrade(StdntTestVO stVO) {
+   		Object rowGrade;
+   		
+   		if(stVO.getScore() >= 95) {
+			rowGrade = "A+";
+		} else if(stVO.getScore() >= 90) {
+			rowGrade = "A";
+		} else if(stVO.getScore() >= 85) {
+			rowGrade = "B+";
+		} else if(stVO.getScore() >= 80) {
+			rowGrade = "B";
+		} else if(stVO.getScore() >= 75) {
+			rowGrade = "C+";
+		} else if(stVO.getScore() >= 70) {
+			rowGrade = "C";
+		} else if(stVO.getScore() >= 65) {
+			rowGrade = "D+";
+		} else if(stVO.getScore() >= 60) {
+			rowGrade = "D";
+		} else if(stVO.getTest_flag().equals("N") || 
+				(stVO.getTest_flag().equals("Y") && stVO.getScore() == 0)) {
+			rowGrade = "";
+		} else {
+			rowGrade = "F";
+		} // end else
+   		
+   		return rowGrade;
+   	} // showGrade
 
 	public StdntHomeDesign getShd() {
 		return shd;
