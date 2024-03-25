@@ -70,6 +70,12 @@ public class ScoreVO {
 		return test_date;
 	}
 
+	@Override
+	public String toString() {
+		return "ScoreVO [reg_number=" + reg_number + ", score=" + score + ", std_num=" + std_num + ", prof_id="
+				+ prof_id + ", std_name=" + std_name + ", dept_name=" + dept_name + ", test_date=" + test_date + "]";
+	}
+
 
 	
 	
