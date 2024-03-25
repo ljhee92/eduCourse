@@ -101,7 +101,13 @@ public class AdminAdminMgtMdfyDesign extends JDialog {
 		String admin_id = aamd.getDtmAdminMgt().getValueAt(index, 0).toString();
 		String admin_name = aamd.getDtmAdminMgt().getValueAt(index, 1).toString();
 
-		// 교번, 이름, PW, 이메일, 소속학과 JTF, JPF, ComboBox 추가
+		// 아이디, 이름, PW, JTF, JPF추가
+		
+		
+		
+		
+		
+		
 		jtfAdminId = new JTextField(admin_id);
 		jtfAdminName = new JTextField(admin_name);
 		jpfAdminPass = new JPasswordField();
