@@ -24,6 +24,12 @@ public class AdminAcadCalDAO {
 		return aacDAO;
 	}//getInstance
 	
+	/**
+	 * 해당하는 날짜의 메모를 불러오는 메서드
+	 * @param yearMonthDay
+	 * @return
+	 * @throws SQLException
+	 */
 	public String selectOneCal(String yearMonthDay) throws SQLException{
 		DbConnection dbCon = DbConnection.getInstance();
 		AdminAcadCalVO aacVO = null;
@@ -45,7 +51,6 @@ public class AdminAcadCalDAO {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				memo = rs.getString("schedule_memo");	
-				System.out.println(memo);
 			}
 			
 
@@ -57,6 +62,12 @@ public class AdminAcadCalDAO {
 		return memo; 
 	}
 	
+	/**
+	 * 메모를 저장하는 메서드
+	 * @param memo
+	 * @param yearMonthDay
+	 * @throws SQLException
+	 */
 	public void saveCal(String memo,String yearMonthDay) throws SQLException {
 		DbConnection dbCon = DbConnection.getInstance();
 		AdminAcadCalVO aacVO = null;
@@ -115,6 +126,11 @@ public class AdminAcadCalDAO {
 		} // end finally
 	}
 	
+	/**
+	 * 메모를 삭제하는 메서드
+	 * @param yearMonthDay
+	 * @throws SQLException
+	 */
 	public void deleteCal(String yearMonthDay) throws SQLException {
 		DbConnection dbCon = DbConnection.getInstance();
 		Connection con = null;

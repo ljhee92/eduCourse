@@ -39,6 +39,10 @@ public class AdminAcadCalEvent extends WindowAdapter implements ActionListener{
 			String memoText = aacd.getMemoJta().getText();
 			AdminAcadCalDAO aacDAO = AdminAcadCalDAO.getInstance();
 			try {
+				if(aacd.getDayJl().getText().isEmpty()) {
+					JOptionPane.showMessageDialog(aacd,"날짜를 선택해주세요");
+					return;
+				}
 				if(aacd.getMemoJta().getText().isEmpty()) {
 					JOptionPane.showMessageDialog(aacd, "내용을 입력해주세요");
 					return;
@@ -63,8 +67,12 @@ public class AdminAcadCalEvent extends WindowAdapter implements ActionListener{
 			String yearMonthDay = selectedYear+""+selectedMonth+""+selectedDay;
 			
 			try {
-				if(aacd.getMemoJta().getText().isEmpty()) {
-					JOptionPane.showMessageDialog(aacd,"삭제할 내용이 없습니다");
+				if(aacd.getDayJl().getText().isEmpty()) {
+					JOptionPane.showMessageDialog(aacd,"날짜를 선택해주세요");
+					return;
+				}
+				if(aacDAO.selectOneCal(yearMonthDay).isEmpty()) {
+					JOptionPane.showMessageDialog(aacd,"해당 날짜에 저장된 메모가 없습니다");
 					return;
 				}
 				 int result = JOptionPane.showConfirmDialog(aacd, "삭제하시겠습니까?", "확인", JOptionPane.YES_NO_OPTION);
