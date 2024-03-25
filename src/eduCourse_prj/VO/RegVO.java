@@ -16,6 +16,11 @@ public class RegVO {
 	public RegVO() {
 	}
 
+	public RegVO(int register_number) {
+		super();
+		this.register_number = register_number;
+	}
+
 	public RegVO(int stdnt_number, String course_code) {
 		this.stdnt_number = stdnt_number;
 		this.course_code = course_code;
