@@ -85,7 +85,7 @@ public class ProfScoreEvent extends WindowAdapter implements ActionListener {
 	            for (ScoreVO sVO : listScoreVO) {
 	            	rowGrade = showGrade(sVO); // 점수에 따른 성취도 확인
 	            	
-	                Object[] row = {sVO.getStd_num(), sVO.getStd_name(), sVO.getDept_name(), sVO.getScore(), rowGrade};
+	                Object[] row = {sVO.getCourse_name(), sVO.getStd_num(), sVO.getStd_name(), sVO.getDept_name(), sVO.getScore(), rowGrade};
 	                psd.getDtmScore().addRow(row);
 	            }
 	        } catch (SQLException e) {
