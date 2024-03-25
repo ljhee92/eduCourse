@@ -405,6 +405,65 @@ public class ProfDAO {
 		return courses;
 	}//slctProfCrs
 	
+	
+	
+	/**
+	 * 교수  > 교수가 속한 학과의 과목중 lecture테이블에 존재하지않는 과목을 조회하기 위한 메서드
+	 * @param prof_number
+	 * @throws SQLException
+	 */
+	public List<CrsVO> slctNotLectCrs(int prof_number)throws SQLException{
+		DbConnection dbCon = DbConnection.getInstance();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		CrsVO cVO = null;
+		List<CrsVO>courses = null;
+		try {
+
+			String id = "scott";
+			String pass = "tiger";
+
+			con = dbCon.getConnection(id, pass);
+
+			String slctCrsQuery = ("	select dept_name,dept_code,course_name,course_code	")+
+					("	from(SELECT d.dept_name, d.dept_code, c.course_name, c.course_code	")+
+							("	FROM professor p	")+
+							("	JOIN dept d ON p.dept_code = d.dept_code	")+
+							("	JOIN course c ON d.dept_code = c.dept_code	")+
+							("	WHERE p.prof_number = ? and course_delete_flag = 'N')	")+
+						("	where course_code not in(select course_code from Lecture)	");
+
+	        pstmt = con.prepareStatement(slctCrsQuery);
+	        pstmt.setInt(1, prof_number);
+	        rs = pstmt.executeQuery();
+	        String deptName = "", courseName="", courseCode = "";
+	        int deptCode = 0;
+	        courses = new ArrayList<CrsVO>();
+	        while (rs.next()) {
+	        	deptName = rs.getString("dept_name");
+	        	deptCode = rs.getInt("dept_code");
+	        	courseName = rs.getString("course_name");
+	        	courseCode = rs.getString("course_code");
+	        	cVO = new CrsVO(courseCode, courseName, deptName, deptCode);
+	        	courses.add(cVO);
+	        }
+		} finally {
+			dbCon.dbClose(rs, pstmt, con);
+		}
+		return courses;
+	}//slctProfCrs
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 * 관리자모드에서  학과,교번으로 교수를 검색하는 DAO
 	 * @param dept_code //학번코드
