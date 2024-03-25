@@ -217,5 +217,45 @@ public class StdntTestDAO {
 			dbCon.dbClose(null, pstmt, con);
 		} // end finally
 	} // insertScore
+	
+	/**
+	 * 학생의 시험 응시 여부를 확인하기 위해 점수 테이블을 조회하는 method
+	 * @return
+	 * @throws SQLException
+	 */
+	public ScoreVO slctScore(int stdnt_number, String course_code) throws SQLException { 
+		ScoreVO sVO = null;
+		
+		DbConnection dbCon = DbConnection.getInstance();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String id = "scott";
+			String pass = "tiger";
+			con = dbCon.getConnection(id, pass);
+			
+			StringBuilder slctOneScore = new StringBuilder();
+			slctOneScore.append("select r.register_number, s.score ")
+						.append("from register r ")
+						.append("join score s on s.register_number = r.register_number ")
+						.append("where r.std_number = ? and r.course_code = ?");
+			
+			pstmt = con.prepareStatement(slctOneScore.toString());
+			pstmt.setInt(1, stdnt_number);
+			pstmt.setString(2, course_code);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				sVO = new ScoreVO(rs.getInt("register_number"), rs.getInt("score"));
+			} // end if
+		} finally {
+			dbCon.dbClose(rs, pstmt, con);
+		} // end finally
+		return sVO;
+	} // slctScore
 
 } // class

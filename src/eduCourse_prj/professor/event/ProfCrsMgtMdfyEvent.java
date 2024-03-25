@@ -37,7 +37,7 @@ public class ProfCrsMgtMdfyEvent extends WindowAdapter implements ActionListener
 				String lect_room = pcmmd.getJcbLectRoom().getSelectedItem().toString();
 				int capacity = Integer.parseInt(pcmmd.getJtfCapa().getText());
 				
-				LectureVO ltVO = new LectureVO(prof_number, course_code, capacity, 0, null, lect_room);
+				LectureVO ltVO = new LectureVO(prof_number, course_code, capacity, 0, null, lect_room, null);
 				
 				cmrDAO.updateLect(ltVO);
 				JOptionPane.showMessageDialog(pcmmd, pcmmd.getJtfCrsName().getText() + " 과목을 수정했습니다.");

@@ -8,6 +8,7 @@ public class LectureVO {
 	private int capacited;
 	private String lect_delete_flag;
 	private String lect_room;
+	private String test_flag;
 	
 	public LectureVO() {
 	}
@@ -16,15 +17,15 @@ public class LectureVO {
 		this.course_code = course_code;
 	}
 	
-
 	public LectureVO(int prof_number, String course_code, int capacity, int capacited, String lect_delete_flag,
-			String lect_room) {
+			String lect_room, String test_flag) {
 		this.prof_number = prof_number;
 		this.course_code = course_code;
 		this.capacity = capacity;
 		this.capacited = capacited;
 		this.lect_delete_flag = lect_delete_flag;
 		this.lect_room = lect_room;
+		this.test_flag = test_flag;
 	}
 
 	public int getProf_number() {
@@ -51,11 +52,15 @@ public class LectureVO {
 		return lect_room;
 	}
 
+	public String getTest_flag() {
+		return test_flag;
+	}
+
 	@Override
 	public String toString() {
 		return "LectureVO [prof_number=" + prof_number + ", course_code=" + course_code + ", capacity=" + capacity
 				+ ", capacited=" + capacited + ", lect_delete_flag=" + lect_delete_flag + ", lect_room=" + lect_room
-				+ "]";
+				+ ", test_flag=" + test_flag + "]";
 	}
-	
+
 } // class
