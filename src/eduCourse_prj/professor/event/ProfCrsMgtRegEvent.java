@@ -56,6 +56,7 @@ public class ProfCrsMgtRegEvent extends WindowAdapter implements ActionListener 
 			
 			try {
 				cVO = cmrDAO.slctOneCrsCode(course_name);
+
 				if(cVO != null) {
 					JOptionPane.showMessageDialog(pcmrd, cVO.getCourName() + "은 기등록된 과목입니다.");
 					return;
