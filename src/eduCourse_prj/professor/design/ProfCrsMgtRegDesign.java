@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import eduCourse_prj.VO.CrsVO;
@@ -118,9 +119,13 @@ public class ProfCrsMgtRegDesign extends JDialog {
 			jcbLectRoom = new JComboBox<String>(lectRooms);
 			jtfCredit = new JTextField();
 			jtfCapa = new JTextField();
+		} catch(IndexOutOfBoundsException e) {
+			JOptionPane.showMessageDialog(pcmd, "등록 가능한 과목이 없습니다.");
+			e.printStackTrace();
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(pcmd, "SQL문제가 발생했습니다.");
 			e.printStackTrace();
 		} // end catch
 		
