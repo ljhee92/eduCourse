@@ -83,7 +83,7 @@ public class StdntCrsRegDesign2 extends JDialog {
         outerPanel1.setLayout(new GridBagLayout()); // 외부패널1 GridBagLayout으로 변경
         jlTopLogin = new JLabel(shd.getTopLogin().getText());
         jlTopLogin.setFont(font);
-        jlTopLogin.setForeground(Color.RED);
+        jlTopLogin.setForeground(Color.WHITE);
         jlTopLogin.setBounds(720, 15, 200, 20);
         
         add(jlTopLogin);

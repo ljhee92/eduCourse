@@ -75,4 +75,7 @@ public class StdntTestDAO {
 		return listSTVO;
 	} // slctAllStdntTestList
 
+		
+	
+
 } // class
