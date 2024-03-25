@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import eduCourse_prj.VO.ScoreVO;
+import eduCourse_prj.VO.StdntTestVO;
 import eduCourse_prj.professor.dao.ScoreDAO;
 import eduCourse_prj.professor.design.ProfScoreDesign;
 
@@ -79,9 +80,12 @@ public class ProfScoreEvent extends WindowAdapter implements ActionListener {
 	            }
 	            
 //	        	listScoreVO = sDAO.slctAllScore();
+	            Object rowGrade;
 
 	            for (ScoreVO sVO : listScoreVO) {
-	                Object[] row = {sVO.getStd_num(), sVO.getStd_name(), sVO.getDept_name(), sVO.getScore()};
+	            	rowGrade = showGrade(sVO); // 점수에 따른 성취도 확인
+	            	
+	                Object[] row = {sVO.getStd_num(), sVO.getStd_name(), sVO.getDept_name(), sVO.getScore(), rowGrade};
 	                psd.getDtmScore().addRow(row);
 	            }
 	        } catch (SQLException e) {
@@ -104,5 +108,35 @@ public class ProfScoreEvent extends WindowAdapter implements ActionListener {
 
 	}
 
+	/**
+   	 * VO의 점수에 따라 성취도를 결정하는 method
+   	 * @param stVO
+   	 * @return
+   	 */
+   	private Object showGrade(ScoreVO sVO) {
+   		Object rowGrade;
+   		
+   		if(sVO.getScore() >= 95) {
+			rowGrade = "A+";
+		} else if(sVO.getScore() >= 90) {
+			rowGrade = "A";
+		} else if(sVO.getScore() >= 85) {
+			rowGrade = "B+";
+		} else if(sVO.getScore() >= 80) {
+			rowGrade = "B";
+		} else if(sVO.getScore() >= 75) {
+			rowGrade = "C+";
+		} else if(sVO.getScore() >= 70) {
+			rowGrade = "C";
+		} else if(sVO.getScore() >= 65) {
+			rowGrade = "D+";
+		} else if(sVO.getScore() >= 60) {
+			rowGrade = "D";
+		} else {
+			rowGrade = "F";
+		} // end else
+   		
+   		return rowGrade;
+   	} // showGrade
 
 }
