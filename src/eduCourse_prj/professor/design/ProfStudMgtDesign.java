@@ -89,7 +89,7 @@ public class ProfStudMgtDesign extends JDialog {
 
 		jlstdNum = new JLabel("학번");
 		jlstdNum.setFont(font);
-		jlstdNum.setBounds(240, 190, 50, 20);
+		jlstdNum.setBounds(240, 150, 50, 20);
 		add(jlstdNum);
 
 	
@@ -100,7 +100,7 @@ public class ProfStudMgtDesign extends JDialog {
 
 		jtfStdNum = new JTextField();
 		jtfStdNum.setFont(font);
-		jtfStdNum.setBounds(280, 185, 200, 30);
+		jtfStdNum.setBounds(280, 145, 200, 30);
 		add(jtfStdNum);
 
 		///////////////////////////////////////////////////////////////////
