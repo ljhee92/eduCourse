@@ -12,7 +12,7 @@ public class CrsVO {
 	public CrsVO() {
 		super();
 	}
-	
+
 	public CrsVO(String courCode, String courName) {
 		super();
 		this.courCode = courCode;
@@ -25,7 +25,7 @@ public class CrsVO {
 		this.courName = courName;
 		this.deptName = deptName;
 	}
-	
+
 	public CrsVO(String courCode, String courName, String deptName, int deptCode) {
 		super();
 		this.courCode = courCode;
@@ -33,7 +33,7 @@ public class CrsVO {
 		this.deptName = deptName;
 		this.deptCode = deptCode;
 	}
-	
+
 	public CrsVO(String courCode, String courName, int creditHour, int deptCode) {
 		super();
 		this.courCode = courCode;
@@ -52,7 +52,6 @@ public class CrsVO {
 		CourDelFlag = courDelFlag;
 		this.deptCode = deptCode;
 	}
-	
 
 	public CrsVO(String courCode, String courName, int creditHour, int deptCode, String deptName) {
 		super();
@@ -74,19 +73,19 @@ public class CrsVO {
 		this.deptCode = deptCode;
 		this.deptName = deptName;
 	}
-	
+
 	public CrsVO(String courCode, String courName, int creditHour) {
 		super();
 		this.courCode = courCode;
 		this.courName = courName;
 		this.creditHour = creditHour;
 	}
-	
+
 	public void profCrsVO(String deptName, String courName) {
 		this.deptName = deptName;
 		this.courName = courName;
 	}
-		
+
 	public String getDeptName() {
 		return deptName;
 	}
@@ -115,10 +114,17 @@ public class CrsVO {
 		return deptCode;
 	}
 
+//	@Override
+//	public String toString() {
+//		return "CrsVO [courCode=" + courCode + ", courName=" + courName + ", creditHour=" + creditHour
+//				+ ", courInputDate=" + courInputDate + ", CourDelFlag=" + CourDelFlag + ", deptCode=" + deptCode
+//				+ ", deptName=" + deptName + "]";
+//	}
 	@Override
 	public String toString() {
 		return "CrsVO [courCode=" + courCode + ", courName=" + courName + ", creditHour=" + creditHour
-				+ ", courInputDate=" + courInputDate + ", CourDelFlag=" + CourDelFlag + ", deptCode=" + deptCode + "]";
+				+ ", courInputDate=" + courInputDate + ", CourDelFlag=" + CourDelFlag + ", deptCode=" + deptCode
+				+ ", deptName=" + deptName + "]";
 	}
 
 }

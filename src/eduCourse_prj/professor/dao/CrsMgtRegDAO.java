@@ -152,6 +152,7 @@ public class CrsMgtRegDAO {
 			pstmt.setString(1, CrsName);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
+				System.out.println(cVO);
 				cVO = new CrsVO(rs.getString("course_code"), CrsName, rs.getInt("credit_hours"));
 			} // end if
 		} finally {
