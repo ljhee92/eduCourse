@@ -49,7 +49,7 @@ public class StdntTestDAO {
 			con = dbCon.getConnection(id, pass);
 			
 			StringBuilder slctAllStdntTestList = new StringBuilder();
-			slctAllStdntTestList.append("select d.dept_name, c.course_name, r.course_code, p.prof_name, l.test_flag, s.score ")
+			slctAllStdntTestList.append("select d.dept_name, c.course_name, r.course_code, p.prof_name, l.test_flag, s.score, c.credit_hours ")
 								.append("from register r ")
 								.append("join course c on c.course_code = r.course_code ")
 								.append("join dept d on d.dept_code = c.dept_code ")
@@ -65,7 +65,7 @@ public class StdntTestDAO {
 			
 			while(rs.next()) {
 				stVO = new StdntTestVO(rs.getString("dept_name"), rs.getString("course_name"), rs.getString("course_code"), 
-									 rs.getString("prof_name"), rs.getString("test_flag"), rs.getInt("score"));
+									 rs.getString("prof_name"), rs.getString("test_flag"), rs.getInt("score"), rs.getInt("credit_hours"));
 				listSTVO.add(stVO);
 			} // end while
 		} finally {

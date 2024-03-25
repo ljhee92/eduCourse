@@ -99,7 +99,7 @@ public class StdntTestSlctDesign extends JDialog {
 		jsp.setBounds(10, 110, 967, 330);
 		add(jsp);
 		
-		// 테이블에 DB 추가
+		// 테이블과 하단 학점 라벨에 DB 추가
 		slctTestReg();
 		
 		// 이벤트 클래스 연결
@@ -130,7 +130,7 @@ public class StdntTestSlctDesign extends JDialog {
    	} // setTbHorizontal
    	
    	/**
-   	 * 테이블에 시험 응시를 위한 수강 과목을 추가하는 일
+   	 * 테이블에 시험 응시를 위한 수강 과목을 추가하고, 하단 학점 라벨에 학점의 합을 추가하는 method
    	 */
    	public void slctTestReg() {
    		StdntTestDAO stDAO = StdntTestDAO.getInstance();
@@ -139,10 +139,10 @@ public class StdntTestSlctDesign extends JDialog {
    		
    		try {
 			List<StdntTestVO> listSTVO = stDAO.slctAllStdntTestList(stdnt_number);
-			
 			Object rowGrade;
+			int totalCredit = 0;
+			
 			for(StdntTestVO stVO : listSTVO) {
-				
 				if(stVO.getScore() >= 95) {
 					rowGrade = "A+";
 				} else if(stVO.getScore() >= 90) {
@@ -159,7 +159,8 @@ public class StdntTestSlctDesign extends JDialog {
 					rowGrade = "D+";
 				} else if(stVO.getScore() >= 60) {
 					rowGrade = "D";
-				} else if(stVO.getTest_flag().equals("N")) {
+				} else if(stVO.getTest_flag().equals("N") || 
+						(stVO.getTest_flag().equals("Y") && stVO.getScore() == 0)) {
 					rowGrade = "";
 				} else {
 					rowGrade = "F";
@@ -169,7 +170,10 @@ public class StdntTestSlctDesign extends JDialog {
 								stVO.getTest_flag(), stVO.getScore() == 0 ? "" : stVO.getScore(), rowGrade};
 
 				dtmTestSlct.addRow(row);
+				
+				totalCredit += stVO.getCredit_hours();
 			} // end for
+			jlAllCreditHour.setText(String.valueOf(totalCredit));
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(shd, "SQL 문제가 발생했습니다.");
 			e.printStackTrace();
