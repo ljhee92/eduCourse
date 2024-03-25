@@ -63,8 +63,8 @@ public class AdminAcadCalEvent extends WindowAdapter implements ActionListener{
 			String yearMonthDay = selectedYear+""+selectedMonth+""+selectedDay;
 			
 			try {
-				if(aacd.getMemoJta().getText().isEmpty()) {
-					JOptionPane.showMessageDialog(aacd,"삭제할 내용이 없습니다");
+				if(aacDAO.selectOneCal(yearMonthDay).isEmpty()) {
+					JOptionPane.showMessageDialog(aacd,"해당 날짜에 저장된 메모가 없습니다");
 					return;
 				}
 				 int result = JOptionPane.showConfirmDialog(aacd, "삭제하시겠습니까?", "확인", JOptionPane.YES_NO_OPTION);
