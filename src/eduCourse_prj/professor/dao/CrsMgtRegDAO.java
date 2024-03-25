@@ -179,8 +179,8 @@ public class CrsMgtRegDAO {
 			con = dbCon.getConnection(id, pass);
 			
 			StringBuilder insertLect = new StringBuilder();
-			insertLect.append("insert into lecture(prof_number, course_code, capacity, lect_room) ")
-					 .append("values(?, ?, ?, ?)");
+			insertLect.append("insert into lecture(prof_number, course_code, capacity, lect_room, test_flag) ")
+					 .append("values(?, ?, ?, ?, 'N')");
 			
 			pstmt = con.prepareStatement(insertLect.toString());
 			
@@ -213,7 +213,7 @@ public class CrsMgtRegDAO {
 			
 			con = dbCon.getConnection(id, pass);
 			
-			String deleteLect = "update lecture set lect_delete_flag = 'Y' where prof_number = ? and course_code = ?";
+			String deleteLect = "update lecture set test_flag = 'N', lect_delete_flag = 'Y' where prof_number = ? and course_code = ?";
 			pstmt = con.prepareStatement(deleteLect);
 			
 			pstmt.setInt(1, prof_number);
