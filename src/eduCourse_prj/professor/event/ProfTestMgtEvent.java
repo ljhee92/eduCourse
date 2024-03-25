@@ -34,6 +34,10 @@ public class ProfTestMgtEvent extends WindowAdapter implements ActionListener, L
 		if(ae.getSource() == ptmd.getJbtnTestReg()) {
 			JOptionPane.showMessageDialog(ptmd, "등록버튼 클릭");
 			int seletedRow = ptmd.getJtbTestMgt().getSelectedRow();
+			if(seletedRow  == -1) {
+				JOptionPane.showMessageDialog(ptmd, "시험을 출제할 과목을 선택해주세요");
+				return;
+			}
 			String seletedValue = (String) ptmd.getJtbTestMgt().getValueAt(seletedRow,2);
 			if(seletedValue.equals("출제완료")) {
 				JOptionPane.showMessageDialog(ptmd,"이미 출제 완료된 시험입니다\n     <수정가능>");
