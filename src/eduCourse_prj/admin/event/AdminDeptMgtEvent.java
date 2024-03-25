@@ -57,7 +57,7 @@ public class AdminDeptMgtEvent extends JDialog implements ActionListener{
 				output.append("학과 코드: ").append(dDTO.getDept_code()).append("\n");
 				output.append("학과: ").append(dDTO.getDept_name()).append("\n");
 				List<String> professors = dDTO.getProf_name();  	//교수 이름 목록을 받기위한 리스트 생성
-				output.append("담당교수: ");					
+				output.append("소속교수: ");					
 				for(String prof : professors) { // stringbuilder에 교수 이름 추가
 				    output.append(profCnt).append(". ").append(prof).append(" ");
 				    profCnt++;
