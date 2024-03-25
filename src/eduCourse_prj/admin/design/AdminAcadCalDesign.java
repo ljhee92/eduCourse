@@ -410,6 +410,71 @@ public class AdminAcadCalDesign extends JDialog {
 	public int getMemoday() {
 		return memoday;
 	}
+	
+	public AdminHomeDesign getAwd() {
+		return awd;
+	}
+
+
+	public JLabel getJlBack() {
+		return jlBack;
+	}
+
+
+	public JLabel getJlBanner() {
+		return jlBanner;
+	}
+
+
+	public JLabel getYearJl() {
+		return yearJl;
+	}
+
+
+	public JLabel getYearJl2() {
+		return yearJl2;
+	}
+
+
+	public JLabel getMonthJl() {
+		return monthJl;
+	}
+
+
+	public JLabel getMonthJl2() {
+		return monthJl2;
+	}
+
+
+	public JLabel getDayJl() {
+		return dayJl;
+	}
+
+
+	public JLabel getDayJl2() {
+		return dayJl2;
+	}
+
+
+	public int getButtonIndex() {
+		return buttonIndex;
+	}
+
+
+	public int getCnt() {
+		return cnt;
+	}
+
+
+	public AdminAcadCalDAO getAacDAO() {
+		return aacDAO;
+	}
+
+
+	public String getYearMonthDay() {
+		return yearMonthDay;
+	}
+
 
 	public JButton getSearchBtn() {
 		return searchBtn;

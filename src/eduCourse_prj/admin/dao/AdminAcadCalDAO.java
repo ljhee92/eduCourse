@@ -51,7 +51,6 @@ public class AdminAcadCalDAO {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				memo = rs.getString("schedule_memo");	
-				System.out.println(memo);
 			}
 			
 
