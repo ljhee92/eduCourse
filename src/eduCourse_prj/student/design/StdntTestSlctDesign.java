@@ -139,35 +139,35 @@ public class StdntTestSlctDesign extends JDialog {
    		
    		try {
 			List<StdntTestVO> listSTVO = stDAO.slctAllStdntTestList(stdnt_number);
-			Object rowGrade;
+//			Object rowGrade;
 			int totalCredit = 0;
 			
 			for(StdntTestVO stVO : listSTVO) {
-				if(stVO.getScore() >= 95) {
-					rowGrade = "A+";
-				} else if(stVO.getScore() >= 90) {
-					rowGrade = "A";
-				} else if(stVO.getScore() >= 85) {
-					rowGrade = "B+";
-				} else if(stVO.getScore() >= 80) {
-					rowGrade = "B";
-				} else if(stVO.getScore() >= 75) {
-					rowGrade = "C+";
-				} else if(stVO.getScore() >= 70) {
-					rowGrade = "C";
-				} else if(stVO.getScore() >= 65) {
-					rowGrade = "D+";
-				} else if(stVO.getScore() >= 60) {
-					rowGrade = "D";
-				} else if(stVO.getTest_flag().equals("N") || 
-						(stVO.getTest_flag().equals("Y") && stVO.getScore() == 0)) {
-					rowGrade = "";
-				} else {
-					rowGrade = "F";
-				} // end else
+//				if(stVO.getScore() >= 95) {
+//					rowGrade = "A+";
+//				} else if(stVO.getScore() >= 90) {
+//					rowGrade = "A";
+//				} else if(stVO.getScore() >= 85) {
+//					rowGrade = "B+";
+//				} else if(stVO.getScore() >= 80) {
+//					rowGrade = "B";
+//				} else if(stVO.getScore() >= 75) {
+//					rowGrade = "C+";
+//				} else if(stVO.getScore() >= 70) {
+//					rowGrade = "C";
+//				} else if(stVO.getScore() >= 65) {
+//					rowGrade = "D+";
+//				} else if(stVO.getScore() >= 60) {
+//					rowGrade = "D";
+//				} else if(stVO.getTest_flag().equals("N") || 
+//						(stVO.getTest_flag().equals("Y") && stVO.getScore() == 0)) {
+//					rowGrade = "";
+//				} else {
+//					rowGrade = "F";
+//				} // end else
 				
 				Object[] row = {stVO.getDept_name(), stVO.getCourse_name(), stVO.getCourse_code(), stVO.getProf_name(), 
-								stVO.getTest_flag(), stVO.getScore() == 0 ? "" : stVO.getScore(), rowGrade};
+								stVO.getTest_flag(), stVO.getScore() == 0 ? "" : stVO.getScore(), /*rowGrade*/};
 
 				dtmTestSlct.addRow(row);
 				

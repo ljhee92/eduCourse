@@ -2,11 +2,15 @@ package eduCourse_prj.student.design;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -14,6 +18,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import eduCourse_prj.VO.TestPageVO;
+import eduCourse_prj.student.dao.StdntTestDAO;
 import eduCourse_prj.student.event.StdntTestPageEvent;
 
 public class StdntTestPageDesign extends JDialog {
@@ -59,26 +65,22 @@ public class StdntTestPageDesign extends JDialog {
 		add(jbtnSubmit);
 		
 		// 테이블 추가
-		String[] testPageColumn = {"번호", "문제", "답"};
+		String[] testPageColumn = {"번호", "문제", "선택1", "선택2", "선택3", "선택4", "답"};
 		
 		dtmTestPage = new DefaultTableModel(testPageColumn, 0) {
 			public boolean isCellEditable(int row, int column){
-			    return column == 2; // "답" 열만 셀 수정 가능하도록 설정
+			    return column == 6; // "답" 열만 셀 수정 가능하도록 설정
 			} // isCellEditable
 		};
 		
 		jtbTestPage = new JTable(dtmTestPage);
 		JScrollPane jsp = new JScrollPane(jtbTestPage);
 		
-		////// 답 열만 셀 수정 가능한지 테스트용 ////
-		Object[] test = {"1", "문제임", ""};
-		dtmTestPage.addRow(test);
-		/////////////////////////////////
-		
 		// 테이블 컬럼 가운데 정렬
 		setTbHorizontal();
 		
-		jsp.setBounds(10, 150, 967, 250);
+		jtbTestPage.setRowHeight(30); // 행 높이 조절
+		jsp.setBounds(10, 150, 967, 300);
 		add(jsp);
 		
 		// 테이블에 시험 문제 번호와 추가
@@ -114,7 +116,26 @@ public class StdntTestPageDesign extends JDialog {
 	 * 테이블에 시험 문제 번호와 문제를 추가하는 method
 	 */
 	public void slctTestContent() {
+		StdntTestDAO stDAO = StdntTestDAO.getInstance();
 		
+		int index = stsd.getJtbTestSlct().getSelectedRow();
+		String course_name = stsd.getJtbTestSlct().getValueAt(index, 2).toString();
+		
+		List<TestPageVO> listTPVO = new ArrayList<TestPageVO>();
+		
+		try {
+			listTPVO = stDAO.slctTestPage(course_name);
+			
+			for(TestPageVO tpVO : listTPVO) {
+				Object[] row = {tpVO.getQuestion_number(), tpVO.getQuestion_split_content(), 
+						tpVO.getOption1(), tpVO.getOption2(), tpVO.getOption3(), tpVO.getOption4()};
+				
+				dtmTestPage.addRow(row);
+			} // end for
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(stsd, "SQL 예외가 발생했습니다.");
+			e.printStackTrace();
+		} // end catch
 	} // slctTestContent
     
 	public StdntTestSlctDesign getStsd() {
