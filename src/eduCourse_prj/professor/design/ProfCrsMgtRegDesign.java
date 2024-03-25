@@ -104,7 +104,7 @@ public class ProfCrsMgtRegDesign extends JDialog {
 		
 		ProfDAO pDAO = ProfDAO.getInstance();
 		try {
-			List<CrsVO> listCVO = pDAO.slctProfCrs(Integer.parseInt(pcmd.getPhd().getlVO().getId()));
+			List<CrsVO> listCVO = pDAO.slctNotLectCrs(Integer.parseInt(pcmd.getPhd().getlVO().getId()));
 			jcbCrsName = new JComboBox<String>();
 			
 			for(CrsVO cVO : listCVO) {
