@@ -53,16 +53,15 @@ public class ProfTestRegDesign extends JDialog {
 	
 
 	public ProfTestRegDesign(ProfTestMgtDesign ptmd, String title) {
-		super();
-		this.ptmd = this.ptmd;
+		super(ptmd, title, true);
+		this.ptmd = ptmd;
 
 		
-			this.ptmd = ptmd;
 			String commonPath = "src/eduCourse_prj/image/common/";
 			String testPath = "src/eduCourse_prj/image/prof/";
 
 			setSize(1000, 650);
-//			setLocationRelativeTo(ptmd);
+			setLocationRelativeTo(ptmd);
 			setModal(true);
 			setLayout(null);
 	//-------------------------------배경 추가--------------------------------------
@@ -77,10 +76,10 @@ public class ProfTestRegDesign extends JDialog {
 			
 	//===============================라벨 추가======================================
 	//------------------------------header Label------------------------------------		
-			topLogin = new JLabel(ptmd.getPhd().getlVO().getName() + " 교수 로그인 중");
+			topLogin = new JLabel(ptmd.getPhd().getlVO().getName() + " 교수님 로그인 중");
 			Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
 			topLogin.setFont(font);
-			topLogin.setForeground(Color.GREEN);
+			topLogin.setForeground(Color.WHITE);
 			topLogin.setBounds(670, 30, 200, 20);
 			add(topLogin);
 			
