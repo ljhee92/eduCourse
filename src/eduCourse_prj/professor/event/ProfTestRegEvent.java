@@ -19,16 +19,19 @@ import eduCourse_prj.admin.design.AdminDeptMgtRegDesign;
 import eduCourse_prj.professor.dao.CrsMgtRegDAO;
 import eduCourse_prj.professor.dao.ProfDAO;
 import eduCourse_prj.professor.dao.TestDAO;
+import eduCourse_prj.professor.design.ProfTestMgtDesign;
 import eduCourse_prj.professor.design.ProfTestRegDesign;
 import oracle.security.o3logon.a;
 
 public class ProfTestRegEvent extends WindowAdapter implements ActionListener {
 	ProfTestRegDesign ptrd;
+	ProfTestMgtDesign ptmd;
 	CrsVO cVO = null;
 	ProfDAO pDAO = ProfDAO.getInstance();
 
-	public ProfTestRegEvent(ProfTestRegDesign ptrd) {
+	public ProfTestRegEvent(ProfTestRegDesign ptrd,ProfTestMgtDesign ptmd) {
 		this.ptrd = ptrd;
+		this.ptmd = ptmd;
 
 	}
 	@Override
@@ -105,6 +108,9 @@ public class ProfTestRegEvent extends WindowAdapter implements ActionListener {
 		        if (courNum.size()==10) {
 					JOptionPane.showMessageDialog(ptrd, "출제가 완료되었습니다");
 					ptrd.dispose();
+					ptmd.getDtmTestMgt().setRowCount(0);
+					ptmd.slctTestMgt();
+					
 				}else {
 			        ptrd.getTestNumberComboBox().removeItem(questionNumber);
 			        ptrd.getTestNumberComboBox().removeAllItems(); // 콤보 박스의 모든 아이템 삭제
@@ -148,7 +154,7 @@ public class ProfTestRegEvent extends WindowAdapter implements ActionListener {
 		}
 
 	}
-	
+
 
 }
 

@@ -200,7 +200,7 @@ public class ProfTestRegDesign extends JDialog {
 	//-------------------------------event관계 설정----------------------------------         
 	/////////////////////////////////////////////////////////////////////////////////
 
-			ProfTestRegEvent admre = new ProfTestRegEvent(this);
+			ProfTestRegEvent admre = new ProfTestRegEvent(this,ptmd);
 			addWindowListener(admre);
 			registerButton.addActionListener(admre);
 			cancelButton.addActionListener(admre);
