@@ -27,7 +27,7 @@ public class ProfTestMgtEvent extends WindowAdapter implements ActionListener, L
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getSource() == ptmd.getJbtnTestMdfy()) {
 			JOptionPane.showMessageDialog(ptmd, "수정버튼 클릭");
-			new ProfTestMdfyDesign(ptmd, null);
+			new ProfTestMdfyDesign(ptmd, "시험 문제 수정");
 			
 		}
 		
@@ -43,7 +43,7 @@ public class ProfTestMgtEvent extends WindowAdapter implements ActionListener, L
 				JOptionPane.showMessageDialog(ptmd,"이미 출제 완료된 시험입니다\n     <수정가능>");
 				return;
 			}
-			new ProfTestRegDesign(ptmd, null);
+			new ProfTestRegDesign(ptmd, "시험 문제 출제");
 		}
 		//////////////////////////활성화 버튼 클릭시///////////////////////////
 		if(ae.getSource() == ptmd.getJrbtnEnable()) {

@@ -136,7 +136,7 @@ public class ProfScoreDesign extends JDialog{
 		/////////////////////////////////////////////////////////////////////
 
 		// 테이블 추가
-		String[] tempColumn = { "학번", "이름", "학과", "점수", "성취도" };
+		String[] tempColumn = {"과목명", "학번", "이름", "학과", "점수", "성취도" };
 		dtmScore = new DefaultTableModel(tempColumn, 0) {
 			public boolean isCellEditable(int row, int column) {
 				return false; // 테이블 셀 수정 불가하도록 설정
