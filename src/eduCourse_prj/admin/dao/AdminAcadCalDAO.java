@@ -54,7 +54,7 @@ public class AdminAcadCalDAO {
 			dbCon.dbClose(rs, pstmt, con);
 
 		} // end finally
-		return memo; ///////////////수정생각해야됨
+		return memo; 
 	}
 	
 	public void saveCal(String memo,String yearMonthDay) throws SQLException {

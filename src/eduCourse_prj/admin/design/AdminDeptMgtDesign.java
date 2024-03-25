@@ -46,7 +46,7 @@ public class AdminDeptMgtDesign extends JDialog {
 		topLogin = new JLabel(awd.getlVO().getName() + " 관리자님 로그인 중");
 		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
 		topLogin.setFont(font);
-		topLogin.setForeground(Color.RED);
+		topLogin.setForeground(Color.WHITE);
 		topLogin.setBounds(670, 30, 200, 20);
 		add(topLogin);
 		

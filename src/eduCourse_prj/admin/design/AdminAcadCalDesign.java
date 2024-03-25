@@ -49,7 +49,8 @@ public class AdminAcadCalDesign extends JDialog {
 	private int year, month, day, todays, memoday = 0;
 	private int buttonIndex;
 	private int cnt;
-
+	AdminAcadCalDAO aacDAO = AdminAcadCalDAO.getInstance();
+	String yearMonthDay = "";
 	public AdminAcadCalDesign(AdminHomeDesign awd, String title) {
 		super(awd, title, true);
 		this.awd = awd;
@@ -153,17 +154,20 @@ public class AdminAcadCalDesign extends JDialog {
 				    yearJl.setText(Integer.toString(year));
 				    monthJl.setText(Integer.toString(month));
 				    dayJl.setText(Integer.toString(day));
-					String dayMonthYear = year+""+month+""+day;
-					AdminAcadCalDAO aacDAO = AdminAcadCalDAO.getInstance();
+				    yearMonthDay = year+""+month+""+day;
 					try {
-						memoJta.setText(aacDAO.selectOneCal(dayMonthYear));
+						memoJta.setText(aacDAO.selectOneCal(yearMonthDay));
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
 				}
 			});
 		}
-		calSet();
+		try {
+			calSet();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 		calJp.setBounds(70, 240, 350, 280);
 		
@@ -249,7 +253,7 @@ public class AdminAcadCalDesign extends JDialog {
 	}// end constructor
 
 
-	public void calSet() {
+	public void calSet() throws SQLException {
 		cal.set(Calendar.YEAR, (int) yearCb.getSelectedItem());
 		cal.set(Calendar.MONTH, (int) monthCb.getSelectedItem() - 1);
 		cal.set(Calendar.DATE, 1);
@@ -282,21 +286,39 @@ public class AdminAcadCalDesign extends JDialog {
 			calBtn[i].setText("");
 		}
 
+		Color background=null;
+		Color forground=null;
 		for (int i = 1; i <= cal.getActualMaximum(Calendar.DAY_OF_MONTH); i++) {
+			year = (int) yearCb.getSelectedItem();
+			month = (int) monthCb.getSelectedItem();
+			
 			cal.set(Calendar.DATE, i);
 			int currentDayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
 			buttonIndex = i + 6 + cnt;
+			selectDay(buttonIndex - (6 + cnt));
+			yearMonthDay = year+""+month+""+i;
+			
+			
+			
 			if (currentDayOfWeek == Calendar.SUNDAY) {
-				calBtn[buttonIndex].setForeground(new Color(255, 91, 87)); // 폰트 색상 변경
-	            calBtn[buttonIndex].setBackground(new Color(217, 217, 217)); // 배경 색상 변경
+				forground=new Color(255, 91, 87); // 폰트 색상 변경
+				background=new Color(217, 217, 217); // 배경 색상 변경
 			} else if (currentDayOfWeek == Calendar.SATURDAY) {
-				calBtn[buttonIndex].setForeground(new Color(52, 143, 226)); // 폰트 색상 변경
-	            calBtn[buttonIndex].setBackground(new Color(217, 217, 217)); // 배경 색상 변경
-			} else {
-				calBtn[buttonIndex].setForeground(Color.GRAY); // 폰트 색상 변경
-	            calBtn[buttonIndex].setBackground(new Color(217, 217, 217));
+				forground=new Color(52, 143, 226); // 폰트 색상 변경
+				background=new Color(217, 217, 217); // 배경 색상 변경
+			}else {
+				forground=Color.GRAY; // 폰트 색상 변경
+				background=new Color(217, 217, 217);
 			}
+			if(!aacDAO.selectOneCal(yearMonthDay).isEmpty() ){
+				background=new Color(255,153,153);
+			};
+			
+			calBtn[buttonIndex].setForeground(forground); // 폰트 색상 변경
+			calBtn[buttonIndex].setBackground(background);
+
 			calBtn[buttonIndex].setText(String.valueOf(i));
+
 
 		} // end for
 		for (int i = 7; i < 49; i++) {

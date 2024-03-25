@@ -24,14 +24,18 @@ public class AdminAcadCalEvent extends WindowAdapter implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getSource() == aacd.getSearchBtn()) { //조회 버튼 클릭
-			aacd.calSet();
+			try {
+				aacd.calSet();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		if(ae.getSource() == aacd.getSaveBtn()) { //저장 버튼 클릭
 			int selectedYear = (int)aacd.getYearCb().getSelectedItem();
 			int selectedMonth = (int)aacd.getMonthCb().getSelectedItem();			
 			int selectedDay = aacd.getDay();
-			String dayMonthYear = selectedYear+""+selectedMonth+""+selectedDay;
+			String yearMonthDay = selectedYear+""+selectedMonth+""+selectedDay;
 			String memoText = aacd.getMemoJta().getText();
 			AdminAcadCalDAO aacDAO = AdminAcadCalDAO.getInstance();
 			try {
@@ -39,11 +43,11 @@ public class AdminAcadCalEvent extends WindowAdapter implements ActionListener{
 					JOptionPane.showMessageDialog(aacd, "내용을 입력해주세요");
 					return;
 				}
-				if(aacDAO.selectOneCal(dayMonthYear).equals("")) {
-					aacDAO.saveCal(memoText, dayMonthYear);	
+				if(aacDAO.selectOneCal(yearMonthDay).equals("")) {
+					aacDAO.saveCal(memoText, yearMonthDay);	
 					JOptionPane.showMessageDialog(aacd, "저장이 성공으로 끝났습니다");
 				}else {
-					aacDAO.updateCal(memoText, dayMonthYear);					
+					aacDAO.updateCal(memoText, yearMonthDay);					
 					JOptionPane.showMessageDialog(aacd, "저장이 성공으로 끝났습니다");
 				}					
 			} catch (SQLException e) {
@@ -56,7 +60,7 @@ public class AdminAcadCalEvent extends WindowAdapter implements ActionListener{
 			int selectedYear = (int)aacd.getYearCb().getSelectedItem();
 			int selectedMonth = (int)aacd.getMonthCb().getSelectedItem();			
 			int selectedDay = aacd.getDay();
-			String dayMonthYear = selectedYear+""+selectedMonth+""+selectedDay;
+			String yearMonthDay = selectedYear+""+selectedMonth+""+selectedDay;
 			
 			try {
 				if(aacd.getMemoJta().getText().isEmpty()) {
@@ -66,7 +70,7 @@ public class AdminAcadCalEvent extends WindowAdapter implements ActionListener{
 				 int result = JOptionPane.showConfirmDialog(aacd, "삭제하시겠습니까?", "확인", JOptionPane.YES_NO_OPTION);
 			        
 			        if (result == JOptionPane.YES_OPTION) {
-			            aacDAO.deleteCal(dayMonthYear);
+			            aacDAO.deleteCal(yearMonthDay);
 			            JOptionPane.showMessageDialog(aacd, "삭제완료 되었습니다");
 			            aacd.getMemoJta().setText("");
 			            aacd.calSet();
