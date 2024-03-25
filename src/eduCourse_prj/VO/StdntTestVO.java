@@ -8,18 +8,21 @@ public class StdntTestVO {
 	private String prof_name;
 	private String test_flag;
 	private int score;
+	private int credit_hours;
 	
 	public StdntTestVO() {
 	}
 
 	public StdntTestVO(String dept_name, String course_name, String course_code, String prof_name, String test_flag,
-			int score) {
+			int score, int credit_hours) {
+		super();
 		this.dept_name = dept_name;
 		this.course_name = course_name;
 		this.course_code = course_code;
 		this.prof_name = prof_name;
 		this.test_flag = test_flag;
 		this.score = score;
+		this.credit_hours = credit_hours;
 	}
 
 	public String getDept_name() {
@@ -46,10 +49,15 @@ public class StdntTestVO {
 		return score;
 	}
 
+	public int getCredit_hours() {
+		return credit_hours;
+	}
+
 	@Override
 	public String toString() {
 		return "StdntTestVO [dept_name=" + dept_name + ", course_name=" + course_name + ", course_code=" + course_code
-				+ ", prof_name=" + prof_name + ", test_flag=" + test_flag + ", score=" + score + "]";
+				+ ", prof_name=" + prof_name + ", test_flag=" + test_flag + ", score=" + score + ", credit_hours="
+				+ credit_hours + "]";
 	}
 	
 } // class

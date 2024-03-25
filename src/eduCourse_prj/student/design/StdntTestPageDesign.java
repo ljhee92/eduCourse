@@ -81,6 +81,9 @@ public class StdntTestPageDesign extends JDialog {
 		jsp.setBounds(10, 150, 967, 250);
 		add(jsp);
 		
+		// 테이블에 시험 문제 번호와 추가
+		slctTestContent();
+		
 		// 이벤트 클래스 연결
 		StdntTestPageEvent stpe = new StdntTestPageEvent(this);
 		addWindowFocusListener(stpe);
@@ -106,6 +109,13 @@ public class StdntTestPageDesign extends JDialog {
 			tcm1.getColumn(i).setCellRenderer(dtcr);
 		} // end for
 	} // setTbHorizontal
+	
+	/**
+	 * 테이블에 시험 문제 번호와 문제를 추가하는 method
+	 */
+	public void slctTestContent() {
+		
+	} // slctTestContent
     
 	public StdntTestSlctDesign getStsd() {
 		return stsd;

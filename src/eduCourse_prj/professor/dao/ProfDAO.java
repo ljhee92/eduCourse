@@ -849,7 +849,7 @@ public class ProfDAO {
 			slctQuery.append("SELECT c.course_name, l.test_flag,c.course_code ");
 			slctQuery.append("FROM lecture l ");
 			slctQuery.append("JOIN course c ON c.course_code = l.course_code ");
-			slctQuery.append("WHERE l.prof_number = ?");
+			slctQuery.append("WHERE l.prof_number = ? and l.lect_delete_flag = 'N'");
 
 			String slctTestQuery = slctQuery.toString();
 			pstmt = con.prepareStatement(slctTestQuery);

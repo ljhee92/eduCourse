@@ -4,8 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.sql.SQLException;
+import java.util.List;
 
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import eduCourse_prj.VO.CrsVO;
 import eduCourse_prj.VO.DeptVO;
@@ -13,12 +17,15 @@ import eduCourse_prj.VO.TestQustVO;
 import eduCourse_prj.admin.dao.AdminDAO;
 import eduCourse_prj.admin.design.AdminDeptMgtRegDesign;
 import eduCourse_prj.professor.dao.CrsMgtRegDAO;
+import eduCourse_prj.professor.dao.ProfDAO;
 import eduCourse_prj.professor.dao.TestDAO;
 import eduCourse_prj.professor.design.ProfTestRegDesign;
+import oracle.security.o3logon.a;
 
 public class ProfTestRegEvent extends WindowAdapter implements ActionListener {
 	ProfTestRegDesign ptrd;
 	CrsVO cVO = null;
+	ProfDAO pDAO = ProfDAO.getInstance();
 
 	public ProfTestRegEvent(ProfTestRegDesign ptrd) {
 		this.ptrd = ptrd;
@@ -68,6 +75,7 @@ public class ProfTestRegEvent extends WindowAdapter implements ActionListener {
 			}
 
 			try {
+				List<Integer> courNum;
 			    int answer = Integer.parseInt(answerText);
 			    //capacity 유효성 검사
 			    if (answer <= 0 || answer >4) {
@@ -76,7 +84,8 @@ public class ProfTestRegEvent extends WindowAdapter implements ActionListener {
 			    }
 			    
 			    int seletedRow = ptrd.getPtmd().getJtbTestMgt().getSelectedRow();
-				String seletedValue = (String) ptrd.getPtmd().getJtbTestMgt().getValueAt(seletedRow,0);
+				String seletedValue = (String) ptrd.getPtmd().getJtbTestMgt().getValueAt(seletedRow,0);//선택된 과목코드 
+				
 				System.out.println(seletedValue);
 				cVO = cmrDAO.slctOneCrsCode(seletedValue);
 				
@@ -88,14 +97,50 @@ public class ProfTestRegEvent extends WindowAdapter implements ActionListener {
 //						+ " 코스 코드  : " + cVO.getCourCode());
 			    tqVO = new TestQustVO(questionNumber, content, answer, profId, courCode);
 			    tDAO.insertTest(tqVO);
+			    
+			    
+			  //등록이 완료되면 등록이 안된 문제의 첫 값으로 설정
+		        courNum = tDAO.selectValidTestNumber(seletedValue);
+		      
+		        if (courNum.size()==10) {
+					JOptionPane.showMessageDialog(ptrd, "출제가 완료되었습니다");
+					ptrd.dispose();
+				}else {
+			        ptrd.getTestNumberComboBox().removeItem(questionNumber);
+			        ptrd.getTestNumberComboBox().removeAllItems(); // 콤보 박스의 모든 아이템 삭제
+			        for (int i = 1; i <= 10; i++) {
+					    boolean skipNumber = false;
+					    for (Integer num : courNum) {
+					        if (i == num) {
+					            skipNumber = true;
+					            break;
+					        }
+					    }
+					    if (!skipNumber) {
+					    	ptrd.getTestNumberComboBox().addItem(String.valueOf(i)); // 새로운 값들 추가
+					    }
+					}
+			        
+			        ptrd.getTestNumberComboBox().setSelectedIndex(0); // 첫 번째 값 선택
+			        //내용 초기화
+	
+			    	ptrd.getMultipleChoiceOneTextField().setText("");
+			    	ptrd.getMultipleChoiceTwoTextField().setText("");
+			    	ptrd.getMultipleChoiceThreeTextField().setText("");
+			    	ptrd.getMultipleChoiceFourTextField().setText("");
+			    	ptrd.getTestQuestionContentTextArea().setText("");
+			    	ptrd.getAnswerTextField().setText("");
+			    	ptrd.getTestQuestionContentTextArea().setCaretPosition(0);
+				}
 			}catch (SQLException se) {
 				JOptionPane.showMessageDialog(ptrd, "SQL예외가 발생했습니다.");
 				se.printStackTrace();
 			}
-
+			
 
 
 		}
+		
 		if (ae.getSource() == ptrd.getCancelButton()) {
 
 			JOptionPane.showMessageDialog(ptrd, "취소버튼 클릭");

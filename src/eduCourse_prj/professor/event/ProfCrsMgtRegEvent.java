@@ -41,17 +41,26 @@ public class ProfCrsMgtRegEvent extends WindowAdapter implements ActionListener 
 			
 			int prof_number = Integer.parseInt(pcmrd.getPcmd().getPhd().getlVO().getId());
 			String course_code = pcmrd.getJtfCrsCode().getText();
+
+			int capacity = Integer.parseInt(pcmrd.getJtfCapa().getText().trim());
+			String lect_room = pcmrd.getJcbLectRoom().getSelectedItem().toString();
+			LectureVO ltVO = new LectureVO(prof_number, course_code, capacity, 0, null, lect_room);
+
+			String course_name = pcmrd.getJcbCrsName().getSelectedItem().toString();
+			CrsVO cVO = null;
 			
 			if(pcmrd.getJtfCapa().getText().isEmpty()) {
 				JOptionPane.showMessageDialog(pcmrd, "정원은 필수 입력사항입니다.");
 				return;
 			} // end if
 			
-			int capacity = Integer.parseInt(pcmrd.getJtfCapa().getText().trim());
-			String lect_room = pcmrd.getJcbLectRoom().getSelectedItem().toString();
-			
-			LectureVO ltVO = new LectureVO(prof_number, course_code, capacity, 0, null, lect_room);
 			try {
+				cVO = cmrDAO.slctOneCrsCode(course_name);
+				if(cVO != null) {
+					JOptionPane.showMessageDialog(pcmrd, cVO.getCourName() + "은 기등록된 과목입니다.");
+					return;
+				} // end if
+					
 				cmrDAO.insertLect(ltVO);
 				JOptionPane.showMessageDialog(pcmrd, pcmrd.getJcbCrsName().getSelectedItem().toString()
 						 + " 과목 등록이 완료되었습니다.");

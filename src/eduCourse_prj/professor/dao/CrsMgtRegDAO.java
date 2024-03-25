@@ -179,8 +179,8 @@ public class CrsMgtRegDAO {
 			con = dbCon.getConnection(id, pass);
 			
 			StringBuilder insertLect = new StringBuilder();
-			insertLect.append("insert into lecture(prof_number, course_code, capacity, lect_room) ")
-					 .append("values(?, ?, ?, ?)");
+			insertLect.append("insert into lecture(prof_number, course_code, capacity, lect_room, test_flag) ")
+					 .append("values(?, ?, ?, ?, 'N')");
 			
 			pstmt = con.prepareStatement(insertLect.toString());
 			
