@@ -3,7 +3,7 @@ package eduCourse_prj.VO;
 public class ScoreVO {
 	private int reg_number, score, std_num, prof_id;
 	
-	private String std_name, dept_name, test_date;
+	private String std_name, dept_name, test_date, course_name;
 	
 	public ScoreVO(int reg_number, int score) {
 		super();
@@ -25,13 +25,14 @@ public class ScoreVO {
 		this.score = score;
 		this.test_date = test_date;
 	}
-
-	public ScoreVO( int stdnt_num, String stdnt_name, String dept_name, int score) {//결과 반환
+	
+	public ScoreVO( int stdnt_num, String stdnt_name, String dept_name, int score, String course_name) {//결과 반환
 		super();
 		this.score = score;
 		this.std_num = stdnt_num;
 		this.std_name = stdnt_name;
 		this.dept_name = dept_name;
+		this.course_name = course_name;
 	}
 	public ScoreVO(int reg_number, int score, int stdnt_num, String stdnt_name, int prof_id) {
 		super();
@@ -40,6 +41,10 @@ public class ScoreVO {
 		this.std_num = stdnt_num;
 		this.std_name = stdnt_name;
 		this.prof_id = prof_id;
+	}
+
+	public String getCourse_name() {
+		return course_name;
 	}
 
 	public int getReg_number() {
