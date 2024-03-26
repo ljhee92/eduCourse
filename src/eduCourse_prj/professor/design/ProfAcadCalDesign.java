@@ -34,7 +34,7 @@ import eduCourse_prj.professor.event.ProfAcadCalEvent;
 public class ProfAcadCalDesign extends JDialog {
 	private ProfHomeDesign phd;
 
-	private JButton searchBtn;
+	private JButton searchBtn, jbtnCnfrm;
 	private JButton[] calBtn;
 	private JComboBox<Integer> yearCb, monthCb;
 	private DefaultComboBoxModel<Integer> yearCbm, monthCbm;
@@ -49,12 +49,13 @@ public class ProfAcadCalDesign extends JDialog {
 	private int year, month, day, todays, memoday = 0;
 	private int buttonIndex;
 	private int cnt;
-	AdminAcadCalDAO aacDAO = AdminAcadCalDAO.getInstance();
-	String yearMonthDay = "";
+	private AdminAcadCalDAO aacDAO = AdminAcadCalDAO.getInstance();
+	private String yearMonthDay = "";
 
 	public ProfAcadCalDesign(ProfHomeDesign phd, String title) {
 		super(phd, title, true);
 		this.phd = phd;
+
 
 		today = Calendar.getInstance(); // 달력 가져오기
 		cal = new GregorianCalendar(); // 표준 달력
@@ -91,6 +92,9 @@ public class ProfAcadCalDesign extends JDialog {
 		dayJl = new JLabel();
 		dayJl2 = new JLabel("일");
 
+
+		
+		
 		// 각 라벨에 border 설정
 		Border labelBorder = BorderFactory.createLineBorder(Color.GRAY, 1);
 		yearJl.setBorder(labelBorder);
@@ -183,6 +187,13 @@ public class ProfAcadCalDesign extends JDialog {
 		String commonPath = "src/eduCourse_prj/image/common/";
 		JPanel memoBtnJp = new JPanel();
 
+		
+		//확인버튼 추가
+		jbtnCnfrm = new JButton(new ImageIcon(commonPath + "Ok_s.png"));
+		jbtnCnfrm.setBounds(430, 520, 95, 50);
+		
+		
+		
 		JLabel memoJl = new JLabel("메모");
 		memoJl.setFont(font);
 		memoJp.add(memoJl, BorderLayout.NORTH);
@@ -225,17 +236,22 @@ public class ProfAcadCalDesign extends JDialog {
 		add(yearSelectJP);
 		add(monthSelectJP);
 		add(labelPanel);
-
+		
+		
+		add(jbtnCnfrm);
 		add(searchBtn);
 
 		add(jlBanner);
 		add(jlBack);
 
+
+		
 		yearSelectJP.setBounds(60, 160, 120, 200);
 		monthSelectJP.setBounds(190, 160, 120, 200);
 
 		ProfAcadCalEvent pace = new ProfAcadCalEvent(this);
 		searchBtn.addActionListener(pace);
+		jbtnCnfrm.addActionListener(pace);
 
 		// jta수정 불가 설정
 		memoJta.setEditable(false);
@@ -246,6 +262,10 @@ public class ProfAcadCalDesign extends JDialog {
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}// end constructor
+
+	public JButton getJbtnCnfrm() {
+		return jbtnCnfrm;
+	}
 
 	public void calSet() throws SQLException {
 		cal.set(Calendar.YEAR, (int) yearCb.getSelectedItem());

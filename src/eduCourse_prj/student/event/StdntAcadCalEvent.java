@@ -32,6 +32,12 @@ public class StdntAcadCalEvent extends WindowAdapter implements ActionListener{
 			}
 		}
 		
+		if(ae.getSource() == sacd.getJbtnCnfrm()) { //확인 버튼 클릭
+	
+			sacd.dispose();
+		}
+		
+		
 
 	}
 

@@ -70,7 +70,7 @@ public class StdntHomeDesign extends JFrame {
 		jbtnJbtnExamCorr = new JButton(new ImageIcon(studPath+"JbtnExamCorr.png"));
 		jbtnInfoUpda = new JButton(new ImageIcon(commonPath+"InfoUpda.png"));
 		jbtnLogout = new JButton(new ImageIcon(commonPath+"Logout.png"));
-		jbtnSched = new JButton("학시일정 확인");
+		jbtnSched = new JButton("학사일정 확인");
 
 
 
