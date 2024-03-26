@@ -21,7 +21,7 @@ public class StdntHomeDesign extends JFrame {
 	private LoginVO lVO;
 
 	private JButton jbtnEnrollCour, jbtnEnrollHist, jbtnExamAttendResu, jbtnJbtnExamCorr, jbtnInfoUpda,
-			jbtnLogout;
+			jbtnLogout,jbtnSched;
 
 	JLabel img; // 사진 삽입 라벨
 	JLabel role; // 권한 표시될 라벨
@@ -70,6 +70,7 @@ public class StdntHomeDesign extends JFrame {
 		jbtnJbtnExamCorr = new JButton(new ImageIcon(studPath+"JbtnExamCorr.png"));
 		jbtnInfoUpda = new JButton(new ImageIcon(commonPath+"InfoUpda.png"));
 		jbtnLogout = new JButton(new ImageIcon(commonPath+"Logout.png"));
+		jbtnSched = new JButton("학시일정 확인");
 
 
 
@@ -104,6 +105,7 @@ public class StdntHomeDesign extends JFrame {
 		addr.setBounds(520, 300, 300, 20);
 		topLogin.setBounds(670,30,200,20);
 		img.setBounds(310, 150, 160, 188);
+		jbtnSched.setBounds(840,90,120,50);
 		
 		
 		jbtnEnrollCour.setBounds(200, 440, 120, 50);
@@ -132,6 +134,7 @@ public class StdntHomeDesign extends JFrame {
 		add(jbtnInfoUpda);
 
 		add(jbtnLogout);
+		add(jbtnSched);
 		
 		add(back);
 
@@ -147,6 +150,7 @@ public class StdntHomeDesign extends JFrame {
 		jbtnInfoUpda.addActionListener(awe);
 
 		jbtnLogout.addActionListener(awe);
+		jbtnSched.addActionListener(awe);
 
 		
 		
@@ -209,9 +213,16 @@ public class StdntHomeDesign extends JFrame {
 
 
 
-	public JLabel getTopLogin() {
-		return topLogin;
+	public JButton getJbtnSched() {
+		return jbtnSched;
 	}
+
+
+
+	public void setJbtnSched(JButton jbtnSched) {
+		this.jbtnSched = jbtnSched;
+	}
+
 
 
 
