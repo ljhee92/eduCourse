@@ -10,6 +10,7 @@ import java.util.List;
 import eduCourse_prj.DbConnection;
 import eduCourse_prj.VO.CrsRegVO;
 import eduCourse_prj.VO.CrsVO;
+import eduCourse_prj.VO.LectureRoomVO;
 import eduCourse_prj.VO.LectureVO;
 
 public class CrsMgtRegDAO {
@@ -152,7 +153,6 @@ public class CrsMgtRegDAO {
 			pstmt.setString(1, CrsName);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				System.out.println(cVO);
 				cVO = new CrsVO(rs.getString("course_code"), CrsName, rs.getInt("credit_hours"));
 			} // end if
 		} finally {
@@ -256,5 +256,41 @@ public class CrsMgtRegDAO {
 			dbCon.dbClose(null, pstmt, con);
 		} // end finally
 	} // updateLect
+	
+	/**
+	 * 교수모드 > 강의 과목 등록, 수정에 DB의 강의실을 추가하기 위한 method
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<LectureRoomVO> selectAllLectRoom() throws SQLException {
+		List<LectureRoomVO> listLectRoom = new ArrayList<LectureRoomVO>();
+		LectureRoomVO lrVO = null;
+		
+		DbConnection dbCon = DbConnection.getInstance();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String id = "scott";
+			String pass = "tiger";
+			
+			con = dbCon.getConnection(id, pass);
+			
+			String selectAllLectRoom = "select lect_room_num, dept_code from lecture_room";
+			
+			pstmt = con.prepareStatement(selectAllLectRoom);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				lrVO = new LectureRoomVO(rs.getString("lect_room_num"), rs.getInt("dept_code"));
+				listLectRoom.add(lrVO);
+			} // end if
+		} finally {
+			dbCon.dbClose(rs, pstmt, con);
+		} // end finally
+		
+		return listLectRoom;
+	} // selectAllLectRoom
 	
 } // class
