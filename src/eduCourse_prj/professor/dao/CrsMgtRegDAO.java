@@ -258,7 +258,7 @@ public class CrsMgtRegDAO {
 	} // updateLect
 	
 	/**
-	 * 교수모드 > 강의 과목 등록, 수정에 DB의 강의실을 추가하기 위한 method
+	 * 교수모드 > 강의 과목 등록에 DB의 강의실을 가져오기 위한 method
 	 * @return
 	 * @throws SQLException
 	 */
@@ -292,5 +292,40 @@ public class CrsMgtRegDAO {
 		
 		return listLectRoom;
 	} // selectAllLectRoom
+	
+	/**
+	 * 교수모드 > 강의 과목 수정에서 선택한 과목코드의 강의실을 가져오기 위한 method
+	 * @param courseCode
+	 * @return
+	 */
+	public LectureRoomVO selectOneLectRoom(String courseCode) throws SQLException {
+		LectureRoomVO lectureRoomVO = null;
+		
+		DbConnection dbCon = DbConnection.getInstance();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String id = "scott";
+			String pass = "tiger";
+			
+			con = dbCon.getConnection(id, pass);
+			
+			String selectAllLectRoom = "select lect_room from lecture where course_code = ?";
+			
+			pstmt = con.prepareStatement(selectAllLectRoom);
+			pstmt.setString(1, courseCode);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				lectureRoomVO = new LectureRoomVO(rs.getString("lect_room"));
+			} // end if
+		} finally {
+			dbCon.dbClose(rs, pstmt, con);
+		} // end finally
+		
+		return lectureRoomVO;
+	} // selectOneLectRoom
 	
 } // class

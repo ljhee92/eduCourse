@@ -109,7 +109,7 @@ public class ProfCrsMgtMdfyDesign extends JDialog {
 		try {
 			CrsRegVO crVO = cmrDAO.slctProfOneLect(course_name);
 			
-			// 강의실 콤보박스 추가
+			// 모든 강의실 콤보박스에 추가
 			List<LectureRoomVO> listLectRoomVO = cmrDAO.selectAllLectRoom();
 			jcbLectRoom = new JComboBox<String>();
 			
@@ -124,6 +124,11 @@ public class ProfCrsMgtMdfyDesign extends JDialog {
 			jtfProfName = new JTextField(pcmd.getPhd().getlVO().getName());
 			jtfCredit = new JTextField(String.valueOf(crVO.getCredit_hours()));
 			jtfCapa = new JTextField(String.valueOf(crVO.getCapacity()));
+			
+			// 선택된 과목의 강의실을 콤보박스에서 선택된 값으로 변경
+			LectureRoomVO lectureRoomVO = cmrDAO.selectOneLectRoom(crVO.getCourse_code());
+			jcbLectRoom.setSelectedItem(lectureRoomVO.getLect_room_num());
+			
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
