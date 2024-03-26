@@ -32,6 +32,8 @@ public class ProfTestRegDesign extends JDialog {
 	
 	private JComboBox<String> testNumberComboBox; //문제 번호 콤보박스
 	
+	private JLabel jlCourseName1;
+	private JLabel jlCourseName2;
 	private JLabel testNumberLabel; //문제 번호
 	private JLabel multipleChoiceOneLabel;//선택 1
 	private JLabel multipleChoiceTwoLabel;//선택 2
@@ -88,13 +90,13 @@ public class ProfTestRegDesign extends JDialog {
 	//-------------------------------등록버튼 생성----------------------------------        
 	/////////////////////////////////////////////////////////////////////////////////        
 			registerButton = new JButton(new ImageIcon(commonPath + "Reg.png"));
-			registerButton.setBounds(720, 481, 60, 40);
+			registerButton.setBounds(720, 500, 60, 40);
 
 	/////////////////////////////////////////////////////////////////////////////////        
 	//-------------------------------취소버튼 생성----------------------------------        
 	/////////////////////////////////////////////////////////////////////////////////   
 			cancelButton = new JButton(new ImageIcon(commonPath + "Cancel.png"));
-			cancelButton.setBounds(800, 481, 60, 40);
+			cancelButton.setBounds(800, 500, 60, 40);
 			
 	//----------------------------좌측 인터페이스-----------------------------------------
 			testNumberComboBox = new JComboBox<>();
@@ -128,15 +130,25 @@ public class ProfTestRegDesign extends JDialog {
 //
 //			}
 			
+			jlCourseName1 = new JLabel("과목명");
+			jlCourseName1.setFont(font);
+			jlCourseName1.setBounds(80, 140, 60, 30);
+			jlCourseName2 = new JLabel();
+			jlCourseName2.setFont(font);
+			jlCourseName2.setBounds(150, 140, 150, 30);
 			
-
+			// 과목명 테이블에서 가져오기
+			slctCourseName();
 
 			testNumberComboBox.setBounds(150, 180, 50, 30);
 			testNumberLabel = new JLabel("문제 번호");
+			testNumberLabel.setFont(font);
 			testNumberLabel.setBounds(80, 180, 60, 30);
 			
 			testQuestionContentLabel = new JLabel("내용");
+			testQuestionContentLabel.setFont(font);
 			testQuestionContentLabel.setBounds(80, 230, 50, 30);
+
 			testQuestionContentTextArea = new JTextArea();
 			testQuestionContentTextArea.setBounds(150, 230, 300, 300);
 			testQuestionContentTextArea.setLineWrap(true);
@@ -148,31 +160,37 @@ public class ProfTestRegDesign extends JDialog {
 
 	//--------------------------텍스트 필드 생성 및 추가----------------------------------
 			multipleChoiceOneLabel = new JLabel("선택 1");
+			multipleChoiceOneLabel.setFont(font);
 			multipleChoiceOneLabel.setBounds(530, 250, 100, 30);
 			multipleChoiceOneTextField = new JTextField();//학과 텍스트필드
 			multipleChoiceOneTextField.setBounds(580, 250, 200, 30);
 
 			multipleChoiceTwoLabel = new JLabel("선택 2");
+			multipleChoiceTwoLabel.setFont(font);
 			multipleChoiceTwoLabel.setBounds(530, 300, 100, 30);
 			multipleChoiceTwoTextField = new JTextField();
 			multipleChoiceTwoTextField.setBounds(580, 300, 200, 30);
 			
 			multipleChoiceThreeLabel = new JLabel("선택 3");
+			multipleChoiceThreeLabel.setFont(font);
 			multipleChoiceThreeLabel.setBounds(530, 350, 100, 30);
 			multipleChoiceThreeTextField = new JTextField();
 			multipleChoiceThreeTextField.setBounds(580, 350, 200, 30);
 			
 			multipleChoiceFourLabel = new JLabel("선택 4");
+			multipleChoiceFourLabel.setFont(font);
 			multipleChoiceFourLabel.setBounds(530, 400, 100, 30);
 			multipleChoiceFourTextField = new JTextField();
 			multipleChoiceFourTextField.setBounds(580, 400, 200, 30);
 			
 			answerLabel = new JLabel("정답");
+			answerLabel.setFont(font);
 			answerLabel.setBounds(530, 460, 100, 30);
 			answerTextField = new JTextField();
 			answerTextField.setBounds(580, 460, 50, 30);
 			
-			
+			add(jlCourseName1);
+			add(jlCourseName2);
 			add(testNumberComboBox);
 			add(testNumberLabel);
 			add(testQuestionContentLabel);
@@ -206,6 +224,15 @@ public class ProfTestRegDesign extends JDialog {
 			
 			setVisible(true);
 	}
+	
+	/**
+	 * ptmd의 테이블에서 선택한 과목명의 값을 가져와 과목명 라벨에 추가하는 method
+	 */
+	private void slctCourseName() {
+		int selectedRow = ptmd.getJtbTestMgt().getSelectedRow();
+		String courseName = ptmd.getDtmTestMgt().getValueAt(selectedRow, 0).toString();
+		jlCourseName2.setText(courseName);
+	} // slctCourseName
 	
 	public JButton getRegisterButton() {
 		return registerButton;
@@ -263,9 +290,4 @@ public class ProfTestRegDesign extends JDialog {
 		return ptmd;
 	}
 
-
-
-//	public static void main(String[] args) {
-//		ProfTestRegDesign ptrd = new ProfTestRegDesign(null, null);
-//	}//main
 }
