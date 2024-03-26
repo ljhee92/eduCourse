@@ -982,12 +982,4 @@ public class ProfDAO {
 		
 		
 	}
-	
-
-	
-	
-	
-	
-	
-	
 } // class
