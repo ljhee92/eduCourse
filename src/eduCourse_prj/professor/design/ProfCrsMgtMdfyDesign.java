@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 
 import eduCourse_prj.VO.CrsRegVO;
 import eduCourse_prj.VO.CrsVO;
+import eduCourse_prj.VO.LectureRoomVO;
 import eduCourse_prj.professor.dao.CrsMgtRegDAO;
 import eduCourse_prj.professor.dao.ProfDAO;
 import eduCourse_prj.professor.event.ProfCrsMgtMdfyEvent;
@@ -102,20 +103,25 @@ public class ProfCrsMgtMdfyDesign extends JDialog {
 		add(jlNecessary);
 		
 		// 과목, 과목 코드, 학과, 학과 코드, 담당 교수, 강의실, 학점, 정원 콤보박스, JTF 추가
-		String[] lectRooms = {"A0527", "A0528", "A0529"};
-		
 		CrsMgtRegDAO cmrDAO = CrsMgtRegDAO.getInstance();
 		int index = pcmd.getJtbLecMgt().getSelectedRow();
 		String course_name = pcmd.getDtmProfMgt().getValueAt(index, 1).toString();
 		try {
 			CrsRegVO crVO = cmrDAO.slctProfOneLect(course_name);
 			
+			// 강의실 콤보박스 추가
+			List<LectureRoomVO> listLectRoomVO = cmrDAO.selectAllLectRoom();
+			jcbLectRoom = new JComboBox<String>();
+			
+			for(LectureRoomVO lrVO : listLectRoomVO) {
+				jcbLectRoom.addItem(lrVO.getLect_room_num());
+			} // end for
+			
 			jtfCrsName = new JTextField(crVO.getCourse_name());
 			jtfCrsCode = new JTextField(crVO.getCourse_code());
 			jtfDeptName = new JTextField(crVO.getDept_name());
 			jtfDeptCode = new JTextField(String.valueOf(crVO.getDept_code()));
 			jtfProfName = new JTextField(pcmd.getPhd().getlVO().getName());
-			jcbLectRoom = new JComboBox<String>(lectRooms);
 			jtfCredit = new JTextField(String.valueOf(crVO.getCredit_hours()));
 			jtfCapa = new JTextField(String.valueOf(crVO.getCapacity()));
 		} catch (NumberFormatException e) {
