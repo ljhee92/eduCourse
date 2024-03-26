@@ -27,9 +27,23 @@ public class ProfTestMgtEvent extends WindowAdapter implements ActionListener, L
 	public void actionPerformed(ActionEvent ae) {
 		// 수정 버튼 클릭 시
 		if(ae.getSource() == ptmd.getJbtnTestMdfy()) {
-			new ProfTestMdfyDesign(ptmd, "시험 문제 수정");
+			int seletedRow = ptmd.getJtbTestMgt().getSelectedRow();
 			
-		}
+			if(seletedRow  == -1) {
+				JOptionPane.showMessageDialog(ptmd, "시험을 출제할 과목을 선택해주세요");
+				return;
+			} // end if
+			
+			String selectedValid = ptmd.getJtbTestMgt().getValueAt(seletedRow, 1).toString();
+			String selectedReg = (String) ptmd.getJtbTestMgt().getValueAt(seletedRow,2);
+			
+			if(selectedValid.equals("Y") && selectedReg.equals("출제완료")) {
+				JOptionPane.showMessageDialog(ptmd, "활성화된 시험은 수정불가합니다.");
+				return;
+			} // end if
+			
+			new ProfTestMdfyDesign(ptmd, "시험 문제 수정");
+		} // end if
 		
 		// 등록 버튼 클릭 시
 		if(ae.getSource() == ptmd.getJbtnTestReg()) {
@@ -40,7 +54,7 @@ public class ProfTestMgtEvent extends WindowAdapter implements ActionListener, L
 			}
 			String seletedValue = (String) ptmd.getJtbTestMgt().getValueAt(seletedRow,2);
 			if(seletedValue.equals("출제완료")) {
-				JOptionPane.showMessageDialog(ptmd,"이미 출제 완료된 시험입니다\n     <수정가능>");
+				JOptionPane.showMessageDialog(ptmd,"이미 출제 완료된 시험입니다.\n     <수정가능>");
 				return;
 			}
 			new ProfTestRegDesign(ptmd, "시험 문제 출제");
