@@ -3,6 +3,8 @@ package eduCourse_prj.student.design;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,8 +18,11 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import eduCourse_prj.VO.CrsVO;
 import eduCourse_prj.VO.DeptVO;
 import eduCourse_prj.VO.StdntTestVO;
+import eduCourse_prj.VO.SubStdntAnswerVO;
+import eduCourse_prj.student.dao.StdntAnswerDAO;
 import eduCourse_prj.student.dao.StdntDAO;
 import eduCourse_prj.student.dao.StdntTestDAO;
 import eduCourse_prj.student.event.StdntTestAnswerEvent;
@@ -30,9 +35,9 @@ public class StdntTestAnswerDesign extends JDialog {
     private JLabel jlTestAnswer, jlCrs;
     private JComboBox<String> jcbCrs;
     private JButton jbtnSlct, jbtnOk;
-    private JTable jtbTestAnswerLeft, jtbTestAnswerRight;
-    private DefaultTableModel dtmTestAnswerLeft, dtmTestAnswerRight;
-    
+    private JTable jtbTestAnswer;
+    private DefaultTableModel dtmTestAnswer;
+    private List<SubStdntAnswerVO> crsList = null;
     public StdntTestAnswerDesign(StdntHomeDesign shd, String title) {
     	super(shd, title, true);
 		this.shd = shd;
@@ -60,9 +65,20 @@ public class StdntTestAnswerDesign extends JDialog {
 		jcbCrs = new JComboBox<String>();
 		jbtnSlct = new JButton(new ImageIcon(commonPath + "Slct2_s.png"));
 		
-		jcbCrs.addItem("테스트1");
-		jcbCrs.addItem("테스트2");
-		jcbCrs.addItem("테스트3");
+		StdntAnswerDAO saDAO = StdntAnswerDAO.getInstance();
+		
+		try {
+			crsList = saDAO.slctExamCrsList(Integer.parseInt(shd.getlVO().getId()));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		for(SubStdntAnswerVO cVO : crsList) {
+			jcbCrs.addItem(cVO.getCourse_name());
+		}
+		
+		
 		
 		jlCrs.setFont(font);
 		jcbCrs.setFont(font);
@@ -81,38 +97,27 @@ public class StdntTestAnswerDesign extends JDialog {
 		add(jbtnOk);
 		
 		// 테이블 추가
-		String[] testAnswerLColumn = {"문제번호", "답안", "나의 답안"};
-		String[] testAnswerRColumn = {"문제번호", "답안", "나의 답안"};
+		String[] testAnswerColumn = {"문제번호", "답안", "나의 답안"};
 		
-		dtmTestAnswerLeft = new DefaultTableModel(testAnswerLColumn, 0) {
+		dtmTestAnswer = new DefaultTableModel(testAnswerColumn, 0) {
 			public boolean isCellEditable(int row, int column){
 			    return false; // 테이블 셀 수정 불가하도록 설정
 			} // isCellEditable
 		};
 		
-		dtmTestAnswerRight = new DefaultTableModel(testAnswerRColumn, 0) {
-			public boolean isCellEditable(int row, int column){
-				return false; // 테이블 셀 수정 불가하도록 설정
-			} // isCellEditable
-		};
 		
-		jtbTestAnswerLeft = new JTable(dtmTestAnswerLeft);
-		jtbTestAnswerRight = new JTable(dtmTestAnswerRight);
+		jtbTestAnswer = new JTable(dtmTestAnswer);
 		
-		JScrollPane jspL = new JScrollPane(jtbTestAnswerLeft);
-		JScrollPane jspR = new JScrollPane(jtbTestAnswerRight);
+		JScrollPane jsp = new JScrollPane(jtbTestAnswer);
 		
 		// 테이블 컬럼 가운데 정렬
 		setTbHorizontal();
 		
-		jtbTestAnswerLeft.setRowHeight(30); // 행 높이 조절
-		jtbTestAnswerRight.setRowHeight(30); // 행 높이 조절
+		jtbTestAnswer.setRowHeight(30); // 행 높이 조절
 		
-		jspL.setBounds(190, 225, 300, 230);
-		jspR.setBounds(500, 225, 300, 230);
+		jsp.setBounds(190, 225, 600, 230);
 		
-		add(jspL);
-		add(jspR);
+		add(jsp);
 		
 		// 이벤트 클래스 연결
 		StdntTestAnswerEvent stae = new StdntTestAnswerEvent(this);
@@ -135,17 +140,12 @@ public class StdntTestAnswerDesign extends JDialog {
    	public void setTbHorizontal() {
    		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
    		dtcr.setHorizontalAlignment(SwingConstants.CENTER);
-   		TableColumnModel tcm1 = jtbTestAnswerLeft.getColumnModel();
+   		TableColumnModel tcm1 = jtbTestAnswer.getColumnModel();
    		for(int i = 0; i < tcm1.getColumnCount(); i++) {
    			tcm1.getColumn(i).setCellRenderer(dtcr);
    		} // end for
    		
-   		DefaultTableCellRenderer dtcr2 = new DefaultTableCellRenderer();
-   		dtcr.setHorizontalAlignment(SwingConstants.CENTER);
-   		TableColumnModel tcm2 = jtbTestAnswerRight.getColumnModel();
-   		for(int i = 0; i < tcm2.getColumnCount(); i++) {
-   			tcm1.getColumn(i).setCellRenderer(dtcr);
-   		} // end for
+
    	} // setTbHorizontal
    	
 	/**
@@ -174,8 +174,13 @@ public class StdntTestAnswerDesign extends JDialog {
 //	
 //	}
 
+   	
 	public StdntHomeDesign getShd() {
 		return shd;
+	}
+
+	public List<SubStdntAnswerVO> getCrsList() {
+		return crsList;
 	}
 
 	public JComboBox<String> getJcbCrs() {
@@ -190,20 +195,16 @@ public class StdntTestAnswerDesign extends JDialog {
 		return jbtnOk;
 	}
 
-	public JTable getJtbTestAnswerLeft() {
-		return jtbTestAnswerLeft;
+	public JTable getJtbTestAnswer() {
+		return jtbTestAnswer;
 	}
 
-	public JTable getJtbTestAnswerRight() {
-		return jtbTestAnswerRight;
+
+
+	public DefaultTableModel getDtmTestAnswer() {
+		return dtmTestAnswer;
 	}
 
-	public DefaultTableModel getDtmTestAnswerLeft() {
-		return dtmTestAnswerLeft;
-	}
 
-	public DefaultTableModel getDtmTestAnswerRight() {
-		return dtmTestAnswerRight;
-	}
     
 } // class

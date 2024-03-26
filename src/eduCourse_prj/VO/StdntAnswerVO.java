@@ -5,6 +5,7 @@ public class StdntAnswerVO {
 	private int register_number;
 	private int question_number;
 	private String std_answer;
+	private String answer;
 	private String course_code;
 	
 	public StdntAnswerVO() {
@@ -15,6 +16,13 @@ public class StdntAnswerVO {
 		this.question_number = question_number;
 		this.std_answer = std_answer;
 		this.course_code = course_code;
+	}
+	
+	public StdntAnswerVO(int question_number, String std_answer, String answer) {
+		super();
+		this.question_number = question_number;
+		this.std_answer = std_answer;
+		this.answer = answer;
 	}
 
 	public int getRegister_number() {
@@ -31,6 +39,11 @@ public class StdntAnswerVO {
 
 	public String getCourse_code() {
 		return course_code;
+	}
+	
+
+	public String getAnswer() {
+		return answer;
 	}
 
 	@Override
