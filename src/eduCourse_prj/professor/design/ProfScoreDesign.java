@@ -80,12 +80,12 @@ public class ProfScoreDesign extends JDialog{
 		add(adminMgt);
 
 		// 우상단 로그인상태 확인창 추가
-		topLogin = new JLabel(phd.getlVO().getName() + " 교수 로그인 중");
+		topLogin = new JLabel(phd.getlVO().getName() + " 교수님 로그인 중");
 //		topLogin = new JLabel("~~ 교수 로그인 중");
 		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.WHITE);
-		topLogin.setBounds(670, 30, 200, 20);
+		topLogin.setBounds(600, 30, 250, 20);
 		add(topLogin);
 
 

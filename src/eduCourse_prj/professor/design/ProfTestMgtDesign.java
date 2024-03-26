@@ -57,7 +57,7 @@ public class ProfTestMgtDesign extends JDialog {
 		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.WHITE);
-		topLogin.setBounds(670, 30, 200, 20);
+		topLogin.setBounds(600, 30, 250, 20);
 		add(topLogin);
 
 		// 테이블 추가

@@ -37,6 +37,11 @@ public class ProfTestMgtEvent extends WindowAdapter implements ActionListener, L
 			String selectedValid = ptmd.getJtbTestMgt().getValueAt(seletedRow, 1).toString();
 			String selectedReg = (String) ptmd.getJtbTestMgt().getValueAt(seletedRow,2);
 			
+			if(selectedValid.equals("N") && selectedReg.equals("출제전")) {
+				JOptionPane.showMessageDialog(ptmd, "출제 전 시험은 수정할 수 없습니다.");
+				return;
+			} // end if
+			
 			if(selectedValid.equals("Y") && selectedReg.equals("출제완료")) {
 				JOptionPane.showMessageDialog(ptmd, "활성화된 시험은 수정불가합니다.");
 				return;
