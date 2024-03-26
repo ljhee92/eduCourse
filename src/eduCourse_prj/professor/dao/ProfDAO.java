@@ -979,7 +979,39 @@ public class ProfDAO {
 			dbCon.dbClose(rs, pstmt, con);
 		} // end finally
 		return isValidEmail;
-		
-		
+
 	}
+	
+	public int selectAllByEmail(String email) throws SQLException {
+		DbConnection dbCon = DbConnection.getInstance();
+		TestListVO tlVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		int count = 0;
+		try {
+
+			String id = "scott";
+			String pass = "tiger";
+			con = dbCon.getConnection(id, pass);
+			
+			String slctQuery = "SELECT prof_number, prof_email FROM professor WHERE prof_email = ?";
+			pstmt = con.prepareStatement(slctQuery);
+			pstmt.setString(1, email);
+
+			rs = pstmt.executeQuery();
+			int emailNumber = 0;
+			if(rs.next()) {
+				emailNumber = rs.getInt("prof_number");	
+				return -1;
+				}
+			
+		} finally {
+			dbCon.dbClose(rs, pstmt, con);
+		} // end finally
+		return 1;
+
+	}
+	
 } // class
