@@ -938,6 +938,48 @@ public class ProfDAO {
 		return examStatus;
 	}// selectExaming
 	
+	/**
+	 * 이메일 중복확인기능
+	 * @throws SQLException 
+	 * 
+	 */
+	public int selectAllByEmail(String email, int prof_number) throws SQLException {
+		DbConnection dbCon = DbConnection.getInstance();
+		TestListVO tlVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int isValidEmail = 0;
+		int count = 0;
+		try {
+
+			String id = "scott";
+			String pass = "tiger";
+			con = dbCon.getConnection(id, pass);
+			
+			String slctQuery = "SELECT prof_number, prof_email FROM professor WHERE prof_email = ?";
+			pstmt = con.prepareStatement(slctQuery);
+			pstmt.setString(1, email);
+
+			rs = pstmt.executeQuery();
+			int emailNumber = 0;
+			while(rs.next()) {
+				emailNumber = rs.getInt("prof_number");
+				if(emailNumber != prof_number) count += 1;
+				if(emailNumber == prof_number) {
+					isValidEmail = 1;
+					return isValidEmail;
+				}
+			}
+			if(emailNumber == 0) isValidEmail = 1; //바뀐게 없을 경우
+			if(emailNumber != 0) isValidEmail = -1;//중복
+		} finally {
+			dbCon.dbClose(rs, pstmt, con);
+		} // end finally
+		return isValidEmail;
+		
+		
+	}
 	
 
 	
