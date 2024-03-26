@@ -68,7 +68,7 @@ public class ProfHomeDesign extends JFrame {
 		jbtnStudySucc = new JButton(new ImageIcon(profPath+"StudySucc.png"));
 		jbtnInfoUpda = new JButton(new ImageIcon(commonPath+"InfoUpda.png"));
 		jbtnLogout = new JButton(new ImageIcon(commonPath+"logout.png"));
-		jbtnSched = new JButton(new ImageIcon(commonPath+"Sched.png"));
+		jbtnSched = new JButton("학사일정 확인");
 
 
 
@@ -110,7 +110,7 @@ public class ProfHomeDesign extends JFrame {
 		jbtnInfoUpda.setBounds(420, 360, 100, 40);
 
 		jbtnLogout.setBounds(870, 20, 100, 36);
-		jbtnSched.setBounds(840,90,114,47);
+		jbtnSched.setBounds(840,90,120,50);
 
 		// JFrame에 버튼 추가
 		
