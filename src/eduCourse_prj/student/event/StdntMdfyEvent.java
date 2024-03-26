@@ -25,7 +25,7 @@ public class StdntMdfyEvent extends WindowAdapter implements ActionListener {
 		// 수정버튼 클릭
 		if(e.getSource() == smd.getJbtnMdfy()) {
 			StdntDAO sDAO = StdntDAO.getInstance();
-			
+			int isValidNewEmail;
 			int stdntNum = Integer.parseInt(smd.getJtfStdntNum().getText().trim());
 			
 			String stdntPass = "";
@@ -45,7 +45,19 @@ public class StdntMdfyEvent extends WindowAdapter implements ActionListener {
 				return;
 			} // end if
 			
+			try {
+				isValidNewEmail = sDAO.selectAllByEmail(stdntEmail, stdntNum);
+				if(isValidNewEmail == -1) {
+					JOptionPane.showMessageDialog(smd, "중복된 이메일입니다");
+					return;
+				}
+			} catch (SQLException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+			
 			String stdntAddr = smd.getJtfStdntAddr().getText().trim();
+			
 
 			try {
 				StdntVO sVO = new StdntVO(stdntNum, stdntPass, smd.getShd().getlVO().getName(), stdntEmail, stdntAddr, null, null, null);
