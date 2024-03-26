@@ -673,7 +673,8 @@ public class ProfDAO {
 			sb.append("	SELECT c.COURSE_CODE, c.COURSE_NAME ");
 			sb.append("	FROM LECTURE l	");
 			sb.append("	JOIN COURSE c on l.COURSE_CODE = c.COURSE_CODE ");
-			sb.append("	where  c.COURSE_DELETE_FLAG ='N'	");
+			sb.append("	JOIN dept d on d.dept_code = c.dept_code ");
+			sb.append("	where  c.COURSE_DELETE_FLAG ='N' and d.dept_delete_flag = 'N'	");
 			sb.append("	AND l.PROF_NUMBER = ?");
 			String slctLecQuery = sb.toString();
 	        pstmt = con.prepareStatement(slctLecQuery);
@@ -849,7 +850,8 @@ public class ProfDAO {
 			slctQuery.append("SELECT c.course_name, l.test_flag,c.course_code ");
 			slctQuery.append("FROM lecture l ");
 			slctQuery.append("JOIN course c ON c.course_code = l.course_code ");
-			slctQuery.append("WHERE l.prof_number = ? and l.lect_delete_flag = 'N'");
+			slctQuery.append("JOIN dept d ON d.dept_code = c.dept_code ");
+			slctQuery.append("WHERE l.prof_number = ? and l.lect_delete_flag = 'N' and c.course_delete_flag = 'N' and d.dept_delete_flag = 'N'");
 
 			String slctTestQuery = slctQuery.toString();
 			pstmt = con.prepareStatement(slctTestQuery);

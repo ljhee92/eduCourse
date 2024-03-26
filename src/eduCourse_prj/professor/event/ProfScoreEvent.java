@@ -34,7 +34,6 @@ public class ProfScoreEvent extends WindowAdapter implements ActionListener {
 	public void actionPerformed(ActionEvent ae) {
 		
 	    if (ae.getSource() == psd.getJbtnSlctTop()) {
-	    	JOptionPane.showMessageDialog(psd, "상단 조회버튼 클릭");
 	        psd.getDtmScore().setRowCount(0); //dtmScore 초기화
 	        
 	        int prof_number = Integer.parseInt(psd.getPhd().getlVO().getId());
@@ -99,7 +98,6 @@ public class ProfScoreEvent extends WindowAdapter implements ActionListener {
 	    }
 	    
 	    if (ae.getSource() == psd.getJbtnCnfrm()) {
-	        JOptionPane.showMessageDialog(psd, "확인버튼 클릭");
 	        
 	        psd.dispose();
 
