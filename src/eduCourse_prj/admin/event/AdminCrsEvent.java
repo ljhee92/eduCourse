@@ -84,10 +84,9 @@ public class AdminCrsEvent extends WindowAdapter implements ActionListener {
 				return;
 			} // end if
 
-			int deleteFlag = JOptionPane.showConfirmDialog(acd, "정말 삭제하시겠습니까?");
+			int deleteFlag = JOptionPane.showConfirmDialog(acd, "정말 삭제하시겠습니까?", "과목정보 삭제", JOptionPane.OK_CANCEL_OPTION);
 			switch (deleteFlag) {
 			case JOptionPane.CANCEL_OPTION:
-			case JOptionPane.NO_OPTION:
 				return;
 			case JOptionPane.OK_OPTION:
 				try {

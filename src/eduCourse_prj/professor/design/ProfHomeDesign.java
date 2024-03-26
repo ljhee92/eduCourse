@@ -20,7 +20,7 @@ public class ProfHomeDesign extends JFrame {
 	private LoginVO lVO;
 
 	private JButton jbtnCourMgt, jbtnExamMgtGrad, jbtnStudMgt, jbtnStudySucc, jbtnInfoUpda,
-			jbtnLogout;
+			jbtnLogout,jbtnSched;
 
 	JLabel img; // 사진 삽입 라벨
 	JLabel role; // 권한 표시될 라벨
@@ -68,6 +68,7 @@ public class ProfHomeDesign extends JFrame {
 		jbtnStudySucc = new JButton(new ImageIcon(profPath+"StudySucc.png"));
 		jbtnInfoUpda = new JButton(new ImageIcon(commonPath+"InfoUpda.png"));
 		jbtnLogout = new JButton(new ImageIcon(commonPath+"logout.png"));
+		jbtnSched = new JButton("학시일정 확인");
 
 
 
@@ -109,6 +110,7 @@ public class ProfHomeDesign extends JFrame {
 		jbtnInfoUpda.setBounds(420, 360, 100, 40);
 
 		jbtnLogout.setBounds(870, 20, 100, 36);
+		jbtnSched.setBounds(840,90,120,50);
 
 		// JFrame에 버튼 추가
 		
@@ -126,6 +128,7 @@ public class ProfHomeDesign extends JFrame {
 		add(jbtnInfoUpda);
 
 		add(jbtnLogout);
+		add(jbtnSched);
 		
 		add(back);
 
@@ -140,6 +143,7 @@ public class ProfHomeDesign extends JFrame {
 		jbtnStudySucc.addActionListener(awe);
 		jbtnInfoUpda.addActionListener(awe);
 		jbtnLogout.addActionListener(awe);
+		jbtnSched.addActionListener(awe);
 
 		
 		
@@ -185,6 +189,12 @@ public class ProfHomeDesign extends JFrame {
 	public JButton getJbtnLogout() {
 		return jbtnLogout;
 	}
+
+	public JButton getJbtnSched() {
+		return jbtnSched;
+	}
+
+
 
 
 

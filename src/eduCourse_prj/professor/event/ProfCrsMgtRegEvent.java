@@ -52,7 +52,9 @@ public class ProfCrsMgtRegEvent extends WindowAdapter implements ActionListener 
 			} // end if
 			
 			try {
+				
 				cmrDAO.insertLect(ltVO);
+				
 				JOptionPane.showMessageDialog(pcmrd, pcmrd.getJcbCrsName().getSelectedItem().toString()
 						 + " 과목 등록이 완료되었습니다.");
 			} catch (SQLException e1) {

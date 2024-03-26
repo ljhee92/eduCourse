@@ -16,6 +16,7 @@ import eduCourse_prj.VO.DeptVO;
 import eduCourse_prj.admin.dao.AdminDAO;
 import eduCourse_prj.admin.design.AdminDeptMgtDesign;
 import eduCourse_prj.admin.design.AdminDeptMgtRegDesign;
+import eduCourse_prj.professor.dao.ProfDAO;
 
 
 @SuppressWarnings("serial")
@@ -83,26 +84,47 @@ public class AdminDeptMgtEvent extends JDialog implements ActionListener{
 		        JOptionPane.showMessageDialog(admd, "삭제할 학과를 선택해 주세요");
 		        return;
 		    }
-		    try {
-		        int deptCode = Integer.parseInt(admd.getDtmDeptMgt().getValueAt(index, 0).toString());
-		        AdminDAO aDAO = AdminDAO.getInstance();
-		        // 학과 삭제 메서드 호출
-		        boolean success = aDAO.deleteDept(deptCode);
-		        if(success) {
-		        	
-		        	//adme 테이블 업데이트
-		            JOptionPane.showMessageDialog(admd, "학과 삭제가 완료되었습니다.");
-		            admd.getDtmDeptMgt().setRowCount(0);
-		            admd.slctDeptMgt();
-		            
+		    
+			int deleteFlag = JOptionPane.showConfirmDialog(admd, "정말 삭제하시겠습니까?", "학과정보 삭제", JOptionPane.OK_CANCEL_OPTION);
 
-		        } else {
-		            JOptionPane.showMessageDialog(admd, "학과 삭제에 실패했습니다.");
-		        }
-		    } catch(SQLException e) {
-		        JOptionPane.showMessageDialog(admd, "SQL 문제가 발생했습니다.");
-		        e.printStackTrace();
-		    }
+
+			switch (deleteFlag) {
+			case JOptionPane.CANCEL_OPTION:
+				return;
+			case JOptionPane.OK_OPTION:
+			    try {
+			        int deptCode = Integer.parseInt(admd.getDtmDeptMgt().getValueAt(index, 0).toString());
+			        AdminDAO aDAO = AdminDAO.getInstance();
+			        // 학과 삭제 메서드 호출
+			        boolean success = aDAO.deleteDept(deptCode);
+			        if(success) {
+			        	
+			        	//adme 테이블 업데이트
+			            JOptionPane.showMessageDialog(admd, "학과 삭제가 완료되었습니다.");
+			            admd.getDtmDeptMgt().setRowCount(0);
+			            admd.slctDeptMgt();
+			            
+
+			        } else {
+			            JOptionPane.showMessageDialog(admd, "학과 삭제에 실패했습니다.");
+			        }
+			    } catch(SQLException e) {
+			        JOptionPane.showMessageDialog(admd, "SQL 문제가 발생했습니다.");
+			        e.printStackTrace();
+			    }//end catch
+				break;
+			} // end case
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+
 			
 		}//getJbtnDel
 

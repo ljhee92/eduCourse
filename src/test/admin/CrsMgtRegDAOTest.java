@@ -79,19 +79,19 @@ class CrsMgtRegDAOTest {
 		expectedCourses1.add(new CrsVO("T0013", "T3", "첫 학과", 1));
 
 		List<CrsVO> expectedCourses2 = new ArrayList<CrsVO>();
-		expectedCourses1.add(new CrsVO("M0001", "MATH_1", "첫 학과", 1));
-		expectedCourses1.add(new CrsVO("M0002", "MATH_2", "첫 학과", 1));
-		expectedCourses1.add(new CrsVO("X0101", "시험등록testtest", "첫 학과", 1));
-		expectedCourses1.add(new CrsVO("q2323", "교수삭제", "첫 학과", 1));
-		expectedCourses1.add(new CrsVO("X1234", "시험등록 test", "첫 학과", 1));
-		expectedCourses1.add(new CrsVO("T6565", "시험테스트", "첫 학과", 1));
-		expectedCourses1.add(new CrsVO("T0011", "T1", "첫 학과", 1));
-		expectedCourses1.add(new CrsVO("T0012", "T2", "첫 학과", 1));
-		expectedCourses1.add(new CrsVO("T0013", "T3", "첫 학과", 1));
+		expectedCourses2.add(new CrsVO("M0001", "MATH_1", "첫 학과", 1));
+		expectedCourses2.add(new CrsVO("M0002", "MATH_2", "첫 학과", 1));
+		expectedCourses2.add(new CrsVO("X0101", "시험등록testtest", "첫 학과", 1));
+		expectedCourses2.add(new CrsVO("q2323", "교수삭제", "첫 학과", 1));
+		expectedCourses2.add(new CrsVO("X1234", "시험등록 test", "첫 학과", 1));
+		expectedCourses2.add(new CrsVO("T6565", "시험테스트", "첫 학과", 1));
+		expectedCourses2.add(new CrsVO("T0011", "T1", "첫 학과", 1));
+		expectedCourses2.add(new CrsVO("T0012", "T2", "첫 학과", 1));
+		expectedCourses2.add(new CrsVO("T0013", "T3", "첫 학과", 1));
 		
 //		assertArrayEquals(expectedCourses1.toArray(), actualCourses.toArray());
-		System.out.println("ddddddddddddd");
-		System.out.println((expectedCourses1.get(0).toString()).equals(expectedCourses2.get(0).toString()));
+//		System.out.println("ddddddddddddd");
+		//System.out.println((expectedCourses1.get(0)).equals(expectedCourses2.get(0)));
 		
 		assertArrayEquals(expectedCourses1.toArray(), expectedCourses2.toArray());
 		
@@ -99,16 +99,7 @@ class CrsMgtRegDAOTest {
 //			actualCourses.get(0).getDeptName().equals(expectedCourses[0].getDeptName());
 //		}
 //		assertThat(expectedCourses).
-		
-		
-
-		
-		
-		
-		
-		
-		
-		
+// 	
 		
 		
 		
@@ -125,10 +116,9 @@ class CrsMgtRegDAOTest {
 //		assertEquals(Arrays.asList(expectedCourses), actualCourses);
 		//System.out.println(actualCourses.get(0).hashCode());
 		//System.out.println(expectedCourses[0].hashCode());
-		
-		
 	}
 
+	
 	
 	
 	
