@@ -23,6 +23,8 @@ public class AdminDeptMgtRegDesign extends JDialog {
 	private JLabel deptRegLabel;
 	private JLabel jlBack;
 	private JLabel deptMgt;
+	private JLabel deptMgtReg;
+	private JLabel jlNecessary;
 
 	private JTextField departmentNameTextField;// 학과
 //	private JTextField departmentCodeTextField; //학과코드
@@ -42,11 +44,18 @@ public class AdminDeptMgtRegDesign extends JDialog {
 		jlBack = new JLabel(new ImageIcon(commonPath + "Back.png"));
         jlBack.setBounds(0,0,984,620);
         
-        deptMgt = new JLabel(new ImageIcon(commonPath + "RegBanner_new.png"));
+        
+        deptMgt = new JLabel(new ImageIcon(deptPath + "deptMgt1.png"));
         deptMgt.setBounds(10, 76, 967, 44);
         
-		
-		
+        deptMgtReg = new JLabel(new ImageIcon(commonPath + "RegBanner_new.png"));
+        deptMgtReg.setBounds(10, 119, 967, 44);
+        
+        jlNecessary = new JLabel("*학과는 필수입력 사항입니다.");
+        Font sfont = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 10);
+		jlNecessary.setFont(sfont);
+		jlNecessary.setForeground(Color.RED);
+		jlNecessary.setBounds(510, 375, 300, 30);
 		
 //===============================라벨 추가======================================
 //------------------------------header Label------------------------------------		
@@ -76,9 +85,9 @@ public class AdminDeptMgtRegDesign extends JDialog {
 		departmentNameLabel = new JLabel("학과");
 		Font basicfont = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 20);
 		departmentNameLabel.setFont(basicfont);
-		departmentNameLabel.setBounds(340, 225, 100, 50);
+		departmentNameLabel.setBounds(340, 245, 100, 50);
 		departmentNameTextField = new JTextField();//학과 텍스트필드
-		departmentNameTextField.setBounds(432, 227, 200, 40);
+		departmentNameTextField.setBounds(432, 247, 200, 40);
 
 //		
 //		departmentCodeLable = new JLabel("학과 코드");
@@ -89,9 +98,9 @@ public class AdminDeptMgtRegDesign extends JDialog {
 		
 		departmentCapacityLabel = new JLabel("정원");
 		departmentCapacityLabel.setFont(basicfont);
-		departmentCapacityLabel.setBounds(340, 316, 100, 50);
+		departmentCapacityLabel.setBounds(340, 336, 100, 50);
 		departmentCapacityTextField = new JTextField();
-		departmentCapacityTextField.setBounds(432, 320, 200, 40);
+		departmentCapacityTextField.setBounds(432, 340, 200, 40);
 
 		add(departmentNameLabel);
 		add(departmentNameTextField);
@@ -103,7 +112,9 @@ public class AdminDeptMgtRegDesign extends JDialog {
 		add(registerButton);
 		add(cancelButton);
 		
+		add(jlNecessary);
 		add(deptMgt);
+		add(deptMgtReg);
 		add(jlBack);
 
 /////////////////////////////////////////////////////////////////////////////////
