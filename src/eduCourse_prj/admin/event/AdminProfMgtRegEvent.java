@@ -26,7 +26,8 @@ public class AdminProfMgtRegEvent extends WindowAdapter implements ActionListene
 		if (e.getSource() == apmrd.getJbtnReg()) {
 			ProfDAO pDAO = ProfDAO.getInstance();
 			ProfVO pVO;
-
+			int isValidNewEmail;
+			
 			String profName = apmrd.getJtfProfName().getText().trim();
 			if (profName.isEmpty()) {
 				JOptionPane.showMessageDialog(apmrd, "이름은 필수 입력 사항입니다.");
@@ -49,6 +50,17 @@ public class AdminProfMgtRegEvent extends WindowAdapter implements ActionListene
 				JOptionPane.showMessageDialog(apmrd, "유효한 이메일 형식이 아닙니다.");
 				return;
 			} // end if
+			
+			try {
+				isValidNewEmail = pDAO.selectAllByEmail(profEmail);
+				if(isValidNewEmail == -1) {
+					JOptionPane.showMessageDialog(apmrd, "중복된 이메일입니다");
+					return;
+				}
+			} catch (SQLException e2) {
+				JOptionPane.showMessageDialog(apmrd, "SQL 문제가 발생했습니다.");
+				e2.printStackTrace();
+			}
 
 			String deptName = (String) apmrd.getJcbDept().getSelectedItem();
 

@@ -34,7 +34,7 @@ import eduCourse_prj.student.event.StdntAcadCalEvent;
 public class StdntAcadCalDesign extends JDialog {
 	private StdntHomeDesign swd;
 
-	private JButton searchBtn;
+	private JButton searchBtn, jbtnCnfrm;
 	private JButton[] calBtn;
 	private JComboBox<Integer> yearCb, monthCb;
 	private DefaultComboBoxModel<Integer> yearCbm, monthCbm;
@@ -55,6 +55,8 @@ public class StdntAcadCalDesign extends JDialog {
 	public StdntAcadCalDesign(StdntHomeDesign swd, String title) {
 		super(swd, title, true);
 		this.swd = swd;
+		
+
 
 		today = Calendar.getInstance(); // 달력 가져오기
 		cal = new GregorianCalendar(); // 표준 달력
@@ -90,6 +92,8 @@ public class StdntAcadCalDesign extends JDialog {
         monthJl2 = new JLabel("월");
         dayJl = new JLabel();
         dayJl2 = new JLabel("일");
+        
+
         
         // 각 라벨에 border 설정
         Border labelBorder = BorderFactory.createLineBorder(Color.GRAY, 1);
@@ -183,6 +187,14 @@ public class StdntAcadCalDesign extends JDialog {
 		String commonPath = "src/eduCourse_prj/image/common/";
 		JPanel memoBtnJp = new JPanel();
 
+		
+        
+		//확인버튼 추가
+		jbtnCnfrm = new JButton(new ImageIcon(commonPath + "Ok_s.png"));
+		jbtnCnfrm.setBounds(430, 520, 95, 50);
+		
+		
+		
 
 		JLabel memoJl = new JLabel("메모");
 		memoJl.setFont(font);
@@ -222,6 +234,8 @@ public class StdntAcadCalDesign extends JDialog {
 		monthSelectJP.add(monthJb);
 		monthSelectJP.add(monthCb);
 		
+		
+		add(jbtnCnfrm);
 		add(calJp);
 		add(memoJp);
 		add(yearSelectJP);
@@ -233,11 +247,14 @@ public class StdntAcadCalDesign extends JDialog {
 		add(jlBanner);
 		add(jlBack);
 
+		
+
 		yearSelectJP.setBounds(60, 160, 120, 200);
 		monthSelectJP.setBounds(190, 160, 120, 200);
 		
 		StdntAcadCalEvent sace = new StdntAcadCalEvent(this);
 		searchBtn.addActionListener(sace);
+		jbtnCnfrm.addActionListener(sace);
 
 		//jta 수정불가 설정
 		memoJta.setEditable(false);
@@ -478,6 +495,11 @@ public class StdntAcadCalDesign extends JDialog {
 
 	public StdntHomeDesign getSwd() {
 		return swd;
+	}
+
+
+	public JButton getJbtnCnfrm() {
+		return jbtnCnfrm;
 	}
 
 

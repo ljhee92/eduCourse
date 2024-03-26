@@ -31,6 +31,9 @@ public class ProfAcadCalEvent extends WindowAdapter implements ActionListener{
 				e.printStackTrace();
 			}
 		}
+		if(ae.getSource() == pacd.getJbtnCnfrm()) { //확인 버튼 클릭
+			pacd.dispose();
+		}
 		
 		
 	}
