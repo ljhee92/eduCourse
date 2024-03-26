@@ -50,9 +50,11 @@ public class AdminAcadCalEvent extends WindowAdapter implements ActionListener{
 				if(aacDAO.selectOneCal(yearMonthDay).equals("")) {
 					aacDAO.saveCal(memoText, yearMonthDay);	
 					JOptionPane.showMessageDialog(aacd, "저장이 성공으로 끝났습니다");
+					aacd.calSet();
 				}else {
 					aacDAO.updateCal(memoText, yearMonthDay);					
 					JOptionPane.showMessageDialog(aacd, "저장이 성공으로 끝났습니다");
+					aacd.calSet();
 				}					
 			} catch (SQLException e) {
 				e.printStackTrace();

@@ -10,6 +10,7 @@ import java.util.List;
 import eduCourse_prj.DbConnection;
 import eduCourse_prj.VO.CrsVO;
 import eduCourse_prj.VO.StdntAnswerVO;
+import eduCourse_prj.VO.SubStdntAnswerVO;
 
 public class StdntAnswerDAO {
 	
@@ -66,9 +67,9 @@ public class StdntAnswerDAO {
 		return saVO;
 	}//slctExamAnswer
 	
-	public List<CrsVO> slctExamCrsList(int std_number) throws SQLException {
-		CrsVO cVO = null;
-		List<CrsVO>crsList = new ArrayList<CrsVO>();
+	public List<SubStdntAnswerVO> slctExamCrsList(int std_number) throws SQLException {
+		SubStdntAnswerVO ssaVO = null;
+		List<SubStdntAnswerVO> crsList = new ArrayList<SubStdntAnswerVO>();
 		DbConnection dbCon = DbConnection.getInstance();
 		
 		Connection con = null;
@@ -82,7 +83,7 @@ public class StdntAnswerDAO {
 			con = dbCon.getConnection(id, pass);
 			
 			StringBuilder slctQuery = new StringBuilder();
-			slctQuery.append("SELECT c.course_name,c.course_code ")
+			slctQuery.append("SELECT r.register_number,c.course_name,c.course_code ")
 			            .append("FROM register r ")
 			            .append("JOIN course c ON c.course_code = r.course_code ")
 			            .append("JOIN dept d ON d.dept_code = c.dept_code ")
@@ -98,9 +99,9 @@ public class StdntAnswerDAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				cVO = new CrsVO(rs.getString("course_code"),rs.getString("course_name"));
+				ssaVO = new SubStdntAnswerVO(rs.getInt("register_number"),rs.getString("course_code"),rs.getString("course_name"));
 				
-				crsList.add(cVO);
+				crsList.add(ssaVO);
 			} // end while
 		} finally {
 			dbCon.dbClose(rs, pstmt, con);
@@ -109,5 +110,46 @@ public class StdntAnswerDAO {
 		return crsList;
 	}//slctExamAnswer
 	
+	public List<StdntAnswerVO> slctExamAnswer(String course_code,int register_number) throws SQLException{
+		StdntAnswerVO saVO = null;
+		List<StdntAnswerVO> answerList = new ArrayList<StdntAnswerVO>();
+		DbConnection dbCon = DbConnection.getInstance();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String id = "scott";
+			String pass = "tiger";
+			
+			con = dbCon.getConnection(id, pass);
+			
+			StringBuilder slctQuery = new StringBuilder();
+			slctQuery.append("SELECT s.question_number, s.std_answer, t.answer ")
+			            .append("FROM std_answer s ")
+			            .append("JOIN test_question t ON s.course_code = t.course_code ")
+			            .append("AND s.question_number = t.question_number ")
+			            .append("JOIN register r ON s.register_number = r.register_number ")
+			            .append("WHERE s.course_code = ? AND r.REGISTER_NUMBER = ?");
+			String slctAnswerQuery = slctQuery.toString();
+			
+			pstmt = con.prepareStatement(slctAnswerQuery);
+			pstmt.setString(1, course_code);
+			pstmt.setInt(2, register_number);
+
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				saVO = new StdntAnswerVO(rs.getInt("question_number"),rs.getString("std_answer"),rs.getString("answer"));
+				
+				answerList.add(saVO);
+			} // end while
+		} finally {
+			dbCon.dbClose(rs, pstmt, con);
+		} // end finally
+				
+		return answerList;
+	}
 	
 }
