@@ -68,7 +68,7 @@ public class ProfHomeDesign extends JFrame {
 		jbtnStudySucc = new JButton(new ImageIcon(profPath+"StudySucc.png"));
 		jbtnInfoUpda = new JButton(new ImageIcon(commonPath+"InfoUpda.png"));
 		jbtnLogout = new JButton(new ImageIcon(commonPath+"logout.png"));
-		jbtnSched = new JButton("학시일정 확인");
+		jbtnSched = new JButton("학사일정 확인");
 
 
 
