@@ -8,6 +8,10 @@ public class LectureRoomVO {
 	public LectureRoomVO() {
 	}
 
+	public LectureRoomVO(String lect_room_num) {
+		this.lect_room_num = lect_room_num;
+	}
+
 	public LectureRoomVO(String lect_room_num, int dept_code) {
 		this.lect_room_num = lect_room_num;
 		this.dept_code = dept_code;
