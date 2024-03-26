@@ -52,7 +52,7 @@ public class CrsMgtRegDAO {
 			sb.append("join professor p on p.prof_number = l.prof_number ");
 			sb.append("join course c on c.course_code = l.course_code ");
 			sb.append("join dept d on d.dept_code = c.dept_code ");
-			sb.append("where p.prof_number = ? and lect_delete_flag = 'N'");
+			sb.append("where p.prof_number = ? and lect_delete_flag = 'N' and d.dept_delete_flag = 'N'");
 			
 			String slctCrsQuery = sb.toString();
 	        pstmt = con.prepareStatement(slctCrsQuery);

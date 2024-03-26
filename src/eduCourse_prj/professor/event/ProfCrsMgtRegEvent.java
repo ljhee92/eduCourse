@@ -53,9 +53,9 @@ public class ProfCrsMgtRegEvent extends WindowAdapter implements ActionListener 
 			
 			try {
 				
-			 cmrDAO.insertLect(ltVO);
+				cmrDAO.insertLect(ltVO);
 				
-		JOptionPane.showMessageDialog(pcmrd, pcmrd.getJcbCrsName().getSelectedItem().toString()
+				JOptionPane.showMessageDialog(pcmrd, pcmrd.getJcbCrsName().getSelectedItem().toString()
 						 + " 과목 등록이 완료되었습니다.");
 			} catch (SQLException e1) {
 				JOptionPane.showMessageDialog(pcmrd, "SQL 문제가 발생했습니다.");

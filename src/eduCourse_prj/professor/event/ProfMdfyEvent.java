@@ -43,8 +43,6 @@ public class ProfMdfyEvent extends WindowAdapter implements ActionListener {
 		
 		// 수정버튼 클릭
 		if(ae.getSource() == pmd.getJbtnMdfy()) {
-			StdntDAO sDAO = StdntDAO.getInstance();
-			
 			int profNum = Integer.parseInt(pmd.getJtfProfNum().getText().trim());
 			int isValidNewEmail;
 			String profPass = "";
@@ -71,7 +69,7 @@ public class ProfMdfyEvent extends WindowAdapter implements ActionListener {
 					return;
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+				JOptionPane.showMessageDialog(pmd, "SQL 문제가 발생했습니다.");
 				e.printStackTrace();
 			}
 			
@@ -91,7 +89,6 @@ public class ProfMdfyEvent extends WindowAdapter implements ActionListener {
 		
 			//취소 버튼 클릭
 			if(ae.getSource()==pmd.getJbtnCancel()) {
-				JOptionPane.showMessageDialog(pmd, "취소버튼 클릭");
 				
 				pmd.dispose();
 			}

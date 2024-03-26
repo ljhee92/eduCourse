@@ -85,9 +85,8 @@ public class ProfCrsMgtEvent extends WindowAdapter implements ActionListener{
 				return;
 			} // end if
 
-			int deleteFlag = JOptionPane.showConfirmDialog(pcmd, "정말 삭제하시겠습니까?");
+			int deleteFlag = JOptionPane.showConfirmDialog(pcmd, "정말 삭제하시겠습니까?", "강의 과목 삭제", JOptionPane.YES_NO_OPTION);
 			switch (deleteFlag) {
-			case JOptionPane.CANCEL_OPTION:
 			case JOptionPane.NO_OPTION:
 				return;
 			case JOptionPane.OK_OPTION:
