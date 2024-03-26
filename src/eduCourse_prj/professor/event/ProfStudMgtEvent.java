@@ -40,7 +40,6 @@ public class ProfStudMgtEvent extends WindowAdapter implements ActionListener {
 	public void actionPerformed(ActionEvent ae) {
 		if (ae.getSource() == psmd.getJbtnSlctTop()) {
 			
-			JOptionPane.showMessageDialog(psmd, "상단 조회버튼 클릭.");
 			psmd.getDtmStdMgt().setRowCount(0);
 
 			int prof_number = Integer.parseInt(psmd.getPhd().getlVO().getId());
@@ -105,8 +104,6 @@ public class ProfStudMgtEvent extends WindowAdapter implements ActionListener {
 		}
 
 		if (ae.getSource() == psmd.getJbtnSlct()) {
-			JOptionPane.showMessageDialog(psmd, "하단 조회버튼 클릭.");
-			
 			// 학생 정보 상세 조회 클릭
 			if(ae.getSource() == psmd.getJbtnSlct()) {
 				int index = psmd.getJtbStdMgt().getSelectedRow();

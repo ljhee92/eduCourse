@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -82,7 +83,7 @@ public class ProfTestRegDesign extends JDialog {
 			Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
 			topLogin.setFont(font);
 			topLogin.setForeground(Color.WHITE);
-			topLogin.setBounds(670, 30, 200, 20);
+			topLogin.setBounds(600, 30, 250, 20);
 			add(topLogin);
 			
 
@@ -121,6 +122,7 @@ public class ProfTestRegDesign extends JDialog {
 				    }
 				}
 			} catch (SQLException e) {
+				JOptionPane.showMessageDialog(ptmd, "SQL 문제가 발생했습니다.");
 				e.printStackTrace();
 			}
 			

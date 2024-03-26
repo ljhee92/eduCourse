@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 import eduCourse_prj.VO.DeptVO;
+import eduCourse_prj.VO.TestPageVO;
 import eduCourse_prj.VO.TestQustVO;
 import eduCourse_prj.admin.dao.AdminDAO;
 import eduCourse_prj.admin.design.AdminDeptMgtRegDesign;
@@ -25,7 +26,7 @@ public class ProfTestMdfyEvent extends WindowAdapter implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		// 수정 버튼 클릭 시
-		if (ae.getSource() == ptmd.getRegisterButton()) {
+		if (ae.getSource() == ptmd.getModifyButton()) {
 			TestDAO tDAO = TestDAO.getInstance();
 			TestQustVO tqVO;
 			
@@ -78,15 +79,55 @@ public class ProfTestMdfyEvent extends WindowAdapter implements ActionListener {
 
 //			System.out.println(tDAO.selectOneDept());
 
-		}
+		} // end if
 		
 		// 취소 버튼 클릭 시
 		if (ae.getSource() == ptmd.getCancelButton()) {
-
 			ptmd.dispose();
-		}
+		} // end if
+		
+		// 콤보박스 클릭 시
+		if(ae.getSource() == ptmd.getTestNumberComboBox()) {
+			slctTestQuestionContent();
+		} // end if
 
 	}
+	
+	/**
+	 * 콤보박스를 클릭했을 때<br>
+	 * DB test_question 테이블에 저장되어있는 question_content의 값을 가져와 JTA, JTF에 추가하는 method
+	 */
+	private void slctTestQuestionContent() {
+		String courseName = ptmd.getJlCourseName2().getText();
+		
+		int selectedQuestionNumber = Integer.parseInt(ptmd.getTestNumberComboBox().getSelectedItem().toString());
+
+		TestDAO tDAO = TestDAO.getInstance();
+		try {
+			TestPageVO tVO = tDAO.slctOneTestQuestion(courseName, selectedQuestionNumber);
+			
+			// DB에 등록된 문제가 없으면 빈칸으로 띄우자 !
+			if(tVO == null) {
+				ptmd.getTestQuestionContentTextArea().setText("");
+				ptmd.getMultipleChoiceOneTextField().setText("");
+				ptmd.getMultipleChoiceTwoTextField().setText("");
+				ptmd.getMultipleChoiceThreeTextField().setText("");
+				ptmd.getMultipleChoiceFourTextField().setText("");
+				ptmd.getAnswerTextField().setText("");
+				return;
+			} // end if
+			
+			ptmd.getTestQuestionContentTextArea().setText(tVO.getQuestion_split_content());
+			ptmd.getMultipleChoiceOneTextField().setText(tVO.getOption1());
+			ptmd.getMultipleChoiceTwoTextField().setText(tVO.getOption2());
+			ptmd.getMultipleChoiceThreeTextField().setText(tVO.getOption3());
+			ptmd.getMultipleChoiceFourTextField().setText(tVO.getOption4());
+			ptmd.getAnswerTextField().setText(tVO.getAnswer());
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(ptmd, "SQL 문제가 발생했습니다.");
+			e.printStackTrace();
+		} // end catch
+	} // slctTestQuestionContent
 	
 
 }

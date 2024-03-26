@@ -15,6 +15,7 @@ import eduCourse_prj.DbConnection;
 import eduCourse_prj.VO.AdminVO;
 import eduCourse_prj.VO.CrsVO;
 import eduCourse_prj.VO.DeptVO;
+import eduCourse_prj.VO.TestPageVO;
 import eduCourse_prj.VO.TestQustVO;
 
 
@@ -571,10 +572,45 @@ public class TestDAO {
 		} // end finally
 	} // deleteProf
 	
-	
-	
-	
-	
+	/**
+	 * test_question 테이블에서 시험 문제 번호와 내용을 가져오는 method
+	 * @return
+	 */
+	public TestPageVO slctOneTestQuestion(String course_name, int question_number) throws SQLException {
+		TestPageVO tpVO = null;
+		DbConnection dbCon = DbConnection.getInstance();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String id = "scott";
+			String pass = "tiger";
+			
+			con = dbCon.getConnection(id, pass);
+			
+			StringBuilder slctOneTestQuestion = new StringBuilder();
+			slctOneTestQuestion.append("select c.course_name, t.question_number, t.question_content, t.answer ")
+							   .append("from test_question t ")
+							   .append("join course c on c.course_code = t.course_code ")
+							   .append("where c.course_name = ? and t.question_number = ?");
+			
+			pstmt = con.prepareStatement(slctOneTestQuestion.toString());
+			pstmt.setString(1, course_name);
+			pstmt.setInt(2, question_number);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				tpVO = new TestPageVO(rs.getInt("question_number"), rs.getString("question_content"), rs.getString("answer"));
+			} // end while
+		} finally {
+			dbCon.dbClose(rs, pstmt, con);
+		} // end finally
+
+		return tpVO;
+	} // slctOneTestQuestion
 	
 	
 	

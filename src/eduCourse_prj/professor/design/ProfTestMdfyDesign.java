@@ -2,6 +2,7 @@ package eduCourse_prj.professor.design;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.sql.SQLException;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -9,11 +10,14 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import eduCourse_prj.VO.TestPageVO;
 import eduCourse_prj.admin.design.AdminDeptMgtDesign;
 import eduCourse_prj.admin.event.AdminDeptMgtRegEvent;
+import eduCourse_prj.professor.dao.TestDAO;
 import eduCourse_prj.professor.event.ProfTestMdfyEvent;
 import eduCourse_prj.professor.event.ProfTestRegEvent;
 
@@ -56,7 +60,7 @@ public class ProfTestMdfyDesign extends JDialog {
 
 		
 			String commonPath = "src/eduCourse_prj/image/common/";
-			String testPath = "src/eduCourse_prj/image/prof/";
+//			String testPath = "src/eduCourse_prj/image/prof/";
 
 			setSize(1000, 650);
 			setLocationRelativeTo(ptmd);
@@ -78,7 +82,7 @@ public class ProfTestMdfyDesign extends JDialog {
 			Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
 			topLogin.setFont(font);
 			topLogin.setForeground(Color.WHITE);
-			topLogin.setBounds(670, 30, 200, 20);
+			topLogin.setBounds(600, 30, 250, 20);
 			add(topLogin);
 			
 
@@ -118,9 +122,10 @@ public class ProfTestMdfyDesign extends JDialog {
 			testQuestionContentLabel = new JLabel("내용");
 			testQuestionContentLabel.setFont(font);
 			testQuestionContentLabel.setBounds(80, 230, 50, 30);
+			
 			testQuestionContentTextArea = new JTextArea();
-			testQuestionContentTextArea.setText(testPath);
 			testQuestionContentTextArea.setBounds(150, 230, 300, 300);
+			
 			testQuestionContentTextArea.setLineWrap(true);
 			testQuestionContentTextArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 			testQuestionContentTextArea.setBackground(Color.WHITE);
@@ -132,7 +137,7 @@ public class ProfTestMdfyDesign extends JDialog {
 			multipleChoiceOneLabel = new JLabel("선택 1");
 			multipleChoiceOneLabel.setFont(font);
 			multipleChoiceOneLabel.setBounds(530, 250, 100, 30);
-			multipleChoiceOneTextField = new JTextField();//학과 텍스트필드
+			multipleChoiceOneTextField = new JTextField();
 			multipleChoiceOneTextField.setBounds(580, 250, 200, 30);
 
 			multipleChoiceTwoLabel = new JLabel("선택 2");
@@ -159,6 +164,9 @@ public class ProfTestMdfyDesign extends JDialog {
 			answerTextField = new JTextField();
 			answerTextField.setBounds(580, 460, 50, 30);
 			
+			// 내용 JTA와 보기 JTF, 정답 JTF에 DB 값을 추가하는 일
+			slctTestQuestionContent();
+
 			add(jlCourseName1);
 			add(jlCourseName2);
 			add(testNumberComboBox);
@@ -191,6 +199,7 @@ public class ProfTestMdfyDesign extends JDialog {
 			addWindowListener(ptme);
 			modifyButton.addActionListener(ptme);
 			cancelButton.addActionListener(ptme);
+			testNumberComboBox.addActionListener(ptme);
 			
 			setVisible(true);
 			
@@ -205,7 +214,32 @@ public class ProfTestMdfyDesign extends JDialog {
 		jlCourseName2.setText(courseName);
 	} // slctCourseName
 	
-	public JButton getRegisterButton() {
+	/**
+	 * DB test_question 테이블에 저장되어있는 question_content의 값을 가져와 JTA, JTF에 추가하는 method
+	 */
+	private void slctTestQuestionContent() {
+		int selectedRow = ptmd.getJtbTestMgt().getSelectedRow();
+		String courseName = ptmd.getDtmTestMgt().getValueAt(selectedRow, 0).toString();
+		
+		int selectedQuestionNumber = Integer.parseInt(testNumberComboBox.getSelectedItem().toString());
+
+		TestDAO tDAO = TestDAO.getInstance();
+		try {
+			TestPageVO tVO = tDAO.slctOneTestQuestion(courseName, selectedQuestionNumber);
+			
+			testQuestionContentTextArea.setText(tVO.getQuestion_split_content());
+			multipleChoiceOneTextField.setText(tVO.getOption1());
+			multipleChoiceTwoTextField.setText(tVO.getOption2());
+			multipleChoiceThreeTextField.setText(tVO.getOption3());
+			multipleChoiceFourTextField.setText(tVO.getOption4());
+			answerTextField.setText(tVO.getAnswer());
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(ptmd, "SQL 문제가 발생했습니다.");
+			e.printStackTrace();
+		} // end catch
+	} // slctTestQuestionContent
+	
+	public JButton getModifyButton() {
 		return modifyButton;
 	}
 
@@ -256,6 +290,12 @@ public class ProfTestMdfyDesign extends JDialog {
 	public JTextArea getTestQuestionContentTextArea() {
 		return testQuestionContentTextArea;
 	}
+	
+	
+	public JLabel getJlCourseName2() {
+		return jlCourseName2;
+	}
+
 	public ProfTestMgtDesign getPtmd() {
 		return ptmd;
 	}
