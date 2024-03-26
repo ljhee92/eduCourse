@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -121,6 +122,7 @@ public class ProfTestRegDesign extends JDialog {
 				    }
 				}
 			} catch (SQLException e) {
+				JOptionPane.showMessageDialog(ptmd, "SQL 문제가 발생했습니다.");
 				e.printStackTrace();
 			}
 			
