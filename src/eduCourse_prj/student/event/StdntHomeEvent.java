@@ -8,6 +8,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 
 import eduCourse_prj.login.SelectLoginDesign;
+import eduCourse_prj.student.design.StdntAcadCalDesign;
 import eduCourse_prj.student.design.StdntCrsRegDesign;
 import eduCourse_prj.student.design.StdntCrsSlctDesign;
 import eduCourse_prj.student.design.StdntHomeDesign;
@@ -64,6 +65,10 @@ public class StdntHomeEvent extends WindowAdapter  implements ActionListener {
 		if (ae.getSource()==shd.getJbtnLogout()) {
 			new SelectLoginDesign();
 			shd.dispose();
+		} // end if
+		if (ae.getSource()==shd.getJbtnSched()) {
+			JOptionPane.showMessageDialog(shd, "학사일정 버튼클릭");
+			new StdntAcadCalDesign(shd, "학사일정");
 		} // end if
 		
 	}
