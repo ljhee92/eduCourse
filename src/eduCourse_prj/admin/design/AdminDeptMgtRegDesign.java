@@ -3,6 +3,7 @@ package eduCourse_prj.admin.design;
 import javax.swing.*;
 
 import eduCourse_prj.VO.DeptVO;
+import eduCourse_prj.VO.LoginVO;
 import eduCourse_prj.admin.event.AdminDeptMgtRegEvent;
 
 import java.awt.Color;
@@ -58,8 +59,9 @@ public class AdminDeptMgtRegDesign extends JDialog {
 		jlNecessary.setBounds(510, 375, 300, 30);
 		
 //===============================라벨 추가======================================
-//------------------------------header Label------------------------------------		
-		topLogin = new JLabel("관리자 로그인 중");
+//------------------------------header Label------------------------------------
+		String adminName = admd.getAwd().getlVO().getName();
+		topLogin = new JLabel(adminName + " 관리자님 로그인 중");
 		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.WHITE);
@@ -156,9 +158,9 @@ public class AdminDeptMgtRegDesign extends JDialog {
 		return departmentCapacityTextField;
 	}
 
-	public static void main(String[] args) {
-
-		AdminDeptMgtRegDesign dialog = new AdminDeptMgtRegDesign(null, "test");
-
-	}// main
+//	public static void main(String[] args) {
+//
+//		AdminDeptMgtRegDesign dialog = new AdminDeptMgtRegDesign(null, "test");
+//
+//	}// main
 }

@@ -34,6 +34,7 @@ public class AdminDeptMgtDesign extends JDialog {
 	
 	public AdminDeptMgtDesign() {
 	}
+	
 	public AdminDeptMgtDesign(AdminHomeDesign awd,String title ) {
 		super(awd,title,true);
 		this.awd = awd;

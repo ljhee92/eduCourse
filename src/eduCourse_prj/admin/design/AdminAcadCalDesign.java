@@ -40,7 +40,7 @@ public class AdminAcadCalDesign extends JDialog {
 	private JTextField timeJtf;
 	private JTextArea memoJta;
 	private JLabel yearJb, monthJb, jlBack, jlBanner, 
-			yearJl, yearJl2, monthJl, monthJl2, dayJl, dayJl2;
+			yearJl, yearJl2, monthJl, monthJl2, dayJl, dayJl2, topLogin;
 	private JPanel calJp;
 
 	private Map<String, String> memoMap;
@@ -89,6 +89,15 @@ public class AdminAcadCalDesign extends JDialog {
         monthJl2 = new JLabel("월");
         dayJl = new JLabel();
         dayJl2 = new JLabel("일");
+        
+        String adminName = awd.getlVO().getName();
+        topLogin = new JLabel(adminName + " 관리자님 로그인 중");
+        
+        Font topLoginFont = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
+		topLogin.setFont(topLoginFont);
+		topLogin.setForeground(Color.WHITE);
+		topLogin.setBounds(670, 30, 200, 20);
+		add(topLogin);
         
         // 각 라벨에 border 설정
         Border labelBorder = BorderFactory.createLineBorder(Color.GRAY, 1);
@@ -488,8 +497,8 @@ public class AdminAcadCalDesign extends JDialog {
 		return deleteBtn;
 	}
 
-	public static void main(String[] args) {
-		new AdminAcadCalDesign(null, null);
-	}
+//	public static void main(String[] args) {
+//		new AdminAcadCalDesign(null, null);
+//	}
 
 }
