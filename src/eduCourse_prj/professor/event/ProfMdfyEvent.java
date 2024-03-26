@@ -46,7 +46,7 @@ public class ProfMdfyEvent extends WindowAdapter implements ActionListener {
 			StdntDAO sDAO = StdntDAO.getInstance();
 			
 			int profNum = Integer.parseInt(pmd.getJtfProfNum().getText().trim());
-			
+			int isValidNewEmail;
 			String profPass = "";
 			char[] secret_pass = pmd.getJpfProfPass().getPassword();
 			for(char cha : secret_pass) {
@@ -63,6 +63,18 @@ public class ProfMdfyEvent extends WindowAdapter implements ActionListener {
 				JOptionPane.showMessageDialog(pmd, "유효한 이메일 형식이 아닙니다.");
 				return;
 			} // end if
+			
+			try {
+				isValidNewEmail = pDAO.selectAllByEmail(profEmail, profNum);
+				if(isValidNewEmail == -1) {
+					JOptionPane.showMessageDialog(pmd, "중복된 이메일입니다");
+					return;
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			
 			try {
 				ProfVO pVO = new ProfVO(profNum, profPass, pmd.getPhd().getlVO().getName(), profEmail,  null, null, null);
