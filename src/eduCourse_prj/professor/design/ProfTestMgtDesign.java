@@ -43,7 +43,6 @@ public class ProfTestMgtDesign extends JDialog {
 
 		String commonPath = "src/eduCourse_prj/image/common/";
 		String profPath = "src/eduCourse_prj/image/prof/";
-		String srsPath = "src/eduCourse_prj/image/crs/";
 
 		jlBack = new JLabel(new ImageIcon(commonPath + "back.png"));
 		jlBack.setBounds(0, 0, 984, 620);
@@ -74,7 +73,7 @@ public class ProfTestMgtDesign extends JDialog {
 		JScrollPane jsp = new JScrollPane(jtbTestMgt);
 
 		jtbTestMgt.setRowHeight(30); // 행 높이 조절
-		jsp.setBounds(10, 120, 967, 350);
+		jsp.setBounds(10, 117, 967, 350);
 		add(jsp);
 
 		////////////////////////////////////////////////////////////////////
@@ -85,6 +84,9 @@ public class ProfTestMgtDesign extends JDialog {
 		jrbtnEnable = new JRadioButton("활성화");
 		jrbtnDisable = new JRadioButton("비활성화");
 		jrbtnDisable.setSelected(true);
+		
+		jrbtnEnable.setFont(font);
+		jrbtnDisable.setFont(font);
 
 		ButtonGroup buttonGroup = new ButtonGroup();
 		buttonGroup.add(jrbtnEnable);

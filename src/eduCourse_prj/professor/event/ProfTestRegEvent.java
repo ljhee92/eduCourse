@@ -36,15 +36,14 @@ public class ProfTestRegEvent extends WindowAdapter implements ActionListener {
 	}
 	@Override
 	public void actionPerformed(ActionEvent ae) {
-		// TODO Auto-generated method stub
+		// 등록 버튼 클릭 시
 		if (ae.getSource() == ptrd.getRegisterButton()) {
 			TestDAO tDAO = TestDAO.getInstance();
 			CrsMgtRegDAO cmrDAO = CrsMgtRegDAO.getInstance();
-			JOptionPane.showMessageDialog(ptrd, "출제버튼 클릭");
 			TestQustVO tqVO;
 			
 			int questionNumber = Integer.parseInt(ptrd.getTestNumberComboBox().getSelectedItem().toString());
-			System.out.println(questionNumber);
+//			System.out.println(questionNumber);
 			
 			String multipleChoiceOne = ptrd.getMultipleChoiceOneTextField().getText();
 			if(multipleChoiceOne.isEmpty()) {
@@ -68,7 +67,7 @@ public class ProfTestRegEvent extends WindowAdapter implements ActionListener {
 			}
 			String content = ptrd.getTestQuestionContentTextArea().getText().toString() + "\n\n" + ptrd.getMultipleChoiceOneTextField().getText() + "\t" + ptrd.getMultipleChoiceTwoTextField().getText()
 			+ "\t" + ptrd.getMultipleChoiceThreeTextField().getText()+ "\t" + ptrd.getMultipleChoiceFourTextField().getText();
-			System.out.println(content);
+//			System.out.println(content);
 			
 
 			String answerText = ptrd.getAnswerTextField().getText();
@@ -89,7 +88,7 @@ public class ProfTestRegEvent extends WindowAdapter implements ActionListener {
 			    int seletedRow = ptrd.getPtmd().getJtbTestMgt().getSelectedRow();
 				String seletedValue = (String) ptrd.getPtmd().getJtbTestMgt().getValueAt(seletedRow,0);//선택된 과목코드 
 				
-				System.out.println(seletedValue);
+//				System.out.println(seletedValue);
 				cVO = cmrDAO.slctOneCrsCode(seletedValue);
 				
 				int profId = Integer.parseInt(ptrd.getPtmd().getPhd().getlVO().getId());
@@ -104,6 +103,10 @@ public class ProfTestRegEvent extends WindowAdapter implements ActionListener {
 			    
 			  //등록이 완료되면 등록이 안된 문제의 첫 값으로 설정
 		        courNum = tDAO.selectValidTestNumber(seletedValue);
+		        
+		        if(courNum.size() < 10 && courNum.size() > 0) {
+					ptmd.getDtmTestMgt().setValueAt("출제중", seletedRow, 2);
+				} // end if
 		      
 		        if (courNum.size()==10) {
 					JOptionPane.showMessageDialog(ptrd, "출제가 완료되었습니다");
@@ -111,7 +114,7 @@ public class ProfTestRegEvent extends WindowAdapter implements ActionListener {
 					ptmd.getDtmTestMgt().setRowCount(0);
 					ptmd.slctTestMgt();
 					
-				}else {
+				} else {
 			        ptrd.getTestNumberComboBox().removeItem(questionNumber);
 			        ptrd.getTestNumberComboBox().removeAllItems(); // 콤보 박스의 모든 아이템 삭제
 			        for (int i = 1; i <= 10; i++) {
@@ -147,9 +150,9 @@ public class ProfTestRegEvent extends WindowAdapter implements ActionListener {
 
 		}
 		
+		// 취소 버튼 클릭 시
 		if (ae.getSource() == ptrd.getCancelButton()) {
 
-			JOptionPane.showMessageDialog(ptrd, "취소버튼 클릭");
 			ptrd.dispose();
 		}
 

@@ -24,10 +24,9 @@ public class ProfTestMdfyEvent extends WindowAdapter implements ActionListener {
 	}
 	@Override
 	public void actionPerformed(ActionEvent ae) {
-		// TODO Auto-generated method stub
+		// 수정 버튼 클릭 시
 		if (ae.getSource() == ptmd.getRegisterButton()) {
 			TestDAO tDAO = TestDAO.getInstance();
-			JOptionPane.showMessageDialog(ptmd, "출제버튼 클릭");
 			TestQustVO tqVO;
 			
 			int questionNumber = Integer.parseInt(ptmd.getTestNumberComboBox().getSelectedItem().toString());
@@ -80,9 +79,10 @@ public class ProfTestMdfyEvent extends WindowAdapter implements ActionListener {
 //			System.out.println(tDAO.selectOneDept());
 
 		}
+		
+		// 취소 버튼 클릭 시
 		if (ae.getSource() == ptmd.getCancelButton()) {
 
-			JOptionPane.showMessageDialog(ptmd, "취소버튼 클릭");
 			ptmd.dispose();
 		}
 
