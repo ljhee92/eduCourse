@@ -45,28 +45,22 @@ public class ProfHomeEvent extends WindowAdapter  implements ActionListener {
 	public void actionPerformed(ActionEvent ae) {
 		
 		if (ae.getSource()==pwd.getJbtnCourMgt()) {
-			JOptionPane.showMessageDialog(pwd, "과목 관리 클릭");
 			new ProfCrsMgtDesign(pwd, "강의 과목 관리");
 		}
 		if (ae.getSource()==pwd.getJbtnExamMgtGrad()) {
-			JOptionPane.showMessageDialog(pwd, "시험 관리 및 채점 클릭");
 			new ProfTestMgtDesign(pwd, "시험 관리 및 채점");
 		}
 		if (ae.getSource()==pwd.getJbtnStudMgt()) {
-			JOptionPane.showMessageDialog(pwd, "학생 관리 클릭");
 			new ProfStudMgtDesign(pwd,"학생 관리" );
 		}
 		if (ae.getSource()==pwd.getJbtnStudySucc()) {
-			JOptionPane.showMessageDialog(pwd, "학습 성취도 클릭");
 			new ProfScoreDesign(pwd, "학습 성취도");
 		}
 		if (ae.getSource()==pwd.getJbtnInfoUpda()) {
-			JOptionPane.showMessageDialog(pwd, "정보 수정 클릭");
 			new ProfMdfyDesign(pwd, "정보수정");
 		}
 
 		if (ae.getSource()==pwd.getJbtnLogout()) {
-			JOptionPane.showMessageDialog(pwd, "로그아웃 버튼클릭");
 			new SelectLoginDesign();
 			pwd.dispose();
 		}
