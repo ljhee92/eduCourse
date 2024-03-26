@@ -8,6 +8,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 
 import eduCourse_prj.login.SelectLoginDesign;
+import eduCourse_prj.professor.design.ProfAcadCalDesign;
 import eduCourse_prj.professor.design.ProfCrsMgtDesign;
 import eduCourse_prj.professor.design.ProfHomeDesign;
 import eduCourse_prj.professor.design.ProfScoreDesign;
@@ -16,33 +17,23 @@ import eduCourse_prj.professor.design.ProfMdfyDesign;
 import eduCourse_prj.professor.design.ProfStudMgtDesign;
 import eduCourse_prj.professor.design.ProfTestMgtDesign;
 
-
-
-public class ProfHomeEvent extends WindowAdapter  implements ActionListener {
+public class ProfHomeEvent extends WindowAdapter implements ActionListener {
 	private ProfHomeDesign pwd;
+
 	public ProfHomeEvent(ProfHomeDesign pwd) {
 		this.pwd = pwd;
-		
+
 	}
-	
-	
-	
-	
-	
-	
+
 	@Override
 	public void windowClosing(WindowEvent e) {
 
 		pwd.dispose();
 	}
 
-
-
-
-
-
 	@Override
 	public void actionPerformed(ActionEvent ae) {
+
 		
 		if (ae.getSource()==pwd.getJbtnCourMgt()) {
 			new ProfCrsMgtDesign(pwd, "강의 과목 관리");
@@ -64,7 +55,11 @@ public class ProfHomeEvent extends WindowAdapter  implements ActionListener {
 			new SelectLoginDesign();
 			pwd.dispose();
 		}
-		
+		if (ae.getSource() == pwd.getJbtnSched()) {
+			JOptionPane.showMessageDialog(pwd, "학사일정 버튼클릭");
+			new ProfAcadCalDesign(pwd, "학사일정");
+		}
+
 	}
 
 }

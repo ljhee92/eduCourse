@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import eduCourse_prj.DbConnection;
 import eduCourse_prj.VO.LoginVO;
 import eduCourse_prj.VO.StdntVO;
+import eduCourse_prj.VO.TestListVO;
 
 
 
@@ -146,4 +147,39 @@ public class StdntDAO {
 			dbCon.dbClose(null, pstmt, con);
 		} // end finally
 	} // modifyStdnt
+	
+	public int selectAllByEmail(String email, int std_number) throws SQLException {
+	    DbConnection dbCon = DbConnection.getInstance();
+	    TestListVO tlVO = null;
+	    Connection con = null;
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    int isValidEmail = 0;
+	    int count = 0;
+	    try {
+	        String id = "scott";
+	        String pass = "tiger";
+	        con = dbCon.getConnection(id, pass);
+	        
+	        String slctQuery = "SELECT std_email, std_number FROM student WHERE std_email = ?";
+	        pstmt = con.prepareStatement(slctQuery);
+	        pstmt.setString(1, email);
+
+	        rs = pstmt.executeQuery();
+	        int emailNumber = 0;
+	        while(rs.next()) {
+	            emailNumber = rs.getInt("std_number");
+	            if(emailNumber == std_number) {
+	                isValidEmail = 1;
+	                return isValidEmail;
+	            }
+	        }
+	        if(emailNumber == 0) isValidEmail = 1; // 바뀐게 없을 경우
+	        if(emailNumber != 0) isValidEmail = -1; // 중복
+	    } finally {
+	        dbCon.dbClose(rs, pstmt, con);
+	    } // end finally
+	    return isValidEmail;
+	}
+
 } // class
