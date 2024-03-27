@@ -1,4 +1,4 @@
-package eduCourse_prj.admin;
+package eduCourse_prj.admin.event;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import eduCourse_prj.VO.AdminVO;
 import eduCourse_prj.admin.dao.AdminDAO;
+import eduCourse_prj.admin.design.AdminAdminMgtMdfyDesign;
 import eduCourse_prj.login.SelectLoginDesign;
 
 
@@ -35,10 +36,9 @@ public class AdminAdminMgtMdfyEvent extends WindowAdapter implements ActionListe
 		if (ae.getSource() == aammd.getJbtnMdfy()) {
 			
 			boolean logoutFlag = false;
-			String loginId = aammd.getAamd().getAwd().getlVO().getId();
+			String loginId = aammd.getAamd().getAhd().getlVO().getId();
 			
 
-			JOptionPane.showMessageDialog(aammd, "수정버튼 클릭");
 			AdminDAO aDAO = AdminDAO.getInstance();
 
 			String adminId = (aammd.getJtfAdminId().getText().trim());
@@ -85,7 +85,7 @@ public class AdminAdminMgtMdfyEvent extends WindowAdapter implements ActionListe
 							aVO.getAdmin_name() + " 관리자님 정보가 성공적으로 수정되었습니다.\n 최신정보를 갱신하기위해 로그아웃됩니다.");
 					aammd.dispose();
 					aammd.getAamd().dispose();
-					aammd.getAamd().getAwd().dispose();
+					aammd.getAamd().getAhd().dispose();
 					new SelectLoginDesign();
 					
 				}else {

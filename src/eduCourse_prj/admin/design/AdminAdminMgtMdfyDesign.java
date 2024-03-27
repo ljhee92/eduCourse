@@ -1,4 +1,4 @@
-package eduCourse_prj.admin;
+package eduCourse_prj.admin.design;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -12,8 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-
-import eduCourse_prj.admin.design.AdminAdminMgtDesign;
+import eduCourse_prj.admin.event.AdminAdminMgtMdfyEvent;
 
 @SuppressWarnings("serial")
 public class AdminAdminMgtMdfyDesign extends JDialog {
@@ -38,10 +37,12 @@ public class AdminAdminMgtMdfyDesign extends JDialog {
 		String adminPath = "src/eduCourse_prj/image/admin/";
 		
 		// 우상단 로그인상태 확인창 추가
-		topLogin = new JLabel(aamd.getAwd().getlVO().getName() + " 관리자님 로그인 중");
-		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
+
+		topLogin = new JLabel(aamd.getAhd().getlVO().getName() + " 관리자님 로그인 중");
+		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 17);
+
 		topLogin.setFont(font);
-		topLogin.setForeground(Color.RED);
+		topLogin.setForeground(Color.WHITE);
 		topLogin.setBounds(670, 30, 200, 20);
 		add(topLogin);
 		

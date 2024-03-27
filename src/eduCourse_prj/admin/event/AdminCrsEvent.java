@@ -19,8 +19,8 @@ import eduCourse_prj.admin.design.AdminCrsRegDisgn;
 import eduCourse_prj.professor.dao.ProfDAO;
 
 public class AdminCrsEvent extends WindowAdapter implements ActionListener {
-	AdminCrsDesign acd;
-	AdminDAO aDAO = AdminDAO.getInstance();
+	private AdminCrsDesign acd;
+	private AdminDAO aDAO = AdminDAO.getInstance();
 
 	public AdminCrsEvent(AdminCrsDesign acd) {
 		this.acd = acd;
@@ -37,13 +37,11 @@ public class AdminCrsEvent extends WindowAdapter implements ActionListener {
 	public void actionPerformed(ActionEvent ae) {
 
 		if (ae.getSource() == acd.getJbtnSlctTop()) {
-			JOptionPane.showMessageDialog(acd, "상단 조회버튼 클릭");
 			updateTable();
 
 		}
 
 		if (ae.getSource() == acd.getJbtnCrsReg()) {
-			JOptionPane.showMessageDialog(acd, "등록버튼클릭");
 			new AdminCrsRegDisgn(acd, "과목 등록");
 
 		}
@@ -84,11 +82,11 @@ public class AdminCrsEvent extends WindowAdapter implements ActionListener {
 				return;
 			} // end if
 
-			int deleteFlag = JOptionPane.showConfirmDialog(acd, "정말 삭제하시겠습니까?", "과목정보 삭제", JOptionPane.OK_CANCEL_OPTION);
+			int deleteFlag = JOptionPane.showConfirmDialog(acd, "정말 삭제하시겠습니까?", "과목정보 삭제", JOptionPane.YES_NO_OPTION);
 			switch (deleteFlag) {
-			case JOptionPane.CANCEL_OPTION:
+			case JOptionPane.NO_OPTION:
 				return;
-			case JOptionPane.OK_OPTION:
+			case JOptionPane.YES_OPTION:
 				try {
 					AdminDAO aDAO = AdminDAO.getInstance();
 					String crs_name = (acd.getDtmCrsMgt().getValueAt(index, 1).toString());

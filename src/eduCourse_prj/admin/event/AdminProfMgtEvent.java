@@ -21,7 +21,7 @@ import eduCourse_prj.professor.dao.ProfDAO;
 public class AdminProfMgtEvent extends WindowAdapter implements ActionListener {
 
 	private AdminProfMgtDesign apmd;
-	ProfDAO pDAO = ProfDAO.getInstance();
+	private ProfDAO pDAO = ProfDAO.getInstance();
 
 	public AdminProfMgtEvent(AdminProfMgtDesign apmd) {
 		this.apmd = apmd;
@@ -31,7 +31,6 @@ public class AdminProfMgtEvent extends WindowAdapter implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == apmd.getJbtnSlctTop()) {
-			JOptionPane.showMessageDialog(apmd, "상단 조회버튼 클릭");
 			updateTable();
 			
 
@@ -96,13 +95,13 @@ public class AdminProfMgtEvent extends WindowAdapter implements ActionListener {
 				return;
 			} // end if
 
-			int deleteFlag = JOptionPane.showConfirmDialog(apmd, "정말 삭제하시겠습니까?", "교수정보 삭제", JOptionPane.OK_CANCEL_OPTION);
+			int deleteFlag = JOptionPane.showConfirmDialog(apmd, "정말 삭제하시겠습니까?", "교수정보 삭제", JOptionPane.YES_NO_OPTION);
 
 
 			switch (deleteFlag) {
-			case JOptionPane.CANCEL_OPTION:
+			case JOptionPane.NO_OPTION:
 				return;
-			case JOptionPane.OK_OPTION:
+			case JOptionPane.YES_OPTION:
 				try {
 					ProfDAO pDAO = ProfDAO.getInstance();
 					int prof_number = Integer.parseInt(apmd.getDtmProfMgt().getValueAt(index, 1).toString());

@@ -33,7 +33,6 @@ public class AdminDeptMgtEvent extends JDialog implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		if (ae.getSource()==admd.getJbtnDeptReg()) {
-			JOptionPane.showMessageDialog(admd, "등록버튼 클릭");
 			new AdminDeptMgtRegDesign(admd,"학과 등록");
 		}//getJbtnReg
 		
@@ -85,13 +84,13 @@ public class AdminDeptMgtEvent extends JDialog implements ActionListener{
 		        return;
 		    }
 		    
-			int deleteFlag = JOptionPane.showConfirmDialog(admd, "정말 삭제하시겠습니까?", "학과정보 삭제", JOptionPane.OK_CANCEL_OPTION);
+			int deleteFlag = JOptionPane.showConfirmDialog(admd, "정말 삭제하시겠습니까?", "학과정보 삭제", JOptionPane.YES_NO_OPTION);
 
 
 			switch (deleteFlag) {
-			case JOptionPane.CANCEL_OPTION:
+			case JOptionPane.NO_OPTION:
 				return;
-			case JOptionPane.OK_OPTION:
+			case JOptionPane.YES_OPTION:
 			    try {
 			        int deptCode = Integer.parseInt(admd.getDtmDeptMgt().getValueAt(index, 0).toString());
 			        AdminDAO aDAO = AdminDAO.getInstance();

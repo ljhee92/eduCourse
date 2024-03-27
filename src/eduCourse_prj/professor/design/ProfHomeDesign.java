@@ -31,7 +31,7 @@ public class ProfHomeDesign extends JFrame {
 	JLabel dept, email;
 	
 	public ProfHomeDesign(LoginVO lVO) {
-		super("관리자 작업창");
+		super("교수 모드");
 
 		this.lVO = lVO;
 
@@ -74,7 +74,7 @@ public class ProfHomeDesign extends JFrame {
 
 		/////////////////////////////////////////////////
 		//요소에 추가선언
-		Font font = new Font("나눔스퀘어라운드 ExtraBold",Font.BOLD,15);
+		Font font = new Font("나눔스퀘어라운드 ExtraBold",Font.BOLD,17);
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.WHITE);
 		

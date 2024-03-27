@@ -27,13 +27,12 @@ import eduCourse_prj.admin.event.AdminStudMgtEvent;
 
 @SuppressWarnings("serial")
 public class AdminStudMgtDesign extends JDialog {
-	private AdminHomeDesign awd;
+	private AdminHomeDesign ahd;
 	private AdminDAO aDAO = AdminDAO.getInstance();
 	private JLabel jlBack;// 배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
 	private JLabel adminMgt;
 	private JTable jtbStdMgt;
-	private DefaultTableModel dtmAdminMgt;
 
 	private JButton jbtnSlct, jbtnSlctTop;
 
@@ -45,14 +44,14 @@ public class AdminStudMgtDesign extends JDialog {
 	private JComboBox<String> jcbCrs;
 	private JTextField jtfStdNum;
 
-	List<DeptVO> lDept;
-	List<CrsVO> lCrs;
+	private List<DeptVO> lDept;
+	private List<CrsVO> lCrs;
 
 	private DefaultTableModel dtmStdMgt;
 
-	public AdminStudMgtDesign(AdminHomeDesign awd, String title) {
-		super(awd, title, true);
-		this.awd = awd;
+	public AdminStudMgtDesign(AdminHomeDesign ahd, String title) {
+		super(ahd, title, true);
+		this.ahd = ahd;
 		setLayout(null);
 		setSize(1000, 650);
 
@@ -69,8 +68,10 @@ public class AdminStudMgtDesign extends JDialog {
 		add(adminMgt);
 
 		// 우상단 로그인상태 확인창 추가
-		topLogin = new JLabel(awd.getlVO().getName() + " 관리자님 로그인 중");
-		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
+
+		topLogin = new JLabel(ahd.getlVO().getName() + " 관리자님 로그인 중");
+		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 17);
+
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.WHITE);
 		topLogin.setBounds(670, 30, 200, 20);
@@ -203,8 +204,8 @@ public class AdminStudMgtDesign extends JDialog {
 		} // end for
 	} // setTbHorizontal
 
-	public AdminHomeDesign getAwd() {
-		return awd;
+	public AdminHomeDesign getAhd() {
+		return ahd;
 	}
 
 	public AdminDAO getaDAO() {
@@ -225,10 +226,6 @@ public class AdminStudMgtDesign extends JDialog {
 
 	public JTable getJtbStdMgt() {
 		return jtbStdMgt;
-	}
-
-	public DefaultTableModel getDtmAdminMgt() {
-		return dtmAdminMgt;
 	}
 
 	public JButton getJbtnSlct() {

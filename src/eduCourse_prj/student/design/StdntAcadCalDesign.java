@@ -127,7 +127,7 @@ public class StdntAcadCalDesign extends JDialog {
 		monthJb.setPreferredSize(new Dimension(30, 30)); // 레이블 크기 설정
 		
 		//폰트 설정
-		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
+		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 17);
 		yearJb.setFont(font);
 		monthJb.setFont(font);
 		yearCb.setFont(font);
