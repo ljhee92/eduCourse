@@ -18,7 +18,7 @@ public class AdminLoginDesign extends JFrame {
 	private JLabel sistMark;// 쌍용마크 라벨
 	private JLabel title;// 살려조쌍용대학교
 
-	private JButton loginButton;
+	private JButton loginButton, jbtLogout;
 
 	public AdminLoginDesign(SelectLoginEvent sle) {
 
@@ -65,6 +65,9 @@ public class AdminLoginDesign extends JFrame {
 		loginButton = new JButton(new ImageIcon(loginPath + "Loginbutton_new.png")); // 298*40 사이즈 변경
 		loginButton.setBounds(350, 400, 298, 40);
 
+		jbtLogout = new JButton("지민에몽~ 해줘~");//
+		jbtLogout.setBounds(870, 20, 100, 36);
+
 		// has a관계 설정
 
 		AdminLoginEvent ale = new AdminLoginEvent(this);
@@ -73,6 +76,7 @@ public class AdminLoginDesign extends JFrame {
 		loginButton.addActionListener(ale);
 		jtfId.addActionListener(ale);
 		jpfPass.addActionListener(ale);
+		jbtLogout.addActionListener(ale);
 
 		// 프레임에 컴포넌트 추가
 
@@ -83,6 +87,8 @@ public class AdminLoginDesign extends JFrame {
 		add(jtfId);
 		add(jpfPass);
 		add(loginButton);
+		add(jbtLogout);
+
 		add(sistMark);
 
 		add(back);
@@ -107,6 +113,10 @@ public class AdminLoginDesign extends JFrame {
 
 	public JButton getLoginButton() {
 		return loginButton;
+	}
+
+	public JButton getJbtLogout() {
+		return jbtLogout;
 	}
 
 }

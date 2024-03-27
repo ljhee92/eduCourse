@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 import eduCourse_prj.VO.LoginVO;
+import eduCourse_prj.login.SelectLoginDesign;
 import eduCourse_prj.professor.dao.ProfDAO;
 import eduCourse_prj.professor.design.ProfHomeDesign;
 import eduCourse_prj.professor.design.ProfLoginDesign;
@@ -29,10 +30,15 @@ public class ProfLoginEvent extends WindowAdapter implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent ae) {
+		
+		if(ae.getSource()==pld.getJbtLogout()) {
+			pld.dispose();
+			new SelectLoginDesign();
+		}
 
 		if (ae.getSource() == pld.getJtfId()) {
 
-			// JOptionPane.showMessageDialog(null, "엔터클릭");
+
 
 			// jtfId에 입력값이 존재한다면
 			if (!pld.getJtfId().getText().isEmpty()) {

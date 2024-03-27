@@ -12,6 +12,7 @@ import eduCourse_prj.VO.LoginVO;
 import eduCourse_prj.admin.dao.AdminDAO;
 import eduCourse_prj.admin.design.AdminHomeDesign;
 import eduCourse_prj.admin.design.AdminLoginDesign;
+import eduCourse_prj.login.SelectLoginDesign;
 
 public class AdminLoginEvent extends WindowAdapter implements ActionListener {
 	private AdminLoginDesign ald;
@@ -30,6 +31,12 @@ public class AdminLoginEvent extends WindowAdapter implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 
+		if(ae.getSource()==ald.getJbtLogout()) {
+			ald.dispose();
+			new SelectLoginDesign();
+		}
+		
+		
 		if (ae.getSource() == ald.getJtfId()) {
 
 			// jtfId에 입력값이 존재한다면
@@ -119,6 +126,11 @@ public class AdminLoginEvent extends WindowAdapter implements ActionListener {
 
 		}
 
+		
+		
+		
+		
+		
 	}
 
 }
