@@ -3,7 +3,7 @@ package eduCourse_prj.admin.event;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.swing.JDialog;
@@ -12,11 +12,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import eduCourse_prj.VO.DeptDTO;
-import eduCourse_prj.VO.DeptVO;
+
 import eduCourse_prj.admin.dao.AdminDAO;
 import eduCourse_prj.admin.design.AdminDeptMgtDesign;
 import eduCourse_prj.admin.design.AdminDeptMgtRegDesign;
-import eduCourse_prj.professor.dao.ProfDAO;
+
 
 
 @SuppressWarnings("serial")

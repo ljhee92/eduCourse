@@ -15,12 +15,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import eduCourse_prj.VO.CrsVO;
-import eduCourse_prj.admin.design.AdminDeptMgtDesign;
-import eduCourse_prj.admin.event.AdminDeptMgtRegEvent;
+
 import eduCourse_prj.professor.dao.TestDAO;
 import eduCourse_prj.professor.event.ProfTestRegEvent;
 
+@SuppressWarnings("serial")
 public class ProfTestRegDesign extends JDialog {
 	private ProfTestMgtDesign ptmd;
 	TestDAO tDAO = TestDAO.getInstance();
@@ -43,7 +42,7 @@ public class ProfTestRegDesign extends JDialog {
 	private JLabel testQuestionContentLabel;// 문제내용
 	private JLabel answerLabel;//정답
 	private JLabel topLogin;
-	private JLabel deptRegLabel;
+
 	private JLabel jlBack;
 	private JLabel deptMgt;
 
@@ -61,7 +60,7 @@ public class ProfTestRegDesign extends JDialog {
 
 		
 			String commonPath = "src/eduCourse_prj/image/common/";
-			String testPath = "src/eduCourse_prj/image/prof/";
+
 
 			setSize(1000, 650);
 			setLocationRelativeTo(ptmd);

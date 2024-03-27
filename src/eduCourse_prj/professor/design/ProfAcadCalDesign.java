@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
@@ -27,7 +26,7 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 import eduCourse_prj.admin.dao.AdminAcadCalDAO;
-import eduCourse_prj.admin.event.AdminAcadCalEvent;
+
 import eduCourse_prj.professor.event.ProfAcadCalEvent;
 
 @SuppressWarnings("serial")
@@ -183,7 +182,7 @@ public class ProfAcadCalDesign extends JDialog {
 		Border border = BorderFactory.createLineBorder(Color.gray, 2);
 		memoJta.setBorder(border); // JTextArea에 Border를 추가
 
-		String adminPath = "src/eduCourse_prj/image/admin/";
+
 		String commonPath = "src/eduCourse_prj/image/common/";
 		JPanel memoBtnJp = new JPanel();
 

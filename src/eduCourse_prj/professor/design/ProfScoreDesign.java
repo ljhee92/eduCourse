@@ -19,23 +19,22 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import eduCourse_prj.VO.CrsVO;
-import eduCourse_prj.VO.DeptVO;
-import eduCourse_prj.VO.LoginVO;
-import eduCourse_prj.VO.ProfVO;
+
 import eduCourse_prj.VO.ScoreVO;
-import eduCourse_prj.admin.dao.AdminDAO;
-import eduCourse_prj.admin.design.AdminHomeDesign;
-import eduCourse_prj.admin.event.AdminStudMgtEvent;
+
+
 import eduCourse_prj.professor.dao.ProfDAO;
 import eduCourse_prj.professor.dao.ScoreDAO;
 import eduCourse_prj.professor.event.ProfScoreEvent;
 
+
+@SuppressWarnings("serial")
 public class ProfScoreDesign extends JDialog{
 	private ProfHomeDesign phd;
 	
     //
 	private ScoreDAO sDAO = ScoreDAO.getInstance();
-	private AdminDAO aDAO = AdminDAO.getInstance();
+
 	private ProfDAO pDAO = ProfDAO.getInstance();
 	private JLabel jlBack;// 배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
@@ -58,6 +57,7 @@ public class ProfScoreDesign extends JDialog{
 	List<CrsVO> lCrs;
 
  
+
 
 
 	public ProfScoreDesign(ProfHomeDesign phd, String title) {

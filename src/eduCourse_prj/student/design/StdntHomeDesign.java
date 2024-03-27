@@ -16,7 +16,7 @@ import eduCourse_prj.student.event.StdntHomeEvent;
 
 
 
-@SuppressWarnings({ "serial", "unused" })
+@SuppressWarnings( "serial" )
 public class StdntHomeDesign extends JFrame {
 	private LoginVO lVO;
 

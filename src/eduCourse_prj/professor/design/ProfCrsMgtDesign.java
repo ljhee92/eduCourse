@@ -18,9 +18,10 @@ import javax.swing.table.TableColumnModel;
 
 import eduCourse_prj.VO.CrsVO;
 import eduCourse_prj.professor.dao.CrsMgtRegDAO;
-import eduCourse_prj.professor.dao.ProfDAO;
+
 import eduCourse_prj.professor.event.ProfCrsMgtEvent;
 
+@SuppressWarnings("serial")
 public class ProfCrsMgtDesign extends JDialog {
 	ProfHomeDesign phd;
 

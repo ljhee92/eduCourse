@@ -19,11 +19,11 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import eduCourse_prj.VO.CrsVO;
-import eduCourse_prj.VO.DeptVO;
+
 
 import eduCourse_prj.admin.dao.AdminDAO;
 
-import eduCourse_prj.admin.event.AdminStudMgtEvent;
+
 import eduCourse_prj.professor.dao.ProfDAO;
 import eduCourse_prj.professor.event.ProfStudMgtEvent;
 

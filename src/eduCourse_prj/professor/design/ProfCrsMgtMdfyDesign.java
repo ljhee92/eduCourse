@@ -13,13 +13,14 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import eduCourse_prj.VO.CrsRegVO;
-import eduCourse_prj.VO.CrsVO;
+
 import eduCourse_prj.VO.LectureRoomVO;
 import eduCourse_prj.professor.dao.CrsMgtRegDAO;
-import eduCourse_prj.professor.dao.ProfDAO;
-import eduCourse_prj.professor.event.ProfCrsMgtMdfyEvent;
-import eduCourse_prj.professor.event.ProfCrsMgtRegEvent;
 
+import eduCourse_prj.professor.event.ProfCrsMgtMdfyEvent;
+
+
+@SuppressWarnings("serial")
 public class ProfCrsMgtMdfyDesign extends JDialog {
 	
 	private ProfCrsMgtDesign pcmd;

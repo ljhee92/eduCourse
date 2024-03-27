@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -17,7 +17,6 @@ import eduCourse_prj.VO.CrsVO;
 import eduCourse_prj.VO.DeptDTO;
 import eduCourse_prj.VO.DeptVO;
 import eduCourse_prj.VO.LoginVO;
-import eduCourse_prj.VO.ProfVO;
 import eduCourse_prj.VO.SlctStdVO;
 
 

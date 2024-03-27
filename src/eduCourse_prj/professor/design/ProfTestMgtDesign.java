@@ -18,13 +18,13 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-import eduCourse_prj.VO.DeptVO;
-import eduCourse_prj.VO.LectureVO;
+
 import eduCourse_prj.VO.TestListVO;
-import eduCourse_prj.admin.dao.AdminDAO;
+
 import eduCourse_prj.professor.dao.ProfDAO;
 import eduCourse_prj.professor.event.ProfTestMgtEvent;
 
+@SuppressWarnings("serial")
 public class ProfTestMgtDesign extends JDialog {
 	ProfHomeDesign phd;
 	JLabel jlBack;// 배경

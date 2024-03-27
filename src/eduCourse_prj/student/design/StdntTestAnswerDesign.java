@@ -3,7 +3,7 @@ package eduCourse_prj.student.design;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.SQLException;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -18,15 +18,13 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-import eduCourse_prj.VO.CrsVO;
-import eduCourse_prj.VO.DeptVO;
-import eduCourse_prj.VO.StdntTestVO;
+
 import eduCourse_prj.VO.SubStdntAnswerVO;
 import eduCourse_prj.student.dao.StdntAnswerDAO;
-import eduCourse_prj.student.dao.StdntDAO;
-import eduCourse_prj.student.dao.StdntTestDAO;
+
 import eduCourse_prj.student.event.StdntTestAnswerEvent;
 
+@SuppressWarnings("serial")
 public class StdntTestAnswerDesign extends JDialog {
 
 	private StdntHomeDesign shd;

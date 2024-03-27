@@ -12,11 +12,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import eduCourse_prj.VO.CrsVO;
-import eduCourse_prj.VO.ProfVO;
+
 import eduCourse_prj.admin.dao.AdminDAO;
 import eduCourse_prj.admin.design.AdminCrsDesign;
 import eduCourse_prj.admin.design.AdminCrsRegDisgn;
-import eduCourse_prj.professor.dao.ProfDAO;
+
 
 public class AdminCrsEvent extends WindowAdapter implements ActionListener {
 	private AdminCrsDesign acd;

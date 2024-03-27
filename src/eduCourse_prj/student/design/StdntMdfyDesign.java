@@ -3,23 +3,24 @@ package eduCourse_prj.student.design;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.SQLException;
-import java.util.List;
+
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
+
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import eduCourse_prj.VO.DeptVO;
+
 import eduCourse_prj.VO.StdntVO;
-import eduCourse_prj.admin.dao.AdminDAO;
-import eduCourse_prj.admin.event.AdminProfMgtMdfyEvent;
+
 import eduCourse_prj.student.dao.StdntDAO;
 import eduCourse_prj.student.event.StdntMdfyEvent;
 
+
+@SuppressWarnings("serial")
 public class StdntMdfyDesign extends JDialog {
 	
 	private StdntHomeDesign shd;

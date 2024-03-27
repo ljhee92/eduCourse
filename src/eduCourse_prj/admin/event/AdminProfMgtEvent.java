@@ -12,7 +12,7 @@ import javax.swing.JTextArea;
 
 import eduCourse_prj.VO.AdminProfVO;
 import eduCourse_prj.VO.ProfVO;
-import eduCourse_prj.VO.SlctStdVO;
+
 import eduCourse_prj.admin.design.AdminProfMgtDesign;
 import eduCourse_prj.admin.design.AdminProfMgtMdfyDesign;
 import eduCourse_prj.admin.design.AdminProfMgtRegDesign;

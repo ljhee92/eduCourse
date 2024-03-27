@@ -3,23 +3,23 @@ package eduCourse_prj.professor.design;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.SQLException;
-import java.util.List;
+
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
+
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import eduCourse_prj.VO.DeptVO;
+
 import eduCourse_prj.VO.ProfVO;
-import eduCourse_prj.admin.dao.AdminDAO;
-import eduCourse_prj.admin.event.AdminProfMgtMdfyEvent;
+
 import eduCourse_prj.professor.dao.ProfDAO;
 import eduCourse_prj.professor.event.ProfMdfyEvent;
 
+@SuppressWarnings("serial")
 public class ProfMdfyDesign extends JDialog {
 
 	private ProfHomeDesign phd;

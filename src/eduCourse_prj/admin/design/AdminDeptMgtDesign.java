@@ -17,10 +17,10 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import eduCourse_prj.VO.DeptVO;
-import eduCourse_prj.VO.ProfVO;
+
 import eduCourse_prj.admin.dao.AdminDAO;
 import eduCourse_prj.admin.event.AdminDeptMgtEvent;
-import eduCourse_prj.professor.dao.ProfDAO;
+
 
 @SuppressWarnings("serial")
 public class AdminDeptMgtDesign extends JDialog {
