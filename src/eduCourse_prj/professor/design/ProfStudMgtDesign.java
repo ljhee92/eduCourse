@@ -84,23 +84,23 @@ public class ProfStudMgtDesign extends JDialog {
 
 		jlCrs = new JLabel("과목");
 		jlCrs.setFont(font);
-		jlCrs.setBounds(500, 150, 50, 20);
+		jlCrs.setBounds(240, 150, 50, 20);
 		add(jlCrs);
 
 		jlstdNum = new JLabel("학번");
 		jlstdNum.setFont(font);
-		jlstdNum.setBounds(240, 150, 50, 20);
+		jlstdNum.setBounds(500, 150, 50, 20);
 		add(jlstdNum);
 
 	
 		jcbCrs = new JComboBox<String>();
 		jcbCrs.setFont(font);
-		jcbCrs.setBounds(540, 145, 200, 30);
+		jcbCrs.setBounds(280, 145, 200, 30);
 		add(jcbCrs);
 
 		jtfStdNum = new JTextField();
 		jtfStdNum.setFont(font);
-		jtfStdNum.setBounds(280, 145, 200, 30);
+		jtfStdNum.setBounds(540, 145, 200, 30);
 		add(jtfStdNum);
 
 		///////////////////////////////////////////////////////////////////

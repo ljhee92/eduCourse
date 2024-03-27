@@ -31,7 +31,7 @@ public class ProfHomeDesign extends JFrame {
 	JLabel dept, email;
 	
 	public ProfHomeDesign(LoginVO lVO) {
-		super("관리자 작업창");
+		super("교수 모드");
 
 		this.lVO = lVO;
 
