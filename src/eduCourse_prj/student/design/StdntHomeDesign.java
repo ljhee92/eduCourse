@@ -70,7 +70,7 @@ public class StdntHomeDesign extends JFrame {
 		jbtnJbtnExamCorr = new JButton(new ImageIcon(studPath+"JbtnExamCorr.png"));
 		jbtnInfoUpda = new JButton(new ImageIcon(commonPath+"InfoUpda.png"));
 		jbtnLogout = new JButton(new ImageIcon(commonPath+"Logout.png"));
-		jbtnSched = new JButton("학사일정 확인");
+		jbtnSched = new JButton(new ImageIcon(commonPath+"Sched.png"));
 
 
 
@@ -105,7 +105,7 @@ public class StdntHomeDesign extends JFrame {
 		addr.setBounds(520, 300, 300, 20);
 		topLogin.setBounds(670,30,200,20);
 		img.setBounds(310, 150, 160, 188);
-		jbtnSched.setBounds(840,90,120,50);
+		jbtnSched.setBounds(840,90,114,47);
 		
 		
 		jbtnEnrollCour.setBounds(200, 440, 120, 50);
