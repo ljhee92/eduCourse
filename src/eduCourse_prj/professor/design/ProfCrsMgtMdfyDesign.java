@@ -44,7 +44,7 @@ public class ProfCrsMgtMdfyDesign extends JDialog {
 		
 		// 우상단 로그인상태 확인창 추가
 		topLogin = new JLabel(pcmd.getPhd().getlVO().getName() + " 교수님 로그인 중");
-		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
+		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 17);
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.WHITE);
 		topLogin.setBounds(670, 30, 300, 20);

@@ -76,7 +76,7 @@ public class StdntHomeDesign extends JFrame {
 
 		/////////////////////////////////////////////////
 		//요소에 추가선언
-		Font font = new Font("나눔스퀘어라운드 ExtraBold",Font.BOLD,15);
+		Font font = new Font("나눔스퀘어라운드 ExtraBold",Font.BOLD,17);
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.WHITE);
 		
