@@ -15,9 +15,9 @@ import eduCourse_prj.professor.design.ProfTestMdfyDesign;
 import eduCourse_prj.professor.design.ProfTestMgtDesign;
 import eduCourse_prj.professor.design.ProfTestRegDesign;
 
-public class ProfTestMgtEvent extends WindowAdapter implements ActionListener, ListSelectionListener {
-	ProfTestMgtDesign ptmd;
 
+public class ProfTestMgtEvent extends WindowAdapter implements ActionListener, ListSelectionListener{
+	private ProfTestMgtDesign ptmd;
 	public ProfTestMgtEvent(ProfTestMgtDesign ptmd) {
 		this.ptmd = ptmd;
 	}

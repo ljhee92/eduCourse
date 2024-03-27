@@ -61,7 +61,7 @@ public class StdntMdfyEvent extends WindowAdapter implements ActionListener {
 			try {
 				StdntVO sVO = new StdntVO(stdntNum, stdntPass, smd.getShd().getlVO().getName(), stdntEmail, stdntAddr,
 						null, null, null);
-				sDAO.modifyStdnt(sVO);
+				sDAO.updateStdnt(sVO);
 				JOptionPane.showMessageDialog(smd,
 						sVO.getStdnt_name() + " 학생님 정보가 성공적으로 수정되었습니다.\n 최신정보를 갱신하기위해 로그아웃됩니다.");
 				smd.dispose();

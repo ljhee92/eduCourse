@@ -25,8 +25,11 @@ public class ProfCrsMgtMdfyDesign extends JDialog {
 	private ProfCrsMgtDesign pcmd;
 	private JLabel jlBack;// 배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
-	private JLabel jlprofCrsMgt, jlprofCrsMgtMdfy; // 상단 라벨
-	private JLabel jlCrsName, jlCrsCode, jlDeptName, jlDeptCode, jlProfName, jlLectRoom, jlCredit, jlCapa, jlNecessary;
+
+	private JLabel jlProfCrsMgt, jlProfCrsMgtMdfy; // 상단 라벨
+	private JLabel jlCrsName, jlCrsCode, jlDeptName, jlDeptCode, jlProfName,
+					jlLectRoom, jlCredit, jlCapa, jlNecessary;
+
 	private JComboBox<String> jcbLectRoom;
 	private JTextField jtfCrsName, jtfCrsCode, jtfDeptName, jtfDeptCode, jtfProfName, jtfCredit, jtfCapa;
 	private JButton jbtnMdfy, jbtnCancel;
@@ -50,14 +53,14 @@ public class ProfCrsMgtMdfyDesign extends JDialog {
 		add(topLogin);
 
 		// 강의 과목 관리, 등록 상단 라벨 추가
-		jlprofCrsMgt = new JLabel(new ImageIcon(profPath + "ProfCrsMgt_Label.png"));
-		jlprofCrsMgtMdfy = new JLabel(new ImageIcon(commonPath + "MdfyBanner_new.png"));
-
-		jlprofCrsMgt.setBounds(10, 76, 967, 44);
-		jlprofCrsMgtMdfy.setBounds(10, 118, 967, 45);
-
-		add(jlprofCrsMgt);
-		add(jlprofCrsMgtMdfy);
+		jlProfCrsMgt = new JLabel(new ImageIcon(profPath + "ProfCrsMgt_Label.png"));
+		jlProfCrsMgtMdfy = new JLabel(new ImageIcon(commonPath + "MdfyBanner_new.png"));
+		
+		jlProfCrsMgt.setBounds(10, 76, 967, 44);
+		jlProfCrsMgtMdfy.setBounds(10, 118, 967, 45);
+		
+		add(jlProfCrsMgt);
+		add(jlProfCrsMgtMdfy);
 
 		// 과목, 과목 코드, 학과, 학과 코드, 담당 교수, 강의실, 학점, 정원, 필수입력사항 라벨 추가
 		jlCrsName = new JLabel("과목");

@@ -12,7 +12,7 @@ import eduCourse_prj.professor.design.ProfHomeDesign;
 import eduCourse_prj.professor.design.ProfScoreDesign;
 
 import eduCourse_prj.professor.design.ProfMdfyDesign;
-import eduCourse_prj.professor.design.ProfStudMgtDesign;
+import eduCourse_prj.professor.design.ProfStdntMgtDesign;
 import eduCourse_prj.professor.design.ProfTestMgtDesign;
 
 public class ProfHomeEvent extends WindowAdapter implements ActionListener {
@@ -38,9 +38,11 @@ public class ProfHomeEvent extends WindowAdapter implements ActionListener {
 		if (ae.getSource() == pwd.getJbtnExamMgtGrad()) {
 			new ProfTestMgtDesign(pwd, "시험 관리 및 채점");
 		}
+
 		if (ae.getSource() == pwd.getJbtnStudMgt()) {
-			new ProfStudMgtDesign(pwd, "학생 관리");
+			new ProfStdntMgtDesign(pwd, "학생 관리");
 		}
+		
 		if (ae.getSource() == pwd.getJbtnStudySucc()) {
 			new ProfScoreDesign(pwd, "학습 성취도");
 		}

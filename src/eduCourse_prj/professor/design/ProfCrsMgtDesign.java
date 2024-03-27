@@ -23,9 +23,9 @@ import eduCourse_prj.professor.event.ProfCrsMgtEvent;
 
 @SuppressWarnings("serial")
 public class ProfCrsMgtDesign extends JDialog {
-	ProfHomeDesign phd;
+	private ProfHomeDesign phd;
 
-	JLabel jlBack;// 배경
+	private JLabel jlBack;// 배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
 	private JLabel profCrsMgt;
 

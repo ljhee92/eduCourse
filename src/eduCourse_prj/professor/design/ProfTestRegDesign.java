@@ -21,7 +21,7 @@ import eduCourse_prj.professor.event.ProfTestRegEvent;
 @SuppressWarnings("serial")
 public class ProfTestRegDesign extends JDialog {
 	private ProfTestMgtDesign ptmd;
-	TestDAO tDAO = TestDAO.getInstance();
+	private TestDAO tDAO = TestDAO.getInstance();
 
 	private JButton registerButton;// 출제버튼
 	private JButton cancelButton;// 취소버튼
@@ -109,16 +109,22 @@ public class ProfTestRegDesign extends JDialog {
 					testNumberComboBox.addItem(String.valueOf(i)); // 숫자를 문자열로 변환하여 콤보 박스에 추가
 				}
 			}
+			jlCourseName1 = new JLabel("과목명");
+			jlCourseName1.setFont(font);
+			jlCourseName1.setBounds(80, 140, 60, 30);
+			jlCourseName2 = new JLabel();
+			jlCourseName2.setFont(font);
+			jlCourseName2.setBounds(150, 140, 150, 30);
+			
+			// 과목명 테이블에서 가져오기
+			slctCourseName();
+
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(ptmd, "SQL 문제가 발생했습니다.");
 			e.printStackTrace();
 		}
 
-//			for (CrsVO crs : lCrs) {
-//
-//				jcbCrs.addItem(crs.getCourName());
-//
-//			}
+
 
 		jlCourseName1 = new JLabel("과목명");
 		jlCourseName1.setFont(font);
