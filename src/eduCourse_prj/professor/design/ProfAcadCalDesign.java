@@ -208,7 +208,7 @@ public class ProfAcadCalDesign extends JDialog {
 		topLogin = new JLabel(phd.getlVO().getName() + " 교수님 로그인 중");
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.WHITE);
-		topLogin.setBounds(600, 30, 300, 20);
+		topLogin.setBounds(670, 30, 300, 20);
 
 		// 버튼 설정
 		searchBtn = new JButton(new ImageIcon(commonPath + "ConfirmButtonSmall_new.png"));
