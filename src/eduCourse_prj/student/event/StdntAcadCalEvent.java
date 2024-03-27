@@ -10,8 +10,7 @@ import eduCourse_prj.student.design.StdntAcadCalDesign;
 
 public class StdntAcadCalEvent extends WindowAdapter implements ActionListener {
 
-	StdntAcadCalDesign sacd;
-	int i = 0;
+	private StdntAcadCalDesign sacd;
 
 	public StdntAcadCalEvent(StdntAcadCalDesign sacd) {
 		this.sacd = sacd;

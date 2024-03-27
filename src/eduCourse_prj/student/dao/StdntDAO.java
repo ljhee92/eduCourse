@@ -8,22 +8,21 @@ import java.sql.SQLException;
 import eduCourse_prj.DbConnection;
 import eduCourse_prj.VO.LoginVO;
 import eduCourse_prj.VO.StdntVO;
-import eduCourse_prj.VO.TestListVO;
 
 public class StdntDAO {
-	private static StdntDAO slDAO;
+	private static StdntDAO sDAO;
 
 	private StdntDAO() {
 
 	}
 
 	public static StdntDAO getInstance() {
-		if (slDAO == null) {
-			slDAO = new StdntDAO();
+		if (sDAO == null) {
+			sDAO = new StdntDAO();
 
 		} // end if
 
-		return slDAO;
+		return sDAO;
 	}
 
 	/**
@@ -118,7 +117,7 @@ public class StdntDAO {
 	 * @param sVO
 	 * @throws SQLException
 	 */
-	public void modifyStdnt(StdntVO sVO) throws SQLException {
+	public void updateStdnt(StdntVO sVO) throws SQLException {
 		DbConnection dbCon = DbConnection.getInstance();
 
 		Connection con = null;
