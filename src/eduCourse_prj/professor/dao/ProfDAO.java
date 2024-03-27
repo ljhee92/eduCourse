@@ -753,10 +753,7 @@ public class ProfDAO {
 	}// slctProfLect
 
 	/**
-	 * <<<<<<< HEAD 로그인한 교수의 강의 과목을 불러오는 메서드 ======= 로그인한 교수의 강의 과목을 불러오는 메서든
-	 * 
-	 * >>>>>>> main
-	 * 
+	 * 로그인한 교수의 강의 과목을 불러오는 메서드
 	 * @param prof_number
 	 * @return
 	 * @throws SQLException
