@@ -104,6 +104,7 @@ public class AdminDeptMgtDesign extends JDialog {
 		setSize(1000,650);
 		setLayout(null);
 		setLocationRelativeTo(null);
+		setResizable(false);
 		setVisible(true);
 		
 		

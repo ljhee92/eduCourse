@@ -258,6 +258,7 @@ public class AdminAcadCalDesign extends JDialog {
 
 		setSize(1000, 650);
 		setLocationRelativeTo(null);
+		setResizable(false);
 		setVisible(true);
 	}// end constructor
 

@@ -84,7 +84,7 @@ public class AdminCrsRegDisgn extends JDialog {
 		
 		
 		// 우상단 로그인상태 확인창 추가
-		topLogin = new JLabel(acd.getAwd().getlVO().getName() + " 관리자님 로그인 중");
+		topLogin = new JLabel(acd.getAhd().getlVO().getName() + " 관리자님 로그인 중");
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.WHITE);
 		topLogin.setBounds(670, 30, 200, 20);
@@ -175,6 +175,7 @@ public class AdminCrsRegDisgn extends JDialog {
 		jbtnRegister.addActionListener(acre);
 		jbtnCancel.addActionListener(acre);
 
+		setResizable(false);
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}

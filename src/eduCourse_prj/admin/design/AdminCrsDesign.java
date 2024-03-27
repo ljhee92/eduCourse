@@ -157,6 +157,7 @@ public class AdminCrsDesign extends JDialog {
 		jbtnSlctTop.addActionListener(ace);
 		setLocationRelativeTo(null);
 
+		setResizable(false);
 		setVisible(true);
 	}
 

@@ -136,8 +136,9 @@ public class AdminAdminMgtDesign extends JDialog {
 
 
 
+		
 		add(jlBack);
-
+		setResizable(false);
 		setSize(1000, 650);
 
 		setLocationRelativeTo(null);
