@@ -40,7 +40,7 @@ public class StdntAcadCalDesign extends JDialog {
 	private DefaultComboBoxModel<Integer> yearCbm, monthCbm;
 	private JTextField timeJtf;
 	private JTextArea memoJta;
-	private JLabel yearJb, monthJb, jlBack, jlBanner, 
+	private JLabel topLogin, yearJb, monthJb, jlBack, jlBanner, 
 			yearJl, yearJl2, monthJl, monthJl2, dayJl, dayJl2;
 	private JPanel calJp;
 
@@ -216,12 +216,18 @@ public class StdntAcadCalDesign extends JDialog {
 		yearSelectJP.setBackground(Color.white); //년 패널
 		monthSelectJP.setBackground(Color.white); //달 패널
 		
+		// 상단 로그인 라벨 설정
+		topLogin = new JLabel(swd.getlVO().getName()+" 학생님 로그인 중");
+		topLogin.setFont(font);
+		topLogin.setForeground(Color.WHITE);
+		topLogin.setBounds(600,30,300,20);
+		
 		// 버튼 설정
 		searchBtn = new JButton(new ImageIcon(commonPath + "ConfirmButtonSmall_new.png"));
 		searchBtn.setBounds(335, 160, 75, 40);
 
 		// 배너 삽입
-		jlBanner = new JLabel(new ImageIcon(adminPath + "SchedMgtBanner_new.png"));
+		jlBanner = new JLabel(new ImageIcon(commonPath + "SchedMgtBanner.png"));
 		jlBanner.setBounds(10, 76, 967, 45);
 
 		// 배경 삽입
@@ -234,6 +240,7 @@ public class StdntAcadCalDesign extends JDialog {
 		monthSelectJP.add(monthJb);
 		monthSelectJP.add(monthCb);
 		
+		add(topLogin);
 		
 		add(jbtnCnfrm);
 		add(calJp);
