@@ -22,7 +22,7 @@ import eduCourse_prj.student.dao.StdntDAO;
 public class AdminStudMgtEvent extends WindowAdapter implements ActionListener {
 
 	private AdminStudMgtDesign asmd;
-	AdminDAO aDAO = AdminDAO.getInstance();
+	private AdminDAO aDAO = AdminDAO.getInstance();
 
 	public AdminStudMgtEvent(AdminStudMgtDesign asmd) {
 

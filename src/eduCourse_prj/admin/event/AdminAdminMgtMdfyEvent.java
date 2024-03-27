@@ -36,7 +36,7 @@ public class AdminAdminMgtMdfyEvent extends WindowAdapter implements ActionListe
 		if (ae.getSource() == aammd.getJbtnMdfy()) {
 			
 			boolean logoutFlag = false;
-			String loginId = aammd.getAamd().getAwd().getlVO().getId();
+			String loginId = aammd.getAamd().getAhd().getlVO().getId();
 			
 
 			AdminDAO aDAO = AdminDAO.getInstance();
@@ -85,7 +85,7 @@ public class AdminAdminMgtMdfyEvent extends WindowAdapter implements ActionListe
 							aVO.getAdmin_name() + " 관리자님 정보가 성공적으로 수정되었습니다.\n 최신정보를 갱신하기위해 로그아웃됩니다.");
 					aammd.dispose();
 					aammd.getAamd().dispose();
-					aammd.getAamd().getAwd().dispose();
+					aammd.getAamd().getAhd().dispose();
 					new SelectLoginDesign();
 					
 				}else {
