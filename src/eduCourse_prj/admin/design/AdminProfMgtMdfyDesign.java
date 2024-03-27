@@ -14,12 +14,17 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import eduCourse_prj.VO.DeptVO;
+import eduCourse_prj.VO.ProfVO;
 import eduCourse_prj.admin.dao.AdminDAO;
 import eduCourse_prj.admin.event.AdminProfMgtMdfyEvent;
+import eduCourse_prj.professor.dao.ProfDAO;
 
 @SuppressWarnings("serial")
 public class AdminProfMgtMdfyDesign extends JDialog {
 	private AdminProfMgtDesign apmd;
+	private ProfDAO pDAO = ProfDAO.getInstance();
+	private AdminDAO aDAO = AdminDAO.getInstance();
+
 	private JLabel jlBack; // 배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
 	private JLabel profMgt, profMgtMdfy, photo, jlProfNum, jlProfName, jlProfPass, jlProfEmail, jlDept, jlNecessary;
@@ -90,19 +95,26 @@ public class AdminProfMgtMdfyDesign extends JDialog {
 		add(jlDept);
 		add(jlNecessary);
 
-		// JTable에서 선택된 교번, 이름 가져오기
+		// 선택된 교사의 정보 가져오기
 		int index = apmd.getJtbProfMgt().getSelectedRow();
-		String prof_number = apmd.getDtmProfMgt().getValueAt(index, 1).toString();
-		String prof_name = apmd.getDtmProfMgt().getValueAt(index, 2).toString();
+		int prof_number = Integer.parseInt(apmd.getDtmProfMgt().getValueAt(index, 1).toString());
+		ProfVO pVO = null;
+		try {
+			pVO = pDAO.slctOneProf(prof_number);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		// 교번, 이름, PW, 이메일, 소속학과 JTF, JPF, ComboBox 추가
-		jtfProfNum = new JTextField(prof_number);
-		jtfProfName = new JTextField(prof_name);
-		jpfProfPass = new JPasswordField();
-		jtfProfEmail = new JTextField();
+
+		jtfProfNum = new JTextField(pVO.getProf_number() + "");
+		jtfProfName = new JTextField(pVO.getProf_name());
+		jpfProfPass = new JPasswordField(pVO.getProf_password());
+		jtfProfEmail = new JTextField(pVO.getProf_email());
 
 		jcbDept = new JComboBox<String>();
-		AdminDAO aDAO = AdminDAO.getInstance();
+
 		try {
 			List<DeptVO> listDVO = aDAO.slctAllDept();
 			String deptName;

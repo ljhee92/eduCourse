@@ -65,7 +65,7 @@ public class AdminAdminMgtMdfyDesign extends JDialog {
 		photo.setBounds(200, 210, 198, 233);
 		add(photo);
 
-		// 교번, 이름, PW, 이메일, 소속학과, 필수입력 라벨 추가
+		// 아이디, 이름, 비밀번호 라벨 추가
 		jlAdminId = new JLabel("아이디");
 		jlAdminName = new JLabel("이름");
 		jlAdminPass = new JLabel("PW");
@@ -92,7 +92,7 @@ public class AdminAdminMgtMdfyDesign extends JDialog {
 		add(jlAdminPass);
 		add(jlNecessary);
 
-		// JTable에서 선택된 id, 이름 가져오기
+		// 선택된 관리자의 정보 가져오기
 		int index = aamd.getJtbAdminMgt().getSelectedRow();
 		String admin_id = aamd.getDtmAdminMgt().getValueAt(index, 0).toString();
 		AdminVO aVO = null;
