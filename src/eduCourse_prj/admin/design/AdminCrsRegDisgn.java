@@ -34,7 +34,11 @@ public class AdminCrsRegDisgn extends JDialog {
 
 	private JButton jbtnRegister, jbtnCancel;
 
+
+	private JLabel topLogin; // 우상단 로그인상태 확인창
+
 	private JLabel jlBack, jlCrsMgtTitle , jlCrsReg;
+
 
 	private JLabel jlDept, jlCrs, jlCrsCode, jlCredit, jlNecessary;
 
@@ -47,7 +51,7 @@ public class AdminCrsRegDisgn extends JDialog {
 		String crsPath = "src/eduCourse_prj/image/crs/";
 
 
-		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
+		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 17);
 
 
 
@@ -77,6 +81,17 @@ public class AdminCrsRegDisgn extends JDialog {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		
+		// 우상단 로그인상태 확인창 추가
+		topLogin = new JLabel(acd.getAwd().getlVO().getName() + " 관리자님 로그인 중");
+		topLogin.setFont(font);
+		topLogin.setForeground(Color.WHITE);
+		topLogin.setBounds(670, 30, 200, 20);
+		add(topLogin);
+		
+		
+		
 		
 		jcbDept.setBounds(400, 200, 200, 30);
 		jcbDept.setFont(font);

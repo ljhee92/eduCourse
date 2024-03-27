@@ -59,7 +59,7 @@ public class AdminDeptMgtRegDesign extends JDialog {
 //------------------------------header Label------------------------------------
 		String adminName = admd.getAhd().getlVO().getName();
 		topLogin = new JLabel(adminName + " 관리자님 로그인 중");
-		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
+		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 17);
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.WHITE);
 		topLogin.setBounds(670, 30, 200, 20);

@@ -93,7 +93,7 @@ public class AdminAcadCalDesign extends JDialog {
         String adminName = ahd.getlVO().getName();
         topLogin = new JLabel(adminName + " 관리자님 로그인 중");
         
-        Font topLoginFont = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
+        Font topLoginFont = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 17);
 		topLogin.setFont(topLoginFont);
 		topLogin.setForeground(Color.WHITE);
 		topLogin.setBounds(670, 30, 200, 20);
