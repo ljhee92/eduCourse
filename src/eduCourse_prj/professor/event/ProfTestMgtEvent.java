@@ -69,6 +69,7 @@ public class ProfTestMgtEvent extends WindowAdapter implements ActionListener, L
 
 			if (index == -1) {
 				JOptionPane.showMessageDialog(ptmd, "과목을 선택해주세요.");
+				ptmd.getJrbtnDisable().setSelected(true);
 				return;
 			} // end if
 
