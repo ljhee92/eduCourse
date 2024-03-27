@@ -60,7 +60,7 @@ public class ProfCrsMgtDesign extends JDialog {
 		add(topLogin);
 
 		// 테이블 추가
-		String[] tempColumn = { "학과", "과목" };
+		String[] tempColumn = { "학과", "과목코드","과목" };
 		dtmProfMgt = new DefaultTableModel(tempColumn, 0) {
 			public boolean isCellEditable(int row, int column) {
 				return false; // 테이블 셀 수정 불가하도록 설정
@@ -122,7 +122,7 @@ public class ProfCrsMgtDesign extends JDialog {
 			int prof_number = Integer.parseInt(strProf_number);
 			List<CrsVO> listCrsVO = cmrDAO.slctProfLect(prof_number);
 			for (CrsVO cVO1 : listCrsVO) {
-				Object[] row = { cVO1.getDeptName(), cVO1.getCourName() };
+				Object[] row = { cVO1.getDeptName(), cVO1.getCourCode(),cVO1.getCourName() };
 				dtmProfMgt.addRow(row);
 			} // end for
 		} catch (SQLException e) {
