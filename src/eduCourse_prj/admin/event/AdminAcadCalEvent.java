@@ -85,7 +85,7 @@ public class AdminAcadCalEvent extends WindowAdapter implements ActionListener{
 			            aacd.getMemoJta().setText("");
 			            aacd.calSet();
 			        } else if (result == JOptionPane.NO_OPTION) {
-			            System.out.println("삭제를 취소합니다.");
+			           
 			            return;
 			        }
 			}catch(SQLException e) {
