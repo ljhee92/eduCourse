@@ -37,8 +37,6 @@ public class StdntAcadCalEvent extends WindowAdapter implements ActionListener{
 			sacd.dispose();
 		}
 		
-		
-
 	}
 
 	@Override

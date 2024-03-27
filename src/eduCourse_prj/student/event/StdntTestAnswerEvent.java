@@ -19,12 +19,7 @@ public class StdntTestAnswerEvent extends WindowAdapter implements ActionListene
 	
 	public StdntTestAnswerEvent(StdntTestAnswerDesign stad) {
 		this.stad = stad;
-	} // StdntTestAnswerEvent
-
-	
-	
-	
-	
+	} // StdntTestAnswerEvent	
 	
 	@Override
 	public void windowClosing(WindowEvent e) {
@@ -33,15 +28,9 @@ public class StdntTestAnswerEvent extends WindowAdapter implements ActionListene
 		
 	}
 
-
-
-
-
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == stad.getJbtnSlct()) {
-			JOptionPane.showMessageDialog(stad, "선택 버튼 클릭");
 			int selectedIndex = stad.getJcbCrs().getSelectedIndex();
 			int register_number = stad.getCrsList().get(selectedIndex).getRegister_number();
 			String course_code = stad.getCrsList().get(selectedIndex).getCourse_code();
@@ -57,7 +46,6 @@ public class StdntTestAnswerEvent extends WindowAdapter implements ActionListene
 				Object[] row = { saVO.getQuestion_number(),saVO.getStd_answer(),saVO.getAnswer()};
 				stad.getDtmTestAnswer().addRow(row);			
 		} // end if
-
 
 	} 
 		if(e.getSource() == stad.getJbtnOk()) {
