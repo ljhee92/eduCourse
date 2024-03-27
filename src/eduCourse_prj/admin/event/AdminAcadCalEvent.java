@@ -14,8 +14,7 @@ import eduCourse_prj.admin.design.AdminAcadCalDesign;
 
 public class AdminAcadCalEvent extends WindowAdapter implements ActionListener{
 	
-	AdminAcadCalDesign aacd;
-	int i=0;
+	private AdminAcadCalDesign aacd;
 	
 	public AdminAcadCalEvent(AdminAcadCalDesign aacd) {
 		this.aacd = aacd;

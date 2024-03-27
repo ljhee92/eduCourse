@@ -21,22 +21,22 @@ import eduCourse_prj.professor.dao.ProfDAO;
 
 @SuppressWarnings("serial")
 public class AdminCrsRegDisgn extends JDialog {
-	AdminCrsDesign acd;
-	AdminDAO aDAO = AdminDAO.getInstance();
-	ProfDAO pDAO = ProfDAO.getInstance();
+	private AdminCrsDesign acd;
+	private AdminDAO aDAO = AdminDAO.getInstance();
+	private ProfDAO pDAO = ProfDAO.getInstance();
 
-	List<DeptVO> lDept;
-	List<ProfVO> lProf;
+	private List<DeptVO> lDept;
+	private List<ProfVO> lProf;
 
-	JComboBox<String> jcbDept, jcbProf;
+	private JComboBox<String> jcbDept, jcbProf;
 
-	JTextField JtfCrsName, JtfCrsCode, JtfCredit, JtfProfName;
+	private JTextField jtfCrsName, jtfCrsCode, jtfCredit, jtfProfName;
 
-	JButton jbtnRegister, jbtnCancel;
+	private JButton jbtnRegister, jbtnCancel;
 
-	JLabel jlBack, jlCrsMgtTitle , jlCrsReg;
+	private JLabel jlBack, jlCrsMgtTitle , jlCrsReg;
 
-	JLabel jlDept, jlCrs, jlCrsCode, jlProf, jlCredit, jlNecessary;
+	private JLabel jlDept, jlCrs, jlCrsCode, jlCredit, jlNecessary;
 
 	public AdminCrsRegDisgn(AdminCrsDesign acd, String title) {
 		super(acd, title, true);
@@ -89,10 +89,10 @@ public class AdminCrsRegDisgn extends JDialog {
 		jlCrs.setBounds(320, 250, 100, 30);
 		add(jlCrs);
 		
-		JtfCrsName = new JTextField();
-		JtfCrsName.setFont(font);
-		JtfCrsName.setBounds(400, 250, 200, 30);
-		add(JtfCrsName);
+		jtfCrsName = new JTextField();
+		jtfCrsName.setFont(font);
+		jtfCrsName.setBounds(400, 250, 200, 30);
+		add(jtfCrsName);
 		
 	
 		jlCrsCode = new JLabel("과목코드");
@@ -100,10 +100,10 @@ public class AdminCrsRegDisgn extends JDialog {
 		jlCrsCode.setBounds(320, 300, 100, 30);
 		add(jlCrsCode);
 		
-		JtfCrsCode = new JTextField();
-		JtfCrsCode.setFont(font);
-		JtfCrsCode.setBounds(400, 300, 200, 30);
-		add(JtfCrsCode);
+		jtfCrsCode = new JTextField();
+		jtfCrsCode.setFont(font);
+		jtfCrsCode.setBounds(400, 300, 200, 30);
+		add(jtfCrsCode);
 
 
 		
@@ -114,10 +114,10 @@ public class AdminCrsRegDisgn extends JDialog {
 		jlCredit.setBounds(320, 400, 100, 30);
 		add(jlCredit);
 	
-		JtfCredit = new JTextField();
-		JtfCredit.setFont(font);
-		JtfCredit.setBounds(400, 400, 200, 30);
-		add(JtfCredit);
+		jtfCredit = new JTextField();
+		jtfCredit.setFont(font);
+		jtfCredit.setBounds(400, 400, 200, 30);
+		add(jtfCredit);
 
 		jbtnRegister = new JButton(new ImageIcon(commonPath + "Reg.png"));
 		jbtnRegister.setFont(font);
@@ -193,19 +193,19 @@ public class AdminCrsRegDisgn extends JDialog {
 	}
 
 	public JTextField getJtfCrsName() {
-		return JtfCrsName;
+		return jtfCrsName;
 	}
 
 	public JTextField getJtfCrsCode() {
-		return JtfCrsCode;
+		return jtfCrsCode;
 	}
 
 	public JTextField getJtfCredit() {
-		return JtfCredit;
+		return jtfCredit;
 	}
 
 	public JTextField getJtfProfName() {
-		return JtfProfName;
+		return jtfProfName;
 	}
 
 	public JButton getJbtnRegister() {

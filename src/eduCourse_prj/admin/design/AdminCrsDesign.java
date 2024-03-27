@@ -27,10 +27,10 @@ import eduCourse_prj.admin.event.AdminCrsEvent;
 
 @SuppressWarnings("serial")
 public class AdminCrsDesign extends JDialog {
-	AdminHomeDesign awd;
-	AdminDAO aDAO = AdminDAO.getInstance();
+	private AdminHomeDesign ahd;
+	private AdminDAO aDAO = AdminDAO.getInstance();
 
-	JLabel jlBack;// 배경
+	private JLabel jlBack;// 배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
 
 	private JLabel crsMgt;
@@ -39,7 +39,6 @@ public class AdminCrsDesign extends JDialog {
 	private JLabel jlCrsName;
 
 	private JTable jtbCrsMgt;
-	private DefaultTableModel dtmAdminMgt;
 
 	private JButton jbtnCrsReg, jbtnSlct, jbtnDel ,jbtnSlctTop;
 
@@ -51,9 +50,9 @@ public class AdminCrsDesign extends JDialog {
 	private List<DeptVO> lDept;
 	
 
-	public AdminCrsDesign(AdminHomeDesign awd, String title) {
-		super(awd, title, true);
-		this.awd = awd;
+	public AdminCrsDesign(AdminHomeDesign ahd, String title) {
+		super(ahd, title, true);
+		this.ahd = ahd;
 		setLayout(null);
 		setSize(1000, 650);
 
@@ -72,7 +71,7 @@ public class AdminCrsDesign extends JDialog {
 		add(crsMgt);
 
 		// 우상단 로그인상태 확인창 추가
-		topLogin = new JLabel(awd.getlVO().getName() + " 관리자님 로그인 중");
+		topLogin = new JLabel(ahd.getlVO().getName() + " 관리자님 로그인 중");
 		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.WHITE);
@@ -210,8 +209,8 @@ public class AdminCrsDesign extends JDialog {
 		} // end for
 	} // setTbHorizontal
 
-	public AdminHomeDesign getAwd() {
-		return awd;
+	public AdminHomeDesign getAhd() {
+		return ahd;
 	}
 
 	public JLabel getJlBack() {
@@ -228,10 +227,6 @@ public class AdminCrsDesign extends JDialog {
 
 	public JTable getJtbCrsMgt() {
 		return jtbCrsMgt;
-	}
-
-	public DefaultTableModel getDtmAdminMgt() {
-		return dtmAdminMgt;
 	}
 
 	public JButton getJbtnCrsReg() {
