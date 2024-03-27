@@ -85,19 +85,19 @@ public class ProfHomeDesign extends JFrame {
 
 		back.setBounds(0, 0, 984, 620);// 성공
 
-		role.setBounds(520, 150, 300, 20);
-		showId.setBounds(520, 190, 300, 20);
-		name.setBounds(520, 230, 300, 20);
-		dept.setBounds(520, 270, 300, 20);
-		email.setBounds(520, 310, 300, 20);
-		topLogin.setBounds(600, 30, 300, 20);
-		img.setBounds(310, 150, 160, 188);
+		role.setBounds(520, 171, 300, 20);
+		showId.setBounds(520, 214, 300, 20);
+		name.setBounds(520, 257, 300, 20);
+		dept.setBounds(520, 300, 300, 20);
+		email.setBounds(520, 343, 300, 20);
+		topLogin.setBounds(670, 30, 300, 20);
+		img.setBounds(270, 150, 198, 233);
 
-		jbtnCourMgt.setBounds(200, 440, 120, 50);
-		jbtnExamMgtGrad.setBounds(350, 440, 120, 50);
-		jbtnStudMgt.setBounds(500, 440, 120, 50);
-		jbtnStudySucc.setBounds(650, 440, 120, 50);
-		jbtnInfoUpda.setBounds(420, 360, 100, 40);
+		jbtnCourMgt.setBounds(200, 490, 120, 50);
+		jbtnExamMgtGrad.setBounds(350, 490, 120, 50);
+		jbtnStudMgt.setBounds(500, 490, 120, 50);
+		jbtnStudySucc.setBounds(650, 490, 120, 50);
+		jbtnInfoUpda.setBounds(435, 420, 100, 40);
 
 		jbtnLogout.setBounds(870, 20, 100, 36);
 		jbtnSched.setBounds(840, 90, 114, 47);

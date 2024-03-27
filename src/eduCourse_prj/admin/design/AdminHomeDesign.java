@@ -63,19 +63,19 @@ public class AdminHomeDesign extends JFrame {
 
 		back.setBounds(0, 0, 984, 620);// 성공
 
-		role.setBounds(530, 220, 150, 20);
-		showId.setBounds(530, 260, 150, 20);
-		name.setBounds(530, 300, 200, 20);
+		role.setBounds(520, 220, 150, 20);
+		showId.setBounds(520, 260, 150, 20);
+		name.setBounds(520, 300, 200, 20);
 		topLogin.setBounds(670, 30, 200, 20);
 
 		img.setBounds(270, 150, 198, 233);
 
-		jbtAdminMgt.setBounds(50, 450, 120, 50);
-		jbtProfMgt.setBounds(200, 450, 120, 50);
-		jbtDeptMgt.setBounds(350, 450, 120, 50);
-		jbtStudMgt.setBounds(500, 450, 120, 50);
-		jbtCourMgt.setBounds(650, 450, 120, 50);
-		jbtSchedMgt.setBounds(800, 450, 120, 50);
+		jbtAdminMgt.setBounds(50, 490, 120, 50);
+		jbtProfMgt.setBounds(200, 490, 120, 50);
+		jbtDeptMgt.setBounds(350, 490, 120, 50);
+		jbtStudMgt.setBounds(500, 490, 120, 50);
+		jbtCourMgt.setBounds(650, 490, 120, 50);
+		jbtSchedMgt.setBounds(800, 490, 120, 50);
 		jbtLogout.setBounds(870, 20, 100, 36);
 
 		// JFrame에 버튼 추가

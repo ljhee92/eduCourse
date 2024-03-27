@@ -30,7 +30,7 @@ public class StdntHomeDesign extends JFrame {
 	JLabel dept, email, addr;
 
 	public StdntHomeDesign(LoginVO lVO) {
-		super("학생");
+		super("학생 모드");
 
 		this.lVO = lVO;
 
@@ -59,7 +59,7 @@ public class StdntHomeDesign extends JFrame {
 		} // end catch
 
 		topLogin = new JLabel(lVO.getName() + " 학생님 로그인 중");
-		img = new JLabel(new ImageIcon(commonPath + "img.png"));
+		img = new JLabel(new ImageIcon(commonPath + "Img_new.png"));
 
 		jbtnEnrollCour = new JButton(new ImageIcon(studPath + "EnrollCour.png"));
 		jbtnEnrollHist = new JButton(new ImageIcon(studPath + "EnrollHist.png"));
@@ -89,21 +89,21 @@ public class StdntHomeDesign extends JFrame {
 
 		back.setBounds(0, 0, 984, 620);// 성공
 
-		role.setBounds(520, 150, 300, 20);
-		showId.setBounds(520, 180, 300, 20);
-		name.setBounds(520, 210, 300, 20);
-		dept.setBounds(520, 240, 300, 20);
-		email.setBounds(520, 270, 300, 20);
-		addr.setBounds(520, 300, 300, 20);
+		role.setBounds(520, 157, 300, 20);
+		showId.setBounds(520, 197, 300, 20);
+		name.setBounds(520, 237, 300, 20);
+		dept.setBounds(520, 277, 300, 20);
+		email.setBounds(520, 317, 300, 20);
+		addr.setBounds(520, 357, 300, 20);
 		topLogin.setBounds(670, 30, 200, 20);
-		img.setBounds(310, 150, 160, 188);
+		img.setBounds(270, 150, 198, 233);
 		jbtnSched.setBounds(840, 90, 114, 47);
 
-		jbtnEnrollCour.setBounds(200, 440, 120, 50);
-		jbtnEnrollHist.setBounds(350, 440, 120, 50);
-		jbtnExamAttendResu.setBounds(500, 440, 120, 50);
-		jbtnJbtnExamCorr.setBounds(650, 440, 120, 50);
-		jbtnInfoUpda.setBounds(420, 360, 100, 40);
+		jbtnEnrollCour.setBounds(200, 490, 120, 50);
+		jbtnEnrollHist.setBounds(350, 490, 120, 50);
+		jbtnExamAttendResu.setBounds(500, 490, 120, 50);
+		jbtnJbtnExamCorr.setBounds(650, 490, 120, 50);
+		jbtnInfoUpda.setBounds(435, 420, 100, 40);
 
 		jbtnLogout.setBounds(870, 20, 100, 36);
 
