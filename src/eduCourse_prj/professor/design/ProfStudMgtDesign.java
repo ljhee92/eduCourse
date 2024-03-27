@@ -20,9 +20,7 @@ import javax.swing.table.TableColumnModel;
 
 import eduCourse_prj.VO.CrsVO;
 
-
 import eduCourse_prj.admin.dao.AdminDAO;
-
 
 import eduCourse_prj.professor.dao.ProfDAO;
 import eduCourse_prj.professor.event.ProfStudMgtEvent;
@@ -32,24 +30,19 @@ public class ProfStudMgtDesign extends JDialog {
 	private ProfHomeDesign phd;
 	private AdminDAO aDAO = AdminDAO.getInstance();
 	private ProfDAO pDAO = ProfDAO.getInstance();
-	
-	
+
 	private JLabel jlBack;// 배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
 	private JLabel adminMgt;
 	private JTable jtbStdMgt;
 
-
 	private JButton jbtnSlct, jbtnSlctTop;
-
 
 	private JLabel jlCrs;
 	private JLabel jlstdNum;
 
-
 	private JComboBox<String> jcbCrs;
 	private JTextField jtfStdNum;
-
 
 	private List<CrsVO> lCrs;
 
@@ -81,7 +74,6 @@ public class ProfStudMgtDesign extends JDialog {
 		topLogin.setBounds(600, 30, 250, 20);
 		add(topLogin);
 
-
 		jlCrs = new JLabel("과목");
 		jlCrs.setFont(font);
 		jlCrs.setBounds(240, 150, 50, 20);
@@ -92,7 +84,6 @@ public class ProfStudMgtDesign extends JDialog {
 		jlstdNum.setBounds(500, 150, 50, 20);
 		add(jlstdNum);
 
-	
 		jcbCrs = new JComboBox<String>();
 		jcbCrs.setFont(font);
 		jcbCrs.setBounds(280, 145, 200, 30);
@@ -107,17 +98,15 @@ public class ProfStudMgtDesign extends JDialog {
 		/////////////////////// 초기 설정/////////////////////////////////////
 		////////////////////////////////////////////////////////////////////
 
-
 		try {// 과목
 
 			// 모든 과목 정보 가져오기
 
 			jcbCrs.addItem("전체");
 
-			
-			//접속된 교수가 강의중인 과목리스트 받아오기
-			
-			//System.out.println(Integer.parseInt(phd.getlVO().getId()) );
+			// 접속된 교수가 강의중인 과목리스트 받아오기
+
+			// System.out.println(Integer.parseInt(phd.getlVO().getId()) );
 			int prof_num = Integer.parseInt(phd.getlVO().getId());
 			lCrs = pDAO.slctProfLectList(prof_num);
 			// 과목명만 저장하는 리스트에 과목명 저장
@@ -152,11 +141,11 @@ public class ProfStudMgtDesign extends JDialog {
 		jbtnSlctTop = new JButton(new ImageIcon(commonPath + "search.png"));
 		jbtnSlctTop.setBounds(780, 145, 70, 30);
 		add(jbtnSlctTop);
-		
+
 		jbtnSlct = new JButton(new ImageIcon(commonPath + "Slct.png"));
 		jbtnSlct.setBounds(440, 500, 111, 59);
 		add(jbtnSlct);
-		
+
 		////////////////////////////////////////////////////////////////////
 
 		// 테이블 컬럼 가운데 정렬
@@ -170,7 +159,6 @@ public class ProfStudMgtDesign extends JDialog {
 		addWindowListener(psme);
 		jbtnSlct.addActionListener(psme);
 		jbtnSlctTop.addActionListener(psme);
-
 
 		setLocationRelativeTo(null);
 		// 프레임크기 조절 불가
@@ -219,7 +207,6 @@ public class ProfStudMgtDesign extends JDialog {
 		return jtbStdMgt;
 	}
 
-
 	public JButton getJbtnSlct() {
 		return jbtnSlct;
 	}
@@ -251,8 +238,5 @@ public class ProfStudMgtDesign extends JDialog {
 	public DefaultTableModel getDtmStdMgt() {
 		return dtmStdMgt;
 	}
-
-
-
 
 }

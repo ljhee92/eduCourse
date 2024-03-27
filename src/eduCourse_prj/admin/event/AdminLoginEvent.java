@@ -12,6 +12,7 @@ import eduCourse_prj.VO.LoginVO;
 import eduCourse_prj.admin.dao.AdminDAO;
 import eduCourse_prj.admin.design.AdminHomeDesign;
 import eduCourse_prj.admin.design.AdminLoginDesign;
+import eduCourse_prj.login.SelectLoginDesign;
 
 public class AdminLoginEvent extends WindowAdapter implements ActionListener {
 	private AdminLoginDesign ald;
@@ -30,6 +31,12 @@ public class AdminLoginEvent extends WindowAdapter implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 
+		if(ae.getSource()==ald.getJbtLogout()) {
+			ald.dispose();
+			new SelectLoginDesign();
+		}
+		
+		
 		if (ae.getSource() == ald.getJtfId()) {
 
 			// jtfId에 입력값이 존재한다면
@@ -45,9 +52,9 @@ public class AdminLoginEvent extends WindowAdapter implements ActionListener {
 
 				} // end else
 
-			}else {
+			} else {
 				JOptionPane.showMessageDialog(ald, "ID를 입력해주세요.");
-			}//end else
+			} // end else
 
 		} // end if
 
@@ -66,43 +73,37 @@ public class AdminLoginEvent extends WindowAdapter implements ActionListener {
 
 				} // end else
 
-			}else {
+			} else {
 				JOptionPane.showMessageDialog(ald, "PW를 입력해주세요.");
-			} 
-			} // end if
+			}
+		} // end if
 
 		if (ae.getSource() == ald.getLoginButton()) {
 			AdminDAO aDAO = AdminDAO.getInstance();
 			String id = "";
 			String pass = "";
 
+			id = ald.getJtfId().getText();
+			pass = new String(ald.getJpfPass().getPassword());
 
-			
-				id = ald.getJtfId().getText();
-				pass = new String(ald.getJpfPass().getPassword());
-
-			
-				// 1. 아이디와 비밀번호가 모두 입력되지 않았을 경우.
-				if (ald.getJtfId().getText().isEmpty() && new String(ald.getJpfPass().getPassword()).isEmpty()) {
-					JOptionPane.showMessageDialog(ald, "아이디와 비밀번호를 모두 입력해주세요");
-					ald.getJtfId().requestFocus();
-					return;
-				}
-				// 2. 비밀번호만만 입력되었을 경우 -> 아이디는 입력되지 않았음.
-				if (ald.getJtfId().getText().isEmpty()) {
-					JOptionPane.showMessageDialog(ald, "아이디를 입력해주세요.");
-					ald.getJtfId().requestFocus();
-					return;
-				}
-				// 3. 아이디만 입력되었을 경우 -> 비밀번호는 입력되지 않았음.
-				if (new String(ald.getJpfPass().getPassword()).isEmpty()) {
-					JOptionPane.showMessageDialog(ald, "비밀번호를 입력해주세요.");
-					ald.getJpfPass().requestFocus();
-					return;
-				}
-
-
-
+			// 1. 아이디와 비밀번호가 모두 입력되지 않았을 경우.
+			if (ald.getJtfId().getText().isEmpty() && new String(ald.getJpfPass().getPassword()).isEmpty()) {
+				JOptionPane.showMessageDialog(ald, "아이디와 비밀번호를 모두 입력해주세요");
+				ald.getJtfId().requestFocus();
+				return;
+			}
+			// 2. 비밀번호만만 입력되었을 경우 -> 아이디는 입력되지 않았음.
+			if (ald.getJtfId().getText().isEmpty()) {
+				JOptionPane.showMessageDialog(ald, "아이디를 입력해주세요.");
+				ald.getJtfId().requestFocus();
+				return;
+			}
+			// 3. 아이디만 입력되었을 경우 -> 비밀번호는 입력되지 않았음.
+			if (new String(ald.getJpfPass().getPassword()).isEmpty()) {
+				JOptionPane.showMessageDialog(ald, "비밀번호를 입력해주세요.");
+				ald.getJpfPass().requestFocus();
+				return;
+			}
 
 			LoginVO lVO = new LoginVO(id, pass);
 			LoginVO LoginResult = null;
@@ -125,10 +126,11 @@ public class AdminLoginEvent extends WindowAdapter implements ActionListener {
 
 		}
 
+		
+		
+		
+		
+		
 	}
-	
-	
-	
-	
 
 }

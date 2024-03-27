@@ -1,7 +1,7 @@
 package eduCourse_prj.VO;
 
 public class CrsRegVO {
-	
+
 	private int dept_code;
 	private String dept_name;
 	private String course_name;
@@ -9,7 +9,7 @@ public class CrsRegVO {
 	private String lect_room;
 	private int capacity;
 	private int credit_hours;
-	
+
 	public CrsRegVO() {
 	}
 

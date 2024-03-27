@@ -1,8 +1,6 @@
 
 package eduCourse_prj.admin.design;
 
-
-
 import java.awt.Color;
 
 import java.awt.Font;
@@ -27,7 +25,6 @@ import eduCourse_prj.VO.AdminVO;
 import eduCourse_prj.admin.dao.AdminDAO;
 import eduCourse_prj.admin.event.AdminAdminMgtEvent;
 
-
 import java.util.List;
 
 @SuppressWarnings("serial")
@@ -37,7 +34,6 @@ public class AdminAdminMgtDesign extends JDialog {
 	private JLabel jlBack;// 배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
 	private JLabel adminMgt;
-
 
 	private JButton jbtnMdfy;
 
@@ -56,13 +52,11 @@ public class AdminAdminMgtDesign extends JDialog {
 		jlBack = new JLabel(new ImageIcon(commonPath + "back.png"));
 		jlBack.setBounds(0, 0, 984, 620);
 		add(jlBack);
-		
+
 		// 관리자관리, 등록 라벨 추가
 		adminMgt = new JLabel(new ImageIcon(adminPath + "adminMgtBanner_new.png"));
 		adminMgt.setBounds(10, 76, 967, 44);
 		add(adminMgt);
-
-		
 
 		// 우상단 로그인상태 확인창 추가
 
@@ -73,10 +67,6 @@ public class AdminAdminMgtDesign extends JDialog {
 		topLogin.setForeground(Color.WHITE);
 		topLogin.setBounds(670, 30, 200, 20);
 		add(topLogin);
-		
-		
-		
-		
 
 		// 관리자 수정 버튼 추가
 
@@ -103,25 +93,17 @@ public class AdminAdminMgtDesign extends JDialog {
 		jlDept.setFont(font);
 		jlDept.setBounds(20, 20, 50, 20);
 		add(jlDept);
-		
-		
+
 		JLabel jlSrc = new JLabel("과목");
 		jlSrc.setFont(font);
 		jlSrc.setBounds(20, 40, 50, 20);
 		add(jlSrc);
-		
+
 		JLabel jlstdNumber = new JLabel("학번");
 		jlstdNumber.setFont(font);
 		jlstdNumber.setBounds(20, 60, 50, 20);
 		add(jlstdNumber);
-		
-		
-		
-		
-		
-		
-		
-		
+
 		// 테이블에 DB 추가
 		slctAdminMgt();
 
@@ -134,9 +116,6 @@ public class AdminAdminMgtDesign extends JDialog {
 
 		jbtnMdfy.addActionListener(aame);
 
-
-
-		
 		add(jlBack);
 		setResizable(false);
 		setSize(1000, 650);
@@ -184,7 +163,6 @@ public class AdminAdminMgtDesign extends JDialog {
 		return jlBack;
 	}
 
-
 	public JButton getJbtnMdfy() {
 		return jbtnMdfy;
 	}
@@ -205,6 +183,4 @@ public class AdminAdminMgtDesign extends JDialog {
 		return adminMgt;
 	}
 
-	
-	
 }

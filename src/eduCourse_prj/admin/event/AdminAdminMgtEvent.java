@@ -27,7 +27,6 @@ public class AdminAdminMgtEvent extends WindowAdapter implements ActionListener 
 	public void actionPerformed(ActionEvent ae) {
 		if (ae.getSource() == aamd.getJbtnMdfy()) {
 
-
 			try {
 				new AdminAdminMgtMdfyDesign(aamd, "관리자 수정");
 			} catch (ArrayIndexOutOfBoundsException aiobe) {

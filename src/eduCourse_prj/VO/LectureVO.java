@@ -1,7 +1,7 @@
 package eduCourse_prj.VO;
 
 public class LectureVO {
-	
+
 	private int prof_number;
 	private String course_code;
 	private int capacity;
@@ -9,14 +9,14 @@ public class LectureVO {
 	private String lect_delete_flag;
 	private String lect_room;
 	private String test_flag;
-	
+
 	public LectureVO() {
 	}
-	
+
 	public LectureVO(String course_code) {
 		this.course_code = course_code;
 	}
-	
+
 	public LectureVO(int prof_number, String course_code, int capacity, int capacited, String lect_delete_flag,
 			String lect_room, String test_flag) {
 		this.prof_number = prof_number;

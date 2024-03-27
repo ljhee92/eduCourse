@@ -55,7 +55,6 @@ public class ProfAcadCalDesign extends JDialog {
 		super(phd, title, true);
 		this.phd = phd;
 
-
 		today = Calendar.getInstance(); // 달력 가져오기
 		cal = new GregorianCalendar(); // 표준 달력
 		year = today.get(Calendar.YEAR);
@@ -91,9 +90,6 @@ public class ProfAcadCalDesign extends JDialog {
 		dayJl = new JLabel();
 		dayJl2 = new JLabel("일");
 
-
-		
-		
 		// 각 라벨에 border 설정
 		Border labelBorder = BorderFactory.createLineBorder(Color.GRAY, 1);
 		yearJl.setBorder(labelBorder);
@@ -182,17 +178,13 @@ public class ProfAcadCalDesign extends JDialog {
 		Border border = BorderFactory.createLineBorder(Color.gray, 2);
 		memoJta.setBorder(border); // JTextArea에 Border를 추가
 
-
 		String commonPath = "src/eduCourse_prj/image/common/";
 		JPanel memoBtnJp = new JPanel();
 
-		
-		//확인버튼 추가
+		// 확인버튼 추가
 		jbtnCnfrm = new JButton(new ImageIcon(commonPath + "Ok_s.png"));
 		jbtnCnfrm.setBounds(430, 520, 95, 50);
-		
-		
-		
+
 		JLabel memoJl = new JLabel("메모");
 		memoJl.setFont(font);
 		memoJp.add(memoJl, BorderLayout.NORTH);
@@ -211,12 +203,12 @@ public class ProfAcadCalDesign extends JDialog {
 		memoJp.setBackground(Color.white); // 메모 패널
 		yearSelectJP.setBackground(Color.white); // 년 패널
 		monthSelectJP.setBackground(Color.white); // 달 패널
-		
+
 		// 상단 로그인 라벨 설정
-		topLogin = new JLabel(phd.getlVO().getName()+" 교수님 로그인 중");
+		topLogin = new JLabel(phd.getlVO().getName() + " 교수님 로그인 중");
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.WHITE);
-		topLogin.setBounds(600,30,300,20);
+		topLogin.setBounds(600, 30, 300, 20);
 
 		// 버튼 설정
 		searchBtn = new JButton(new ImageIcon(commonPath + "ConfirmButtonSmall_new.png"));
@@ -241,17 +233,15 @@ public class ProfAcadCalDesign extends JDialog {
 		add(yearSelectJP);
 		add(monthSelectJP);
 		add(labelPanel);
-		
+
 		add(topLogin);
-		
+
 		add(jbtnCnfrm);
 		add(searchBtn);
 
 		add(jlBanner);
 		add(jlBack);
 
-
-		
 		yearSelectJP.setBounds(60, 160, 120, 200);
 		monthSelectJP.setBounds(190, 160, 120, 200);
 

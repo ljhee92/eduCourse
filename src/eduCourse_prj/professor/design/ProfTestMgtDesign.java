@@ -18,7 +18,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-
 import eduCourse_prj.VO.TestListVO;
 
 import eduCourse_prj.professor.dao.ProfDAO;
@@ -61,13 +60,12 @@ public class ProfTestMgtDesign extends JDialog {
 		add(topLogin);
 
 		// 테이블 추가
-		String[] tempColumn = { "과목", "시험 활성화 여부","시험 출제 여부" };
+		String[] tempColumn = { "과목", "시험 활성화 여부", "시험 출제 여부" };
 		dtmTestMgt = new DefaultTableModel(tempColumn, 0) {
 			public boolean isCellEditable(int row, int column) {
 				return false; // 테이블 셀 수정 불가하도록 설정
 			} // isCellEditable
 		};
-		
 
 		jtbTestMgt = new JTable(dtmTestMgt);
 		JScrollPane jsp = new JScrollPane(jtbTestMgt);
@@ -84,7 +82,7 @@ public class ProfTestMgtDesign extends JDialog {
 		jrbtnEnable = new JRadioButton("활성화");
 		jrbtnDisable = new JRadioButton("비활성화");
 		jrbtnDisable.setSelected(true);
-		
+
 		jrbtnEnable.setFont(font);
 		jrbtnDisable.setFont(font);
 
@@ -118,7 +116,7 @@ public class ProfTestMgtDesign extends JDialog {
 		jbtnTestMdfy.addActionListener(pme);
 		jrbtnEnable.addActionListener(pme);
 		jrbtnDisable.addActionListener(pme);
-		
+
 		jtbTestMgt.getSelectionModel().addListSelectionListener(pme);
 
 		setLayout(null);
@@ -137,14 +135,13 @@ public class ProfTestMgtDesign extends JDialog {
 			List<TestListVO> testListVO = pDAO.slctAllTest(prof_number);
 			for (TestListVO lVO : testListVO) {
 				String examStatus = pDAO.selectExaming(lVO.course_code());
-				Object[] row = { lVO.getCourse_name(), lVO.getTest_flag(),examStatus };
+				Object[] row = { lVO.getCourse_name(), lVO.getTest_flag(), examStatus };
 				dtmTestMgt.addRow(row);
 			} // end for
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} // end catch
 	} // slctTestMgt
-	
 
 	/**
 	 * 테이블의 컬럼을 가운데 정렬
@@ -197,6 +194,5 @@ public class ProfTestMgtDesign extends JDialog {
 	public JLabel getTestMgt() {
 		return TestMgt;
 	}
-	
 
 }

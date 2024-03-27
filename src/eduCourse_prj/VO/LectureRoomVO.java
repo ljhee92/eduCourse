@@ -1,10 +1,10 @@
 package eduCourse_prj.VO;
 
 public class LectureRoomVO {
-	
+
 	private String lect_room_num;
 	private int dept_code;
-	
+
 	public LectureRoomVO() {
 	}
 
@@ -36,6 +36,6 @@ public class LectureRoomVO {
 	@Override
 	public String toString() {
 		return "LectureRoomVO [lect_room_num=" + lect_room_num + ", dept_code=" + dept_code + "]";
-	} 
-	
+	}
+
 } // class

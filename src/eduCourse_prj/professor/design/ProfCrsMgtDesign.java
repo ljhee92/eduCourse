@@ -34,9 +34,8 @@ public class ProfCrsMgtDesign extends JDialog {
 
 	private JButton jbtnLecReg, jbtnSlct, jbtnMdfy, jbtnDel;
 
-
 	public ProfCrsMgtDesign(ProfHomeDesign phd, String title) {
-		super(phd,title,true);
+		super(phd, title, true);
 		this.phd = phd;
 
 		String commonPath = "src/eduCourse_prj/image/common/";
@@ -78,12 +77,12 @@ public class ProfCrsMgtDesign extends JDialog {
 		// 과목등록, 조회, 삭제 버튼 추가
 		jbtnLecReg = new JButton(new ImageIcon(crsPath + "crsRegBtn_new.png"));
 		jbtnSlct = new JButton(new ImageIcon(commonPath + "Slct.png"));
-		jbtnMdfy = new JButton(new ImageIcon(commonPath +"Mdfy.png"));
+		jbtnMdfy = new JButton(new ImageIcon(commonPath + "Mdfy.png"));
 		jbtnDel = new JButton(new ImageIcon(commonPath + "Del.png"));
 
 		jbtnLecReg.setBounds(150, 500, 142, 50);
 		jbtnSlct.setBounds(400, 500, 111, 59);
-		jbtnMdfy.setBounds(550,500,111,59);
+		jbtnMdfy.setBounds(550, 500, 111, 59);
 		jbtnDel.setBounds(700, 500, 111, 59);
 
 		add(jbtnLecReg);
@@ -109,19 +108,19 @@ public class ProfCrsMgtDesign extends JDialog {
 		jbtnDel.addActionListener(pme);
 
 		setLayout(null);
-		setSize(1000,650);	
+		setSize(1000, 650);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}
 
-	//학과와 과목을 테이블에 보여주는 메서드
+	// 학과와 과목을 테이블에 보여주는 메서드
 	public void slctLecMgt() {
-		CrsMgtRegDAO cmrDAO = CrsMgtRegDAO.getInstance(); 
+		CrsMgtRegDAO cmrDAO = CrsMgtRegDAO.getInstance();
 		try {
 			String strProf_number = phd.getlVO().getId();
 			int prof_number = Integer.parseInt(strProf_number);
-			List<CrsVO> listCrsVO= cmrDAO.slctProfLect(prof_number);			
+			List<CrsVO> listCrsVO = cmrDAO.slctProfLect(prof_number);
 			for (CrsVO cVO1 : listCrsVO) {
 				Object[] row = { cVO1.getDeptName(), cVO1.getCourName() };
 				dtmProfMgt.addRow(row);
@@ -170,7 +169,5 @@ public class ProfCrsMgtDesign extends JDialog {
 	public DefaultTableModel getDtmProfMgt() {
 		return dtmProfMgt;
 	}
-	
-	
 
 }

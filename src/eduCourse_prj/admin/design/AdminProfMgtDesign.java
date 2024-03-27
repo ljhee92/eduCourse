@@ -23,14 +23,12 @@ import eduCourse_prj.VO.DeptVO;
 import eduCourse_prj.admin.dao.AdminDAO;
 import eduCourse_prj.admin.event.AdminProfMgtEvent;
 
-
 @SuppressWarnings("serial")
 public class AdminProfMgtDesign extends JDialog {
 
-
 	private AdminHomeDesign ahd;
 	private AdminDAO aDAO = AdminDAO.getInstance();
-	
+
 	private JLabel jlBack; // 배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
 	private JLabel profMgt;
@@ -79,7 +77,6 @@ public class AdminProfMgtDesign extends JDialog {
 		jtbProfMgt = new JTable(dtmProfMgt);
 		JScrollPane jsp = new JScrollPane(jtbProfMgt);
 
-
 		// 테이블 컬럼 가운데 정렬
 		setTbHorizontal();
 
@@ -97,7 +94,7 @@ public class AdminProfMgtDesign extends JDialog {
 		jcbDept.setFont(font);
 		jcbDept.setBounds(230, 145, 200, 30);
 		add(jcbDept);
-		
+
 		seltAllDept();
 
 		jlProfNum = new JLabel("교번");
@@ -148,34 +145,30 @@ public class AdminProfMgtDesign extends JDialog {
 		setVisible(true);
 	} // AdminProfMgtDesign
 
-	
-	
 	/**
 	 * DB에서 모든 학과 정보를 가져오는 method
 	 */
 	public void seltAllDept() {
-	
-	try {// 학과
 
-		// 모든 학과 정보 가져오기
-		lDept = aDAO.slctAllDept();
+		try {// 학과
 
-		// "전체 아이템 추가"
-		jcbDept.addItem("전체");
+			// 모든 학과 정보 가져오기
+			lDept = aDAO.slctAllDept();
 
-		// 학과명만 저장하는 리스트에 학과명 저장
-		for (DeptVO dept : lDept) {
-			jcbDept.addItem(dept.getDept_name());
+			// "전체 아이템 추가"
+			jcbDept.addItem("전체");
 
+			// 학과명만 저장하는 리스트에 학과명 저장
+			for (DeptVO dept : lDept) {
+				jcbDept.addItem(dept.getDept_name());
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 
-	} catch (SQLException e) {
-		e.printStackTrace();
 	}
-	
-	}
-	
-	
 
 	/**
 	 * 테이블의 컬럼을 가운데 정렬
@@ -228,42 +221,30 @@ public class AdminProfMgtDesign extends JDialog {
 	public AdminHomeDesign getAhd() {
 		return ahd;
 	}
-	
+
 	public AdminDAO getaDAO() {
 		return aDAO;
 	}
-
-
 
 	public JLabel getJlDept() {
 		return jlDept;
 	}
 
-
-
 	public JLabel getJlProfNum() {
 		return jlProfNum;
 	}
-
-
 
 	public JButton getJbtnSlctTop() {
 		return jbtnSlctTop;
 	}
 
-
-
 	public JComboBox<String> getJcbDept() {
 		return jcbDept;
 	}
 
-
-
 	public JTextField getJtfProfNum() {
 		return jtfProfNum;
 	}
-
-
 
 	public List<DeptVO> getLDept() {
 		return lDept;

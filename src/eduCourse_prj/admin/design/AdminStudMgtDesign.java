@@ -167,11 +167,11 @@ public class AdminStudMgtDesign extends JDialog {
 		jbtnSlctTop = new JButton(new ImageIcon(commonPath + "search.png"));
 		jbtnSlctTop.setBounds(780, 145, 70, 30);
 		add(jbtnSlctTop);
-		
+
 		jbtnSlct = new JButton(new ImageIcon(commonPath + "Slct.png"));
 		jbtnSlct.setBounds(440, 500, 111, 59);
 		add(jbtnSlct);
-		
+
 		////////////////////////////////////////////////////////////////////
 
 		// 테이블 컬럼 가운데 정렬
