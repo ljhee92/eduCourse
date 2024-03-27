@@ -65,8 +65,8 @@ public class StdntLoginDesign extends JFrame {
 		loginButton = new JButton(new ImageIcon(loginPath + "login.png"));
 		loginButton.setBounds(350, 400, 300, 40);
 
-		jbtLogout = new JButton("지민에몽~ 해줘~");//
-		jbtLogout.setBounds(870, 20, 100, 36);
+		jbtLogout = new JButton(new ImageIcon(loginPath + "HomeButton.png"));//
+		jbtLogout.setBounds(910, 20, 50, 50);
 
 		// has a관계 설정
 

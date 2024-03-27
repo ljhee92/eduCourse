@@ -73,7 +73,7 @@ public class ProfTestRegDesign extends JDialog {
 		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 17);
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.WHITE);
-		topLogin.setBounds(600, 30, 250, 20);
+		topLogin.setBounds(670, 30, 250, 20);
 		add(topLogin);
 
 		/////////////////////////////////////////////////////////////////////////////////

@@ -42,7 +42,7 @@ public class ProfMdfyDesign extends JDialog {
 		Font fonts = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 13);
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.WHITE);
-		topLogin.setBounds(600, 30, 250, 20);
+		topLogin.setBounds(670, 30, 250, 20);
 		add(topLogin);
 
 		// 정보수정 라벨 추가

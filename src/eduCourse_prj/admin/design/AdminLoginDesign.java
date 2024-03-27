@@ -65,8 +65,8 @@ public class AdminLoginDesign extends JFrame {
 		loginButton = new JButton(new ImageIcon(loginPath + "Loginbutton_new.png")); // 298*40 사이즈 변경
 		loginButton.setBounds(350, 400, 298, 40);
 
-		jbtLogout = new JButton("지민에몽~ 해줘~");//
-		jbtLogout.setBounds(870, 20, 100, 36);
+		jbtLogout = new JButton(new ImageIcon(loginPath + "HomeButton.png"));//
+		jbtLogout.setBounds(910, 20, 50, 50);
 
 		// has a관계 설정
 
