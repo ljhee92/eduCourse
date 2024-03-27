@@ -5,7 +5,7 @@ public class CrsVO {
 	private String courName;// 과목명
 	private int creditHour;// 학점
 	private String courInputDate;// 입력일
-	private String CourDelFlag;// 삭제플레그
+	private String courDelFlag;// 삭제플레그
 	private int deptCode;// 학과번호
 	private String deptName;
 
@@ -49,7 +49,7 @@ public class CrsVO {
 		this.courName = courName;
 		this.creditHour = creditHour;
 		this.courInputDate = courInputDate;
-		CourDelFlag = courDelFlag;
+		this.courDelFlag = courDelFlag;
 		this.deptCode = deptCode;
 	}
 
@@ -69,7 +69,7 @@ public class CrsVO {
 		this.courName = courName;
 		this.creditHour = creditHour;
 		this.courInputDate = courInputDate;
-		CourDelFlag = courDelFlag;
+		this.courDelFlag = courDelFlag;
 		this.deptCode = deptCode;
 		this.deptName = deptName;
 	}
@@ -79,11 +79,6 @@ public class CrsVO {
 		this.courCode = courCode;
 		this.courName = courName;
 		this.creditHour = creditHour;
-	}
-
-	public void profCrsVO(String deptName, String courName) {
-		this.deptName = deptName;
-		this.courName = courName;
 	}
 
 	public String getDeptName() {
@@ -107,23 +102,17 @@ public class CrsVO {
 	}
 
 	public String getCourDelFlag() {
-		return CourDelFlag;
+		return courDelFlag;
 	}
 
 	public int getDeptCode() {
 		return deptCode;
 	}
 
-//	@Override
-//	public String toString() {
-//		return "CrsVO [courCode=" + courCode + ", courName=" + courName + ", creditHour=" + creditHour
-//				+ ", courInputDate=" + courInputDate + ", CourDelFlag=" + CourDelFlag + ", deptCode=" + deptCode
-//				+ ", deptName=" + deptName + "]";
-//	}
 	@Override
 	public String toString() {
 		return "CrsVO [courCode=" + courCode + ", courName=" + courName + ", creditHour=" + creditHour
-				+ ", courInputDate=" + courInputDate + ", CourDelFlag=" + CourDelFlag + ", deptCode=" + deptCode
+				+ ", courInputDate=" + courInputDate + ", CourDelFlag=" + courDelFlag + ", deptCode=" + deptCode
 				+ ", deptName=" + deptName + "]";
 	}
 
