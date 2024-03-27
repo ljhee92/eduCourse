@@ -23,7 +23,7 @@ public class StdntMdfyDesign extends JDialog {
 	private StdntHomeDesign shd;
 	private JLabel jlBack; // 배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
-	private JLabel StdntMdfy, photo, jlStdntNum, jlStdntPass, jlStdntEmail, jlStdntAddr, jlNecessary;
+	private JLabel jlStdntMdfy, photo, jlStdntNum, jlStdntPass, jlStdntEmail, jlStdntAddr, jlNecessary;
 	private JTextField jtfStdntNum, jtfStdntEmail, jtfStdntAddr;
 	private JPasswordField jpfStdntPass;
 	private JButton jbtnMdfy, jbtnCancel;
@@ -45,9 +45,9 @@ public class StdntMdfyDesign extends JDialog {
 		add(topLogin);
 
 		// 정보수정 라벨 추가
-		StdntMdfy = new JLabel(new ImageIcon(commonPath + "InfoMdfy_label.png"));
-		StdntMdfy.setBounds(10, 76, 967, 44);
-		add(StdntMdfy);
+		jlStdntMdfy = new JLabel(new ImageIcon(commonPath + "InfoMdfy_label.png"));
+		jlStdntMdfy.setBounds(10, 76, 967, 44);
+		add(jlStdntMdfy);
 
 		// 프로필 사진 추가
 		photo = new JLabel(new ImageIcon(commonPath + "photo.png"));

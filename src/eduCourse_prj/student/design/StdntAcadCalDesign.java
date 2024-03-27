@@ -32,7 +32,7 @@ import eduCourse_prj.student.event.StdntAcadCalEvent;
 
 @SuppressWarnings("serial")
 public class StdntAcadCalDesign extends JDialog {
-	private StdntHomeDesign swd;
+	private StdntHomeDesign shd;
 
 	private JButton searchBtn, jbtnCnfrm;
 	private JButton[] calBtn;
@@ -49,12 +49,12 @@ public class StdntAcadCalDesign extends JDialog {
 	private int year, month, day, todays, memoday = 0;
 	private int buttonIndex;
 	private int cnt;
-	AdminAcadCalDAO aacDAO = AdminAcadCalDAO.getInstance();
-	String yearMonthDay = "";
+	private AdminAcadCalDAO aacDAO = AdminAcadCalDAO.getInstance();
+	private String yearMonthDay = "";
 
-	public StdntAcadCalDesign(StdntHomeDesign swd, String title) {
-		super(swd, title, true);
-		this.swd = swd;
+	public StdntAcadCalDesign(StdntHomeDesign shd, String title) {
+		super(shd, title, true);
+		this.shd = shd;
 
 		today = Calendar.getInstance(); // 달력 가져오기
 		cal = new GregorianCalendar(); // 표준 달력
@@ -206,7 +206,7 @@ public class StdntAcadCalDesign extends JDialog {
 		monthSelectJP.setBackground(Color.white); // 달 패널
 
 		// 상단 로그인 라벨 설정
-		topLogin = new JLabel(swd.getlVO().getName() + " 학생님 로그인 중");
+		topLogin = new JLabel(shd.getlVO().getName() + " 학생님 로그인 중");
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.WHITE);
 		topLogin.setBounds(600, 30, 300, 20);
@@ -470,8 +470,8 @@ public class StdntAcadCalDesign extends JDialog {
 		return searchBtn;
 	}
 
-	public StdntHomeDesign getSwd() {
-		return swd;
+	public StdntHomeDesign getShd() {
+		return shd;
 	}
 
 	public JButton getJbtnCnfrm() {

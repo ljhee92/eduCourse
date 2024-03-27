@@ -145,32 +145,6 @@ public class StdntTestAnswerDesign extends JDialog {
 
 	} // setTbHorizontal
 
-	/**
-	 * DB에서 모든 학과 정보를 가져오는 method
-	 */
-//	public void seltAllDept() {
-//	
-//	try {// 학과
-//
-//		// 모든 학과 정보 가져오기
-//		StdntTestDAO stDAO = StdntTestDAO.getInstance();
-//		stDAO.slctAllCrs();
-//
-//		// "전체 아이템 추가"
-//		jcbDept.addItem("전체");
-//
-//		// 학과명만 저장하는 리스트에 학과명 저장
-//		for (DeptVO dept : lDept) {
-//			jcbDept.addItem(dept.getDept_name());
-//
-//		}
-//
-//	} catch (SQLException e) {
-//		e.printStackTrace();
-//	}
-//	
-//	}
-
 	public StdntHomeDesign getShd() {
 		return shd;
 	}
