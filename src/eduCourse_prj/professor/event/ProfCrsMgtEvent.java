@@ -89,7 +89,7 @@ public class ProfCrsMgtEvent extends WindowAdapter implements ActionListener{
 			switch (deleteFlag) {
 			case JOptionPane.NO_OPTION:
 				return;
-			case JOptionPane.OK_OPTION:
+			case JOptionPane.YES_OPTION:
 				try {
 					CrsMgtRegDAO cmrDAO = CrsMgtRegDAO.getInstance();
 					int prof_number = Integer.parseInt(pcmd.getPhd().getlVO().getId());
