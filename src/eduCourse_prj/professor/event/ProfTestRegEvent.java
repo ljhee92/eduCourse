@@ -19,10 +19,9 @@ import eduCourse_prj.professor.design.ProfTestMgtDesign;
 import eduCourse_prj.professor.design.ProfTestRegDesign;
 
 public class ProfTestRegEvent extends WindowAdapter implements ActionListener {
-	ProfTestRegDesign ptrd;
-	ProfTestMgtDesign ptmd;
-	CrsVO cVO = null;
-	ProfDAO pDAO = ProfDAO.getInstance();
+	private ProfTestRegDesign ptrd;
+	private ProfTestMgtDesign ptmd;
+	private CrsVO cVO = null;
 
 	public ProfTestRegEvent(ProfTestRegDesign ptrd, ProfTestMgtDesign ptmd) {
 		this.ptrd = ptrd;
@@ -39,7 +38,6 @@ public class ProfTestRegEvent extends WindowAdapter implements ActionListener {
 			TestQustVO tqVO;
 
 			int questionNumber = Integer.parseInt(ptrd.getTestNumberComboBox().getSelectedItem().toString());
-//			System.out.println(questionNumber);
 
 			String multipleChoiceOne = ptrd.getMultipleChoiceOneTextField().getText();
 			if (multipleChoiceOne.isEmpty()) {
@@ -61,12 +59,13 @@ public class ProfTestRegEvent extends WindowAdapter implements ActionListener {
 				JOptionPane.showMessageDialog(ptrd, "선택(4)은 필수 입력 사항입니다.");
 				return;
 			}
+
 			String content = ptrd.getTestQuestionContentTextArea().getText().toString() + "\n\n"
 					+ ptrd.getMultipleChoiceOneTextField().getText() + "\t"
 					+ ptrd.getMultipleChoiceTwoTextField().getText() + "\t"
 					+ ptrd.getMultipleChoiceThreeTextField().getText() + "\t"
 					+ ptrd.getMultipleChoiceFourTextField().getText();
-//			System.out.println(content);
+
 
 			String answerText = ptrd.getAnswerTextField().getText();
 			if (answerText.isEmpty()) {
@@ -76,32 +75,31 @@ public class ProfTestRegEvent extends WindowAdapter implements ActionListener {
 
 			try {
 				List<Integer> courNum;
-				int answer = Integer.parseInt(answerText);
-				// capacity 유효성 검사
-				if (answer <= 0 || answer > 4) {
-					JOptionPane.showMessageDialog(ptrd, "정답은 (1~4)만 입력 가능합니다.");
-					return;
-				}
 
-				int seletedRow = ptrd.getPtmd().getJtbTestMgt().getSelectedRow();
-				String seletedValue = (String) ptrd.getPtmd().getJtbTestMgt().getValueAt(seletedRow, 0);// 선택된 과목코드
+			    int answer = Integer.parseInt(answerText);
+			    //capacity 유효성 검사
+			    if (answer <= 0 || answer >4) {
+			        JOptionPane.showMessageDialog(ptrd, "정답은 (1~4)만 입력 가능합니다.");
+			        return;
+			    }
+			    
+			    int seletedRow = ptrd.getPtmd().getJtbTestMgt().getSelectedRow();
+				String seletedValue = (String) ptrd.getPtmd().getJtbTestMgt().getValueAt(seletedRow,0);//선택된 과목코드 
 
-//				System.out.println(seletedValue);
 				cVO = cmrDAO.slctOneCrsCode(seletedValue);
 
 				int profId = Integer.parseInt(ptrd.getPtmd().getPhd().getlVO().getId());
 				String courCode = cVO.getCourCode();
+				
+			    tqVO = new TestQustVO(questionNumber, content, answer, profId, courCode);
+			    tDAO.insertTest(tqVO);
+			    
+			    
+			  //등록이 완료되면 등록이 안된 문제의 첫 값으로 설정
+		        courNum = tDAO.selectValidTestNumber(seletedValue);
+		        
+		        if(courNum.size() < 10 && courNum.size() > 0) {
 
-//				System.out.println("questionNumber : " + questionNumber + " content : " + content 
-//						+ " answer : " + answer + " 교수 이름 : " + Integer.parseInt(ptrd.getPtmd().getPhd().getlVO().getId()) 
-//						+ " 코스 코드  : " + cVO.getCourCode());
-				tqVO = new TestQustVO(questionNumber, content, answer, profId, courCode);
-				tDAO.insertTest(tqVO);
-
-				// 등록이 완료되면 등록이 안된 문제의 첫 값으로 설정
-				courNum = tDAO.selectValidTestNumber(seletedValue);
-
-				if (courNum.size() < 10 && courNum.size() > 0) {
 					ptmd.getDtmTestMgt().setValueAt("출제중", seletedRow, 2);
 				} // end if
 

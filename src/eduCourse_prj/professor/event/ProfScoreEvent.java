@@ -16,8 +16,8 @@ import eduCourse_prj.professor.dao.ScoreDAO;
 import eduCourse_prj.professor.design.ProfScoreDesign;
 
 public class ProfScoreEvent extends WindowAdapter implements ActionListener {
-	ProfScoreDesign psd;
-	ScoreDAO sDAO = ScoreDAO.getInstance();
+	private ProfScoreDesign psd;
+	private ScoreDAO sDAO = ScoreDAO.getInstance();
 
 	public ProfScoreEvent(ProfScoreDesign psd, String title) {
 		this.psd = psd;
@@ -55,9 +55,6 @@ public class ProfScoreEvent extends WindowAdapter implements ActionListener {
 				}
 			}
 
-			// System.out.println("prof_number : "+prof_number );
-			// System.out.println("std_number : "+std_number );
-			// System.out.println("crs_code : "+crs_code );
 
 			List<ScoreVO> listScoreVO = new ArrayList<ScoreVO>();
 
@@ -72,7 +69,6 @@ public class ProfScoreEvent extends WindowAdapter implements ActionListener {
 					listScoreVO = sDAO.slctAllScore(prof_number);
 				}
 
-//	        	listScoreVO = sDAO.slctAllScore();
 				Object rowGrade;
 
 				for (ScoreVO sVO : listScoreVO) {

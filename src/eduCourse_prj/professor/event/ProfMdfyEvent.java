@@ -16,8 +16,8 @@ import eduCourse_prj.professor.design.ProfMdfyDesign;
 
 public class ProfMdfyEvent extends WindowAdapter implements ActionListener {
 	private ProfMdfyDesign pmd;
-	ProfDAO pDAO = ProfDAO.getInstance();
-
+	private ProfDAO pDAO = ProfDAO.getInstance();
+	
 	public ProfMdfyEvent(ProfMdfyDesign pmd) {
 		this.pmd = pmd;
 	}
