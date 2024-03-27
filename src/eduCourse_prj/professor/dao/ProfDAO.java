@@ -753,12 +753,10 @@ public class ProfDAO {
 	}// slctProfLect
 
 	/**
-<<<<<<< HEAD
-	 * 로그인한 교수의 강의 과목을 불러오는 메서드
-=======
-	 * 로그인한 교수의 강의 과목을 불러오는 메서든
+	 * <<<<<<< HEAD 로그인한 교수의 강의 과목을 불러오는 메서드 ======= 로그인한 교수의 강의 과목을 불러오는 메서든
 	 * 
->>>>>>> main
+	 * >>>>>>> main
+	 * 
 	 * @param prof_number
 	 * @return
 	 * @throws SQLException
@@ -949,6 +947,49 @@ public class ProfDAO {
 			dbCon.dbClose(rs, pstmt, con);
 		} // end finally
 		return 1;
+
+	}
+
+	/**
+	 * @param 과목코드
+	 * @return 해당 과목을 수강중인 학생이 존재하는지 확인하는 method
+	 * @throws SQLException
+	 */
+	public boolean checkDeleteable(String courCode) throws SQLException {
+		DbConnection dbCon = DbConnection.getInstance();
+		boolean result = false;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			String id = "scott";
+			String pass = "tiger";
+			con = dbCon.getConnection(id, pass);
+
+			String slctQuery = "select count(*)	count" + "	from REGISTER r	"
+					+ "	JOIN LECTURE l on l.COURSE_CODE = r.COURSE_CODE	" + "	WHERE r.COURSE_CODE = ?	";
+			pstmt = con.prepareStatement(slctQuery);
+			pstmt.setString(1, courCode);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				// 해당 과목코드를 수강하는 학생이 0명일 경우에만 삭제가능 flag = true
+				System.out.println(rs.getInt("count"));
+				if (rs.getInt("count") == 0) {
+
+					result = true;
+				}
+
+			}
+
+		} finally {
+			dbCon.dbClose(rs, pstmt, con);
+		} // end finally
+		return result;
 
 	}
 

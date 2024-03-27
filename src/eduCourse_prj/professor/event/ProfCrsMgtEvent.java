@@ -14,6 +14,7 @@ import javax.swing.JTextArea;
 import eduCourse_prj.VO.CrsRegVO;
 import eduCourse_prj.VO.CrsVO;
 import eduCourse_prj.professor.dao.CrsMgtRegDAO;
+import eduCourse_prj.professor.dao.ProfDAO;
 import eduCourse_prj.professor.design.ProfCrsMgtDesign;
 import eduCourse_prj.professor.design.ProfCrsMgtMdfyDesign;
 import eduCourse_prj.professor.design.ProfCrsMgtRegDesign;
@@ -42,7 +43,7 @@ public class ProfCrsMgtEvent extends WindowAdapter implements ActionListener{
 			} // end if
 			try {
 				String prof_name = pcmd.getPhd().getlVO().getName();
-				String crs_name = pcmd.getDtmProfMgt().getValueAt(index, 1).toString();
+				String crs_name = pcmd.getDtmProfMgt().getValueAt(index, 2).toString();
 
 				CrsMgtRegDAO cmrDAO = CrsMgtRegDAO.getInstance();
 				CrsRegVO crVO = cmrDAO.slctProfOneLect(crs_name);
@@ -90,9 +91,22 @@ public class ProfCrsMgtEvent extends WindowAdapter implements ActionListener{
 				return;
 			case JOptionPane.YES_OPTION:
 				try {
+
 					CrsMgtRegDAO cmrDAO = CrsMgtRegDAO.getInstance();
+					ProfDAO pDAO = ProfDAO.getInstance();
+					
+					boolean deleteable = pDAO.checkDeleteable(pcmd.getDtmProfMgt().getValueAt(index, 1).toString());
+					
+					if(!deleteable) {//삭제 불가능일 경우
+						JOptionPane.showMessageDialog(pcmd, "해당 과목을 수강중인 학생이 존재하여\n과목을 삭제할 수 없습니다.");
+						return;
+						
+					}
+					
+					
+					
 					int prof_number = Integer.parseInt(pcmd.getPhd().getlVO().getId());
-					String course_name = pcmd.getDtmProfMgt().getValueAt(index, 1).toString();
+					String course_name = pcmd.getDtmProfMgt().getValueAt(index, 2).toString();
 					CrsVO cVO = cmrDAO.slctOneCrsCode(course_name);
 
 					cmrDAO.deleteLect(prof_number, cVO.getCourCode());
