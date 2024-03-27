@@ -410,7 +410,7 @@ public class ProfDAO {
 					+ ("	from(SELECT d.dept_name, d.dept_code, c.course_name, c.course_code	")
 					+ ("	FROM professor p	") + ("	JOIN dept d ON p.dept_code = d.dept_code	")
 					+ ("	JOIN course c ON d.dept_code = c.dept_code	")
-					+ ("	WHERE p.prof_number = ? and course_delete_flag = 'N')	")
+					+ ("	WHERE p.prof_number = ? and c.course_delete_flag = 'N' and d.dept_delete_flag = 'N')	")
 					+ ("	where course_code not in(select course_code from Lecture)	");
 
 			pstmt = con.prepareStatement(slctCrsQuery);
@@ -753,10 +753,7 @@ public class ProfDAO {
 	}// slctProfLect
 
 	/**
-	 * <<<<<<< HEAD 로그인한 교수의 강의 과목을 불러오는 메서드 ======= 로그인한 교수의 강의 과목을 불러오는 메서든
-	 * 
-	 * >>>>>>> main
-	 * 
+	 * 로그인한 교수의 강의 과목을 불러오는 메서드
 	 * @param prof_number
 	 * @return
 	 * @throws SQLException
@@ -992,5 +989,38 @@ public class ProfDAO {
 		return result;
 
 	}
+	
+	/**
+	 * 교수 등록을 위해 DB의 가장 마지막 교번을 가져오는 method
+	 * @return
+	 * @throws SQLException
+	 */
+	public int selectMaxProfNumber() throws SQLException {
+		int maxProfNumber = 0;
+		DbConnection dbCon = DbConnection.getInstance();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			String id = "scott";
+			String pass = "tiger";
+			con = dbCon.getConnection(id, pass);
+
+			String selectMaxProfNumber = "select max(prof_number) as maxProfNumber from professor";
+			pstmt = con.prepareStatement(selectMaxProfNumber);
+
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				maxProfNumber = rs.getInt("maxProfNumber");
+			} // end if
+
+		} finally {
+			dbCon.dbClose(rs, pstmt, con);
+		} // end finally
+		return maxProfNumber;
+	} // selectMaxProfNumber
 
 } // class

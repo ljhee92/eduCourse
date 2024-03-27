@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import eduCourse_prj.VO.DeptVO;
 import eduCourse_prj.admin.dao.AdminDAO;
 import eduCourse_prj.admin.event.AdminProfMgtRegEvent;
+import eduCourse_prj.professor.dao.ProfDAO;
 
 @SuppressWarnings("serial")
 public class AdminProfMgtRegDesign extends JDialog {
@@ -94,14 +95,15 @@ public class AdminProfMgtRegDesign extends JDialog {
 		add(jlNecessary);
 
 		// 교번, 이름, PW, 이메일, 소속학과 JTF, JPF, ComboBox 추가
-		jtfProfNum = new JTextField("교번 자동입력");
-		jtfProfName = new JTextField();
-		jpfProfPass = new JPasswordField();
-		jtfProfEmail = new JTextField();
-
-		jcbDept = new JComboBox<String>();
-		AdminDAO aDAO = AdminDAO.getInstance();
 		try {
+			ProfDAO pDAO = ProfDAO.getInstance();
+			jtfProfNum = new JTextField(String.valueOf(pDAO.selectMaxProfNumber()+1));
+			jtfProfName = new JTextField();
+			jpfProfPass = new JPasswordField();
+			jtfProfEmail = new JTextField();
+	
+			jcbDept = new JComboBox<String>();
+			AdminDAO aDAO = AdminDAO.getInstance();
 			List<DeptVO> listDVO = aDAO.slctAllDept();
 			String deptName;
 			for (DeptVO dVO : listDVO) {
@@ -119,6 +121,8 @@ public class AdminProfMgtRegDesign extends JDialog {
 		jpfProfPass.setBounds(510, 310, 300, 30);
 		jtfProfEmail.setBounds(510, 350, 300, 30);
 		jcbDept.setBounds(510, 390, 300, 30);
+		
+		jcbDept.setFont(sfont);
 
 		add(jtfProfNum);
 		add(jtfProfName);
