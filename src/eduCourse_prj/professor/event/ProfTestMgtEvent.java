@@ -89,7 +89,7 @@ public class ProfTestMgtEvent extends WindowAdapter implements ActionListener, L
 				ptmd.getDtmTestMgt().setRowCount(0); 
 				ptmd.slctTestMgt();
 				ptmd.getJrbtnEnable().setSelected(false);
-				JOptionPane.showMessageDialog(ptmd, course_name + " 활성화 완료");
+				JOptionPane.showMessageDialog(ptmd, course_name + " 과목의 시험이 활성화되었습니다.");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}			
@@ -109,7 +109,7 @@ public class ProfTestMgtEvent extends WindowAdapter implements ActionListener, L
 				ptmd.getDtmTestMgt().setRowCount(0);				
 				ptmd.slctTestMgt();
 				ptmd.getJrbtnEnable().setSelected(true);
-				JOptionPane.showMessageDialog(ptmd, course_name + " 비활성화 완료");
+				JOptionPane.showMessageDialog(ptmd, course_name + " 과목의 시험이 비활성화되었습니다.");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}			

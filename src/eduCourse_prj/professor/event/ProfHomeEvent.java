@@ -56,7 +56,6 @@ public class ProfHomeEvent extends WindowAdapter implements ActionListener {
 			pwd.dispose();
 		}
 		if (ae.getSource() == pwd.getJbtnSched()) {
-			JOptionPane.showMessageDialog(pwd, "학사일정 버튼클릭");
 			new ProfAcadCalDesign(pwd, "학사일정");
 		}
 
