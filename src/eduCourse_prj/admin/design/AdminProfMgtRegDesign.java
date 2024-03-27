@@ -74,7 +74,7 @@ public class AdminProfMgtRegDesign extends JDialog {
 		jlProfPass.setBounds(410, 310, 100, 30);
 		jlProfEmail.setBounds(410, 350, 100, 30);
 		jlDept.setBounds(410, 390, 100, 30);
-		jlNecessary.setBounds(670, 420, 300, 30);
+		jlNecessary.setBounds(640, 420, 300, 30);
 
 		jlProfNum.setFont(font);
 		jlProfName.setFont(font);
@@ -82,7 +82,7 @@ public class AdminProfMgtRegDesign extends JDialog {
 		jlProfEmail.setFont(font);
 		jlDept.setFont(font);
 
-		Font sfont = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
+		Font sfont = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 13);
 		jlNecessary.setFont(sfont);
 		jlNecessary.setForeground(Color.RED);
 
