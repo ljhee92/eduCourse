@@ -31,7 +31,6 @@ public class AdminProfMgtEvent extends WindowAdapter implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == apmd.getJbtnSlctTop()) {
-			JOptionPane.showMessageDialog(apmd, "상단 조회버튼 클릭");
 			updateTable();
 			
 

@@ -42,7 +42,6 @@ public class AdminStudMgtEvent extends WindowAdapter implements ActionListener {
 		if (ae.getSource() == asmd.getJbtnSlctTop()) {
 			
 			asmd.getDtmStdMgt().setRowCount(0);
-			//JOptionPane.showMessageDialog(asmd, "상단 조회버튼 클릭");
 
 			int dept_code = 0; // 학과 코드
 			String crs_code = ""; // 과목 코드
@@ -115,7 +114,6 @@ public class AdminStudMgtEvent extends WindowAdapter implements ActionListener {
 	}//end if
 		
 		if (ae.getSource() == asmd.getJbtnSlct()) {
-			//JOptionPane.showMessageDialog(asmd, "하단 조회버튼 클릭");
 			
 			// 학생 정보 상세 조회 클릭
 			if(ae.getSource() == asmd.getJbtnSlct()) {
@@ -156,7 +154,6 @@ public class AdminStudMgtEvent extends WindowAdapter implements ActionListener {
 	
 
 		if (ae.getSource() == asmd.getJcbDept()) {
-			//JOptionPane.showMessageDialog(asmd, "학과 콤보박스 클릭");
 			int dept_code = 0;
 			asmd.getJcbCrs().removeAllItems();
 			asmd.getJcbCrs().addItem("전체");

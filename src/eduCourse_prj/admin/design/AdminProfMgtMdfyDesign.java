@@ -151,6 +151,7 @@ public class AdminProfMgtMdfyDesign extends JDialog {
 			for(DeptVO dVO : listDVO) {
 				deptName = dVO.getDept_name();
 				jcbDept.addItem(deptName);
+				jcbDept.setSelectedItem(apmd.getDtmProfMgt().getValueAt(index, 0).toString());
 			} // end for
 		} catch (SQLException e) {
 			e.printStackTrace();
