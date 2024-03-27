@@ -23,7 +23,7 @@ public class StdntLoginDesign extends JFrame {
     
 
     
-    JButton loginButton ;
+    private JButton loginButton ;
 
 
     
