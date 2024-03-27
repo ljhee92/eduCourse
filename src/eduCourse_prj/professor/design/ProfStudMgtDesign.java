@@ -55,14 +55,14 @@ public class ProfStudMgtDesign extends JDialog {
 		setSize(1000, 650);
 
 		String commonPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/common/";
-		String adminPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/admin/";
+		String profPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/prof/";
 
 		jlBack = new JLabel(new ImageIcon(commonPath + "back.png"));
 		jlBack.setBounds(0, 0, 984, 620);
 		add(jlBack);
 
 		// 관리자관리, 등록 라벨 추가
-		adminMgt = new JLabel(new ImageIcon(adminPath + "studentTitle.png"));
+		adminMgt = new JLabel(new ImageIcon(profPath + "StudentSlctBanner_new.png"));
 		adminMgt.setBounds(10, 76, 967, 44);
 		add(adminMgt);
 
