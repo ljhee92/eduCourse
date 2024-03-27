@@ -18,16 +18,8 @@ public class AdminAcadCalVO {
 		return memo;
 	}
 
-	public void setMemo(String memo) {
-		this.memo = memo;
-	}
-
 	public String getYearMonthDay() {
 		return yearMonthDay;
-	}
-
-	public void setYearMonthDay(String yearMonthDay) {
-		this.yearMonthDay = yearMonthDay;
 	}
 
 }
