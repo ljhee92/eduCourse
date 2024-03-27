@@ -410,7 +410,7 @@ public class ProfDAO {
 					+ ("	from(SELECT d.dept_name, d.dept_code, c.course_name, c.course_code	")
 					+ ("	FROM professor p	") + ("	JOIN dept d ON p.dept_code = d.dept_code	")
 					+ ("	JOIN course c ON d.dept_code = c.dept_code	")
-					+ ("	WHERE p.prof_number = ? and course_delete_flag = 'N' and dept_delete_flag = 'N')	")
+					+ ("	WHERE p.prof_number = ? and c.course_delete_flag = 'N' and d.dept_delete_flag = 'N')	")
 					+ ("	where course_code not in(select course_code from Lecture)	");
 
 			pstmt = con.prepareStatement(slctCrsQuery);
