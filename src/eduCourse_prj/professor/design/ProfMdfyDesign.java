@@ -39,6 +39,7 @@ public class ProfMdfyDesign extends JDialog {
 		// 우상단 로그인상태 확인창 추가
 		topLogin = new JLabel(phd.getlVO().getName() + " 교수님 로그인 중");
 		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 17);
+		Font fonts = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 13);
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.WHITE);
 		topLogin.setBounds(600, 30, 250, 20);
@@ -65,13 +66,13 @@ public class ProfMdfyDesign extends JDialog {
 		jlProfPass.setBounds(410, 270, 100, 30);
 		jlProfEmail.setBounds(410, 310, 100, 30);
 
-		jlNecessary.setBounds(600, 400, 300, 30);
+		jlNecessary.setBounds(660, 340, 300, 30);
 
 		jlProfNum.setFont(font);
 		jlProfPass.setFont(font);
 		jlProfEmail.setFont(font);
 
-		jlNecessary.setFont(font);
+		jlNecessary.setFont(fonts);
 		jlNecessary.setForeground(Color.RED);
 
 		add(jlProfNum);

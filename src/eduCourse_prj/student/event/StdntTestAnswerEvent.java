@@ -28,6 +28,7 @@ public class StdntTestAnswerEvent extends WindowAdapter implements ActionListene
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == stad.getJbtnSlct()) {
+			stad.getDtmTestAnswer().setRowCount(0);
 			int selectedIndex = stad.getJcbCrs().getSelectedIndex();
 			int register_number = stad.getCrsList().get(selectedIndex).getRegister_number();
 			String course_code = stad.getCrsList().get(selectedIndex).getCourse_code();

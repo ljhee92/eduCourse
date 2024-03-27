@@ -76,14 +76,14 @@ public class AdminAdminMgtMdfyDesign extends JDialog {
 		jlAdminName.setBounds(450, 310, 100, 30);
 		jlAdminPass.setBounds(450, 365, 100, 30);
 
-		jlNecessary.setBounds(680, 390, 300, 30);
+		jlNecessary.setBounds(645, 395, 300, 30);
 
 		// 폰트 설정
 		Font labelFont = new Font("나눔스퀘어라운드 ExtraBold", Font.PLAIN, 20);
 		jlAdminId.setFont(labelFont);
 		jlAdminName.setFont(labelFont);
 		jlAdminPass.setFont(labelFont);
-		Font smallFont = new Font("나눔스퀘어라운드 ExtraBold", Font.PLAIN, 10);
+		Font smallFont = new Font("나눔스퀘어라운드 ExtraBold", Font.PLAIN, 13);
 		jlNecessary.setFont(smallFont);
 		jlNecessary.setForeground(Color.RED);
 
