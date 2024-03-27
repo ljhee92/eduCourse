@@ -25,7 +25,7 @@ public class ProfCrsMgtRegDesign extends JDialog {
 	private ProfCrsMgtDesign pcmd;
 	private JLabel jlBack;// 배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
-	private JLabel jlprofCrsMgt, jlprofCrsMgtReg; // 상단 라벨
+	private JLabel jlProfCrsMgt, jlProfCrsMgtReg; // 상단 라벨
 	private JLabel jlCrsName, jlCrsCode, jlDeptName, jlDeptCode, jlProfName,
 					jlLectRoom, jlCredit, jlCapa, jlNecessary;
 	private JComboBox<String> jcbCrsName, jcbLectRoom;
@@ -51,14 +51,14 @@ public class ProfCrsMgtRegDesign extends JDialog {
 		add(topLogin);
 		
 		// 강의 과목 관리, 등록 상단 라벨 추가
-		jlprofCrsMgt = new JLabel(new ImageIcon(profPath + "ProfCrsMgt_Label.png"));
-		jlprofCrsMgtReg = new JLabel(new ImageIcon(commonPath + "RegBanner_new.png"));
+		jlProfCrsMgt = new JLabel(new ImageIcon(profPath + "ProfCrsMgt_Label.png"));
+		jlProfCrsMgtReg = new JLabel(new ImageIcon(commonPath + "RegBanner_new.png"));
 		
-		jlprofCrsMgt.setBounds(10, 76, 967, 44);
-		jlprofCrsMgtReg.setBounds(10, 118, 967, 45);
+		jlProfCrsMgt.setBounds(10, 76, 967, 44);
+		jlProfCrsMgtReg.setBounds(10, 118, 967, 45);
 		
-		add(jlprofCrsMgt);
-		add(jlprofCrsMgtReg);
+		add(jlProfCrsMgt);
+		add(jlProfCrsMgtReg);
 		
 		// 과목, 과목 코드, 학과, 학과 코드, 담당 교수, 강의실, 학점, 정원, 필수입력사항 라벨 추가
 		jlCrsName = new JLabel("과목");

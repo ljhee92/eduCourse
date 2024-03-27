@@ -255,7 +255,7 @@ public class ProfDAO {
 	 * @param pVO
 	 * @throws SQLException
 	 */
-	public void addProf(ProfVO pVO) throws SQLException {
+	public void insertProf(ProfVO pVO) throws SQLException {
 		DbConnection dbCon = DbConnection.getInstance();
 		
 		Connection con = null;
@@ -328,7 +328,7 @@ public class ProfDAO {
 	 * @param pVO
 	 * @throws SQLException
 	 */
-	public void adminModifyProf(ProfVO pVO) throws SQLException {
+	public void updateProf(ProfVO pVO) throws SQLException {
 		DbConnection dbCon = DbConnection.getInstance();
 		
 		Connection con = null;
@@ -824,7 +824,7 @@ public class ProfDAO {
 	}//slctProfLect
 	
 	/**
-	 * 로그인한 교수의 강의 과목을 불러오는 메서든
+	 * 로그인한 교수의 강의 과목을 불러오는 메서드
 	 * @param prof_number
 	 * @return
 	 * @throws SQLException

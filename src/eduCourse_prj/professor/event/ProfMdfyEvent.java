@@ -17,26 +17,11 @@ import eduCourse_prj.student.dao.StdntDAO;
 
 public class ProfMdfyEvent extends WindowAdapter implements ActionListener {
 	private ProfMdfyDesign pmd;
-	ProfDAO pDAO = ProfDAO.getInstance();
-	
-	
-	
+	private ProfDAO pDAO = ProfDAO.getInstance();
 	
 	public ProfMdfyEvent(ProfMdfyDesign pmd) {
 		this.pmd = pmd;
 	}
-	
-	
-	
-
-
-	
-	
-	
-	
-	
-	
-	
 	
 	@Override
 	public void actionPerformed(ActionEvent ae) {

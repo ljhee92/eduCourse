@@ -7,17 +7,13 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
-import eduCourse_prj.VO.DeptVO;
 import eduCourse_prj.VO.TestPageVO;
 import eduCourse_prj.VO.TestQustVO;
-import eduCourse_prj.admin.dao.AdminDAO;
-import eduCourse_prj.admin.design.AdminDeptMgtRegDesign;
 import eduCourse_prj.professor.dao.TestDAO;
 import eduCourse_prj.professor.design.ProfTestMdfyDesign;
-import eduCourse_prj.professor.design.ProfTestRegDesign;
 
 public class ProfTestMdfyEvent extends WindowAdapter implements ActionListener {
-	ProfTestMdfyDesign ptmd;
+	private ProfTestMdfyDesign ptmd;
 
 	public ProfTestMdfyEvent(ProfTestMdfyDesign ptmd) {
 		this.ptmd = ptmd;
@@ -77,7 +73,6 @@ public class ProfTestMdfyEvent extends WindowAdapter implements ActionListener {
 				se.printStackTrace();
 			}
 
-//			System.out.println(tDAO.selectOneDept());
 
 		} // end if
 		

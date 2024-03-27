@@ -23,9 +23,6 @@ import eduCourse_prj.professor.event.ProfTestMdfyEvent;
 @SuppressWarnings("serial")
 public class ProfTestMdfyDesign extends JDialog {
 	private ProfTestMgtDesign ptmd;
-	
-
-
 
 	private JButton modifyButton;// 수정버튼
 	private JButton cancelButton;// 취소버튼

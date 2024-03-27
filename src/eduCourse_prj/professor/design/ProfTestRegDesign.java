@@ -22,11 +22,8 @@ import eduCourse_prj.professor.event.ProfTestRegEvent;
 @SuppressWarnings("serial")
 public class ProfTestRegDesign extends JDialog {
 	private ProfTestMgtDesign ptmd;
-	TestDAO tDAO = TestDAO.getInstance();
+	private TestDAO tDAO = TestDAO.getInstance();
 	
-
-
-
 	private JButton registerButton;// 출제버튼
 	private JButton cancelButton;// 취소버튼
 	
@@ -124,12 +121,6 @@ public class ProfTestRegDesign extends JDialog {
 				JOptionPane.showMessageDialog(ptmd, "SQL 문제가 발생했습니다.");
 				e.printStackTrace();
 			}
-			
-//			for (CrsVO crs : lCrs) {
-//
-//				jcbCrs.addItem(crs.getCourName());
-//
-//			}
 			
 			jlCourseName1 = new JLabel("과목명");
 			jlCourseName1.setFont(font);

@@ -21,19 +21,19 @@ import eduCourse_prj.VO.SlctStdVO;
 
 
 public class AdminDAO {
-	private static AdminDAO alDAO;
+	private static AdminDAO aDAO;
 
 	private AdminDAO() {
 
 	}
 
 	public static AdminDAO getInstance() {
-		if (alDAO == null) {
-			alDAO = new AdminDAO();
+		if (aDAO == null) {
+			aDAO = new AdminDAO();
 
 		} // end if
 
-		return alDAO;
+		return aDAO;
 	}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

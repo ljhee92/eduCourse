@@ -12,18 +12,17 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import eduCourse_prj.VO.ProfLectStudVO;
-import eduCourse_prj.VO.SlctStdVO;
 import eduCourse_prj.VO.StdntVO;
 import eduCourse_prj.professor.dao.ProfDAO;
-import eduCourse_prj.professor.design.ProfStudMgtDesign;
+import eduCourse_prj.professor.design.ProfStdntMgtDesign;
 import eduCourse_prj.student.dao.StdntDAO;
 
-public class ProfStudMgtEvent extends WindowAdapter implements ActionListener {
+public class ProfStdntMgtEvent extends WindowAdapter implements ActionListener {
 
-	private ProfStudMgtDesign psmd;
-	ProfDAO pDAO = ProfDAO.getInstance();
+	private ProfStdntMgtDesign psmd;
+	private ProfDAO pDAO = ProfDAO.getInstance();
 
-	public ProfStudMgtEvent(ProfStudMgtDesign psmd) {
+	public ProfStdntMgtEvent(ProfStdntMgtDesign psmd) {
 
 		this.psmd = psmd;
 
@@ -70,15 +69,6 @@ public class ProfStudMgtEvent extends WindowAdapter implements ActionListener {
 					return;
 				}
 			}
-			
-			
-
-
-//			System.out.println("prof_number : " + prof_number);
-//			System.out.println("crs_number : " + crs_code);
-//			System.out.println("std_number : " + std_number);
-
-			
 			
 			try {
 			List<ProfLectStudVO> listplsVO	=	pDAO.slctProfStud(prof_number,crs_code,std_number);

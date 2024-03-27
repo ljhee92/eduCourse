@@ -67,7 +67,7 @@ public class AdminProfMgtRegEvent extends WindowAdapter implements ActionListene
 			pVO = new ProfVO(profPass, profName, profEmail, deptName);
 
 			try {
-				pDAO.addProf(pVO);
+				pDAO.insertProf(pVO);
 				JOptionPane.showMessageDialog(null, pVO.getProf_name() + " 교수님 정보가 성공적으로 등록되었습니다.");
 
 				

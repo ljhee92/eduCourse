@@ -26,10 +26,10 @@ import eduCourse_prj.professor.event.ProfTestMgtEvent;
 
 @SuppressWarnings("serial")
 public class ProfTestMgtDesign extends JDialog {
-	ProfHomeDesign phd;
-	JLabel jlBack;// 배경
+	private ProfHomeDesign phd;
+	private JLabel jlBack;// 배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
-	private JLabel TestMgt;
+	private JLabel testMgt;
 
 	private DefaultTableModel dtmTestMgt;
 	private JTable jtbTestMgt;
@@ -48,9 +48,9 @@ public class ProfTestMgtDesign extends JDialog {
 		jlBack.setBounds(0, 0, 984, 620);
 
 		// 강의 과목 관리 라벨 추가
-		TestMgt = new JLabel(new ImageIcon(profPath + "TestMgt2.png"));
-		TestMgt.setBounds(10, 76, 967, 44);
-		add(TestMgt);
+		testMgt = new JLabel(new ImageIcon(profPath + "TestMgt2.png"));
+		testMgt.setBounds(10, 76, 967, 44);
+		add(testMgt);
 
 		// 우상단 로그인상태 확인창 추가
 		topLogin = new JLabel(phd.getlVO().getName() + " 교수님 로그인 중");
@@ -195,7 +195,7 @@ public class ProfTestMgtDesign extends JDialog {
 	}
 
 	public JLabel getTestMgt() {
-		return TestMgt;
+		return testMgt;
 	}
 	
 

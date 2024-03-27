@@ -24,10 +24,9 @@ import eduCourse_prj.professor.design.ProfTestRegDesign;
 import oracle.security.o3logon.a;
 
 public class ProfTestRegEvent extends WindowAdapter implements ActionListener {
-	ProfTestRegDesign ptrd;
-	ProfTestMgtDesign ptmd;
-	CrsVO cVO = null;
-	ProfDAO pDAO = ProfDAO.getInstance();
+	private ProfTestRegDesign ptrd;
+	private ProfTestMgtDesign ptmd;
+	private CrsVO cVO = null;
 
 	public ProfTestRegEvent(ProfTestRegDesign ptrd,ProfTestMgtDesign ptmd) {
 		this.ptrd = ptrd;
@@ -43,7 +42,6 @@ public class ProfTestRegEvent extends WindowAdapter implements ActionListener {
 			TestQustVO tqVO;
 			
 			int questionNumber = Integer.parseInt(ptrd.getTestNumberComboBox().getSelectedItem().toString());
-//			System.out.println(questionNumber);
 			
 			String multipleChoiceOne = ptrd.getMultipleChoiceOneTextField().getText();
 			if(multipleChoiceOne.isEmpty()) {
@@ -67,7 +65,6 @@ public class ProfTestRegEvent extends WindowAdapter implements ActionListener {
 			}
 			String content = ptrd.getTestQuestionContentTextArea().getText().toString() + "\n\n" + ptrd.getMultipleChoiceOneTextField().getText() + "\t" + ptrd.getMultipleChoiceTwoTextField().getText()
 			+ "\t" + ptrd.getMultipleChoiceThreeTextField().getText()+ "\t" + ptrd.getMultipleChoiceFourTextField().getText();
-//			System.out.println(content);
 			
 
 			String answerText = ptrd.getAnswerTextField().getText();
@@ -88,15 +85,11 @@ public class ProfTestRegEvent extends WindowAdapter implements ActionListener {
 			    int seletedRow = ptrd.getPtmd().getJtbTestMgt().getSelectedRow();
 				String seletedValue = (String) ptrd.getPtmd().getJtbTestMgt().getValueAt(seletedRow,0);//선택된 과목코드 
 				
-//				System.out.println(seletedValue);
 				cVO = cmrDAO.slctOneCrsCode(seletedValue);
 				
 				int profId = Integer.parseInt(ptrd.getPtmd().getPhd().getlVO().getId());
 				String courCode = cVO.getCourCode();
 				
-//				System.out.println("questionNumber : " + questionNumber + " content : " + content 
-//						+ " answer : " + answer + " 교수 이름 : " + Integer.parseInt(ptrd.getPtmd().getPhd().getlVO().getId()) 
-//						+ " 코스 코드  : " + cVO.getCourCode());
 			    tqVO = new TestQustVO(questionNumber, content, answer, profId, courCode);
 			    tDAO.insertTest(tqVO);
 			    

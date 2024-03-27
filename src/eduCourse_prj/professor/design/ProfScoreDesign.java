@@ -19,10 +19,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import eduCourse_prj.VO.CrsVO;
-
-import eduCourse_prj.VO.ScoreVO;
-
-
 import eduCourse_prj.professor.dao.ProfDAO;
 import eduCourse_prj.professor.dao.ScoreDAO;
 import eduCourse_prj.professor.event.ProfScoreEvent;
@@ -32,7 +28,6 @@ import eduCourse_prj.professor.event.ProfScoreEvent;
 public class ProfScoreDesign extends JDialog{
 	private ProfHomeDesign phd;
 	
-    //
 	private ScoreDAO sDAO = ScoreDAO.getInstance();
 
 	private ProfDAO pDAO = ProfDAO.getInstance();
@@ -45,20 +40,13 @@ public class ProfScoreDesign extends JDialog{
 	private JButton jbtnCnfrm, jbtnSlctTop;
 
 	private JLabel jlCrs;
-	private JLabel jlstdntNum;
+	private JLabel jlStdntNum;
 
 	private JComboBox<String> jcbDept;
 	private JComboBox<String> jcbCrs;
 	private JTextField jtfStdNum;
 
-
-	List<ScoreVO> stdntNumber ;
-
-	List<CrsVO> lCrs;
-
- 
-
-
+	private List<CrsVO> lCrs;
 
 	public ProfScoreDesign(ProfHomeDesign phd, String title) {
 		super(phd,title, true);
@@ -81,7 +69,6 @@ public class ProfScoreDesign extends JDialog{
 
 		// 우상단 로그인상태 확인창 추가
 		topLogin = new JLabel(phd.getlVO().getName() + " 교수님 로그인 중");
-//		topLogin = new JLabel("~~ 교수 로그인 중");
 		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 17);
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.WHITE);
@@ -95,10 +82,10 @@ public class ProfScoreDesign extends JDialog{
 		jlCrs.setBounds(240, 150, 50, 20);
 		add(jlCrs);
 
-		jlstdntNum = new JLabel("학번");
-		jlstdntNum.setFont(font);
-		jlstdntNum.setBounds(500, 150, 50, 20);
-		add(jlstdntNum);
+		jlStdntNum = new JLabel("학번");
+		jlStdntNum.setFont(font);
+		jlStdntNum.setBounds(500, 150, 50, 20);
+		add(jlStdntNum);
 
 
 		jcbCrs = new JComboBox<String>();
@@ -226,8 +213,8 @@ public class ProfScoreDesign extends JDialog{
 		return jlCrs;
 	}
 
-	public JLabel getJlstdNum() {
-		return jlstdntNum;
+	public JLabel getJlStdNum() {
+		return jlStdntNum;
 	}
 
 	public JComboBox<String> getJcbDept() {
@@ -251,9 +238,5 @@ public class ProfScoreDesign extends JDialog{
 	public DefaultTableModel getDtmScore() {
 		return dtmScore;
 	}
-	
-//	public static void main(String[] args) {
-//		new ProfScoreDesign(null, null);
-//	}//main
 
 }

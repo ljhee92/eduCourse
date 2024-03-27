@@ -19,7 +19,7 @@ import eduCourse_prj.professor.design.ProfCrsMgtMdfyDesign;
 import eduCourse_prj.professor.design.ProfCrsMgtRegDesign;
 
 public class ProfCrsMgtEvent extends WindowAdapter implements ActionListener{
-	ProfCrsMgtDesign pcmd;
+	private ProfCrsMgtDesign pcmd;
 
 	public ProfCrsMgtEvent(ProfCrsMgtDesign pcmd) {
 		this.pcmd = pcmd;

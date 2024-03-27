@@ -25,10 +25,10 @@ import eduCourse_prj.admin.dao.AdminDAO;
 
 
 import eduCourse_prj.professor.dao.ProfDAO;
-import eduCourse_prj.professor.event.ProfStudMgtEvent;
+import eduCourse_prj.professor.event.ProfStdntMgtEvent;
 
 @SuppressWarnings("serial")
-public class ProfStudMgtDesign extends JDialog {
+public class ProfStdntMgtDesign extends JDialog {
 	private ProfHomeDesign phd;
 	private AdminDAO aDAO = AdminDAO.getInstance();
 	private ProfDAO pDAO = ProfDAO.getInstance();
@@ -44,7 +44,7 @@ public class ProfStudMgtDesign extends JDialog {
 
 
 	private JLabel jlCrs;
-	private JLabel jlstdNum;
+	private JLabel jlStdNum;
 
 
 	private JComboBox<String> jcbCrs;
@@ -55,7 +55,7 @@ public class ProfStudMgtDesign extends JDialog {
 
 	private DefaultTableModel dtmStdMgt;
 
-	public ProfStudMgtDesign(ProfHomeDesign phd, String title) {
+	public ProfStdntMgtDesign(ProfHomeDesign phd, String title) {
 		super(phd, title, true);
 		this.phd = phd;
 		setLayout(null);
@@ -87,10 +87,10 @@ public class ProfStudMgtDesign extends JDialog {
 		jlCrs.setBounds(240, 150, 50, 20);
 		add(jlCrs);
 
-		jlstdNum = new JLabel("학번");
-		jlstdNum.setFont(font);
-		jlstdNum.setBounds(500, 150, 50, 20);
-		add(jlstdNum);
+		jlStdNum = new JLabel("학번");
+		jlStdNum.setFont(font);
+		jlStdNum.setBounds(500, 150, 50, 20);
+		add(jlStdNum);
 
 	
 		jcbCrs = new JComboBox<String>();
@@ -166,7 +166,7 @@ public class ProfStudMgtDesign extends JDialog {
 
 		add(jlBack);
 
-		ProfStudMgtEvent psme = new ProfStudMgtEvent(this);
+		ProfStdntMgtEvent psme = new ProfStdntMgtEvent(this);
 		addWindowListener(psme);
 		jbtnSlct.addActionListener(psme);
 		jbtnSlctTop.addActionListener(psme);
@@ -232,8 +232,8 @@ public class ProfStudMgtDesign extends JDialog {
 		return jlCrs;
 	}
 
-	public JLabel getJlstdNum() {
-		return jlstdNum;
+	public JLabel getJlStdNum() {
+		return jlStdNum;
 	}
 
 	public JComboBox<String> getJcbCrs() {
