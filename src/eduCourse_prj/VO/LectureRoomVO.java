@@ -21,16 +21,8 @@ public class LectureRoomVO {
 		return lect_room_num;
 	}
 
-	public void setLect_room_num(String lect_room_num) {
-		this.lect_room_num = lect_room_num;
-	}
-
 	public int getDept_code() {
 		return dept_code;
-	}
-
-	public void setDept_code(int dept_code) {
-		this.dept_code = dept_code;
 	}
 
 	@Override

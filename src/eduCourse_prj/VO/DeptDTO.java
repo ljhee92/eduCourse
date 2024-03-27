@@ -16,36 +16,19 @@ public class DeptDTO {
 		return dept_code;
 	}
 
-	public void setDept_code(int dept_code) {
-		this.dept_code = dept_code;
-	}
-
 	public String getDept_name() {
 		return dept_name;
-	}
-
-	public void setDept_name(String dept_name) {
-		this.dept_name = dept_name;
 	}
 
 	public List<String> getProf_name() {
 		return prof_name;
 	}
 
-	public void setProf_name(List<String> prof_name) {
-		this.prof_name = prof_name;
-	}
-
 	public int getDept_capacity() {
 		return dept_capacity;
 	}
 
-	public void setDept_capacity(int dept_capacity) {
-		this.dept_capacity = dept_capacity;
-	}
-
 	public DeptDTO() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public DeptDTO(int dept_code, String dept_name, List<String> prof_name, int dept_capacity) {

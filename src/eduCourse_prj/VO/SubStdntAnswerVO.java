@@ -25,6 +25,5 @@ public class SubStdntAnswerVO {
 	}
 
 	public SubStdntAnswerVO() {
-		// TODO Auto-generated constructor stub
 	}
 }
