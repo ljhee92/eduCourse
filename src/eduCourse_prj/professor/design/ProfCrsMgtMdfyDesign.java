@@ -107,7 +107,7 @@ public class ProfCrsMgtMdfyDesign extends JDialog {
 		// 과목, 과목 코드, 학과, 학과 코드, 담당 교수, 강의실, 학점, 정원 콤보박스, JTF 추가
 		CrsMgtRegDAO cmrDAO = CrsMgtRegDAO.getInstance();
 		int index = pcmd.getJtbLecMgt().getSelectedRow();
-		String course_name = pcmd.getDtmProfMgt().getValueAt(index, 1).toString();
+		String course_name = pcmd.getDtmProfMgt().getValueAt(index, 2).toString();
 		try {
 			CrsRegVO crVO = cmrDAO.slctProfOneLect(course_name);
 

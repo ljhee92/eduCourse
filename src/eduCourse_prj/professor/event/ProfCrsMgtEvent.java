@@ -132,7 +132,7 @@ public class ProfCrsMgtEvent extends WindowAdapter implements ActionListener{
 			int prof_number = Integer.parseInt(strProf_number);
 			List<CrsVO> listCrsVO = cmrDAO.slctProfLect(prof_number);
 			for (CrsVO cVO1 : listCrsVO) {
-				Object[] row = { cVO1.getDeptName(), cVO1.getCourName() };
+				Object[] row = { cVO1.getDeptName(), cVO1.getCourCode(), cVO1.getCourName() };
 				pcmd.getDtmProfMgt().addRow(row);
 			} // end for
 		} catch (SQLException e) {
