@@ -21,7 +21,7 @@ import eduCourse_prj.professor.dao.ProfDAO;
 public class AdminProfMgtEvent extends WindowAdapter implements ActionListener {
 
 	private AdminProfMgtDesign apmd;
-	ProfDAO pDAO = ProfDAO.getInstance();
+	private ProfDAO pDAO = ProfDAO.getInstance();
 
 	public AdminProfMgtEvent(AdminProfMgtDesign apmd) {
 		this.apmd = apmd;

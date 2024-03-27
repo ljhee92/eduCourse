@@ -12,7 +12,7 @@ import eduCourse_prj.admin.design.AdminAdminMgtMdfyDesign;
 
 public class AdminAdminMgtEvent extends WindowAdapter implements ActionListener {
 
-	AdminAdminMgtDesign aamd;
+	private AdminAdminMgtDesign aamd;
 
 	public AdminAdminMgtEvent(AdminAdminMgtDesign aamd) {
 		this.aamd = aamd;
