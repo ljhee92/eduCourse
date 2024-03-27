@@ -26,6 +26,11 @@ public class StdntTestSlctEvent extends WindowAdapter implements ActionListener 
 				return;
 			} // end if
 
+			if (!stsd.getDtmTestSlct().getValueAt(index, 6).toString().isEmpty()) {
+				JOptionPane.showMessageDialog(stsd, "이미 응시한 시험입니다.");
+				return;
+			} // end if
+
 			if (stsd.getDtmTestSlct().getValueAt(index, 4).equals("N")) {
 				JOptionPane.showMessageDialog(stsd, "시험 활성화가 되지 않은 과목입니다.");
 				return;
