@@ -49,6 +49,7 @@ public class AdminCrsRegDisgn extends JDialog {
 		// 공통경로
 		String commonPath = "src/eduCourse_prj/image/common/";
 		String crsPath = "src/eduCourse_prj/image/crs/";
+		String adminPath = "src/eduCourse_prj/image/admin/";
 
 
 		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 17);
@@ -63,7 +64,7 @@ public class AdminCrsRegDisgn extends JDialog {
 
 		jlDept = new JLabel("학과");
 		jlDept.setFont(font);
-		jlDept.setBounds(320, 200, 100, 30);
+		jlDept.setBounds(350, 220, 100, 30);
 		add(jlDept);
 		
 		jcbDept = new JComboBox<>();
@@ -93,7 +94,7 @@ public class AdminCrsRegDisgn extends JDialog {
 		
 		
 		
-		jcbDept.setBounds(400, 200, 200, 30);
+		jcbDept.setBounds(430, 220, 200, 30);
 		jcbDept.setFont(font);
 		add(jcbDept);
 
@@ -101,23 +102,23 @@ public class AdminCrsRegDisgn extends JDialog {
 		
 		jlCrs = new JLabel("과목");
 		jlCrs.setFont(font);
-		jlCrs.setBounds(320, 250, 100, 30);
+		jlCrs.setBounds(350, 270, 100, 30);
 		add(jlCrs);
 		
 		jtfCrsName = new JTextField();
 		jtfCrsName.setFont(font);
-		jtfCrsName.setBounds(400, 250, 200, 30);
+		jtfCrsName.setBounds(430, 270, 200, 30);
 		add(jtfCrsName);
 		
 	
 		jlCrsCode = new JLabel("과목코드");
 		jlCrsCode.setFont(font);
-		jlCrsCode.setBounds(320, 300, 100, 30);
+		jlCrsCode.setBounds(350, 320, 100, 30);
 		add(jlCrsCode);
 		
 		jtfCrsCode = new JTextField();
 		jtfCrsCode.setFont(font);
-		jtfCrsCode.setBounds(400, 300, 200, 30);
+		jtfCrsCode.setBounds(430, 320, 200, 30);
 		add(jtfCrsCode);
 
 
@@ -126,12 +127,12 @@ public class AdminCrsRegDisgn extends JDialog {
 		
 		jlCredit = new JLabel("학점");
 		jlCredit.setFont(font);
-		jlCredit.setBounds(320, 400, 100, 30);
+		jlCredit.setBounds(350, 370, 100, 30);
 		add(jlCredit);
 	
 		jtfCredit = new JTextField();
 		jtfCredit.setFont(font);
-		jtfCredit.setBounds(400, 400, 200, 30);
+		jtfCredit.setBounds(430, 370, 200, 30);
 		add(jtfCredit);
 
 		jbtnRegister = new JButton(new ImageIcon(commonPath + "Reg.png"));
@@ -148,17 +149,17 @@ public class AdminCrsRegDisgn extends JDialog {
 		jlNecessary = new JLabel("과목 과목코드 학점은 필수 입력사항입니다.");
 		jlNecessary.setFont(sfont);
 		jlNecessary.setForeground(Color.RED);
-		jlNecessary.setBounds(470, 430, 300, 30);
+		jlNecessary.setBounds(450, 395, 300, 30);
 		add(jlNecessary);
 
 		// 배경 추가
 
 		
-		jlCrsMgtTitle = new JLabel(new ImageIcon(crsPath + "crsMgtTitle.png"));
+		jlCrsMgtTitle = new JLabel(new ImageIcon(adminPath + "CourMgtBanner_new.png"));
 		jlCrsMgtTitle.setBounds(10, 76, 967, 44);
 		add(jlCrsMgtTitle);
 
-		jlCrsReg = new JLabel(new ImageIcon(crsPath + "crsRegTitle.png"));
+		jlCrsReg = new JLabel(new ImageIcon(commonPath + "RegBanner_new.png"));
 		jlCrsReg.setBounds(10, 120, 967, 44);
 		add(jlCrsReg);
 		
