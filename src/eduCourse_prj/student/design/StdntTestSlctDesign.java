@@ -213,30 +213,37 @@ public class StdntTestSlctDesign extends JDialog {
 	 * @return
 	 */
 	private Object showGrade(StdntTestVO stVO) {
-		Object rowGrade;
+		Object rowGrade = "";
 
-		if (stVO.getScore() >= 95) {
-			rowGrade = "A+";
-		} else if (stVO.getScore() >= 90) {
-			rowGrade = "A";
-		} else if (stVO.getScore() >= 85) {
-			rowGrade = "B+";
-		} else if (stVO.getScore() >= 80) {
-			rowGrade = "B";
-		} else if (stVO.getScore() >= 75) {
-			rowGrade = "C+";
-		} else if (stVO.getScore() >= 70) {
-			rowGrade = "C";
-		} else if (stVO.getScore() >= 65) {
-			rowGrade = "D+";
-		} else if (stVO.getScore() >= 60) {
-			rowGrade = "D";
-		} else if (stVO.getTest_flag().equals("N") && stVO.getScore() == 0) {
-			rowGrade = "";
-		} else {
-			rowGrade = "F";
-		} // end else
-
+		int rowCount = jtbTestSlct.getRowCount();
+		String[] getScores = new String[rowCount];
+		for(int i = 0; i < rowCount; i++) {
+			getScores[i] = dtmTestSlct.getValueAt(i, 5).toString();
+			if (stVO.getScore() >= 95) {
+				rowGrade = "A+";
+			} else if (stVO.getScore() >= 90) {
+				rowGrade = "A";
+			} else if (stVO.getScore() >= 85) {
+				rowGrade = "B+";
+			} else if (stVO.getScore() >= 80) {
+				rowGrade = "B";
+			} else if (stVO.getScore() >= 75) {
+				rowGrade = "C+";
+			} else if (stVO.getScore() >= 70) {
+				rowGrade = "C";
+			} else if (stVO.getScore() >= 65) {
+				rowGrade = "D+";
+			} else if (stVO.getScore() >= 60) {
+				rowGrade = "D";
+			} else if (stVO.getTest_flag().equals("N") && stVO.getScore() == 0) {
+				rowGrade = "";
+			} else if (getScores[i].equals("")) {
+				rowGrade = "";
+			} else {
+				rowGrade = "F";
+			} // end else
+		} // end for
+		
 		return rowGrade;
 	} // showGrade
 

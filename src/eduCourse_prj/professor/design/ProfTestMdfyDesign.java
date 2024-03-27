@@ -54,7 +54,6 @@ public class ProfTestMdfyDesign extends JDialog {
 		this.ptmd = ptmd;
 
 		String commonPath = "src/eduCourse_prj/image/common/";
-//			String testPath = "src/eduCourse_prj/image/prof/";
 
 		setSize(1000, 650);
 		setLocationRelativeTo(ptmd);
@@ -97,7 +96,7 @@ public class ProfTestMdfyDesign extends JDialog {
 
 		jlCourseName1 = new JLabel("과목명");
 		jlCourseName1.setFont(font);
-		jlCourseName1.setBounds(80, 140, 60, 30);
+		jlCourseName1.setBounds(70, 140, 60, 30);
 		jlCourseName2 = new JLabel();
 		jlCourseName2.setFont(font);
 		jlCourseName2.setBounds(150, 140, 150, 30);
@@ -108,11 +107,11 @@ public class ProfTestMdfyDesign extends JDialog {
 		testNumberComboBox.setBounds(150, 180, 50, 30);
 		testNumberLabel = new JLabel("문제 번호");
 		testNumberLabel.setFont(font);
-		testNumberLabel.setBounds(80, 180, 60, 30);
+		testNumberLabel.setBounds(70, 180, 80, 30);
 
 		testQuestionContentLabel = new JLabel("내용");
 		testQuestionContentLabel.setFont(font);
-		testQuestionContentLabel.setBounds(80, 230, 50, 30);
+		testQuestionContentLabel.setBounds(70, 230, 50, 30);
 
 		testQuestionContentTextArea = new JTextArea();
 		testQuestionContentTextArea.setBounds(150, 230, 300, 300);
