@@ -14,7 +14,7 @@ import eduCourse_prj.professor.dao.TestDAO;
 import eduCourse_prj.professor.design.ProfTestMdfyDesign;
 
 public class ProfTestMdfyEvent extends WindowAdapter implements ActionListener {
-	ProfTestMdfyDesign ptmd;
+	private ProfTestMdfyDesign ptmd;
 
 	public ProfTestMdfyEvent(ProfTestMdfyDesign ptmd) {
 		this.ptmd = ptmd;
@@ -73,7 +73,6 @@ public class ProfTestMdfyEvent extends WindowAdapter implements ActionListener {
 				se.printStackTrace();
 			}
 
-//			System.out.println(tDAO.selectOneDept());
 
 		} // end if
 

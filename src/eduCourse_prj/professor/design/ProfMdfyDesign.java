@@ -23,7 +23,7 @@ public class ProfMdfyDesign extends JDialog {
 	private ProfHomeDesign phd;
 	private JLabel jlBack; // 배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
-	private JLabel ProfMdfy, photo, jlProfNum, jlProfPass, jlProfEmail, jlNecessary;
+	private JLabel jlProfMdfy, photo, jlProfNum, jlProfPass, jlProfEmail, jlNecessary;
 	private JTextField jtfProfNum, jtfProfEmail, jtfProfAddr;
 	private JPasswordField jpfProfPass;
 	private JButton jbtnMdfy, jbtnCancel;
@@ -45,9 +45,9 @@ public class ProfMdfyDesign extends JDialog {
 		add(topLogin);
 
 		// 정보수정 라벨 추가
-		ProfMdfy = new JLabel(new ImageIcon(commonPath + "InfoMdfy_label.png"));
-		ProfMdfy.setBounds(10, 76, 967, 44);
-		add(ProfMdfy);
+		jlProfMdfy = new JLabel(new ImageIcon(commonPath + "InfoMdfy_label.png"));
+		jlProfMdfy.setBounds(10, 76, 967, 44);
+		add(jlProfMdfy);
 
 		// 프로필 사진 추가
 		photo = new JLabel(new ImageIcon(commonPath + "photo.png"));
@@ -145,8 +145,8 @@ public class ProfMdfyDesign extends JDialog {
 		return topLogin;
 	}
 
-	public JLabel getProfMdfy() {
-		return ProfMdfy;
+	public JLabel getjlProfMdfy() {
+		return jlProfMdfy;
 	}
 
 	public JLabel getPhoto() {

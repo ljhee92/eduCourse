@@ -8,11 +8,10 @@ import java.sql.SQLException;
 
 import eduCourse_prj.professor.design.ProfAcadCalDesign;
 
-public class ProfAcadCalEvent extends WindowAdapter implements ActionListener {
-
-	ProfAcadCalDesign pacd;
-	int i = 0;
-
+public class ProfAcadCalEvent extends WindowAdapter implements ActionListener{
+	
+	private ProfAcadCalDesign pacd;
+	
 	public ProfAcadCalEvent(ProfAcadCalDesign pacd) {
 		this.pacd = pacd;
 	}
