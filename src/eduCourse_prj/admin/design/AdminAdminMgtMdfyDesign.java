@@ -1,4 +1,4 @@
-package eduCourse_prj.admin;
+package eduCourse_prj.admin.design;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -12,8 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-
-import eduCourse_prj.admin.design.AdminAdminMgtDesign;
+import eduCourse_prj.admin.event.AdminAdminMgtMdfyEvent;
 
 @SuppressWarnings("serial")
 public class AdminAdminMgtMdfyDesign extends JDialog {
