@@ -118,7 +118,7 @@ public class AdminDeptMgtRegDesign extends JDialog {
 		cancelButton.addActionListener(admre);
 
 		
-		
+		setResizable(false);
 		
 		setVisible(true);
 	}

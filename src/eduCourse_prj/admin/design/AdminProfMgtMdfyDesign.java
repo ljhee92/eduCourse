@@ -151,6 +151,7 @@ public class AdminProfMgtMdfyDesign extends JDialog {
         add(jlBack);
 		setSize(1000,650);
 		setLocationRelativeTo(null);
+		setResizable(false);
 		setVisible(true);
 	} // AdminProfMgtRegDesign
 
