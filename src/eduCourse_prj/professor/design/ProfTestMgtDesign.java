@@ -124,6 +124,8 @@ public class ProfTestMgtDesign extends JDialog {
 		setLayout(null);
 		setSize(1000, 650);
 		setLocationRelativeTo(null);
+		// 프레임크기 조절 불가
+		setResizable(false);
 		setVisible(true);
 
 	}

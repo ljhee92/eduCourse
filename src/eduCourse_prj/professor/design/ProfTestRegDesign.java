@@ -224,6 +224,8 @@ public class ProfTestRegDesign extends JDialog {
 			registerButton.addActionListener(admre);
 			cancelButton.addActionListener(admre);
 			
+			// 프레임크기 조절 불가
+			setResizable(false);
 			setVisible(true);
 	}
 	

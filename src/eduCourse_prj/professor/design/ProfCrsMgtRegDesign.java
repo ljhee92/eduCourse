@@ -184,6 +184,7 @@ public class ProfCrsMgtRegDesign extends JDialog {
         add(jlBack);
 		setSize(1000,650);
 		setLocationRelativeTo(null);
+		setResizable(false);
 		setVisible(true);
 	} // ProfCrsMgtRegDesign
 

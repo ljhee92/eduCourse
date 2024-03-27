@@ -201,6 +201,8 @@ public class ProfTestMdfyDesign extends JDialog {
 			cancelButton.addActionListener(ptme);
 			testNumberComboBox.addActionListener(ptme);
 			
+			// 프레임크기 조절 불가
+			setResizable(false);
 			setVisible(true);
 			
 	}
