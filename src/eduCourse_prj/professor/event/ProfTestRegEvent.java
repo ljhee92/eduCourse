@@ -13,7 +13,6 @@ import eduCourse_prj.VO.CrsVO;
 import eduCourse_prj.VO.TestQustVO;
 
 import eduCourse_prj.professor.dao.CrsMgtRegDAO;
-import eduCourse_prj.professor.dao.ProfDAO;
 import eduCourse_prj.professor.dao.TestDAO;
 import eduCourse_prj.professor.design.ProfTestMgtDesign;
 import eduCourse_prj.professor.design.ProfTestRegDesign;
