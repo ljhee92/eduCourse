@@ -150,7 +150,7 @@ public class StdntTestSlctDesign extends JDialog {
 
 				rowTestFlag = showTestFlag(stdnt_number, stVO); // 점수 유무에 따른 시험활성화 유무
 				rowScore = showScore(stdnt_number, stVO); // VO의 점수 유무에 따른 점수 표기
-				rowGrade = showGrade(stVO); // VO의 점수에 따른 성취도 확인
+				rowGrade = showGrade(stVO, rowScore); // VO의 점수와 테이블에 표기된 점수에 따른 성취도 표기
 
 				Object[] row = { stVO.getDept_name(), stVO.getCourse_name(), stVO.getCourse_code(), stVO.getProf_name(),
 						rowTestFlag, rowScore, rowGrade };
@@ -212,37 +212,32 @@ public class StdntTestSlctDesign extends JDialog {
 	 * @param stVO
 	 * @return
 	 */
-	private Object showGrade(StdntTestVO stVO) {
+	private Object showGrade(StdntTestVO stVO, Object rowScore) {
 		Object rowGrade = "";
-
-		int rowCount = jtbTestSlct.getRowCount();
-		String[] getScores = new String[rowCount];
-		for(int i = 0; i < rowCount; i++) {
-			getScores[i] = dtmTestSlct.getValueAt(i, 5).toString();
-			if (stVO.getScore() >= 95) {
-				rowGrade = "A+";
-			} else if (stVO.getScore() >= 90) {
-				rowGrade = "A";
-			} else if (stVO.getScore() >= 85) {
-				rowGrade = "B+";
-			} else if (stVO.getScore() >= 80) {
-				rowGrade = "B";
-			} else if (stVO.getScore() >= 75) {
-				rowGrade = "C+";
-			} else if (stVO.getScore() >= 70) {
-				rowGrade = "C";
-			} else if (stVO.getScore() >= 65) {
-				rowGrade = "D+";
-			} else if (stVO.getScore() >= 60) {
-				rowGrade = "D";
-			} else if (stVO.getTest_flag().equals("N") && stVO.getScore() == 0) {
-				rowGrade = "";
-			} else if (getScores[i].equals("")) {
-				rowGrade = "";
-			} else {
-				rowGrade = "F";
-			} // end else
-		} // end for
+		
+		if (stVO.getScore() >= 95) {
+			rowGrade = "A+";
+		} else if (stVO.getScore() >= 90) {
+			rowGrade = "A";
+		} else if (stVO.getScore() >= 85) {
+			rowGrade = "B+";
+		} else if (stVO.getScore() >= 80) {
+			rowGrade = "B";
+		} else if (stVO.getScore() >= 75) {
+			rowGrade = "C+";
+		} else if (stVO.getScore() >= 70) {
+			rowGrade = "C";
+		} else if (stVO.getScore() >= 65) {
+			rowGrade = "D+";
+		} else if (stVO.getScore() >= 60) {
+			rowGrade = "D";
+		} else if (stVO.getTest_flag().equals("N") && stVO.getScore() == 0) {
+			rowGrade = "";
+		} else if (rowScore.equals("")) {
+			rowGrade = "";
+		} else {
+			rowGrade = "F";
+		} // end else
 		
 		return rowGrade;
 	} // showGrade
