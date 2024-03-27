@@ -40,7 +40,7 @@ public class ProfAcadCalDesign extends JDialog {
 	private DefaultComboBoxModel<Integer> yearCbm, monthCbm;
 	private JTextField timeJtf;
 	private JTextArea memoJta;
-	private JLabel yearJb, monthJb, jlBack, jlBanner, yearJl, yearJl2, monthJl, monthJl2, dayJl, dayJl2;
+	private JLabel topLogin, yearJb, monthJb, jlBack, jlBanner, yearJl, yearJl2, monthJl, monthJl2, dayJl, dayJl2;
 	private JPanel calJp;
 
 	private Map<String, String> memoMap;
@@ -212,14 +212,20 @@ public class ProfAcadCalDesign extends JDialog {
 		memoJp.setBackground(Color.white); // 메모 패널
 		yearSelectJP.setBackground(Color.white); // 년 패널
 		monthSelectJP.setBackground(Color.white); // 달 패널
+		
+		// 상단 로그인 라벨 설정
+		topLogin = new JLabel(phd.getlVO().getName()+" 교수님 로그인 중");
+		topLogin.setFont(font);
+		topLogin.setForeground(Color.WHITE);
+		topLogin.setBounds(600,30,300,20);
 
 		// 버튼 설정
 		searchBtn = new JButton(new ImageIcon(commonPath + "ConfirmButtonSmall_new.png"));
 		searchBtn.setBounds(335, 160, 75, 40);
 
 		// 배너 삽입
-		jlBanner = new JLabel(new ImageIcon(adminPath + "SchedMgtBanner_new.png"));
-		jlBanner.setBounds(10, 76, 967, 45);
+		jlBanner = new JLabel(new ImageIcon(commonPath + "SchedMgtBanner.png"));
+		jlBanner.setBounds(10, 76, 967, 43);
 
 		// 배경 삽입
 		jlBack = new JLabel(new ImageIcon(commonPath + "back.png"));
@@ -237,6 +243,7 @@ public class ProfAcadCalDesign extends JDialog {
 		add(monthSelectJP);
 		add(labelPanel);
 		
+		add(topLogin);
 		
 		add(jbtnCnfrm);
 		add(searchBtn);
