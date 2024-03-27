@@ -43,6 +43,7 @@ public class ProfCrsMgtRegDesign extends JDialog {
 		// 우상단 로그인상태 확인창 추가
 		topLogin = new JLabel(pcmd.getPhd().getlVO().getName() + " 교수님 로그인 중");
 		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 17);
+		Font fonts = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 13);
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.WHITE);
 		topLogin.setBounds(670, 30, 300, 20);
@@ -77,7 +78,7 @@ public class ProfCrsMgtRegDesign extends JDialog {
 		jlLectRoom.setBounds(520, 280, 100, 20);
 		jlCredit.setBounds(520, 340, 100, 20);
 		jlCapa.setBounds(520, 400, 100, 20);
-		jlNecessary.setBounds(670, 450, 300, 20);
+		jlNecessary.setBounds(690, 430, 300, 20);
 
 		jlCrsName.setFont(font);
 		jlCrsCode.setFont(font);
@@ -87,7 +88,7 @@ public class ProfCrsMgtRegDesign extends JDialog {
 		jlLectRoom.setFont(font);
 		jlCredit.setFont(font);
 		jlCapa.setFont(font);
-		jlNecessary.setFont(font);
+		jlNecessary.setFont(fonts);
 		jlNecessary.setForeground(Color.RED);
 
 		add(jlCrsName);
