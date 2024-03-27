@@ -22,17 +22,15 @@ import eduCourse_prj.VO.CrsVO;
 
 import eduCourse_prj.VO.ScoreVO;
 
-
 import eduCourse_prj.professor.dao.ProfDAO;
 import eduCourse_prj.professor.dao.ScoreDAO;
 import eduCourse_prj.professor.event.ProfScoreEvent;
 
-
 @SuppressWarnings("serial")
-public class ProfScoreDesign extends JDialog{
+public class ProfScoreDesign extends JDialog {
 	private ProfHomeDesign phd;
-	
-    //
+
+	//
 	private ScoreDAO sDAO = ScoreDAO.getInstance();
 
 	private ProfDAO pDAO = ProfDAO.getInstance();
@@ -51,19 +49,14 @@ public class ProfScoreDesign extends JDialog{
 	private JComboBox<String> jcbCrs;
 	private JTextField jtfStdNum;
 
-
-	List<ScoreVO> stdntNumber ;
+	List<ScoreVO> stdntNumber;
 
 	List<CrsVO> lCrs;
 
- 
-
-
-
 	public ProfScoreDesign(ProfHomeDesign phd, String title) {
-		super(phd,title, true);
+		super(phd, title, true);
 		this.phd = phd;
-		
+
 		setLayout(null);
 		setSize(1000, 650);
 
@@ -88,8 +81,6 @@ public class ProfScoreDesign extends JDialog{
 		topLogin.setBounds(600, 30, 250, 20);
 		add(topLogin);
 
-
-
 		jlCrs = new JLabel("과목");
 		jlCrs.setFont(font);
 		jlCrs.setBounds(240, 150, 50, 20);
@@ -99,7 +90,6 @@ public class ProfScoreDesign extends JDialog{
 		jlstdntNum.setFont(font);
 		jlstdntNum.setBounds(500, 150, 50, 20);
 		add(jlstdntNum);
-
 
 		jcbCrs = new JComboBox<String>();
 		jcbCrs.setFont(font);
@@ -127,16 +117,15 @@ public class ProfScoreDesign extends JDialog{
 				jcbCrs.addItem(crs.getCourName());
 
 			}
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 
 		/////////////////////////////////////////////////////////////////////
 		/////////////////////////////////////////////////////////////////////
 
 		// 테이블 추가
-		String[] tempColumn = {"과목명", "학번", "이름", "학과", "점수", "성취도" };
+		String[] tempColumn = { "과목명", "학번", "이름", "학과", "점수", "성취도" };
 		dtmScore = new DefaultTableModel(tempColumn, 0) {
 			public boolean isCellEditable(int row, int column) {
 				return false; // 테이블 셀 수정 불가하도록 설정
@@ -195,14 +184,10 @@ public class ProfScoreDesign extends JDialog{
 	public ProfHomeDesign getPhd() {
 		return phd;
 	}
-	
-	
 
 	public ScoreDAO getsDAO() {
 		return sDAO;
 	}
-
-	
 
 	public JTable getJtbScore() {
 		return jtbScore;
@@ -219,8 +204,6 @@ public class ProfScoreDesign extends JDialog{
 	public JButton getJbtnSlctTop() {
 		return jbtnSlctTop;
 	}
-
-
 
 	public JLabel getJlCrs() {
 		return jlCrs;
@@ -242,8 +225,6 @@ public class ProfScoreDesign extends JDialog{
 		return jtfStdNum;
 	}
 
-
-
 	public List<CrsVO> getLCrs() {
 		return lCrs;
 	}
@@ -251,7 +232,7 @@ public class ProfScoreDesign extends JDialog{
 	public DefaultTableModel getDtmScore() {
 		return dtmScore;
 	}
-	
+
 //	public static void main(String[] args) {
 //		new ProfScoreDesign(null, null);
 //	}//main

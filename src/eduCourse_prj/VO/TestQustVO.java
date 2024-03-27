@@ -7,9 +7,8 @@ public class TestQustVO {
 	private int answer;
 	private int prof_number;
 	private String crs_code;
-	
-	public TestQustVO(int qust_number, String qust_content, int answer, int prof_number,
-			String crs_code) {
+
+	public TestQustVO(int qust_number, String qust_content, int answer, int prof_number, String crs_code) {
 		super();
 		this.qust_number = qust_number;
 		this.qust_content = qust_content;
@@ -17,8 +16,6 @@ public class TestQustVO {
 		this.prof_number = prof_number;
 		this.crs_code = crs_code;
 	}
-	
-	
 
 	public int getTest_qust_id() {
 		return test_qust_id;
@@ -43,8 +40,5 @@ public class TestQustVO {
 	public String getCrs_code() {
 		return crs_code;
 	}
-	
-	
-	
-	
+
 }

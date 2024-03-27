@@ -16,67 +16,64 @@ public class AdminProfMgtMdfyEvent extends WindowAdapter implements ActionListen
 
 	private AdminProfMgtMdfyDesign apmmd;
 	private ProfDAO pDAO = ProfDAO.getInstance();
-	
+
 	public AdminProfMgtMdfyEvent(AdminProfMgtMdfyDesign apmmd) {
 		this.apmmd = apmmd;
 	} // AdminProfMgtRegEvent
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// 수정버튼 클릭
-		if(e.getSource() == apmmd.getJbtnMdfy()) {
+		if (e.getSource() == apmmd.getJbtnMdfy()) {
 			ProfDAO pDAO = ProfDAO.getInstance();
-			
+
 			int profNum = Integer.parseInt(apmmd.getJtfProfNum().getText().trim());
-			
+
 			String profName = apmmd.getJtfProfName().getText().trim();
-			if(profName.isEmpty()) {
+			if (profName.isEmpty()) {
 				JOptionPane.showMessageDialog(apmmd, "이름은 필수 입력 사항입니다.");
 				return;
 			} // end if
-			
+
 			String profPass = "";
 			char[] secret_pass = apmmd.getJpfProfPass().getPassword();
-			for(char cha : secret_pass) {
+			for (char cha : secret_pass) {
 				Character.toString(cha);
 				profPass += (profPass.equals("")) ? "" + cha + "" : cha + "";
 			} // end for
-			if(profPass.isEmpty()) {
+			if (profPass.isEmpty()) {
 				JOptionPane.showMessageDialog(apmmd, "비밀번호는 필수 입력 사항입니다.");
 				return;
 			} // end if
-			
+
 			String profEmail = apmmd.getJtfProfEmail().getText().trim();
-			if(!profEmail.isEmpty() && !profEmail.contains("@")) {
+			if (!profEmail.isEmpty() && !profEmail.contains("@")) {
 				JOptionPane.showMessageDialog(apmmd, "유효한 이메일 형식이 아닙니다.");
 				return;
 			} // end if
-			
+
 			String deptName = (String) apmmd.getJcbDept().getSelectedItem();
-			
+
 			try {
 				ProfVO pVO = new ProfVO(profNum, profPass, profName, profEmail, null, null, deptName);
 				pDAO.adminModifyProf(pVO);
 				JOptionPane.showMessageDialog(null, pVO.getProf_name() + " 교수님 정보가 성공적으로 수정되었습니다.");
-				
+
 				updateTable();
-				
-				
+
 				apmmd.dispose();
 			} catch (SQLException e1) {
 				JOptionPane.showMessageDialog(apmmd, "SQL 문제가 발생했습니다.");
 				e1.printStackTrace();
 			} // end catch
 		} // end if
-		
+
 		// 취소 버튼 클릭
-		if(e.getSource() == apmmd.getJbtnCancel()) {
+		if (e.getSource() == apmmd.getJbtnCancel()) {
 			apmmd.dispose();
 		} // end if
 	} // actionPerformed
-	
-	
-	
+
 	/**
 	 * 교수정보 수정시 테이블 업데이트
 	 */
@@ -125,9 +122,5 @@ public class AdminProfMgtMdfyEvent extends WindowAdapter implements ActionListen
 		} // end catch
 
 	}
-	
-	
-	
-	
-	
+
 } // class

@@ -18,7 +18,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-
 import eduCourse_prj.VO.DeptVO;
 import eduCourse_prj.admin.dao.AdminDAO;
 
@@ -33,21 +32,20 @@ public class AdminCrsDesign extends JDialog {
 	private JLabel topLogin; // 우상단 로그인상태 확인창
 
 	private JLabel crsMgt;
-	
+
 	private JLabel jlDept;
 	private JLabel jlCrsName;
 
 	private JTable jtbCrsMgt;
 
-	private JButton jbtnCrsReg, jbtnSlct, jbtnDel ,jbtnSlctTop;
+	private JButton jbtnCrsReg, jbtnSlct, jbtnDel, jbtnSlctTop;
 
 	private DefaultTableModel dtmCrsMgt;
-	
+
 	private JComboBox<String> jcbDept;
 	private JTextField jtfCrsName;
 
 	private List<DeptVO> lDept;
-	
 
 	public AdminCrsDesign(AdminHomeDesign ahd, String title) {
 		super(ahd, title, true);
@@ -93,7 +91,6 @@ public class AdminCrsDesign extends JDialog {
 		jsp.setBounds(10, 200, 967, 250);
 		add(jsp);
 
-		
 		// 학과 라벨,콤보박스 // 교번 라벨,텍스트필드 추가
 		jlDept = new JLabel("학과");
 		jlDept.setFont(font);
@@ -104,7 +101,7 @@ public class AdminCrsDesign extends JDialog {
 		jcbDept.setFont(font);
 		jcbDept.setBounds(230, 145, 200, 30);
 		add(jcbDept);
-		
+
 		seltAllDept();
 
 		jlCrsName = new JLabel("과목명");
@@ -116,15 +113,12 @@ public class AdminCrsDesign extends JDialog {
 		jtfCrsName.setFont(font);
 		jtfCrsName.setBounds(530, 145, 200, 30);
 		add(jtfCrsName);
-		
+
 		// 상단 조회버튼 추가
 		jbtnSlctTop = new JButton(new ImageIcon(commonPath + "searchButton_new.png"));
 		jbtnSlctTop.setBounds(750, 145, 55, 30);
 		add(jbtnSlctTop);
-		
-		
-		
-		
+
 		// 과목등록, 조회, 삭제 버튼 추가
 
 		jbtnCrsReg = new JButton(new ImageIcon(crsPath + "crsRegBtn_new.png"));
@@ -138,8 +132,6 @@ public class AdminCrsDesign extends JDialog {
 		add(jbtnCrsReg);
 		add(jbtnSlct);
 		add(jbtnDel);
-
-
 
 		// 테이블 컬럼 가운데 정렬
 		setTbHorizontal();
@@ -160,44 +152,30 @@ public class AdminCrsDesign extends JDialog {
 		setVisible(true);
 	}
 
-	
-	
-	
 	/**
 	 * DB에서 모든 학과 정보를 가져오는 method
 	 */
 	public void seltAllDept() {
-	
-	try {// 학과
 
-		// 모든 학과 정보 가져오기
-		lDept = aDAO.slctAllDept();
+		try {// 학과
 
-		// "전체 아이템 추가"
-		jcbDept.addItem("전체");
+			// 모든 학과 정보 가져오기
+			lDept = aDAO.slctAllDept();
 
-		// 학과명만 저장하는 리스트에 학과명 저장
-		for (DeptVO dept : lDept) {
-			jcbDept.addItem(dept.getDept_name());
+			// "전체 아이템 추가"
+			jcbDept.addItem("전체");
 
+			// 학과명만 저장하는 리스트에 학과명 저장
+			for (DeptVO dept : lDept) {
+				jcbDept.addItem(dept.getDept_name());
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 
-	} catch (SQLException e) {
-		e.printStackTrace();
 	}
-	
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	/**
 	 * 테이블의 컬럼을 가운데 정렬
@@ -275,6 +253,4 @@ public class AdminCrsDesign extends JDialog {
 		return lDept;
 	}
 
-	
-	
 }

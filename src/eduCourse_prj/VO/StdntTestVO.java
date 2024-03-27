@@ -1,7 +1,7 @@
 package eduCourse_prj.VO;
 
 public class StdntTestVO {
-	
+
 	private String dept_name;
 	private String course_name;
 	private String course_code;
@@ -9,7 +9,7 @@ public class StdntTestVO {
 	private String test_flag;
 	private int score;
 	private int credit_hours;
-	
+
 	public StdntTestVO() {
 	}
 
@@ -59,5 +59,5 @@ public class StdntTestVO {
 				+ ", prof_name=" + prof_name + ", test_flag=" + test_flag + ", score=" + score + ", credit_hours="
 				+ credit_hours + "]";
 	}
-	
+
 } // class

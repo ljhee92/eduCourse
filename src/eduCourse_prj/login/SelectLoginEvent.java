@@ -21,31 +21,28 @@ public class SelectLoginEvent extends WindowAdapter implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		if (ae.getSource() == sld.getAdminButton()) {
-			//JOptionPane.showMessageDialog(null, "관리자 버튼이 클릭되었습니다.");
+			// JOptionPane.showMessageDialog(null, "관리자 버튼이 클릭되었습니다.");
 			new AdminLoginDesign(this);
 			sld.dispose();
-			
+
 		}
 		if (ae.getSource() == sld.getProfessorButton()) {
-			//JOptionPane.showMessageDialog(null, "교수 버튼이 클릭되었습니다.");
+			// JOptionPane.showMessageDialog(null, "교수 버튼이 클릭되었습니다.");
 			new ProfLoginDesign(this);
 			sld.dispose();
 		}
 		if (ae.getSource() == sld.getStudentButton()) {
-			//JOptionPane.showMessageDialog(null, "학생 버튼이 클릭되었습니다.");
+			// JOptionPane.showMessageDialog(null, "학생 버튼이 클릭되었습니다.");
 			new StdntLoginDesign(this);
 			sld.dispose();
 		}
 
-
-	}//actionPerformed
+	}// actionPerformed
 
 	@Override
 	public void windowClosing(WindowEvent e) {
 		sld.dispose();
 
 	}// windowClosing
-
-
 
 }

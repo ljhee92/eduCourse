@@ -14,7 +14,6 @@ import eduCourse_prj.VO.CrsVO;
 import eduCourse_prj.admin.dao.AdminDAO;
 import eduCourse_prj.admin.design.AdminCrsRegDisgn;
 
-
 public class AdminCrsRegEvent extends WindowAdapter implements ActionListener {
 	private AdminCrsRegDisgn acrd;
 	private AdminDAO aDAO = AdminDAO.getInstance();
@@ -81,7 +80,6 @@ public class AdminCrsRegEvent extends WindowAdapter implements ActionListener {
 
 				updateTable();
 				acrd.dispose();
-				
 
 			} catch (SQLException se) {
 
@@ -91,27 +89,24 @@ public class AdminCrsRegEvent extends WindowAdapter implements ActionListener {
 							JOptionPane.ERROR_MESSAGE);
 					return;
 				}
-				
+
 				if (se.getErrorCode() == 1438) {
 
-					JOptionPane.showMessageDialog(acrd, "학점은 2자리 정수까지 입력가능합니다.", "오류",
-							JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(acrd, "학점은 2자리 정수까지 입력가능합니다.", "오류", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 				se.printStackTrace();
 			}
 		}
-		
-		if (ae.getSource()==acrd.getJbtnCancel()) {
+
+		if (ae.getSource() == acrd.getJbtnCancel()) {
 			acrd.dispose();
 		}
-		
+
 	}
 
-	
-	
 	public void updateTable() {
-		
+
 		acrd.getAcd().getDtmCrsMgt().setRowCount(0);
 
 		int dept_code = 0; // 학과 코드
@@ -129,7 +124,8 @@ public class AdminCrsRegEvent extends WindowAdapter implements ActionListener {
 			}
 
 		} else {// 학과가 "전체"가 아닌 모든 경우
-			dept_code = acrd.getAcd().getLDept().get((acrd.getAcd().getJcbDept().getSelectedIndex() - 1)).getDept_code();
+			dept_code = acrd.getAcd().getLDept().get((acrd.getAcd().getJcbDept().getSelectedIndex() - 1))
+					.getDept_code();
 			// 과목명이 존재하는 경우
 			if (!acrd.getAcd().getJtfCrsName().getText().isEmpty()) {
 
@@ -143,24 +139,18 @@ public class AdminCrsRegEvent extends WindowAdapter implements ActionListener {
 		List<CrsVO> lCrsVO;
 
 		try {
-			List<CrsVO> listCrsVO = aDAO.slctCrs(dept_code,crs_name);
+			List<CrsVO> listCrsVO = aDAO.slctCrs(dept_code, crs_name);
 
 			for (CrsVO cVO : listCrsVO) {
 
-				Object[] row = { cVO.getDeptName(), cVO.getCourName()};
+				Object[] row = { cVO.getDeptName(), cVO.getCourName() };
 				acrd.getAcd().getDtmCrsMgt().addRow(row);
 			} // end for
 
 		} catch (SQLException se) {
 			se.printStackTrace();
 		} // end catch
-		
-		
+
 	}
-	
-	
-	
-	
-	
-	
+
 }

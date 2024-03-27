@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.sql.SQLException;
 
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -12,7 +11,6 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
 
 import eduCourse_prj.VO.ProfVO;
 

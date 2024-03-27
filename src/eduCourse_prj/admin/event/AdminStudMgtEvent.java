@@ -37,10 +37,9 @@ public class AdminStudMgtEvent extends WindowAdapter implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent ae) {
-		
 
 		if (ae.getSource() == asmd.getJbtnSlctTop()) {
-			
+
 			asmd.getDtmStdMgt().setRowCount(0);
 
 			int dept_code = 0; // 학과 코드
@@ -64,17 +63,14 @@ public class AdminStudMgtEvent extends WindowAdapter implements ActionListener {
 				// 과목이 "전체"일 경우
 				if (asmd.getJcbCrs().getSelectedItem().equals("전체")) {
 
-				} else {// 과목이 "전체"가 아닌 모든 경우 //문제 발견 -> 
+				} else {// 과목이 "전체"가 아닌 모든 경우 //문제 발견 ->
 
 					crs_code = (asmd.getLCrs().get(asmd.getJcbCrs().getSelectedIndex() - 1)).getCourCode();
 
-
 				}
 
-
-
 			}
-			
+
 			// 학번 입력 유무 체크
 			if (!(asmd.getJtfStdNum().getText().isEmpty())) {
 				try {
@@ -86,39 +82,31 @@ public class AdminStudMgtEvent extends WindowAdapter implements ActionListener {
 					return;
 				}
 			}
-			
-			
 
-			
-			
-			
 			@SuppressWarnings("unused")
 			List<SlctStdVO> lSlctstdVO;
 
-		try {
-			List<SlctStdVO> listSlctStdVO = aDAO.slctStd(dept_code , crs_code, std_num);
+			try {
+				List<SlctStdVO> listSlctStdVO = aDAO.slctStd(dept_code, crs_code, std_num);
 
-			for (SlctStdVO ssVO : listSlctStdVO) {
+				for (SlctStdVO ssVO : listSlctStdVO) {
 
-				Object[] row = { ssVO.getDept_name(), ssVO.getCrs_name(), ssVO.getStd_num(), ssVO.getStd_name() };
-				asmd.getDtmStdMgt().addRow(row);
-			} // end for
+					Object[] row = { ssVO.getDept_name(), ssVO.getCrs_name(), ssVO.getStd_num(), ssVO.getStd_name() };
+					asmd.getDtmStdMgt().addRow(row);
+				} // end for
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} // end catch
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} // end catch
 
+		} // end if
 
-	
-	
-	}//end if
-		
 		if (ae.getSource() == asmd.getJbtnSlct()) {
-			
+
 			// 학생 정보 상세 조회 클릭
-			if(ae.getSource() == asmd.getJbtnSlct()) {
+			if (ae.getSource() == asmd.getJbtnSlct()) {
 				int index = asmd.getJtbStdMgt().getSelectedRow();
-				if(index == -1) {
+				if (index == -1) {
 					JOptionPane.showMessageDialog(asmd, "조회할 학생을 선택해주세요.");
 					return;
 				} // end if
@@ -128,15 +116,14 @@ public class AdminStudMgtEvent extends WindowAdapter implements ActionListener {
 					StdntDAO sDAO = StdntDAO.getInstance();
 					StdntVO sVO = sDAO.slctOneStdnt(stud_number);
 
-					
 					StringBuilder output = new StringBuilder();
 					output.append("학과: ").append(dept_name).append("\n");
 					output.append("학번: ").append(stud_number).append("\n");
 					output.append("이름: ").append(sVO.getStdnt_name()).append("\n");
-					output.append("이메일: ").append(sVO.getStdnt_email()!=null?sVO.getStdnt_email():"").append("\n");
-					output.append("주소: ").append(sVO.getStdnt_addr());					
-					
-					
+					output.append("이메일: ").append(sVO.getStdnt_email() != null ? sVO.getStdnt_email() : "")
+							.append("\n");
+					output.append("주소: ").append(sVO.getStdnt_addr());
+
 					JTextArea jta = new JTextArea(output.toString(), 8, 50);
 					JScrollPane jsp = new JScrollPane(jta);
 					jta.setEditable(false);
@@ -146,19 +133,14 @@ public class AdminStudMgtEvent extends WindowAdapter implements ActionListener {
 					e1.printStackTrace();
 				} // end catch
 			} // end if
-			
 
-		}	
-	
-	
-	
+		}
 
 		if (ae.getSource() == asmd.getJcbDept()) {
 			int dept_code = 0;
 			asmd.getJcbCrs().removeAllItems();
 			asmd.getJcbCrs().addItem("전체");
 			asmd.getLCrs().clear();
-			
 
 			// 학과 콤보박스(jcbDept)를 클릭시 선택된 아이템의 인덱스와 동일한 인덱스를 lDept(DeptVO가 저장되어있음)에서 선택하여
 			// DeptVo객체에서 dept_code를 얻어냄.
@@ -166,7 +148,7 @@ public class AdminStudMgtEvent extends WindowAdapter implements ActionListener {
 			if (asmd.getJcbDept().getSelectedItem().equals("전체")) {
 
 				// 모든 과목 정보 가져오기
-				
+
 				List<CrsVO> listCrsVO = new ArrayList<CrsVO>();
 
 				try {
@@ -184,25 +166,20 @@ public class AdminStudMgtEvent extends WindowAdapter implements ActionListener {
 				}
 
 			} else
-				
-				dept_code = asmd.getLDept().get(asmd.getJcbDept().getSelectedIndex() - 1).getDept_code();
 
+				dept_code = asmd.getLDept().get(asmd.getJcbDept().getSelectedIndex() - 1).getDept_code();
 
 			List<CrsVO> listCrsVO;
 			try {
-			
+
 				listCrsVO = aDAO.slctDeptCrs(dept_code);
-
-
 
 				for (CrsVO cVO : listCrsVO) {
 
 					asmd.getJcbCrs().addItem(cVO.getCourName());
 					asmd.getLCrs().add(cVO);
-					
 
 				}
-				
 
 			} catch (SQLException e) {
 				JOptionPane.showConfirmDialog(asmd, "에러발생");

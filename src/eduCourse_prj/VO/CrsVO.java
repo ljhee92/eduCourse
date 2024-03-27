@@ -12,7 +12,6 @@ public class CrsVO {
 	public CrsVO() {
 		super();
 	}
-	
 
 	public CrsVO(String courCode, String courName) {
 		super();

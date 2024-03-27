@@ -29,56 +29,56 @@ public class ProfDAO {
 		} // end if
 		return pDAO;
 	}
-	
+
 	/**
 	 * 교수 로그인 정보를 가져오기 위한 DAO
+	 * 
 	 * @param lVO
 	 * @return
 	 * @throws SQLException
 	 */
 	public LoginVO professorLogin(LoginVO lVO) throws SQLException {
-	    LoginVO lresultVO = null;
-	    DbConnection dbcon = DbConnection.getInstance();
-	    Connection con = null;
-	    PreparedStatement pstmt = null;
-	    ResultSet rs = null;
+		LoginVO lresultVO = null;
+		DbConnection dbcon = DbConnection.getInstance();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
-	    try {
-	        // 1. 데이터베이스 접속 정보
-	        String id = "scott";
-	        String pass = "tiger";
+		try {
+			// 1. 데이터베이스 접속 정보
+			String id = "scott";
+			String pass = "tiger";
 
-	        // 2. 데이터베이스 연결
-	        con = dbcon.getConnection(id, pass);
+			// 2. 데이터베이스 연결
+			con = dbcon.getConnection(id, pass);
 
-	        // 3. SQL 쿼리 준비
-	        String selectQuery = "SELECT PROF_NUMBER, PROF_PASSWORD ,PROF_NAME FROM professor WHERE  PROF_NUMBER = ? AND PROF_PASSWORD = ?";
-	        pstmt = con.prepareStatement(selectQuery);
+			// 3. SQL 쿼리 준비
+			String selectQuery = "SELECT PROF_NUMBER, PROF_PASSWORD ,PROF_NAME FROM professor WHERE  PROF_NUMBER = ? AND PROF_PASSWORD = ?";
+			pstmt = con.prepareStatement(selectQuery);
 
-	        // 4. SQL 쿼리에 파라미터 설정
+			// 4. SQL 쿼리에 파라미터 설정
 
-	        pstmt.setString(1, lVO.getId());
-	        pstmt.setString(2, lVO.getPassword());
+			pstmt.setString(1, lVO.getId());
+			pstmt.setString(2, lVO.getPassword());
 
-	        // 5. 쿼리 실행 및 결과 처리
-	        rs = pstmt.executeQuery();
+			// 5. 쿼리 실행 및 결과 처리
+			rs = pstmt.executeQuery();
 
-	        if (rs.next()) {
-	        	
-	            lresultVO = new LoginVO(rs.getString("PROF_NUMBER"), rs.getString("PROF_PASSWORD"),rs.getString("PROF_NAME"));
-	        }
-	    } finally {
-	        // 6. 리소스 해제
-	        dbcon.dbClose(rs, pstmt, con);
-	    }
-	    return lresultVO;
+			if (rs.next()) {
+
+				lresultVO = new LoginVO(rs.getString("PROF_NUMBER"), rs.getString("PROF_PASSWORD"),
+						rs.getString("PROF_NAME"));
+			}
+		} finally {
+			// 6. 리소스 해제
+			dbcon.dbClose(rs, pstmt, con);
+		}
+		return lresultVO;
 	}
-	
 
-	
-	
 	/**
 	 * 관리자모드 과목관리의 특정학과의 교수의 교번, 이름을 가져오기 위한 DAO
+	 * 
 	 * @return 특정학과의 교수 리스트
 	 * @throws SQLException
 	 */
@@ -86,39 +86,37 @@ public class ProfDAO {
 		List<ProfVO> listProfVO = new ArrayList<ProfVO>();
 		ProfVO pVO = null;
 		DbConnection dbCon = DbConnection.getInstance();
-		
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 			String id = "scott";
 			String pass = "tiger";
-			
+
 			con = dbCon.getConnection(id, pass);
-			
+
 			String selectDeptProf = "select prof_number, prof_name from professor where prof_delete_flag = 'N' and DEPT_CODE = ? order by prof_number";
 			pstmt = con.prepareStatement(selectDeptProf);
 			pstmt.setInt(1, dept_code);
-			
+
 			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				pVO = new ProfVO(rs.getInt("prof_number"), rs.getString("prof_name"));
 				listProfVO.add(pVO);
 			} // end while
 		} finally {
 			dbCon.dbClose(rs, pstmt, con);
 		} // end finally
-		
+
 		return listProfVO;
 	} // slctDeptProf
-	
-	
 
-	
 	/**
 	 * 관리자모드 교수관리의 교번, 이름, 학과 번호를 가져오기 위한 DAO
+	 * 
 	 * @return
 	 * @throws SQLException
 	 */
@@ -126,90 +124,86 @@ public class ProfDAO {
 		List<ProfVO> listProfVO = new ArrayList<ProfVO>();
 		ProfVO pVO = null;
 		DbConnection dbCon = DbConnection.getInstance();
-		
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 			String id = "scott";
 			String pass = "tiger";
-			
+
 			con = dbCon.getConnection(id, pass);
-			
-			String selectProfMgt = "	select p.prof_number, p.prof_name , d.dept_name	"
-					+ "	from professor p	"
+
+			String selectProfMgt = "	select p.prof_number, p.prof_name , d.dept_name	" + "	from professor p	"
 					+ "	JOIN dept d ON p.dept_code = d.dept_code	"
 					+ "	where prof_delete_flag = 'N' order by dept_name	";
 			pstmt = con.prepareStatement(selectProfMgt);
-			
+
 			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				pVO = new ProfVO(rs.getInt("prof_number"), rs.getString("prof_name"), rs.getString("dept_name"));
 				listProfVO.add(pVO);
 			} // end while
 		} finally {
 			dbCon.dbClose(rs, pstmt, con);
 		} // end finally
-		
+
 		return listProfVO;
 	} // slctProfMgt
-	
+
 	/**
 	 * 관리자 모드 > 교수 관리 > 교수 상세 조회, 교수 모드 > 교수 메인을 위한 method
+	 * 
 	 * @param prof_number
 	 * @return
 	 * @throws SQLException
 	 */
-	public AdminProfVO slctProfMgtSlct(int prof_number) throws SQLException{
+	public AdminProfVO slctProfMgtSlct(int prof_number) throws SQLException {
 		AdminProfVO apVO = null;
 		DbConnection dbCon = DbConnection.getInstance();
-		
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 			String id = "scott";
 			String pass = "tiger";
-			
+
 			con = dbCon.getConnection(id, pass);
-			
-	        StringBuilder slcQuery = new StringBuilder();
-	        slcQuery.append("SELECT p.PROF_NUMBER, p.PROF_NAME, p.PROF_EMAIL, d.dept_name, c.COURSE_NAME ");
-	        slcQuery.append("FROM PROFESSOR p ");
-	        slcQuery.append("JOIN lecture s ON p.PROF_NUMBER = s.PROF_NUMBER ");
-	        slcQuery.append("JOIN COURSE c ON s.COURSE_code = c.COURSE_code ");
-	        slcQuery.append("JOIN dept d ON d.dept_code = p.dept_code ");
-	        slcQuery.append("WHERE p.PROF_NUMBER = ?");
-	        String slcProfQuery = slcQuery.toString();
-	        
-			pstmt = con.prepareStatement(slcProfQuery,ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+
+			StringBuilder slcQuery = new StringBuilder();
+			slcQuery.append("SELECT p.PROF_NUMBER, p.PROF_NAME, p.PROF_EMAIL, d.dept_name, c.COURSE_NAME ");
+			slcQuery.append("FROM PROFESSOR p ");
+			slcQuery.append("JOIN lecture s ON p.PROF_NUMBER = s.PROF_NUMBER ");
+			slcQuery.append("JOIN COURSE c ON s.COURSE_code = c.COURSE_code ");
+			slcQuery.append("JOIN dept d ON d.dept_code = p.dept_code ");
+			slcQuery.append("WHERE p.PROF_NUMBER = ?");
+			String slcProfQuery = slcQuery.toString();
+
+			pstmt = con.prepareStatement(slcProfQuery, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			pstmt.setInt(1, prof_number);
 			rs = pstmt.executeQuery();
 
 			List<String> courses = new ArrayList<>();
-			///////////////////과목이 존재한다면//////////////////////////
-			if(rs.next()) {
+			/////////////////// 과목이 존재한다면//////////////////////////
+			if (rs.next()) {
 				rs.beforeFirst();
-				while(rs.next()) {
+				while (rs.next()) {
 					courses.add(rs.getString("course_name"));
-					apVO = new AdminProfVO(
-							rs.getInt("prof_number"),
-							rs.getString("prof_name"),
-							rs.getString("prof_email"),
-							rs.getString("dept_name"),
-							courses);
-				} // end while				
-			}//end if
+					apVO = new AdminProfVO(rs.getInt("prof_number"), rs.getString("prof_name"),
+							rs.getString("prof_email"), rs.getString("dept_name"), courses);
+				} // end while
+			} // end if
 			else {
-				/////////////////과목이 없다면//////////////////////////
+				///////////////// 과목이 없다면//////////////////////////
 				rs.beforeFirst();
-				pstmt.close(); //닫기
+				pstmt.close(); // 닫기
 				rs.close(); // 닫기
-				
-				//새로운 쿼리 생성
+
+				// 새로운 쿼리 생성
 				slcQuery.delete(0, slcQuery.length());
 				slcQuery.append("SELECT p.PROF_NUMBER, p.PROF_NAME, p.PROF_EMAIL, d.DEPT_NAME ");
 				slcQuery.append("FROM PROFESSOR p ");
@@ -219,156 +213,144 @@ public class ProfDAO {
 				pstmt = con.prepareStatement(slcProfQuery);
 				pstmt.setInt(1, prof_number);
 				rs = pstmt.executeQuery();
-				
-				if(rs.next()) {
-				apVO = new AdminProfVO(
-						rs.getInt("prof_number"),
-						rs.getString("prof_name"),
-						rs.getString("prof_email"),
-						rs.getString("dept_name"),
-						courses);
+
+				if (rs.next()) {
+					apVO = new AdminProfVO(rs.getInt("prof_number"), rs.getString("prof_name"),
+							rs.getString("prof_email"), rs.getString("dept_name"), courses);
 
 				}
-			}//end else
+			} // end else
 		} finally {
 			dbCon.dbClose(rs, pstmt, con);
 		} // end finally
-		
+
 		return apVO;
 //		return listProfVO;
 	} // slctProfMgtSlct
-	
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	/**
-	 * 관리자모드 > 교수 등록 구현부 
+	 * 관리자모드 > 교수 등록 구현부
+	 * 
 	 * @param pVO
 	 * @throws SQLException
 	 */
 	public void addProf(ProfVO pVO) throws SQLException {
 		DbConnection dbCon = DbConnection.getInstance();
-		
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		PreparedStatement pstmt2 = null;
 		ResultSet rs = null;
-		
+
 		try {
 			String id = "scott";
 			String pass = "tiger";
 			con = dbCon.getConnection(id, pass);
-			
+
 			// 교수 번호 확인 후, max 교번+1로 추가
 			int prof_num = 000000001;
 			String checkProfNum = "select max(prof_number) from professor";
 			pstmt = con.prepareStatement(checkProfNum);
 			rs = pstmt.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				int lastProfNum = rs.getInt(1);
-				prof_num = lastProfNum +1;
+				prof_num = lastProfNum + 1;
 			} // end if
-			
+
 			String addProf = "insert into professor(PROF_NUMBER, PROF_PASSWORD, PROF_NAME, PROF_EMAIL, DEPT_CODE)"
-							+ "	values(?, ?, ?, ?, (select dept_code from dept where dept_name = ?))";
+					+ "	values(?, ?, ?, ?, (select dept_code from dept where dept_name = ?))";
 			pstmt2 = con.prepareStatement(addProf);
-			
+
 			pstmt2.setInt(1, prof_num);
 			pstmt2.setString(2, pVO.getProf_password());
 			pstmt2.setString(3, pVO.getProf_name());
 			pstmt2.setString(4, pVO.getProf_email());
 			pstmt2.setString(5, pVO.getDept_name());
-			
+
 			pstmt2.executeUpdate();
 		} finally {
 			dbCon.dbClose(rs, pstmt, con);
 			dbCon.dbClose(rs, pstmt2, con);
 		} // end finally
 	} // addProf
-	
+
 	/**
 	 * 관리자모드 > 교수 관리에서 교수 삭제를 위한 method
+	 * 
 	 * @param prof_number
 	 * @throws SQLException
 	 */
 	public void deleteProf(int prof_number) throws SQLException {
 		DbConnection dbCon = DbConnection.getInstance();
-		
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
+
 		try {
 			String id = "scott";
 			String pass = "tiger";
-			
+
 			con = dbCon.getConnection(id, pass);
-			
+
 			String deleteProf = "update professor set prof_delete_flag = 'Y' where prof_number = ?";
 			pstmt = con.prepareStatement(deleteProf);
-			
+
 			pstmt.setInt(1, prof_number);
-			
+
 			pstmt.executeUpdate();
 		} finally {
 			dbCon.dbClose(null, pstmt, con);
 		} // end finally
 	} // deleteProf
-	
+
 	/**
 	 * 관리자모드 > 교수 관리에서 교수 정보 수정을 위한 method
+	 * 
 	 * @param pVO
 	 * @throws SQLException
 	 */
 	public void adminModifyProf(ProfVO pVO) throws SQLException {
 		DbConnection dbCon = DbConnection.getInstance();
-		
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
+
 		try {
 			String id = "scott";
 			String pass = "tiger";
-			
+
 			con = dbCon.getConnection(id, pass);
-			 
+
 			String modifyProf = "update professor set prof_name = ?, prof_password = ?, prof_email = ?, "
 					+ "dept_code = (select dept_code from dept where dept_name = ?) where prof_number = ?";
 			pstmt = con.prepareStatement(modifyProf);
-			
+
 			pstmt.setString(1, pVO.getProf_name());
 			pstmt.setString(2, pVO.getProf_password());
 			pstmt.setString(3, pVO.getProf_email());
 			pstmt.setString(4, pVO.getDept_name());
 			pstmt.setInt(5, pVO.getProf_number());
-			
+
 			pstmt.executeUpdate();
 		} finally {
 			dbCon.dbClose(null, pstmt, con);
 		} // end finally
 	} // modifyProf
-	
+
 	/**
-	 * 교수  > 교수가 속한 학과의 과목을 조회하기 위한 메서드
+	 * 교수 > 교수가 속한 학과의 과목을 조회하기 위한 메서드
+	 * 
 	 * @param prof_number
 	 * @throws SQLException
 	 */
-	public List<CrsVO> slctProfCrs(int prof_number)throws SQLException{
+	public List<CrsVO> slctProfCrs(int prof_number) throws SQLException {
 		DbConnection dbCon = DbConnection.getInstance();
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		CrsVO cVO = null;
-		List<CrsVO>courses = null;
+		List<CrsVO> courses = null;
 		try {
 
 			String id = "scott";
@@ -383,41 +365,40 @@ public class ProfDAO {
 			sb.append("JOIN course c ON d.dept_code = c.dept_code ");
 			sb.append("WHERE p.prof_number = ? and course_delete_flag = 'N'");
 			String slctCrsQuery = sb.toString();
-	        pstmt = con.prepareStatement(slctCrsQuery);
-	        pstmt.setInt(1, prof_number);
-	        rs = pstmt.executeQuery();
-	        String deptName = "", courseName="", courseCode = "";
-	        int deptCode = 0;
-	        courses = new ArrayList<CrsVO>();
-	        while (rs.next()) {
-	        	deptName = rs.getString("dept_name");
-	        	deptCode = rs.getInt("dept_code");
-	        	courseName = rs.getString("course_name");
-	        	courseCode = rs.getString("course_code");
-	        	cVO = new CrsVO(courseCode, courseName, deptName, deptCode);
-	        	courses.add(cVO);
-	        }
+			pstmt = con.prepareStatement(slctCrsQuery);
+			pstmt.setInt(1, prof_number);
+			rs = pstmt.executeQuery();
+			String deptName = "", courseName = "", courseCode = "";
+			int deptCode = 0;
+			courses = new ArrayList<CrsVO>();
+			while (rs.next()) {
+				deptName = rs.getString("dept_name");
+				deptCode = rs.getInt("dept_code");
+				courseName = rs.getString("course_name");
+				courseCode = rs.getString("course_code");
+				cVO = new CrsVO(courseCode, courseName, deptName, deptCode);
+				courses.add(cVO);
+			}
 		} finally {
 			dbCon.dbClose(rs, pstmt, con);
 		}
 		return courses;
-	}//slctProfCrs
-	
-	
-	
+	}// slctProfCrs
+
 	/**
-	 * 교수  > 교수가 속한 학과의 과목중 lecture테이블에 존재하지않는 과목을 조회하기 위한 메서드
+	 * 교수 > 교수가 속한 학과의 과목중 lecture테이블에 존재하지않는 과목을 조회하기 위한 메서드
+	 * 
 	 * @param prof_number
 	 * @throws SQLException
 	 */
-	public List<CrsVO> slctNotLectCrs(int prof_number)throws SQLException{
+	public List<CrsVO> slctNotLectCrs(int prof_number) throws SQLException {
 		DbConnection dbCon = DbConnection.getInstance();
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		CrsVO cVO = null;
-		List<CrsVO>courses = null;
+		List<CrsVO> courses = null;
 		try {
 
 			String id = "scott";
@@ -425,241 +406,215 @@ public class ProfDAO {
 
 			con = dbCon.getConnection(id, pass);
 
-			String slctCrsQuery = ("	select dept_name,dept_code,course_name,course_code	")+
-					("	from(SELECT d.dept_name, d.dept_code, c.course_name, c.course_code	")+
-							("	FROM professor p	")+
-							("	JOIN dept d ON p.dept_code = d.dept_code	")+
-							("	JOIN course c ON d.dept_code = c.dept_code	")+
-							("	WHERE p.prof_number = ? and course_delete_flag = 'N')	")+
-						("	where course_code not in(select course_code from Lecture)	");
+			String slctCrsQuery = ("	select dept_name,dept_code,course_name,course_code	")
+					+ ("	from(SELECT d.dept_name, d.dept_code, c.course_name, c.course_code	")
+					+ ("	FROM professor p	") + ("	JOIN dept d ON p.dept_code = d.dept_code	")
+					+ ("	JOIN course c ON d.dept_code = c.dept_code	")
+					+ ("	WHERE p.prof_number = ? and course_delete_flag = 'N')	")
+					+ ("	where course_code not in(select course_code from Lecture)	");
 
-	        pstmt = con.prepareStatement(slctCrsQuery);
-	        pstmt.setInt(1, prof_number);
-	        rs = pstmt.executeQuery();
-	        String deptName = "", courseName="", courseCode = "";
-	        int deptCode = 0;
-	        courses = new ArrayList<CrsVO>();
-	        while (rs.next()) {
-	        	deptName = rs.getString("dept_name");
-	        	deptCode = rs.getInt("dept_code");
-	        	courseName = rs.getString("course_name");
-	        	courseCode = rs.getString("course_code");
-	        	cVO = new CrsVO(courseCode, courseName, deptName, deptCode);
-	        	courses.add(cVO);
-	        }
+			pstmt = con.prepareStatement(slctCrsQuery);
+			pstmt.setInt(1, prof_number);
+			rs = pstmt.executeQuery();
+			String deptName = "", courseName = "", courseCode = "";
+			int deptCode = 0;
+			courses = new ArrayList<CrsVO>();
+			while (rs.next()) {
+				deptName = rs.getString("dept_name");
+				deptCode = rs.getInt("dept_code");
+				courseName = rs.getString("course_name");
+				courseCode = rs.getString("course_code");
+				cVO = new CrsVO(courseCode, courseName, deptName, deptCode);
+				courses.add(cVO);
+			}
 		} finally {
 			dbCon.dbClose(rs, pstmt, con);
 		}
 		return courses;
-	}//slctProfCrs
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}// slctProfCrs
+
 	/**
-	 * 관리자모드에서  학과,교번으로 교수를 검색하는 DAO
+	 * 관리자모드에서 학과,교번으로 교수를 검색하는 DAO
+	 * 
 	 * @param dept_code //학번코드
-	 * @param prof_num //학번
+	 * @param prof_num  //학번
 	 * @return 선택된 학과,교번,교수명을 가진 ProfVO를 가지고있는 리스트
 	 * @throws SQLException
 	 */
-	public List<ProfVO> slctProf(int dept_code ,int prof_num) throws SQLException {
+	public List<ProfVO> slctProf(int dept_code, int prof_num) throws SQLException {
 		List<ProfVO> listProfVO = new ArrayList<ProfVO>();
 		ProfVO pVO = null;
 		DbConnection dbCon = DbConnection.getInstance();
-		
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 			String id = "scott";
 			String pass = "tiger";
-			
+
 			con = dbCon.getConnection(id, pass);
-			
-			
-			//1 전체 비어있음
-			if(dept_code==0  && prof_num==0) {
-				
+
+			// 1 전체 비어있음
+			if (dept_code == 0 && prof_num == 0) {
+
 				String selectProf = "SELECT d.dept_name, p.PROF_NUMBER, p.PROF_NAME	"
 						+ "						FROM PROFESSOR p	"
 						+ "						JOIN dept d ON p.dept_code = d.dept_code	"
 						+ "						where p.PROF_DELETE_FLAG = 'N'	"
 						+ "						order by dept_name	";
-				
-				
-				
-				
+
 				pstmt = con.prepareStatement(selectProf);
-				
+
 			}
-			
-			//2 전체 비어X
-			else if(dept_code==0 && prof_num!=0) {
-				
+
+			// 2 전체 비어X
+			else if (dept_code == 0 && prof_num != 0) {
+
 				String selectProf = "SELECT d.dept_name, p.PROF_NUMBER, p.PROF_NAME	"
 						+ "						FROM PROFESSOR p	"
 						+ "						JOIN dept d ON p.dept_code = d.dept_code	"
-						+ "						WHERE p.prof_number = ?	"	
+						+ "						WHERE p.prof_number = ?	"
 						+ "						AND p.PROF_DELETE_FLAG = 'N'	"
 						+ "						order by dept_name	";
 
-				
-
 				pstmt = con.prepareStatement(selectProf);
-				pstmt.setInt(1,prof_num);
+				pstmt.setInt(1, prof_num);
 			}
-			
-			//3 일부 비어있음
-			else if(dept_code!=0  && prof_num==0) {
-				
-				String selectProf =  "SELECT d.dept_name, p.PROF_NUMBER, p.PROF_NAME	"
+
+			// 3 일부 비어있음
+			else if (dept_code != 0 && prof_num == 0) {
+
+				String selectProf = "SELECT d.dept_name, p.PROF_NUMBER, p.PROF_NAME	"
 						+ "						FROM PROFESSOR p	"
 						+ "						JOIN dept d ON p.dept_code = d.dept_code	"
 						+ "						WHERE d.dept_code = ?	"
 						+ "						AND p.PROF_DELETE_FLAG = 'N'	"
 						+ "						order by dept_name	";
 
-				
-
 				pstmt = con.prepareStatement(selectProf);
-				pstmt.setInt(1,dept_code);
+				pstmt.setInt(1, dept_code);
 			}
-			
-			
-			//4 일부 비어X
-			
-			else if(dept_code!=0 && prof_num!=0) {
-				
+
+			// 4 일부 비어X
+
+			else if (dept_code != 0 && prof_num != 0) {
+
 				String selectProf = "SELECT d.dept_name, p.PROF_NUMBER, p.PROF_NAME	"
 						+ "						FROM PROFESSOR p	"
 						+ "						JOIN dept d ON p.dept_code = d.dept_code	"
-						+ "						WHERE d.dept_code = ?	"				
-						+ "						AND p.prof_number = ?	"	
+						+ "						WHERE d.dept_code = ?	"
+						+ "						AND p.prof_number = ?	"
 						+ "						AND p.PROF_DELETE_FLAG = 'N'	"
 						+ "						order by dept_name	";
-				
 
 				pstmt = con.prepareStatement(selectProf);
-				pstmt.setInt(1,dept_code);
-				pstmt.setInt(2,prof_num);
+				pstmt.setInt(1, dept_code);
+				pstmt.setInt(2, prof_num);
 			}
 
-			
-
 			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				pVO = new ProfVO(rs.getInt("prof_number"), rs.getString("prof_name"),rs.getString("dept_name"));
+
+			while (rs.next()) {
+				pVO = new ProfVO(rs.getInt("prof_number"), rs.getString("prof_name"), rs.getString("dept_name"));
 
 				listProfVO.add(pVO);
-				
-				
+
 			} // end while
 		} finally {
 			dbCon.dbClose(rs, pstmt, con);
 		} // end finally
-		
+
 		return listProfVO;
 	} // slctDeptProf
-	
 
 	/**
 	 * 교수모드 > 교수 메인 정보호출을 위한 method
+	 * 
 	 * @param prof_number
 	 * @return
 	 * @throws SQLException
 	 */
-	public ProfVO slctOneProf(int prof_number) throws SQLException{
+	public ProfVO slctOneProf(int prof_number) throws SQLException {
 		ProfVO pVO = null;
 		DbConnection dbCon = DbConnection.getInstance();
-		
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 			String id = "scott";
 			String pass = "tiger";
-			
+
 			con = dbCon.getConnection(id, pass);
-			
+
 			String selectProf = "select p.PROF_NUMBER, p.PROF_PASSWORD, p.PROF_NAME, p.PROF_EMAIL, d.dept_name "
-								+ "	from PROFESSOR p "
-								+ "	join dept d on p.dept_code = d.dept_code "
-								+ "	WHERE p.prof_number = ?";
-			
+					+ "	from PROFESSOR p " + "	join dept d on p.dept_code = d.dept_code "
+					+ "	WHERE p.prof_number = ?";
+
 			pstmt = con.prepareStatement(selectProf);
 			pstmt.setInt(1, prof_number);
 			rs = pstmt.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 
-				pVO = new ProfVO(rs.getInt("PROF_NUMBER"),
-						rs.getString("PROF_PASSWORD"),
-						rs.getString("PROF_NAME"),
-						rs.getString("PROF_EMAIL"),
-						rs.getString("DEPT_NAME"));
-			
-			
+				pVO = new ProfVO(rs.getInt("PROF_NUMBER"), rs.getString("PROF_PASSWORD"), rs.getString("PROF_NAME"),
+						rs.getString("PROF_EMAIL"), rs.getString("DEPT_NAME"));
+
 			} // end while
 		} finally {
 			dbCon.dbClose(rs, pstmt, con);
 		} // end finally
-		
+
 		return pVO;
 	} // slctOneProf
-	
+
 	/**
 	 * 교수모드 > 교수 정보 수정을 위한 method
+	 * 
 	 * @param pVO
 	 * @throws SQLException
 	 */
 	public void modifyProf(ProfVO pVO) throws SQLException {
 		DbConnection dbCon = DbConnection.getInstance();
-		
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
+
 		try {
 			String id = "scott";
 			String pass = "tiger";
-			
+
 			con = dbCon.getConnection(id, pass);
-			
+
 			String modifyProf = "update PROFESSOR set PROF_PASSWORD = ?, PROF_EMAIL = ? where PROF_NUMBER = ?";
-			
+
 			pstmt = con.prepareStatement(modifyProf);
 			pstmt.setString(1, pVO.getProf_password());
 			pstmt.setString(2, pVO.getProf_email());
 			pstmt.setInt(3, pVO.getProf_number());
-			
+
 			pstmt.executeUpdate();
 		} finally {
 			dbCon.dbClose(null, pstmt, con);
 		} // end finally
 	} // modifyStdnt
 
-
 	/**
-	 * 교수  > 해당 교수의 강의 과목을 조회하기 위한 메서드
+	 * 교수 > 해당 교수의 강의 과목을 조회하기 위한 메서드
+	 * 
 	 * @param prof_number
 	 * @throws SQLException
 	 */
-	public List<CrsVO> slctProfLectList(int prof_number)throws SQLException{
+	public List<CrsVO> slctProfLectList(int prof_number) throws SQLException {
 		DbConnection dbCon = DbConnection.getInstance();
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		CrsVO cVO = null;
-		List<CrsVO>courses = null;
+		List<CrsVO> courses = null;
 		try {
 
 			String id = "scott";
@@ -675,156 +630,131 @@ public class ProfDAO {
 			sb.append("	where  c.COURSE_DELETE_FLAG ='N' and d.dept_delete_flag = 'N'	");
 			sb.append("	AND l.PROF_NUMBER = ?");
 			String slctLecQuery = sb.toString();
-	        pstmt = con.prepareStatement(slctLecQuery);
-	        pstmt.setInt(1, prof_number);
-	        rs = pstmt.executeQuery();
-	        String deptCode = "";
-	        String courseName="";
-	        courses = new ArrayList<CrsVO>();
-	        while (rs.next()) {
-	        	deptCode = rs.getString("COURSE_CODE");
-	        	courseName = rs.getString("course_name");     
-	        	cVO = new CrsVO(deptCode, courseName);
-	        	courses.add(cVO);
-	        }
+			pstmt = con.prepareStatement(slctLecQuery);
+			pstmt.setInt(1, prof_number);
+			rs = pstmt.executeQuery();
+			String deptCode = "";
+			String courseName = "";
+			courses = new ArrayList<CrsVO>();
+			while (rs.next()) {
+				deptCode = rs.getString("COURSE_CODE");
+				courseName = rs.getString("course_name");
+				cVO = new CrsVO(deptCode, courseName);
+				courses.add(cVO);
+			}
 		} finally {
 			dbCon.dbClose(null, pstmt, con);
 		}
 		return courses;
-	}//slctProfLect
-	
-	
-	
+	}// slctProfLect
+
 	/**
-	 * 교수  > 과목코드 ,학번선택시 그에따른 확과, 과목 , 학번, 이름 을 가진 리스트 반환
+	 * 교수 > 과목코드 ,학번선택시 그에따른 확과, 과목 , 학번, 이름 을 가진 리스트 반환
+	 * 
 	 * @param prof_number
 	 * @throws SQLException
 	 */
-	public List<ProfLectStudVO> slctProfStud(int prof_number,String crs_code,int std_number)throws SQLException{
+	public List<ProfLectStudVO> slctProfStud(int prof_number, String crs_code, int std_number) throws SQLException {
 		DbConnection dbCon = DbConnection.getInstance();
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ProfLectStudVO plsVO = null;
-		List<ProfLectStudVO>	lSlctProfStud = null;
+		List<ProfLectStudVO> lSlctProfStud = null;
 		try {
 
 			String id = "scott";
 			String pass = "tiger";
 
-			
 			con = dbCon.getConnection(id, pass);
 
-			//1 전체 비어있음
-			if(crs_code.isEmpty()  && std_number==0) {
-				
+			// 1 전체 비어있음
+			if (crs_code.isEmpty() && std_number == 0) {
+
 				String selectProf = "SElECT  d.DEPT_NAME , c.COURSE_NAME   , s.STD_NUMBER ,s.STD_NAME	"
-						+ "	FROM REGISTER r	"
-						+ "	JOIN COURSE c on r.COURSE_CODE = c.COURSE_CODE	"
+						+ "	FROM REGISTER r	" + "	JOIN COURSE c on r.COURSE_CODE = c.COURSE_CODE	"
 						+ "	JOIN STUDENT s on r.STD_NUMBER  = s.STD_NUMBER	"
 						+ "	JOIN PROFESSOR p on r.PROF_NUMBER = p.PROF_NUMBER	"
-						+ "	JOIN DEPT d on c.DEPT_CODE = d.DEPT_CODE	"
-						+ "	WHERE  r.PROF_NUMBER = ?	"
-						+ "	AND  s.STD_DELETE_FLAG = 'N' "
-						+ "	AND  d.DEPT_DELETE_FLAG ='N' "
+						+ "	JOIN DEPT d on c.DEPT_CODE = d.DEPT_CODE	" + "	WHERE  r.PROF_NUMBER = ?	"
+						+ "	AND  s.STD_DELETE_FLAG = 'N' " + "	AND  d.DEPT_DELETE_FLAG ='N' "
 						+ "	AND  c.COURSE_DELETE_FLAG ='N' ";
-				
-				
-				
-				
+
 				pstmt = con.prepareStatement(selectProf);
-				pstmt.setInt(1,prof_number);
-				
+				pstmt.setInt(1, prof_number);
+
 			}
-			
-			//2 전체 비어X
-			else if(crs_code.isEmpty() && std_number!=0) {
-				
+
+			// 2 전체 비어X
+			else if (crs_code.isEmpty() && std_number != 0) {
+
 				String selectProf = "SElECT  d.DEPT_NAME , c.COURSE_NAME   , s.STD_NUMBER ,s.STD_NAME	"
-						+ "	FROM REGISTER r	"
-						+ "	JOIN COURSE c on r.COURSE_CODE = c.COURSE_CODE	"
+						+ "	FROM REGISTER r	" + "	JOIN COURSE c on r.COURSE_CODE = c.COURSE_CODE	"
 						+ "	JOIN STUDENT s on r.STD_NUMBER  = s.STD_NUMBER	"
 						+ "	JOIN PROFESSOR p on r.PROF_NUMBER = p.PROF_NUMBER	"
-						+ "	JOIN DEPT d on c.DEPT_CODE = d.DEPT_CODE	"
-						+ "	WHERE  r.PROF_NUMBER = ?	"
-						+ "	AND s.STD_NUMBER = ?"
-						+ "	AND s.STD_DELETE_FLAG = 'N' "
-						+ "	AND d.DEPT_DELETE_FLAG ='N' "
-						+ "	AND c.COURSE_DELETE_FLAG ='N' ";
-
-				
+						+ "	JOIN DEPT d on c.DEPT_CODE = d.DEPT_CODE	" + "	WHERE  r.PROF_NUMBER = ?	"
+						+ "	AND s.STD_NUMBER = ?" + "	AND s.STD_DELETE_FLAG = 'N' "
+						+ "	AND d.DEPT_DELETE_FLAG ='N' " + "	AND c.COURSE_DELETE_FLAG ='N' ";
 
 				pstmt = con.prepareStatement(selectProf);
-				pstmt.setInt(1,prof_number);
-				pstmt.setInt(2,std_number);
+				pstmt.setInt(1, prof_number);
+				pstmt.setInt(2, std_number);
 			}
-			
-			//3 일부 비어있음
-			else if(!crs_code.isEmpty()  && std_number==0) {
-				
+
+			// 3 일부 비어있음
+			else if (!crs_code.isEmpty() && std_number == 0) {
+
 				String selectProf = "SElECT  d.DEPT_NAME , c.COURSE_NAME  , s.STD_NUMBER ,s.STD_NAME	"
-						+ "	FROM REGISTER r	"
-						+ "	JOIN COURSE c on r.COURSE_CODE = c.COURSE_CODE	"
+						+ "	FROM REGISTER r	" + "	JOIN COURSE c on r.COURSE_CODE = c.COURSE_CODE	"
 						+ "	JOIN STUDENT s on r.STD_NUMBER  = s.STD_NUMBER	"
 						+ "	JOIN PROFESSOR p on r.PROF_NUMBER = p.PROF_NUMBER	"
-						+ "	JOIN DEPT d on c.DEPT_CODE = d.DEPT_CODE	"
-						+ "	WHERE  r.PROF_NUMBER = ?		"
-						+ "	AND r.COURSE_CODE = ?	 "
-						+ "	AND s.STD_DELETE_FLAG = 'N' "
-						+ "	AND d.DEPT_DELETE_FLAG ='N' "
-						+ "	AND c.COURSE_DELETE_FLAG ='N' ";
-
-
-				
+						+ "	JOIN DEPT d on c.DEPT_CODE = d.DEPT_CODE	" + "	WHERE  r.PROF_NUMBER = ?		"
+						+ "	AND r.COURSE_CODE = ?	 " + "	AND s.STD_DELETE_FLAG = 'N' "
+						+ "	AND d.DEPT_DELETE_FLAG ='N' " + "	AND c.COURSE_DELETE_FLAG ='N' ";
 
 				pstmt = con.prepareStatement(selectProf);
-				pstmt.setInt(1,prof_number);
-				pstmt.setString(2,crs_code);
+				pstmt.setInt(1, prof_number);
+				pstmt.setString(2, crs_code);
 			}
-			
-			
-			//4 일부 비어X
-			
-			else if(!crs_code.isEmpty() && std_number!=0) {
-				
+
+			// 4 일부 비어X
+
+			else if (!crs_code.isEmpty() && std_number != 0) {
+
 				String selectProf = "SElECT  d.DEPT_NAME , c.COURSE_NAME  , s.STD_NUMBER ,s.STD_NAME	"
-						+ "	FROM REGISTER r	"
-						+ "	JOIN COURSE c on r.COURSE_CODE = c.COURSE_CODE	"
+						+ "	FROM REGISTER r	" + "	JOIN COURSE c on r.COURSE_CODE = c.COURSE_CODE	"
 						+ "	JOIN STUDENT s on r.STD_NUMBER  = s.STD_NUMBER	"
 						+ "	JOIN PROFESSOR p on r.PROF_NUMBER = p.PROF_NUMBER	"
-						+ "	JOIN DEPT d on c.DEPT_CODE = d.DEPT_CODE	"
-						+ "	WHERE  r.PROF_NUMBER = ?		"
-						+ "	AND r.COURSE_CODE = ?	 "
-						+ "	AND s.STD_NUMBER = ?	"
-						+ "	AND s.STD_DELETE_FLAG = 'N' "
-						+ "	AND d.DEPT_DELETE_FLAG ='N' "
+						+ "	JOIN DEPT d on c.DEPT_CODE = d.DEPT_CODE	" + "	WHERE  r.PROF_NUMBER = ?		"
+						+ "	AND r.COURSE_CODE = ?	 " + "	AND s.STD_NUMBER = ?	"
+						+ "	AND s.STD_DELETE_FLAG = 'N' " + "	AND d.DEPT_DELETE_FLAG ='N' "
 						+ "	AND c.COURSE_DELETE_FLAG ='N' ";
-				
 
 				pstmt = con.prepareStatement(selectProf);
-				pstmt.setInt(1,prof_number);
-				pstmt.setString(2,crs_code);
-				pstmt.setInt(3,std_number);
+				pstmt.setInt(1, prof_number);
+				pstmt.setString(2, crs_code);
+				pstmt.setInt(3, std_number);
 			}
 
-	        rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 
-	        lSlctProfStud = new ArrayList<ProfLectStudVO>();
-	        while (rs.next()) {
-	        	
-	        	plsVO = new ProfLectStudVO(rs.getString("DEPT_NAME"),rs.getString("COURSE_NAME"),rs.getInt("STD_NUMBER"),rs.getString("STD_NAME"));
+			lSlctProfStud = new ArrayList<ProfLectStudVO>();
+			while (rs.next()) {
 
-	        	lSlctProfStud.add(plsVO);
-	        }
+				plsVO = new ProfLectStudVO(rs.getString("DEPT_NAME"), rs.getString("COURSE_NAME"),
+						rs.getInt("STD_NUMBER"), rs.getString("STD_NAME"));
+
+				lSlctProfStud.add(plsVO);
+			}
 		} finally {
 			dbCon.dbClose(null, pstmt, con);
 		}
 		return lSlctProfStud;
-	}//slctProfLect
-	
+	}// slctProfLect
+
 	/**
 	 * 로그인한 교수의 강의 과목을 불러오는 메서든
+	 * 
 	 * @param prof_number
 	 * @return
 	 * @throws SQLException
@@ -849,29 +779,32 @@ public class ProfDAO {
 			slctQuery.append("FROM lecture l ");
 			slctQuery.append("JOIN course c ON c.course_code = l.course_code ");
 			slctQuery.append("JOIN dept d ON d.dept_code = c.dept_code ");
-			slctQuery.append("WHERE l.prof_number = ? and l.lect_delete_flag = 'N' and c.course_delete_flag = 'N' and d.dept_delete_flag = 'N'");
+			slctQuery.append(
+					"WHERE l.prof_number = ? and l.lect_delete_flag = 'N' and c.course_delete_flag = 'N' and d.dept_delete_flag = 'N'");
 
 			String slctTestQuery = slctQuery.toString();
 			pstmt = con.prepareStatement(slctTestQuery);
-			pstmt.setInt(1,prof_number);
+			pstmt.setInt(1, prof_number);
 			// 5. 쿼리 실행 및 결과 처리
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				tlVO = new TestListVO(rs.getString("course_name"),rs.getString("test_flag"),rs.getString("course_code"));
+				tlVO = new TestListVO(rs.getString("course_name"), rs.getString("test_flag"),
+						rs.getString("course_code"));
 				testList.add(tlVO);
 			}
 		} finally {
 			dbCon.dbClose(null, pstmt, con);
 		} // end finally
-		return testList;		
-	}//slctAllTest
-	
+		return testList;
+	}// slctAllTest
+
 	/**
-	 * 시험 활성화 여부를 업데이트하는 메서드 
-	 * @throws SQLException 
+	 * 시험 활성화 여부를 업데이트하는 메서드
+	 * 
+	 * @throws SQLException
 	 */
-	public void updateTestFlag(String course_name ,String clickBtn) throws SQLException {
+	public void updateTestFlag(String course_name, String clickBtn) throws SQLException {
 		DbConnection dbCon = DbConnection.getInstance();
 
 		Connection con = null;
@@ -886,21 +819,22 @@ public class ProfDAO {
 			StringBuilder updateQuery = new StringBuilder();
 			updateQuery.append("UPDATE lecture l ");
 			updateQuery.append("SET l.test_flag = ? ");
-			updateQuery.append("WHERE EXISTS (SELECT 1 FROM course c WHERE l.course_code = c.course_code AND c.course_name = ?)");
+			updateQuery.append(
+					"WHERE EXISTS (SELECT 1 FROM course c WHERE l.course_code = c.course_code AND c.course_name = ?)");
 			String updateTestQuery = updateQuery.toString();
 			pstmt = con.prepareStatement(updateTestQuery);
-			pstmt.setString(1,clickBtn);
-			pstmt.setString(2,course_name);
+			pstmt.setString(1, clickBtn);
+			pstmt.setString(2, course_name);
 			pstmt.executeUpdate();
 		} finally {
 			dbCon.dbClose(null, pstmt, con);
 		} // end finally
-	}//updateTestFlag
-	
-	
+	}// updateTestFlag
+
 	/**
 	 * 시험출제여부를 판단하는 메서드
-	 * @throws SQLException 
+	 * 
+	 * @throws SQLException
 	 */
 	public String selectExaming(String course_code) throws SQLException {
 		DbConnection dbCon = DbConnection.getInstance();
@@ -914,22 +848,22 @@ public class ProfDAO {
 			String id = "scott";
 			String pass = "tiger";
 			con = dbCon.getConnection(id, pass);
-			
+
 			String slctQuery = "SELECT COUNT(*) AS count FROM test_question WHERE course_code = ?";
 			pstmt = con.prepareStatement(slctQuery);
 			pstmt.setString(1, course_code);
 			rs = pstmt.executeQuery();
 			int examCount = 0;
-			while(rs.next()) {
-				examCount = rs.getInt("count");	
-			}			
-			if(examCount > 0 && examCount < 10) {
+			while (rs.next()) {
+				examCount = rs.getInt("count");
+			}
+			if (examCount > 0 && examCount < 10) {
 				examStatus = "출제중";
 			}
-			if(examCount == 0) {
+			if (examCount == 0) {
 				examStatus = "출제전";
 			}
-			if(examCount == 10) {
+			if (examCount == 10) {
 				examStatus = "출제완료";
 			}
 		} finally {
@@ -937,10 +871,11 @@ public class ProfDAO {
 		} // end finally
 		return examStatus;
 	}// selectExaming
-	
+
 	/**
 	 * 이메일 중복확인기능
-	 * @throws SQLException 
+	 * 
+	 * @throws SQLException
 	 * 
 	 */
 	public int selectAllByEmail(String email, int prof_number) throws SQLException {
@@ -956,30 +891,32 @@ public class ProfDAO {
 			String id = "scott";
 			String pass = "tiger";
 			con = dbCon.getConnection(id, pass);
-			
+
 			String slctQuery = "SELECT prof_number, prof_email FROM professor WHERE prof_email = ?";
 			pstmt = con.prepareStatement(slctQuery);
 			pstmt.setString(1, email);
 
 			rs = pstmt.executeQuery();
 			int emailNumber = 0;
-			while(rs.next()) {
+			while (rs.next()) {
 				emailNumber = rs.getInt("prof_number");
 
-				if(emailNumber == prof_number) {
+				if (emailNumber == prof_number) {
 					isValidEmail = 1;
 					return isValidEmail;
 				}
 			}
-			if(emailNumber == 0) isValidEmail = 1; //바뀐게 없을 경우
-			if(emailNumber != 0) isValidEmail = -1;//중복
+			if (emailNumber == 0)
+				isValidEmail = 1; // 바뀐게 없을 경우
+			if (emailNumber != 0)
+				isValidEmail = -1;// 중복
 		} finally {
 			dbCon.dbClose(rs, pstmt, con);
 		} // end finally
 		return isValidEmail;
 
 	}
-	
+
 	public int selectAllByEmail(String email) throws SQLException {
 		DbConnection dbCon = DbConnection.getInstance();
 
@@ -987,29 +924,28 @@ public class ProfDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-
 		try {
 
 			String id = "scott";
 			String pass = "tiger";
 			con = dbCon.getConnection(id, pass);
-			
+
 			String slctQuery = "SELECT prof_number, prof_email FROM professor WHERE prof_email = ?";
 			pstmt = con.prepareStatement(slctQuery);
 			pstmt.setString(1, email);
 
 			rs = pstmt.executeQuery();
 
-			if(rs.next()) {
+			if (rs.next()) {
 
 				return -1;
-				}
-			
+			}
+
 		} finally {
 			dbCon.dbClose(rs, pstmt, con);
 		} // end finally
 		return 1;
 
 	}
-	
+
 } // class

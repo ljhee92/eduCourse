@@ -1,7 +1,7 @@
 package eduCourse_prj.VO;
 
 public class StdntVO {
-	
+
 	private int stdnt_number;
 	private String stdnt_password;
 	private String stdnt_name;
@@ -10,12 +10,9 @@ public class StdntVO {
 	private String stdnt_input_date;
 	private String stdnt_delete_flag;
 	private String dept_name;
-	
+
 	public StdntVO() {
-		
-		
-		
-		
+
 	}
 
 	public StdntVO(int stdnt_number, String stdnt_password, String stdnt_name, String stdnt_email) {

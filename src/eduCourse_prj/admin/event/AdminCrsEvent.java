@@ -17,7 +17,6 @@ import eduCourse_prj.admin.dao.AdminDAO;
 import eduCourse_prj.admin.design.AdminCrsDesign;
 import eduCourse_prj.admin.design.AdminCrsRegDisgn;
 
-
 public class AdminCrsEvent extends WindowAdapter implements ActionListener {
 	private AdminCrsDesign acd;
 	private AdminDAO aDAO = AdminDAO.getInstance();
@@ -92,15 +91,11 @@ public class AdminCrsEvent extends WindowAdapter implements ActionListener {
 					String crs_name = (acd.getDtmCrsMgt().getValueAt(index, 1).toString());
 
 					aDAO.deleteCrs(crs_name);
-					JOptionPane.showMessageDialog(acd, acd.getDtmCrsMgt().getValueAt(index, 1).toString()
-							+ " 과목 정보 삭제 성공");
+					JOptionPane.showMessageDialog(acd,
+							acd.getDtmCrsMgt().getValueAt(index, 1).toString() + " 과목 정보 삭제 성공");
 
 					updateTable();
-					
-					
-					
-					
-					
+
 				} catch (SQLException e1) {
 					JOptionPane.showMessageDialog(acd, "SQL 문제가 발생했습니다.");
 					e1.printStackTrace();
@@ -146,11 +141,11 @@ public class AdminCrsEvent extends WindowAdapter implements ActionListener {
 		List<CrsVO> lCrsVO;
 
 		try {
-			List<CrsVO> listCrsVO = aDAO.slctCrs(dept_code,crs_name);
+			List<CrsVO> listCrsVO = aDAO.slctCrs(dept_code, crs_name);
 
 			for (CrsVO cVO : listCrsVO) {
 
-				Object[] row = { cVO.getDeptName(), cVO.getCourName()};
+				Object[] row = { cVO.getDeptName(), cVO.getCourName() };
 				acd.getDtmCrsMgt().addRow(row);
 			} // end for
 
@@ -158,14 +153,6 @@ public class AdminCrsEvent extends WindowAdapter implements ActionListener {
 			se.printStackTrace();
 		} // end catch
 
-		
-		
 	}
-	
 
-	
-	
-	
-	
-	
 }

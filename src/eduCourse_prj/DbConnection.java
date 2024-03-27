@@ -24,13 +24,13 @@ public class DbConnection {
 
 	public Connection getConnection(String url, String id, String pass) throws SQLException {
 		Connection con = null;
-		//1. 드라이버 로딩
+		// 1. 드라이버 로딩
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		//2. Connection 얻기
+		// 2. Connection 얻기
 		con = DriverManager.getConnection(url, id, pass);
 
 		return con;
@@ -39,6 +39,7 @@ public class DbConnection {
 
 	/**
 	 * 로컬 DBMS에 연동하여 Connection을 반환
+	 * 
 	 * @param id
 	 * @param pass
 	 * @return
@@ -46,7 +47,7 @@ public class DbConnection {
 	 */
 	public Connection getConnection(String id, String pass) throws SQLException {
 		Connection con = null;
-		//1. 드라이버 로딩
+		// 1. 드라이버 로딩
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
 		} catch (ClassNotFoundException e) {
@@ -54,31 +55,36 @@ public class DbConnection {
 		}
 
 		String url = "jdbc:oracle:thin:@192.168.10.231:1521:orcl";
-		//2. Connection 얻기
+		// 2. Connection 얻기
 		con = DriverManager.getConnection(url, id, pass);
 
 		return con;
 
 	}// getConnection
-	
-	
-	
+
 	/**
 	 * 연결을 종료하는 메서드
+	 * 
 	 * @param rs
 	 * @param stmt
 	 * @param con
 	 * @throws SQLException
 	 */
-	public void dbClose(ResultSet rs, Statement stmt, Connection con)throws SQLException{
+	public void dbClose(ResultSet rs, Statement stmt, Connection con) throws SQLException {
 		try {
-			if(rs!=null) {rs.close();}
-			if(stmt!=null) {stmt.close();}
-			
+			if (rs != null) {
+				rs.close();
+			}
+			if (stmt != null) {
+				stmt.close();
+			}
+
 		} finally {
-			if(con!=null) {con.close();}
+			if (con != null) {
+				con.close();
+			}
 		}
-		
+
 	}
 
 }// class
