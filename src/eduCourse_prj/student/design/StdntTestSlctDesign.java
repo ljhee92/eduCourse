@@ -34,6 +34,7 @@ public class StdntTestSlctDesign extends JDialog {
     private JButton jbtnTest, jbtnOK;
     private JTable jtbTestSlct;
     private DefaultTableModel dtmTestSlct;
+    private Object rowGrade, rowTestFlag, rowScore;
     
     public StdntTestSlctDesign(StdntHomeDesign shd, String title) {
     	super(shd, title, true);
@@ -140,16 +141,16 @@ public class StdntTestSlctDesign extends JDialog {
    		
    		try {
 			List<StdntTestVO> listSTVO = stDAO.slctAllStdntTestList(stdnt_number);
-			Object rowGrade, rowTestFlag;
 			int totalCredit = 0;
 			
 			for(StdntTestVO stVO : listSTVO) {
 						
 				rowTestFlag = showTestFlag(stdnt_number, stVO); // 점수 유무에 따른 시험활성화 유무
-				rowGrade = showGrade(stVO); // 점수에 따른 성취도 확인
+				rowScore = showScore(stdnt_number, stVO); // VO의 점수 유무에 따른 점수 표기
+				rowGrade = showGrade(stVO); // VO의 점수에 따른 성취도 확인
 				
 				Object[] row = {stVO.getDept_name(), stVO.getCourse_name(), stVO.getCourse_code(), stVO.getProf_name(), 
-								rowTestFlag, stVO.getScore() == 0 ? "" : stVO.getScore(), rowGrade};
+								rowTestFlag, rowScore, rowGrade};
 
 				dtmTestSlct.addRow(row);
 				
@@ -182,6 +183,25 @@ public class StdntTestSlctDesign extends JDialog {
    	} // showTestFlag
    	
    	/**
+   	 * VO의 점수 유무에 따라 테이블에 표기되는 점수를 결정하는 method
+   	 * @param stVO
+   	 * @return
+   	 * @throws SQLException 
+   	 */
+   	private Object showScore(int stdnt_number, StdntTestVO stVO) throws SQLException {
+   		Object rowScore = "";
+   		
+   		StdntTestDAO stDAO = StdntTestDAO.getInstance();
+   		
+   		ScoreVO sVO = stDAO.slctScore(stdnt_number, stVO.getCourse_code());
+   		if(sVO != null) {
+   			rowScore = stVO.getScore();
+   		} // end if
+   		
+   		return rowScore;
+   	} // showScore
+   	
+   	/**
    	 * VO의 점수에 따라 성취도를 결정하는 method
    	 * @param stVO
    	 * @return
@@ -205,8 +225,7 @@ public class StdntTestSlctDesign extends JDialog {
 			rowGrade = "D+";
 		} else if(stVO.getScore() >= 60) {
 			rowGrade = "D";
-		} else if(stVO.getTest_flag().equals("N") || 
-				(stVO.getTest_flag().equals("Y") && stVO.getScore() == 0)) {
+		} else if(stVO.getTest_flag().equals("N") && stVO.getScore() == 0) {
 			rowGrade = "";
 		} else {
 			rowGrade = "F";
