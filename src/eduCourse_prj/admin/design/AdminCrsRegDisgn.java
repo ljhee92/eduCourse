@@ -46,7 +46,7 @@ public class AdminCrsRegDisgn extends JDialog {
 
 		// 공통경로
 		String commonPath = "src/eduCourse_prj/image/common/";
-		String crsPath = "src/eduCourse_prj/image/crs/";
+
 		String adminPath = "src/eduCourse_prj/image/admin/";
 
 		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 17);
@@ -83,7 +83,6 @@ public class AdminCrsRegDisgn extends JDialog {
 		topLogin.setBounds(670, 30, 200, 20);
 		add(topLogin);
 
-		
 		jcbDept.setBounds(430, 220, 200, 30);
 
 		jcbDept.setFont(font);

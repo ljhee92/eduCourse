@@ -48,7 +48,6 @@ public class StdntCrsRegEvent extends WindowAdapter implements ActionListener {
 		// 최종신청 버튼 클릭
 		if (e.getSource() == scrd.getJbtnReg()) {
 
-
 			if (scrd.getDtmCrsCart().getRowCount() == 0) {
 				JOptionPane.showMessageDialog(scrd, "수강할 과목을 수강바구니에 담은 후 최종 신청버튼 클릭해주세요");
 				return;
@@ -63,15 +62,13 @@ public class StdntCrsRegEvent extends WindowAdapter implements ActionListener {
 				int index = scrd.getJtbCrsCart().getRowCount();
 
 				String crs_code = "";
-				int stdnt_number = Integer.parseInt(scrd.getShd().getlVO().getId());
+
 				LectureVO lVO = null;
-				RegVO rVO = null;
 
 				for (int i = 0; i < index; i++) {
 					crs_code = scrd.getDtmCrsCart().getValueAt(0, 2).toString();
 
 					lVO = new LectureVO(crs_code);
-					rVO = new RegVO(stdnt_number, crs_code);
 
 					// true일시 수강신청 가능
 					boolean check = crDAO.checkCapacited(lVO);
