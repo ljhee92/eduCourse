@@ -2,6 +2,7 @@ package eduCourse_prj.admin.design;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -11,11 +12,14 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import eduCourse_prj.VO.AdminVO;
+import eduCourse_prj.admin.dao.AdminDAO;
 import eduCourse_prj.admin.event.AdminAdminMgtMdfyEvent;
 
 @SuppressWarnings("serial")
 public class AdminAdminMgtMdfyDesign extends JDialog {
 	private AdminAdminMgtDesign aamd;
+	private AdminDAO aDAO = AdminDAO.getInstance();
 
 	private JLabel jlBack; // 배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
@@ -91,13 +95,19 @@ public class AdminAdminMgtMdfyDesign extends JDialog {
 		// JTable에서 선택된 id, 이름 가져오기
 		int index = aamd.getJtbAdminMgt().getSelectedRow();
 		String admin_id = aamd.getDtmAdminMgt().getValueAt(index, 0).toString();
-		String admin_name = aamd.getDtmAdminMgt().getValueAt(index, 1).toString();
+		AdminVO aVO = null;
+		try {
+			aVO = aDAO.selectAdmin(admin_id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		// 아이디, 이름, PW, JTF, JPF추가
 
-		jtfAdminId = new JTextField(admin_id);
-		jtfAdminName = new JTextField(admin_name);
-		jpfAdminPass = new JPasswordField();
+		jtfAdminId = new JTextField(aVO.getAdmin_id());
+		jtfAdminName = new JTextField(aVO.getAdmin_name());
+		jpfAdminPass = new JPasswordField(aVO.getAdmin_password());
 
 		jtfAdminId.setEditable(false);
 

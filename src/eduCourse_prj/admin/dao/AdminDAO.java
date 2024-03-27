@@ -83,6 +83,91 @@ public class AdminDAO {
 	}// AdminLogin
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	
+	
+	
+	
+	/**
+	 * 어드민모드 -> 어드민계정 수정시 필요정보 불러오는 method
+	 * 
+	 * @param admin_id
+	 * @return 어드민정보가 담겨있는 VO
+	 * @throws SQLException
+	 */
+	public AdminVO selectAdmin(String admin_id) throws SQLException {
+		AdminVO aVO =null;
+				
+		DbConnection dbcon = DbConnection.getInstance();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			// 1. 데이터베이스 접속 정보
+			String id = "scott";
+			String pass = "tiger";
+
+			// 2. 데이터베이스 연결
+			con = dbcon.getConnection(id, pass);
+
+			// 3. SQL 쿼리 준비
+			String selectQuery = "SELECT ADMIN_ID, ADMIN_PASSWORD, ADMIN_NAME FROM admin WHERE ADMIN_ID = ?";
+			pstmt = con.prepareStatement(selectQuery);
+
+			// 4. SQL 쿼리에 파라미터 설정
+
+			pstmt.setString(1,admin_id);
+	
+
+			// 5. 쿼리 실행 및 결과 처리
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				aVO = new AdminVO(rs.getString("ADMIN_ID"), rs.getString("ADMIN_PASSWORD"),
+						rs.getString("ADMIN_NAME"));
+			}
+		} finally {
+			// 6. 리소스 해제
+			dbcon.dbClose(rs, pstmt, con);
+		}
+
+
+		return aVO;
+	}//selectAdmin
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 * 학과 등록 구현부
 	 * 
@@ -149,6 +234,7 @@ public class AdminDAO {
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	
 	/**
 	 * 과목 등록을 위한 DAO 동일한 과목명이 존재하거나 동일한 과목코드가 존재하면 리턴
 	 * 
