@@ -23,7 +23,7 @@ public class AdminHomeDesign extends JFrame {
 	JLabel topLogin; // 우상단 로그인상태 확인창
 
 	public AdminHomeDesign(LoginVO lVO) {
-		super("관리자 작업창");
+		super("관리자 모드");
 
 		this.lVO = lVO;
 
