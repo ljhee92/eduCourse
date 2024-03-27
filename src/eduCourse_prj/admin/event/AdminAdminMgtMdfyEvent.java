@@ -1,4 +1,4 @@
-package eduCourse_prj.admin;
+package eduCourse_prj.admin.event;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import eduCourse_prj.VO.AdminVO;
 import eduCourse_prj.admin.dao.AdminDAO;
+import eduCourse_prj.admin.design.AdminAdminMgtMdfyDesign;
 import eduCourse_prj.login.SelectLoginDesign;
 
 

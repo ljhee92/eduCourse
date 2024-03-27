@@ -23,7 +23,7 @@ public class AdminLoginDesign extends JFrame {
     
 
     
-    JButton loginButton ;
+    private JButton loginButton ;
 
 
     

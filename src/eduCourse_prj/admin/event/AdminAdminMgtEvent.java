@@ -7,8 +7,8 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JOptionPane;
 
-import eduCourse_prj.admin.AdminAdminMgtMdfyDesign;
 import eduCourse_prj.admin.design.AdminAdminMgtDesign;
+import eduCourse_prj.admin.design.AdminAdminMgtMdfyDesign;
 
 public class AdminAdminMgtEvent extends WindowAdapter implements ActionListener {
 
