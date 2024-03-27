@@ -189,6 +189,7 @@ public class AdminStudMgtDesign extends JDialog {
 
 		setLocationRelativeTo(null);
 
+		setResizable(false);
 		setVisible(true);
 	}
 

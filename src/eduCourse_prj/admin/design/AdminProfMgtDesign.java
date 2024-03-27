@@ -143,6 +143,7 @@ public class AdminProfMgtDesign extends JDialog {
 		jlBack.setBounds(0, 0, 984, 620);
 		add(jlBack);
 		setSize(1000, 650);
+		setResizable(false);
 		setLocationRelativeTo(null);
 		setVisible(true);
 	} // AdminProfMgtDesign

@@ -132,6 +132,7 @@ public class AdminLoginDesign extends JFrame {
         
         add(back);
        
+        setResizable(false);
 
         // 프레임 표시
         setVisible(true);
