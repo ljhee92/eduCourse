@@ -31,7 +31,6 @@ public class AdminLoginEvent extends WindowAdapter implements ActionListener {
 	public void actionPerformed(ActionEvent ae) {
 
 		if (ae.getSource() == ald.getJtfId()) {
-			//JOptionPane.showMessageDialog(null, "엔터클릭");
 
 			// jtfId에 입력값이 존재한다면
 			if (!ald.getJtfId().getText().isEmpty()) {
@@ -53,7 +52,6 @@ public class AdminLoginEvent extends WindowAdapter implements ActionListener {
 		} // end if
 
 		if (ae.getSource() == ald.getJpfPass()) {
-			//JOptionPane.showMessageDialog(null, "엔터클릭");
 
 			// jpfPass에 입력값이 존재한다면
 			if (!new String(ald.getJpfPass().getPassword()).isEmpty()) {
@@ -74,7 +72,6 @@ public class AdminLoginEvent extends WindowAdapter implements ActionListener {
 			} // end if
 
 		if (ae.getSource() == ald.getLoginButton()) {
-			//JOptionPane.showMessageDialog(null, "로그인 버튼이 클릭되었습니다.");
 			AdminDAO aDAO = AdminDAO.getInstance();
 			String id = "";
 			String pass = "";

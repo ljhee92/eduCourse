@@ -24,7 +24,6 @@ public class AdminDeptMgtRegEvent extends WindowAdapter implements ActionListene
 
 		if (ae.getSource() == admrd.getRegisterButton()) {
 			AdminDAO aDAO = AdminDAO.getInstance();
-			JOptionPane.showMessageDialog(admrd, "등록버튼 클릭");
 			DeptVO dVO;
 			
 			
@@ -66,7 +65,6 @@ public class AdminDeptMgtRegEvent extends WindowAdapter implements ActionListene
 		}
 		if (ae.getSource() == admrd.getCancelButton()) {
 
-			JOptionPane.showMessageDialog(admrd, "취소버튼 클릭");
 			admrd.dispose();
 		}
 

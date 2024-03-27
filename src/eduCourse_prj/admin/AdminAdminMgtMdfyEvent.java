@@ -38,7 +38,6 @@ public class AdminAdminMgtMdfyEvent extends WindowAdapter implements ActionListe
 			String loginId = aammd.getAamd().getAwd().getlVO().getId();
 			
 
-			JOptionPane.showMessageDialog(aammd, "수정버튼 클릭");
 			AdminDAO aDAO = AdminDAO.getInstance();
 
 			String adminId = (aammd.getJtfAdminId().getText().trim());

@@ -33,7 +33,6 @@ public class AdminDeptMgtEvent extends JDialog implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		if (ae.getSource()==admd.getJbtnDeptReg()) {
-			JOptionPane.showMessageDialog(admd, "등록버튼 클릭");
 			new AdminDeptMgtRegDesign(admd,"학과 등록");
 		}//getJbtnReg
 		

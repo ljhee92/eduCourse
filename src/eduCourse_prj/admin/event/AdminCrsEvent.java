@@ -37,13 +37,11 @@ public class AdminCrsEvent extends WindowAdapter implements ActionListener {
 	public void actionPerformed(ActionEvent ae) {
 
 		if (ae.getSource() == acd.getJbtnSlctTop()) {
-			JOptionPane.showMessageDialog(acd, "상단 조회버튼 클릭");
 			updateTable();
 
 		}
 
 		if (ae.getSource() == acd.getJbtnCrsReg()) {
-			JOptionPane.showMessageDialog(acd, "등록버튼클릭");
 			new AdminCrsRegDisgn(acd, "과목 등록");
 
 		}
