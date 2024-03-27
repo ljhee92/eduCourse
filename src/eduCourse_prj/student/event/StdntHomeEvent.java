@@ -22,22 +22,12 @@ public class StdntHomeEvent extends WindowAdapter  implements ActionListener {
 		this.shd =shd;
 		
 	}
-	
-	
-	
-	
-	
-	
+			
 	@Override
 	public void windowClosing(WindowEvent e) {
 
 		shd.dispose();
 	}
-
-
-
-
-
 
 	@Override
 	public void actionPerformed(ActionEvent ae) {
@@ -67,10 +57,9 @@ public class StdntHomeEvent extends WindowAdapter  implements ActionListener {
 			shd.dispose();
 		} // end if
 		if (ae.getSource()==shd.getJbtnSched()) {
-			JOptionPane.showMessageDialog(shd, "학사일정 버튼클릭");
 			new StdntAcadCalDesign(shd, "학사일정");
 		} // end if
 		
-	}
+	}//actionPerformed
 
 }

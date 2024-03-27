@@ -104,7 +104,6 @@ public class StdntTestPageEvent extends WindowAdapter implements ActionListener 
 			
 			// 점수에 따라 성취도 넣기
 			String grade = showGrade(score);
-			
 			stpd.getStsd().getDtmTestSlct().setValueAt(grade, slctIndex, 6);
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(stpd, "SQL 문제가 발생했습니다.");

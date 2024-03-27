@@ -80,7 +80,7 @@ public class AdminProfMgtRegDesign extends JDialog {
 		jlProfEmail.setFont(font);
 		jlDept.setFont(font);
 		
-		Font sfont = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 10);
+		Font sfont = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
 		jlNecessary.setFont(sfont);
 		jlNecessary.setForeground(Color.RED);
 		

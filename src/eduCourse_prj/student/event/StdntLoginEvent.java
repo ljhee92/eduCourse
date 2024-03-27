@@ -31,38 +31,31 @@ public class StdntLoginEvent extends WindowAdapter implements ActionListener {
 	public void actionPerformed(ActionEvent ae) {
 
 		if (ae.getSource() == sld.getJtfId()) {
-		//	JOptionPane.showMessageDialog(null, "엔터클릭");
 
 			// jtfId에 입력값이 존재한다면
 			if (!sld.getJtfId().getText().isEmpty()) {
 				try {
 					Integer.parseInt(sld.getJtfId().getText());
-				}catch (NumberFormatException mfe) {
+				} catch (NumberFormatException mfe) {
 					JOptionPane.showMessageDialog(sld, "학번은 숫자만 입력 가능합니다.");
 					return;
 				}
 
-
 				// jpfPass에 입력값이 존재한다면
 				if (!new String(sld.getJpfPass().getPassword()).isEmpty()) {
-					
-
 					// 로그인 실행
 					sld.getLoginButton().doClick();
-
 				} else {// jpfPass에 입력값이 존재하지 않으면 jpfPass로 포커스 이동
 					sld.getJpfPass().requestFocus();
-
 				} // end else
 
 			} else {
 				JOptionPane.showMessageDialog(sld, "ID를 입력해주세요.");
-			}//end else
+			} // end else
 
 		} // end if
 
 		if (ae.getSource() == sld.getJpfPass()) {
-		//	JOptionPane.showMessageDialog(null, "엔터클릭");
 
 			// jpfPass에 입력값이 존재한다면
 			if (!new String(sld.getJpfPass().getPassword()).isEmpty()) {
@@ -77,14 +70,13 @@ public class StdntLoginEvent extends WindowAdapter implements ActionListener {
 
 				} // end else
 
-			}else {
+			} else {
 				JOptionPane.showMessageDialog(sld, "PW를 입력해주세요.");
-			} 
+			}
 
 		} // end if
 
 		if (ae.getSource() == sld.getLoginButton()) {
-			//JOptionPane.showMessageDialog(null, "로그인 버튼이 클릭되었습니다.");
 			StdntDAO slDAO = StdntDAO.getInstance();
 			int id = 0;
 			String pass = "";
@@ -119,7 +111,7 @@ public class StdntLoginEvent extends WindowAdapter implements ActionListener {
 
 			} // end catch
 
-			LoginVO lVO = new LoginVO(id+"", pass);
+			LoginVO lVO = new LoginVO(id + "", pass);
 			LoginVO LoginResult = null;
 			try {
 
