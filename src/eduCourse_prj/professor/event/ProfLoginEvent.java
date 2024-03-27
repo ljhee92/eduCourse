@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 import eduCourse_prj.VO.LoginVO;
+import eduCourse_prj.login.SelectLoginDesign;
 import eduCourse_prj.professor.dao.ProfDAO;
 import eduCourse_prj.professor.design.ProfHomeDesign;
 import eduCourse_prj.professor.design.ProfLoginDesign;
@@ -29,20 +30,24 @@ public class ProfLoginEvent extends WindowAdapter implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent ae) {
+		
+		if(ae.getSource()==pld.getJbtLogout()) {
+			pld.dispose();
+			new SelectLoginDesign();
+		}
 
 		if (ae.getSource() == pld.getJtfId()) {
 
-			//JOptionPane.showMessageDialog(null, "엔터클릭");
 
 
 			// jtfId에 입력값이 존재한다면
 			if (!pld.getJtfId().getText().isEmpty()) {
 				try {
-				Integer.parseInt(pld.getJtfId().getText());
-			}catch (NumberFormatException mfe) {
-				JOptionPane.showMessageDialog(pld, "교번은 숫자만 입력 가능합니다.");
-				return;
-			}
+					Integer.parseInt(pld.getJtfId().getText());
+				} catch (NumberFormatException mfe) {
+					JOptionPane.showMessageDialog(pld, "교번은 숫자만 입력 가능합니다.");
+					return;
+				}
 
 				// jpfPass에 입력값이 존재한다면
 				if (!new String(pld.getJpfPass().getPassword()).isEmpty()) {
@@ -56,12 +61,12 @@ public class ProfLoginEvent extends WindowAdapter implements ActionListener {
 
 			} else {
 				JOptionPane.showMessageDialog(pld, "ID를 입력해주세요.");
-			}//end else
+			} // end else
 
 		} // end if
 
 		if (ae.getSource() == pld.getJpfPass()) {
-		//	JOptionPane.showMessageDialog(null, "엔터클릭");
+			// JOptionPane.showMessageDialog(null, "엔터클릭");
 
 			// jpfPass에 입력값이 존재한다면
 			if (!new String(pld.getJpfPass().getPassword()).isEmpty()) {
@@ -78,12 +83,12 @@ public class ProfLoginEvent extends WindowAdapter implements ActionListener {
 
 			} else {
 				JOptionPane.showMessageDialog(pld, "PW를 입력해주세요.");
-			}//end else
+			} // end else
 
 		} // end if
 
 		if (ae.getSource() == pld.getLoginButton()) {
-		//	JOptionPane.showMessageDialog(null, "로그인 버튼이 클릭되었습니다.");
+			// JOptionPane.showMessageDialog(null, "로그인 버튼이 클릭되었습니다.");
 			ProfDAO plDAO = ProfDAO.getInstance();
 			int id = 0;
 			String pass = "";
@@ -118,7 +123,7 @@ public class ProfLoginEvent extends WindowAdapter implements ActionListener {
 
 			} // end catch
 
-			LoginVO lVO = new LoginVO(id+"" , pass);
+			LoginVO lVO = new LoginVO(id + "", pass);
 			LoginVO LoginResult = null;
 			try {
 
@@ -129,7 +134,7 @@ public class ProfLoginEvent extends WindowAdapter implements ActionListener {
 			}
 
 			if (LoginResult != null) {// 객체가 존재하면 로그인 성공
-				JOptionPane.showMessageDialog(pld, LoginResult.getName()+ "교수님 로그인 성공");
+				JOptionPane.showMessageDialog(pld, LoginResult.getName() + "교수님 로그인 성공");
 				new ProfHomeDesign(LoginResult);
 				pld.dispose();
 			} else {

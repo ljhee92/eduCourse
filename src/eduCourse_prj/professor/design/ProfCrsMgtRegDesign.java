@@ -21,27 +21,27 @@ import eduCourse_prj.professor.event.ProfCrsMgtRegEvent;
 
 @SuppressWarnings("serial")
 public class ProfCrsMgtRegDesign extends JDialog {
-	
+
 	private ProfCrsMgtDesign pcmd;
 	private JLabel jlBack;// 배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
 	private JLabel jlProfCrsMgt, jlProfCrsMgtReg; // 상단 라벨
 	private JLabel jlCrsName, jlCrsCode, jlDeptName, jlDeptCode, jlProfName,
 					jlLectRoom, jlCredit, jlCapa, jlNecessary;
+
 	private JComboBox<String> jcbCrsName, jcbLectRoom;
-	private JTextField jtfCrsCode, jtfDeptName, jtfDeptCode, jtfProfName, 
-						jtfCredit, jtfCapa;
+	private JTextField jtfCrsCode, jtfDeptName, jtfDeptCode, jtfProfName, jtfCredit, jtfCapa;
 	private JButton jbtnReg, jbtnCancel;
-	
+
 	public ProfCrsMgtRegDesign(ProfCrsMgtDesign pcmd, String title) {
 		super(pcmd, title, true);
 		this.pcmd = pcmd;
-		
+
 		setLayout(null);
-		
+
 		String commonPath = "src/eduCourse_prj/image/common/";
 		String profPath = "src/eduCourse_prj/image/prof/";
-		
+
 		// 우상단 로그인상태 확인창 추가
 		topLogin = new JLabel(pcmd.getPhd().getlVO().getName() + " 교수님 로그인 중");
 		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 17);
@@ -49,7 +49,7 @@ public class ProfCrsMgtRegDesign extends JDialog {
 		topLogin.setForeground(Color.WHITE);
 		topLogin.setBounds(670, 30, 300, 20);
 		add(topLogin);
-		
+
 		// 강의 과목 관리, 등록 상단 라벨 추가
 		jlProfCrsMgt = new JLabel(new ImageIcon(profPath + "ProfCrsMgt_Label.png"));
 		jlProfCrsMgtReg = new JLabel(new ImageIcon(commonPath + "RegBanner_new.png"));
@@ -70,7 +70,7 @@ public class ProfCrsMgtRegDesign extends JDialog {
 		jlCredit = new JLabel("학점");
 		jlCapa = new JLabel("정원");
 		jlNecessary = new JLabel("정원은 필수입력사항입니다.");
-		
+
 		jlCrsName.setBounds(120, 220, 100, 20);
 		jlCrsCode.setBounds(120, 280, 100, 20);
 		jlDeptName.setBounds(120, 340, 100, 20);
@@ -80,7 +80,7 @@ public class ProfCrsMgtRegDesign extends JDialog {
 		jlCredit.setBounds(520, 340, 100, 20);
 		jlCapa.setBounds(520, 400, 100, 20);
 		jlNecessary.setBounds(670, 450, 300, 20);
-		
+
 		jlCrsName.setFont(font);
 		jlCrsCode.setFont(font);
 		jlDeptName.setFont(font);
@@ -91,7 +91,7 @@ public class ProfCrsMgtRegDesign extends JDialog {
 		jlCapa.setFont(font);
 		jlNecessary.setFont(font);
 		jlNecessary.setForeground(Color.RED);
-		
+
 		add(jlCrsName);
 		add(jlCrsCode);
 		add(jlDeptName);
@@ -101,7 +101,7 @@ public class ProfCrsMgtRegDesign extends JDialog {
 		add(jlCredit);
 		add(jlCapa);
 		add(jlNecessary);
-		
+
 		// 과목, 과목 코드, 학과, 학과 코드, 담당 교수, 강의실, 학점, 정원 콤보박스, JTF 추가
 		ProfDAO pDAO = ProfDAO.getInstance();
 		CrsMgtRegDAO cmrDAO = CrsMgtRegDAO.getInstance();
@@ -109,16 +109,16 @@ public class ProfCrsMgtRegDesign extends JDialog {
 			// 학과이름 콤보박스 추가
 			List<CrsVO> listCVO = pDAO.slctNotLectCrs(Integer.parseInt(pcmd.getPhd().getlVO().getId()));
 			jcbCrsName = new JComboBox<String>();
-			
-			for(CrsVO cVO : listCVO) {
+
+			for (CrsVO cVO : listCVO) {
 				jcbCrsName.addItem(cVO.getCourName());
 			} // end for
-			
+
 			// 강의실 콤보박스 추가
 			List<LectureRoomVO> listLectRoomVO = cmrDAO.selectAllLectRoom();
 			jcbLectRoom = new JComboBox<String>();
-			
-			for(LectureRoomVO lrVO : listLectRoomVO) {
+
+			for (LectureRoomVO lrVO : listLectRoomVO) {
 				jcbLectRoom.addItem(lrVO.getLect_room_num());
 			} // end for
 
@@ -128,7 +128,7 @@ public class ProfCrsMgtRegDesign extends JDialog {
 			jtfProfName = new JTextField(pcmd.getPhd().getlVO().getName());
 			jtfCredit = new JTextField();
 			jtfCapa = new JTextField();
-		} catch(IndexOutOfBoundsException e) {
+		} catch (IndexOutOfBoundsException e) {
 			JOptionPane.showMessageDialog(pcmd, "등록 가능한 과목이 없습니다.");
 			e.printStackTrace();
 		} catch (NumberFormatException e) {
@@ -137,7 +137,7 @@ public class ProfCrsMgtRegDesign extends JDialog {
 			JOptionPane.showMessageDialog(pcmd, "SQL문제가 발생했습니다.");
 			e.printStackTrace();
 		} // end catch
-		
+
 		jcbCrsName.setBounds(220, 215, 220, 30);
 		jtfCrsCode.setBounds(220, 275, 220, 30);
 		jtfDeptName.setBounds(220, 335, 220, 30);
@@ -146,13 +146,13 @@ public class ProfCrsMgtRegDesign extends JDialog {
 		jcbLectRoom.setBounds(620, 275, 220, 30);
 		jtfCredit.setBounds(620, 335, 220, 30);
 		jtfCapa.setBounds(620, 395, 220, 30);
-		
+
 		jtfCrsCode.setEditable(false);
 		jtfDeptName.setEditable(false);
 		jtfDeptCode.setEditable(false);
 		jtfProfName.setEditable(false);
 		jtfCredit.setEditable(false);
-		
+
 		add(jcbCrsName);
 		add(jtfCrsCode);
 		add(jtfDeptName);
@@ -161,29 +161,29 @@ public class ProfCrsMgtRegDesign extends JDialog {
 		add(jcbLectRoom);
 		add(jtfCredit);
 		add(jtfCapa);
-		
+
 		// 등록, 취소 버튼 추가
 		jbtnReg = new JButton(new ImageIcon(commonPath + "RegButton_new.png"));
 		jbtnCancel = new JButton(new ImageIcon(commonPath + "CancelButton_new.png"));
-		
+
 		jbtnReg.setBounds(370, 510, 90, 50);
 		jbtnCancel.setBounds(520, 510, 90, 50);
-		
+
 		add(jbtnReg);
 		add(jbtnCancel);
-		
+
 		// 이벤트 클래스 연결
 		ProfCrsMgtRegEvent pcmre = new ProfCrsMgtRegEvent(this);
 		addWindowListener(pcmre);
 		jcbCrsName.addActionListener(pcmre);
 		jbtnReg.addActionListener(pcmre);
 		jbtnCancel.addActionListener(pcmre);
-		
+
 		// 배경 추가
-        jlBack = new JLabel(new ImageIcon(commonPath + "Back.png"));
-        jlBack.setBounds(0,0,984,620);
-        add(jlBack);
-		setSize(1000,650);
+		jlBack = new JLabel(new ImageIcon(commonPath + "Back.png"));
+		jlBack.setBounds(0, 0, 984, 620);
+		add(jlBack);
+		setSize(1000, 650);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setVisible(true);
@@ -220,5 +220,5 @@ public class ProfCrsMgtRegDesign extends JDialog {
 	public ProfCrsMgtDesign getPcmd() {
 		return pcmd;
 	}
-	
+
 } // class

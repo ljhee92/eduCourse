@@ -15,8 +15,6 @@ public class AdminVO {
 		this.admin_id = admin_id;
 		this.admin_name = admin_name;
 	}
-	
-	
 
 	public AdminVO(String admin_id, String admin_password, String admin_name) {
 		super();

@@ -27,35 +27,34 @@ public class ProfCrsMgtEvent extends WindowAdapter implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent ae) {
-		
+
 		// 등록 버튼 클릭 시
-		if(ae.getSource() == pcmd.getJbtnLecReg()) {
+		if (ae.getSource() == pcmd.getJbtnLecReg()) {
 			new ProfCrsMgtRegDesign(pcmd, "강의 과목 등록");
 			updateTable();
 		} // end if
-		
-		if(ae.getSource() == pcmd.getJbtnSlct()) {
+
+		if (ae.getSource() == pcmd.getJbtnSlct()) {
 			int index = pcmd.getJtbLecMgt().getSelectedRow();
-			if(index == -1) {
+			if (index == -1) {
 				JOptionPane.showMessageDialog(pcmd, "조회할 과목을 선택해주세요.");
 				return;
 			} // end if
 			try {
 				String prof_name = pcmd.getPhd().getlVO().getName();
 				String crs_name = pcmd.getDtmProfMgt().getValueAt(index, 1).toString();
-				
+
 				CrsMgtRegDAO cmrDAO = CrsMgtRegDAO.getInstance();
 				CrsRegVO crVO = cmrDAO.slctProfOneLect(crs_name);
-				
+
 				StringBuilder output = new StringBuilder();
 				output.append("과목코드: ").append(crVO.getCourse_code()).append("\n");
 				output.append("과목: ").append(crs_name).append("\n");
 				output.append("담당교수: ").append(prof_name).append("\n");
 				output.append("강의실: ").append(crVO.getLect_room()).append("\n");
-				output.append("학점: ").append(crVO.getCredit_hours()).append("\n");					
-				output.append("정원: ").append(crVO.getCapacity());					
-				
-				
+				output.append("학점: ").append(crVO.getCredit_hours()).append("\n");
+				output.append("정원: ").append(crVO.getCapacity());
+
 				JTextArea jta = new JTextArea(output.toString(), 8, 50);
 				JScrollPane jsp = new JScrollPane(jta);
 				jta.setEditable(false);
@@ -65,20 +64,20 @@ public class ProfCrsMgtEvent extends WindowAdapter implements ActionListener{
 				e1.printStackTrace();
 			} // end catch
 		} // end if
-		
+
 		// 수정 버튼 클릭 시
-		if(ae.getSource() == pcmd.getJbtnMdfy()) {
+		if (ae.getSource() == pcmd.getJbtnMdfy()) {
 			int index = pcmd.getJtbLecMgt().getSelectedRow();
-			if(index == -1) {
+			if (index == -1) {
 				JOptionPane.showMessageDialog(pcmd, "수정할 과목을 선택해주세요.");
 				return;
 			} // end if
-			
+
 			new ProfCrsMgtMdfyDesign(pcmd, "강의 과목 수정");
 		} // end if
-		
+
 		// 삭제 버튼 클릭 시
-		if(ae.getSource() == pcmd.getJbtnDel()) {
+		if (ae.getSource() == pcmd.getJbtnDel()) {
 			int index = pcmd.getJtbLecMgt().getSelectedRow();
 			if (index == -1) {
 				JOptionPane.showMessageDialog(pcmd, "삭제할 과목을 선택해주세요.");
@@ -95,7 +94,7 @@ public class ProfCrsMgtEvent extends WindowAdapter implements ActionListener{
 					int prof_number = Integer.parseInt(pcmd.getPhd().getlVO().getId());
 					String course_name = pcmd.getDtmProfMgt().getValueAt(index, 1).toString();
 					CrsVO cVO = cmrDAO.slctOneCrsCode(course_name);
-					
+
 					cmrDAO.deleteLect(prof_number, cVO.getCourCode());
 					JOptionPane.showMessageDialog(pcmd, course_name + " 과목 정보 삭제 성공");
 					updateTable();
@@ -107,17 +106,17 @@ public class ProfCrsMgtEvent extends WindowAdapter implements ActionListener{
 			} // end case
 		} // end if
 	} // actionPerformed
-	
+
 	/**
 	 * 등록, 삭제버튼 클릭 시 테이블 최신화
 	 */
 	public void updateTable() {
 		pcmd.getDtmProfMgt().setRowCount(0);
-		CrsMgtRegDAO cmrDAO = CrsMgtRegDAO.getInstance(); 
+		CrsMgtRegDAO cmrDAO = CrsMgtRegDAO.getInstance();
 		try {
 			String strProf_number = pcmd.getPhd().getlVO().getId();
 			int prof_number = Integer.parseInt(strProf_number);
-			List<CrsVO> listCrsVO= cmrDAO.slctProfLect(prof_number);			
+			List<CrsVO> listCrsVO = cmrDAO.slctProfLect(prof_number);
 			for (CrsVO cVO1 : listCrsVO) {
 				Object[] row = { cVO1.getDeptName(), cVO1.getCourName() };
 				pcmd.getDtmProfMgt().addRow(row);
@@ -125,7 +124,7 @@ public class ProfCrsMgtEvent extends WindowAdapter implements ActionListener{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} // end catch
-		
+
 	} // updateTable
 
 	@Override

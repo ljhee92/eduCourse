@@ -1,7 +1,7 @@
 package eduCourse_prj.VO;
 
 public class RegVO {
-	
+
 	private String dept_name;
 	private String course_name;
 	private String lect_room;
@@ -12,7 +12,7 @@ public class RegVO {
 	private int stdnt_number;
 	private int prof_number;
 	private String course_code;
-	
+
 	public RegVO() {
 	}
 

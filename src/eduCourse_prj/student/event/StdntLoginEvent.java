@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 import eduCourse_prj.VO.LoginVO;
+import eduCourse_prj.login.SelectLoginDesign;
 import eduCourse_prj.student.dao.StdntDAO;
 import eduCourse_prj.student.design.StdntHomeDesign;
 import eduCourse_prj.student.design.StdntLoginDesign;
@@ -29,6 +30,11 @@ public class StdntLoginEvent extends WindowAdapter implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent ae) {
+		
+		if(ae.getSource()==sld.getJbtLogout()) {
+			sld.dispose();
+			new SelectLoginDesign();
+		}
 
 		if (ae.getSource() == sld.getJtfId()) {
 

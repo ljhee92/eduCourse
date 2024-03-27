@@ -31,22 +31,21 @@ public class AdminHomeDesign extends JFrame {
 
 		String commonPath = "src/eduCourse_prj/image/common/";
 		String adminPath = "src/eduCourse_prj/image/admin/";
-		
-		
-		back = new JLabel(new ImageIcon(commonPath+"Back.png"));
+
+		back = new JLabel(new ImageIcon(commonPath + "Back.png"));
 		role = new JLabel("권한 : 관리자");
 		showId = new JLabel("ID : " + lVO.getId());
 		name = new JLabel("이름 : " + lVO.getName());
 		topLogin = new JLabel(lVO.getName() + " 관리자님 로그인 중");
-		img = new JLabel(new ImageIcon(commonPath+"Img_new.png"));
+		img = new JLabel(new ImageIcon(commonPath + "Img_new.png"));
 
-		jbtAdminMgt = new JButton(new ImageIcon(adminPath+"AdminMgt_new.png"));//AdminMgt
-		jbtProfMgt = new JButton(new ImageIcon(adminPath+"ProfMgt_new.png"));//ProfMgt
-		jbtDeptMgt = new JButton(new ImageIcon(adminPath+"DeptMgt_new.png"));//DeptMgt
-		jbtStudMgt = new JButton(new ImageIcon(adminPath+"StudMgt_new.png"));//StudMgt
-		jbtCourMgt = new JButton(new ImageIcon(adminPath+"CourMgt_new.png"));//CourMgt
-		jbtSchedMgt = new JButton(new ImageIcon(adminPath+"SchedMgt_new.png"));//SchedMgt
-		jbtLogout = new JButton(new ImageIcon(commonPath+"Logout.png"));//
+		jbtAdminMgt = new JButton(new ImageIcon(adminPath + "AdminMgt_new.png"));// AdminMgt
+		jbtProfMgt = new JButton(new ImageIcon(adminPath + "ProfMgt_new.png"));// ProfMgt
+		jbtDeptMgt = new JButton(new ImageIcon(adminPath + "DeptMgt_new.png"));// DeptMgt
+		jbtStudMgt = new JButton(new ImageIcon(adminPath + "StudMgt_new.png"));// StudMgt
+		jbtCourMgt = new JButton(new ImageIcon(adminPath + "CourMgt_new.png"));// CourMgt
+		jbtSchedMgt = new JButton(new ImageIcon(adminPath + "SchedMgt_new.png"));// SchedMgt
+		jbtLogout = new JButton(new ImageIcon(commonPath + "Logout.png"));//
 
 		/////////////////////////////////////////////////
 		// 요소에 추가선언

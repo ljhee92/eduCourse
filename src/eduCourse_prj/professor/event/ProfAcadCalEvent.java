@@ -8,7 +8,6 @@ import java.sql.SQLException;
 
 import eduCourse_prj.professor.design.ProfAcadCalDesign;
 
-
 public class ProfAcadCalEvent extends WindowAdapter implements ActionListener{
 	
 	private ProfAcadCalDesign pacd;
@@ -19,25 +18,22 @@ public class ProfAcadCalEvent extends WindowAdapter implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent ae) {
-		if(ae.getSource() == pacd.getSearchBtn()) { //조회 버튼 클릭
+		if (ae.getSource() == pacd.getSearchBtn()) { // 조회 버튼 클릭
 			try {
 				pacd.calSet();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		if(ae.getSource() == pacd.getJbtnCnfrm()) { //확인 버튼 클릭
+		if (ae.getSource() == pacd.getJbtnCnfrm()) { // 확인 버튼 클릭
 			pacd.dispose();
 		}
-		
-		
+
 	}
 
 	@Override
 	public void windowClosing(WindowEvent we) {
 		super.windowClosing(we);
 	}
-	
-	
-	
+
 }

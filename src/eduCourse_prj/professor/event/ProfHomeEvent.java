@@ -5,8 +5,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import javax.swing.JOptionPane;
-
 import eduCourse_prj.login.SelectLoginDesign;
 import eduCourse_prj.professor.design.ProfAcadCalDesign;
 import eduCourse_prj.professor.design.ProfCrsMgtDesign;
@@ -34,24 +32,25 @@ public class ProfHomeEvent extends WindowAdapter implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 
-		
-		if (ae.getSource()==pwd.getJbtnCourMgt()) {
+		if (ae.getSource() == pwd.getJbtnCourMgt()) {
 			new ProfCrsMgtDesign(pwd, "강의 과목 관리");
 		}
-		if (ae.getSource()==pwd.getJbtnExamMgtGrad()) {
+		if (ae.getSource() == pwd.getJbtnExamMgtGrad()) {
 			new ProfTestMgtDesign(pwd, "시험 관리 및 채점");
 		}
-		if (ae.getSource()==pwd.getJbtnStudMgt()) {
-			new ProfStdntMgtDesign(pwd,"학생 관리" );
+
+		if (ae.getSource() == pwd.getJbtnStudMgt()) {
+			new ProfStdntMgtDesign(pwd, "학생 관리");
 		}
-		if (ae.getSource()==pwd.getJbtnStudySucc()) {
+		
+		if (ae.getSource() == pwd.getJbtnStudySucc()) {
 			new ProfScoreDesign(pwd, "학습 성취도");
 		}
-		if (ae.getSource()==pwd.getJbtnInfoUpda()) {
+		if (ae.getSource() == pwd.getJbtnInfoUpda()) {
 			new ProfMdfyDesign(pwd, "정보수정");
 		}
 
-		if (ae.getSource()==pwd.getJbtnLogout()) {
+		if (ae.getSource() == pwd.getJbtnLogout()) {
 			new SelectLoginDesign();
 			pwd.dispose();
 		}

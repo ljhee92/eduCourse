@@ -32,7 +32,6 @@ public class AdminProfMgtEvent extends WindowAdapter implements ActionListener {
 
 		if (e.getSource() == apmd.getJbtnSlctTop()) {
 			updateTable();
-			
 
 		}
 
@@ -97,7 +96,6 @@ public class AdminProfMgtEvent extends WindowAdapter implements ActionListener {
 
 			int deleteFlag = JOptionPane.showConfirmDialog(apmd, "정말 삭제하시겠습니까?", "교수정보 삭제", JOptionPane.YES_NO_OPTION);
 
-
 			switch (deleteFlag) {
 			case JOptionPane.NO_OPTION:
 				return;
@@ -107,11 +105,11 @@ public class AdminProfMgtEvent extends WindowAdapter implements ActionListener {
 					int prof_number = Integer.parseInt(apmd.getDtmProfMgt().getValueAt(index, 1).toString());
 
 					pDAO.deleteProf(prof_number);
-					JOptionPane.showMessageDialog(apmd, apmd.getDtmProfMgt().getValueAt(index, 2).toString()
-							+ " 교수님 정보 삭제 성공");
-					
+					JOptionPane.showMessageDialog(apmd,
+							apmd.getDtmProfMgt().getValueAt(index, 2).toString() + " 교수님 정보 삭제 성공");
+
 					updateTable();
-					
+
 				} catch (SQLException e1) {
 					JOptionPane.showMessageDialog(apmd, "SQL 문제가 발생했습니다.");
 					e1.printStackTrace();
@@ -121,8 +119,6 @@ public class AdminProfMgtEvent extends WindowAdapter implements ActionListener {
 		} // end if
 	} // actionPerformed
 
-	
-	
 	/**
 	 * 조회버튼, 삭제버튼 클릭 시 테이블 최신화
 	 */
@@ -154,31 +150,22 @@ public class AdminProfMgtEvent extends WindowAdapter implements ActionListener {
 			}
 		}
 
-		
-		
 		@SuppressWarnings("unused")
 		List<ProfVO> lProfVO;
 
-	try {
-		List<ProfVO> listProfVO = pDAO.slctProf(dept_code ,prof_num);
+		try {
+			List<ProfVO> listProfVO = pDAO.slctProf(dept_code, prof_num);
 
-		for (ProfVO pVO : listProfVO) {
+			for (ProfVO pVO : listProfVO) {
 
-			Object[] row = { pVO.getDept_name(), pVO.getProf_number(), pVO.getProf_name()};
-			apmd.getDtmProfMgt().addRow(row);
-		} // end for
+				Object[] row = { pVO.getDept_name(), pVO.getProf_number(), pVO.getProf_name() };
+				apmd.getDtmProfMgt().addRow(row);
+			} // end for
 
-	} catch (SQLException se) {
-		se.printStackTrace();
-	} // end catch
-		
-		
-		
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} // end catch
+
 	}
-	
-	
-	
-	
-	
-	
+
 } // class

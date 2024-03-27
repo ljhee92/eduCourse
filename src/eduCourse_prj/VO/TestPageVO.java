@@ -1,13 +1,13 @@
 package eduCourse_prj.VO;
 
 public class TestPageVO {
-	
+
 	private int question_number;
 	private String question_content;
 	private String question_split_content;
 	private String option1, option2, option3, option4;
 	private String answer;
-	
+
 	public TestPageVO() {
 	}
 
@@ -17,11 +17,11 @@ public class TestPageVO {
 		this.answer = answer;
 		splitContent();
 	}
-	
+
 	private void splitContent() {
-		String[] contents = this.question_content.split("\n\n"); 
+		String[] contents = this.question_content.split("\n\n");
 		this.question_split_content = contents[0];
-		
+
 		String option = contents[1];
 		String[] options = option.split("\t");
 		this.option1 = options[0];

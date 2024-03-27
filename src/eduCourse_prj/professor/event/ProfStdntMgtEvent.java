@@ -38,66 +38,55 @@ public class ProfStdntMgtEvent extends WindowAdapter implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		if (ae.getSource() == psmd.getJbtnSlctTop()) {
-			
+
 			psmd.getDtmStdMgt().setRowCount(0);
 
 			int prof_number = Integer.parseInt(psmd.getPhd().getlVO().getId());
 			int std_number = 0;
 			String crs_code = "";
-			
-			
-			
-			//과목이 전체일 경우
-			if(psmd.getJcbCrs().getSelectedItem().equals("전체")) {
-				
-				
-			}else {
-			//과목이 전체가 아닐 경우
-				 crs_code = (psmd.getLCrs().get((psmd.getJcbCrs().getSelectedIndex() - 1)).getCourCode());
-			}
-			
 
-			
+			// 과목이 전체일 경우
+			if (psmd.getJcbCrs().getSelectedItem().equals("전체")) {
+
+			} else {
+				// 과목이 전체가 아닐 경우
+				crs_code = (psmd.getLCrs().get((psmd.getJcbCrs().getSelectedIndex() - 1)).getCourCode());
+			}
+
 			// 학번 입력 유무 체크
 			if (!(psmd.getJtfStdNum().getText().isEmpty())) {
 				try {
 
 					std_number = Integer.parseInt(psmd.getJtfStdNum().getText());
 				} catch (Exception e) {
-					//e.printStackTrace();
+					// e.printStackTrace();
 					JOptionPane.showMessageDialog(psmd, "숫자만 입력가능 9자리");
 					return;
 				}
 			}
-			
+
 			try {
-			List<ProfLectStudVO> listplsVO	=	pDAO.slctProfStud(prof_number,crs_code,std_number);
-			
-			for (ProfLectStudVO plsVO : listplsVO) {
+				List<ProfLectStudVO> listplsVO = pDAO.slctProfStud(prof_number, crs_code, std_number);
 
-				Object[] row = { plsVO.getDept_name(), plsVO.getCourse_name(), plsVO.getStd_number(), plsVO.getStd_name() };
-				psmd.getDtmStdMgt().addRow(row);
-			} // end for
+				for (ProfLectStudVO plsVO : listplsVO) {
 
-			
-			
-			
-			
+					Object[] row = { plsVO.getDept_name(), plsVO.getCourse_name(), plsVO.getStd_number(),
+							plsVO.getStd_name() };
+					psmd.getDtmStdMgt().addRow(row);
+				} // end for
+
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				
+
 				e.printStackTrace();
 			}
-			
-			
-			
+
 		}
 
 		if (ae.getSource() == psmd.getJbtnSlct()) {
 			// 학생 정보 상세 조회 클릭
-			if(ae.getSource() == psmd.getJbtnSlct()) {
+			if (ae.getSource() == psmd.getJbtnSlct()) {
 				int index = psmd.getJtbStdMgt().getSelectedRow();
-				if(index == -1) {
+				if (index == -1) {
 					JOptionPane.showMessageDialog(psmd, "조회할 학생을 선택해주세요.");
 					return;
 				} // end if
@@ -107,15 +96,14 @@ public class ProfStdntMgtEvent extends WindowAdapter implements ActionListener {
 					StdntDAO sDAO = StdntDAO.getInstance();
 					StdntVO sVO = sDAO.slctOneStdnt(stud_number);
 
-					
 					StringBuilder output = new StringBuilder();
 					output.append("학과: ").append(dept_name).append("\n");
 					output.append("학번: ").append(stud_number).append("\n");
 					output.append("이름: ").append(sVO.getStdnt_name()).append("\n");
-					output.append("이메일: ").append(sVO.getStdnt_email()!=null?sVO.getStdnt_email():"").append("\n");
-					output.append("주소: ").append(sVO.getStdnt_addr());					
-					
-					
+					output.append("이메일: ").append(sVO.getStdnt_email() != null ? sVO.getStdnt_email() : "")
+							.append("\n");
+					output.append("주소: ").append(sVO.getStdnt_addr());
+
 					JTextArea jta = new JTextArea(output.toString(), 8, 50);
 					JScrollPane jsp = new JScrollPane(jta);
 					jta.setEditable(false);
@@ -125,8 +113,6 @@ public class ProfStdntMgtEvent extends WindowAdapter implements ActionListener {
 					e1.printStackTrace();
 				} // end catch
 			} // end if
-			
-			
 
 		}
 

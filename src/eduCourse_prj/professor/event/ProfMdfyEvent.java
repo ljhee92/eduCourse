@@ -9,11 +9,10 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 import eduCourse_prj.VO.ProfVO;
-import eduCourse_prj.VO.StdntVO;
+
 import eduCourse_prj.login.SelectLoginDesign;
 import eduCourse_prj.professor.dao.ProfDAO;
 import eduCourse_prj.professor.design.ProfMdfyDesign;
-import eduCourse_prj.student.dao.StdntDAO;
 
 public class ProfMdfyEvent extends WindowAdapter implements ActionListener {
 	private ProfMdfyDesign pmd;
@@ -22,34 +21,34 @@ public class ProfMdfyEvent extends WindowAdapter implements ActionListener {
 	public ProfMdfyEvent(ProfMdfyDesign pmd) {
 		this.pmd = pmd;
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent ae) {
-		
+
 		// 수정버튼 클릭
-		if(ae.getSource() == pmd.getJbtnMdfy()) {
+		if (ae.getSource() == pmd.getJbtnMdfy()) {
 			int profNum = Integer.parseInt(pmd.getJtfProfNum().getText().trim());
 			int isValidNewEmail;
 			String profPass = "";
 			char[] secret_pass = pmd.getJpfProfPass().getPassword();
-			for(char cha : secret_pass) {
+			for (char cha : secret_pass) {
 				Character.toChars(cha);
 				profPass += (profPass.equals("")) ? "" + cha + "" : cha + "";
 			} // end for
-			if(profPass.isEmpty()) {
+			if (profPass.isEmpty()) {
 				JOptionPane.showMessageDialog(pmd, "비밀번호는 필수 입력 사항입니다.");
 				return;
 			} // end if
-			
+
 			String profEmail = pmd.getJtfProfEmail().getText().trim();
-			if(!profEmail.isEmpty() && !profEmail.contains("@")) {
+			if (!profEmail.isEmpty() && !profEmail.contains("@")) {
 				JOptionPane.showMessageDialog(pmd, "유효한 이메일 형식이 아닙니다.");
 				return;
 			} // end if
-			
+
 			try {
 				isValidNewEmail = pDAO.selectAllByEmail(profEmail, profNum);
-				if(isValidNewEmail == -1) {
+				if (isValidNewEmail == -1) {
 					JOptionPane.showMessageDialog(pmd, "중복된 이메일입니다");
 					return;
 				}
@@ -57,12 +56,13 @@ public class ProfMdfyEvent extends WindowAdapter implements ActionListener {
 				JOptionPane.showMessageDialog(pmd, "SQL 문제가 발생했습니다.");
 				e.printStackTrace();
 			}
-			
-			
+
 			try {
-				ProfVO pVO = new ProfVO(profNum, profPass, pmd.getPhd().getlVO().getName(), profEmail,  null, null, null);
+				ProfVO pVO = new ProfVO(profNum, profPass, pmd.getPhd().getlVO().getName(), profEmail, null, null,
+						null);
 				pDAO.modifyProf(pVO);
-				JOptionPane.showMessageDialog(pmd, pVO.getProf_name() + " 교수님 정보가 성공적으로 수정되었습니다.\n 최신정보를 갱신하기위해 로그아웃됩니다.");
+				JOptionPane.showMessageDialog(pmd,
+						pVO.getProf_name() + " 교수님 정보가 성공적으로 수정되었습니다.\n 최신정보를 갱신하기위해 로그아웃됩니다.");
 				new SelectLoginDesign();
 				pmd.dispose();
 				pmd.getPhd().dispose();
@@ -71,19 +71,18 @@ public class ProfMdfyEvent extends WindowAdapter implements ActionListener {
 				e1.printStackTrace();
 			} // end catch
 		} // end if
-		
-			//취소 버튼 클릭
-			if(ae.getSource()==pmd.getJbtnCancel()) {
-				
-				pmd.dispose();
-			}
 
+		// 취소 버튼 클릭
+		if (ae.getSource() == pmd.getJbtnCancel()) {
+
+			pmd.dispose();
+		}
 
 	}
 
 	@Override
 	public void windowClosing(WindowEvent e) {
-		
+
 		super.windowClosing(e);
 	}
 
