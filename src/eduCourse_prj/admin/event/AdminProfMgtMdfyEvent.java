@@ -51,10 +51,18 @@ public class AdminProfMgtMdfyEvent extends WindowAdapter implements ActionListen
 				JOptionPane.showMessageDialog(apmmd, "유효한 이메일 형식이 아닙니다.");
 				return;
 			} // end if
+			
+			int isValidNewEmail;
 
 			String deptName = (String) apmmd.getJcbDept().getSelectedItem();
 
 			try {
+				isValidNewEmail = pDAO.selectAllByEmail(profEmail, profNum);
+				if (isValidNewEmail == -1) {
+					JOptionPane.showMessageDialog(apmmd, "중복된 이메일입니다");
+					return;
+				} // end if
+				
 				ProfVO pVO = new ProfVO(profNum, profPass, profName, profEmail, null, null, deptName);
 				pDAO.updateProf(pVO);
 				JOptionPane.showMessageDialog(null, pVO.getProf_name() + " 교수님 정보가 성공적으로 수정되었습니다.");
