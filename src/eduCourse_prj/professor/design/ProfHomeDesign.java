@@ -151,6 +151,7 @@ public class ProfHomeDesign extends JFrame {
 		setSize(1000, 650); //+16 +30 
 
 		setVisible(true);
+		
 	
 		
 

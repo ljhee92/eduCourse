@@ -19,6 +19,7 @@ import eduCourse_prj.professor.dao.CrsMgtRegDAO;
 import eduCourse_prj.professor.dao.ProfDAO;
 import eduCourse_prj.professor.event.ProfCrsMgtRegEvent;
 
+@SuppressWarnings("serial")
 public class ProfCrsMgtRegDesign extends JDialog {
 	
 	private ProfCrsMgtDesign pcmd;

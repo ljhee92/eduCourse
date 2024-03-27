@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -54,7 +54,7 @@ public class TestDAO {
 			String id = "scott";
 			String pass = "tiger";
 			con = dbCon.getConnection(id, pass);
-			List<Integer> qustNum = new ArrayList<Integer>();
+
 
 
 			// 1. 문제 id 삽입
@@ -148,7 +148,7 @@ public class TestDAO {
 			String id = "scott";
 			String pass = "tiger";
 			con = dbCon.getConnection(id, pass);
-			List<Integer> qustNum = new ArrayList<Integer>();
+
 
 
 			// 1. 문제 id 삽입

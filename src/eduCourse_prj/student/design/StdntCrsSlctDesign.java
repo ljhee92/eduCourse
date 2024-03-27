@@ -20,6 +20,7 @@ import eduCourse_prj.VO.RegVO;
 import eduCourse_prj.student.dao.CrsRegDAO;
 import eduCourse_prj.student.event.StdntCrsSlctEvent;
 
+@SuppressWarnings( "serial")
 public class StdntCrsSlctDesign extends JDialog {
 	
 	private StdntHomeDesign shd;

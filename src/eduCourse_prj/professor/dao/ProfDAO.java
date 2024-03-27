@@ -10,13 +10,11 @@ import java.util.List;
 import eduCourse_prj.DbConnection;
 import eduCourse_prj.VO.AdminProfVO;
 import eduCourse_prj.VO.CrsVO;
-import eduCourse_prj.VO.DeptVO;
-import eduCourse_prj.VO.LectureVO;
+
 import eduCourse_prj.VO.LoginVO;
 import eduCourse_prj.VO.ProfLectStudVO;
 import eduCourse_prj.VO.ProfVO;
-import eduCourse_prj.VO.SlctStdVO;
-import eduCourse_prj.VO.StdntVO;
+
 import eduCourse_prj.VO.TestListVO;
 
 public class ProfDAO {
@@ -906,7 +904,7 @@ public class ProfDAO {
 	 */
 	public String selectExaming(String course_code) throws SQLException {
 		DbConnection dbCon = DbConnection.getInstance();
-		TestListVO tlVO = null;
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -947,12 +945,12 @@ public class ProfDAO {
 	 */
 	public int selectAllByEmail(String email, int prof_number) throws SQLException {
 		DbConnection dbCon = DbConnection.getInstance();
-		TestListVO tlVO = null;
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int isValidEmail = 0;
-		int count = 0;
+
 		try {
 
 			String id = "scott";
@@ -967,7 +965,7 @@ public class ProfDAO {
 			int emailNumber = 0;
 			while(rs.next()) {
 				emailNumber = rs.getInt("prof_number");
-				if(emailNumber != prof_number) count += 1;
+
 				if(emailNumber == prof_number) {
 					isValidEmail = 1;
 					return isValidEmail;
@@ -984,12 +982,12 @@ public class ProfDAO {
 	
 	public int selectAllByEmail(String email) throws SQLException {
 		DbConnection dbCon = DbConnection.getInstance();
-		TestListVO tlVO = null;
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		int count = 0;
+
 		try {
 
 			String id = "scott";
@@ -1001,9 +999,9 @@ public class ProfDAO {
 			pstmt.setString(1, email);
 
 			rs = pstmt.executeQuery();
-			int emailNumber = 0;
+
 			if(rs.next()) {
-				emailNumber = rs.getInt("prof_number");	
+
 				return -1;
 				}
 			

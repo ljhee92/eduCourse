@@ -22,6 +22,7 @@ import eduCourse_prj.VO.TestPageVO;
 import eduCourse_prj.student.dao.StdntTestDAO;
 import eduCourse_prj.student.event.StdntTestPageEvent;
 
+@SuppressWarnings("serial")
 public class StdntTestPageDesign extends JDialog {
 	
 	private StdntTestSlctDesign stsd;

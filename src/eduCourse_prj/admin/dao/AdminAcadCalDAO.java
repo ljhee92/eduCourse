@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.swing.JOptionPane;
+
 
 import eduCourse_prj.DbConnection;
 import eduCourse_prj.VO.AdminAcadCalVO;
@@ -32,13 +32,13 @@ public class AdminAcadCalDAO {
 	 */
 	public String selectOneCal(String yearMonthDay) throws SQLException{
 		DbConnection dbCon = DbConnection.getInstance();
-		AdminAcadCalVO aacVO = null;
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null ;
 		String memo = "";
 		try {
-			aacVO = new AdminAcadCalVO();
+
 			String id = "scott";
 			String pass = "tiger";
 			
@@ -102,12 +102,13 @@ public class AdminAcadCalDAO {
 	 */
 	public void updateCal(String memo ,String yearMonthDay) throws SQLException {
 		DbConnection dbCon = DbConnection.getInstance();
-		AdminAcadCalVO aacVO = null;
+
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
 		try {
-			aacVO = new AdminAcadCalVO(memo, yearMonthDay);
+
 			String id = "scott";
 			String pass = "tiger";
 			

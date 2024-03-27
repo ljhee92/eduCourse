@@ -9,8 +9,7 @@ import java.util.List;
 
 import eduCourse_prj.DbConnection;
 import eduCourse_prj.VO.ScoreVO;
-import eduCourse_prj.VO.DeptVO;
-import eduCourse_prj.VO.LoginVO;
+
 
 public class ScoreDAO {
 	private static ScoreDAO sDAO;

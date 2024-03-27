@@ -2,14 +2,12 @@ package eduCourse_prj.admin.design;
 
 import javax.swing.*;
 
-import eduCourse_prj.VO.DeptVO;
-import eduCourse_prj.VO.LoginVO;
+
 import eduCourse_prj.admin.event.AdminDeptMgtRegEvent;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 @SuppressWarnings("serial")
 public class AdminDeptMgtRegDesign extends JDialog {

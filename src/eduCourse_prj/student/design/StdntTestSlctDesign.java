@@ -5,10 +5,10 @@ import java.awt.Font;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.swing.DefaultCellEditor;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
+
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -17,7 +17,7 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
+
 import javax.swing.table.TableColumnModel;
 
 import eduCourse_prj.VO.ScoreVO;
@@ -25,6 +25,7 @@ import eduCourse_prj.VO.StdntTestVO;
 import eduCourse_prj.student.dao.StdntTestDAO;
 import eduCourse_prj.student.event.StdntTestSlctEvent;
 
+@SuppressWarnings("serial")
 public class StdntTestSlctDesign extends JDialog {
 	
 	private StdntHomeDesign shd;

@@ -10,11 +10,10 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import eduCourse_prj.VO.CrsVO;
-import eduCourse_prj.VO.DeptVO;
-import eduCourse_prj.VO.ProfVO;
+
 import eduCourse_prj.admin.dao.AdminDAO;
 import eduCourse_prj.admin.design.AdminCrsRegDisgn;
-import eduCourse_prj.professor.dao.ProfDAO;
+
 
 public class AdminCrsRegEvent extends WindowAdapter implements ActionListener {
 	private AdminCrsRegDisgn acrd;

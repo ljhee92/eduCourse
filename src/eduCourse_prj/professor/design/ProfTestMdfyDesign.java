@@ -15,12 +15,12 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import eduCourse_prj.VO.TestPageVO;
-import eduCourse_prj.admin.design.AdminDeptMgtDesign;
-import eduCourse_prj.admin.event.AdminDeptMgtRegEvent;
+
 import eduCourse_prj.professor.dao.TestDAO;
 import eduCourse_prj.professor.event.ProfTestMdfyEvent;
-import eduCourse_prj.professor.event.ProfTestRegEvent;
 
+
+@SuppressWarnings("serial")
 public class ProfTestMdfyDesign extends JDialog {
 	private ProfTestMgtDesign ptmd;
 	
@@ -42,7 +42,7 @@ public class ProfTestMdfyDesign extends JDialog {
 	private JLabel testQuestionContentLabel;// 문제내용
 	private JLabel answerLabel;//정답
 	private JLabel topLogin;
-	private JLabel deptRegLabel;
+
 	private JLabel jlBack;
 	private JLabel deptMgt;
 
