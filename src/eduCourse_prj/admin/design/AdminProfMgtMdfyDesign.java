@@ -28,50 +28,6 @@ public class AdminProfMgtMdfyDesign extends JDialog {
 	private JComboBox<String> jcbDept;
 	private JButton jbtnMdfy, jbtnCancel;
 	
-	public JLabel getJlBack() {
-		return jlBack;
-	}
-
-	public JLabel getTopLogin() {
-		return topLogin;
-	}
-
-	public JLabel getProfMgt() {
-		return profMgt;
-	}
-
-	public JLabel getProfMgtMdfy() {
-		return profMgtMdfy;
-	}
-
-	public JLabel getPhoto() {
-		return photo;
-	}
-
-	public JLabel getJlProfNum() {
-		return jlProfNum;
-	}
-
-	public JLabel getJlProfName() {
-		return jlProfName;
-	}
-
-	public JLabel getJlProfPass() {
-		return jlProfPass;
-	}
-
-	public JLabel getJlProfEmail() {
-		return jlProfEmail;
-	}
-
-	public JLabel getJlDept() {
-		return jlDept;
-	}
-
-	public JLabel getJlNecessary() {
-		return jlNecessary;
-	}
-
 	public AdminProfMgtMdfyDesign(AdminProfMgtDesign apmd, String title) {
 		super(apmd, title, true);
 		this.apmd = apmd;
@@ -81,8 +37,10 @@ public class AdminProfMgtMdfyDesign extends JDialog {
 		String profPath = "src/eduCourse_prj/image/prof/";
 		
 		// 우상단 로그인상태 확인창 추가
-		topLogin = new JLabel(apmd.getAwd().getlVO().getName() + " 관리자님 로그인 중");
+
+		topLogin = new JLabel(apmd.getAhd().getlVO().getName() + " 관리자님 로그인 중");
 		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 17);
+
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.WHITE);
 		topLogin.setBounds(670, 30, 200, 20);
@@ -228,6 +186,50 @@ public class AdminProfMgtMdfyDesign extends JDialog {
 		return apmd;
 	}
 	
-	
+
+	public JLabel getJlBack() {
+		return jlBack;
+	}
+
+	public JLabel getTopLogin() {
+		return topLogin;
+	}
+
+	public JLabel getProfMgt() {
+		return profMgt;
+	}
+
+	public JLabel getProfMgtMdfy() {
+		return profMgtMdfy;
+	}
+
+	public JLabel getPhoto() {
+		return photo;
+	}
+
+	public JLabel getJlProfNum() {
+		return jlProfNum;
+	}
+
+	public JLabel getJlProfName() {
+		return jlProfName;
+	}
+
+	public JLabel getJlProfPass() {
+		return jlProfPass;
+	}
+
+	public JLabel getJlProfEmail() {
+		return jlProfEmail;
+	}
+
+	public JLabel getJlDept() {
+		return jlDept;
+	}
+
+	public JLabel getJlNecessary() {
+		return jlNecessary;
+	}
+
 
 } // class

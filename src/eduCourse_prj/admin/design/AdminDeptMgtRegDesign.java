@@ -19,16 +19,13 @@ public class AdminDeptMgtRegDesign extends JDialog {
 	
 	private JLabel departmentNameLabel;
 	private JLabel departmentCapacityLabel;
-	private JLabel departmentCodeLable;
 	private JLabel topLogin;
-	private JLabel deptRegLabel;
 	private JLabel jlBack;
 	private JLabel deptMgt;
 	private JLabel deptMgtReg;
 	private JLabel jlNecessary;
 
 	private JTextField departmentNameTextField;// 학과
-//	private JTextField departmentCodeTextField; //학과코드
 	private JTextField departmentCapacityTextField;// 정원
 
 	public AdminDeptMgtRegDesign(AdminDeptMgtDesign admd, String title) {
@@ -60,7 +57,7 @@ public class AdminDeptMgtRegDesign extends JDialog {
 		
 //===============================라벨 추가======================================
 //------------------------------header Label------------------------------------
-		String adminName = admd.getAwd().getlVO().getName();
+		String adminName = admd.getAhd().getlVO().getName();
 		topLogin = new JLabel(adminName + " 관리자님 로그인 중");
 		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 17);
 		topLogin.setFont(font);
@@ -91,12 +88,6 @@ public class AdminDeptMgtRegDesign extends JDialog {
 		departmentNameTextField = new JTextField();//학과 텍스트필드
 		departmentNameTextField.setBounds(432, 247, 200, 40);
 
-//		
-//		departmentCodeLable = new JLabel("학과 코드");
-//		departmentCodeLable.setBounds(372,293,100,50);
-//		departmentCodeTextField = new JTextField();
-//		departmentCodeTextField.setBounds(472, 293, 200, 40);
-//		departmentCodeTextField.setEnabled(false);
 		
 		departmentCapacityLabel = new JLabel("정원");
 		departmentCapacityLabel.setFont(basicfont);
@@ -106,8 +97,6 @@ public class AdminDeptMgtRegDesign extends JDialog {
 
 		add(departmentNameLabel);
 		add(departmentNameTextField);
-//		add(departmentCodeLable);
-//		add(departmentCodeTextField);
 		add(departmentCapacityLabel);
 		add(departmentCapacityTextField);
 
@@ -150,17 +139,7 @@ public class AdminDeptMgtRegDesign extends JDialog {
 		return departmentNameTextField;
 	}
 
-//	public JTextField getDepartmentCodeTextField() {
-//		return departmentCodeTextField;
-//	}
-
 	public JTextField getDepartmentCapacityTextField() {
 		return departmentCapacityTextField;
 	}
-
-//	public static void main(String[] args) {
-//
-//		AdminDeptMgtRegDesign dialog = new AdminDeptMgtRegDesign(null, "test");
-//
-//	}// main
 }

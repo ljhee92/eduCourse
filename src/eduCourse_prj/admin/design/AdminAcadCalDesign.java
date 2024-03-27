@@ -31,7 +31,7 @@ import eduCourse_prj.admin.event.AdminAcadCalEvent;
 
 @SuppressWarnings("serial")
 public class AdminAcadCalDesign extends JDialog {
-	AdminHomeDesign awd;
+	private AdminHomeDesign ahd;
 
 	private JButton searchBtn, saveBtn, deleteBtn;
 	private JButton[] calBtn;
@@ -49,11 +49,11 @@ public class AdminAcadCalDesign extends JDialog {
 	private int year, month, day, todays, memoday = 0;
 	private int buttonIndex;
 	private int cnt;
-	AdminAcadCalDAO aacDAO = AdminAcadCalDAO.getInstance();
-	String yearMonthDay = "";
-	public AdminAcadCalDesign(AdminHomeDesign awd, String title) {
-		super(awd, title, true);
-		this.awd = awd;
+	private AdminAcadCalDAO aacDAO = AdminAcadCalDAO.getInstance();
+	private String yearMonthDay = "";
+	public AdminAcadCalDesign(AdminHomeDesign ahd, String title) {
+		super(ahd, title, true);
+		this.ahd = ahd;
 
 		today = Calendar.getInstance(); // 달력 가져오기
 		cal = new GregorianCalendar(); // 표준 달력
@@ -90,7 +90,7 @@ public class AdminAcadCalDesign extends JDialog {
         dayJl = new JLabel();
         dayJl2 = new JLabel("일");
         
-        String adminName = awd.getlVO().getName();
+        String adminName = ahd.getlVO().getName();
         topLogin = new JLabel(adminName + " 관리자님 로그인 중");
         
         Font topLoginFont = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 17);
@@ -420,8 +420,8 @@ public class AdminAcadCalDesign extends JDialog {
 		return memoday;
 	}
 	
-	public AdminHomeDesign getAwd() {
-		return awd;
+	public AdminHomeDesign getAhd() {
+		return ahd;
 	}
 
 
@@ -496,9 +496,5 @@ public class AdminAcadCalDesign extends JDialog {
 	public JButton getDeleteBtn() {
 		return deleteBtn;
 	}
-
-//	public static void main(String[] args) {
-//		new AdminAcadCalDesign(null, null);
-//	}
 
 }

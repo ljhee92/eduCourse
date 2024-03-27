@@ -28,8 +28,8 @@ import eduCourse_prj.admin.event.AdminProfMgtEvent;
 public class AdminProfMgtDesign extends JDialog {
 
 
-	private AdminHomeDesign awd;
-	AdminDAO aDAO = AdminDAO.getInstance();
+	private AdminHomeDesign ahd;
+	private AdminDAO aDAO = AdminDAO.getInstance();
 	
 	private JLabel jlBack; // 배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
@@ -45,9 +45,9 @@ public class AdminProfMgtDesign extends JDialog {
 
 	private List<DeptVO> lDept;
 
-	public AdminProfMgtDesign(AdminHomeDesign awd, String title) {
-		super(awd, title, true);
-		this.awd = awd;
+	public AdminProfMgtDesign(AdminHomeDesign ahd, String title) {
+		super(ahd, title, true);
+		this.ahd = ahd;
 
 		setLayout(null);
 
@@ -55,8 +55,10 @@ public class AdminProfMgtDesign extends JDialog {
 		String profPath = "src/eduCourse_prj/image/prof/";
 
 		// 우상단 로그인상태 확인창 추가
-		topLogin = new JLabel(awd.getlVO().getName() + " 관리자님 로그인 중");
+
+		topLogin = new JLabel(ahd.getlVO().getName() + " 관리자님 로그인 중");
 		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 17);
+
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.WHITE);
 		topLogin.setBounds(670, 30, 200, 20);
@@ -222,8 +224,8 @@ public class AdminProfMgtDesign extends JDialog {
 		return dtmProfMgt;
 	}
 
-	public AdminHomeDesign getAwd() {
-		return awd;
+	public AdminHomeDesign getAhd() {
+		return ahd;
 	}
 	
 	public AdminDAO getaDAO() {

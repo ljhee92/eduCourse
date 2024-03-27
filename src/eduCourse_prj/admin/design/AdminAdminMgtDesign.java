@@ -32,9 +32,9 @@ import java.util.List;
 
 @SuppressWarnings("serial")
 public class AdminAdminMgtDesign extends JDialog {
-	AdminHomeDesign awd;
+	private AdminHomeDesign ahd;
 
-	JLabel jlBack;// 배경
+	private JLabel jlBack;// 배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
 	private JLabel adminMgt;
 
@@ -44,9 +44,9 @@ public class AdminAdminMgtDesign extends JDialog {
 	private JTable jtbAdminMgt;
 	private DefaultTableModel dtmAdminMgt;
 
-	public AdminAdminMgtDesign(AdminHomeDesign awd, String title) {
-		super(awd, title, true);
-		this.awd = awd;
+	public AdminAdminMgtDesign(AdminHomeDesign ahd, String title) {
+		super(ahd, title, true);
+		this.ahd = ahd;
 
 		setLayout(null);
 
@@ -65,8 +65,10 @@ public class AdminAdminMgtDesign extends JDialog {
 		
 
 		// 우상단 로그인상태 확인창 추가
-		topLogin = new JLabel(awd.getlVO().getName() + " 관리자님 로그인 중");
+
+		topLogin = new JLabel(ahd.getlVO().getName() + " 관리자님 로그인 중");
 		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 17);
+
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.WHITE);
 		topLogin.setBounds(670, 30, 200, 20);
@@ -173,8 +175,8 @@ public class AdminAdminMgtDesign extends JDialog {
 		} // end for
 	} // setTbHorizontal
 
-	public AdminHomeDesign getAwd() {
-		return awd;
+	public AdminHomeDesign getAhd() {
+		return ahd;
 	}
 
 	public JLabel getJlBack() {

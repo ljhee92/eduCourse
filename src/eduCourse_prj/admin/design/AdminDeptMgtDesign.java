@@ -24,7 +24,7 @@ import eduCourse_prj.professor.dao.ProfDAO;
 
 @SuppressWarnings("serial")
 public class AdminDeptMgtDesign extends JDialog {
-	private AdminHomeDesign awd;
+	private AdminHomeDesign ahd;
 	private JLabel jlBack; // 배경
 	private JLabel topLogin; // 우상단 로그인상태 확인창
 	private JLabel deptMgt;
@@ -32,20 +32,20 @@ public class AdminDeptMgtDesign extends JDialog {
 	private JTable jtbDeptMgt;
 	private DefaultTableModel dtmDeptMgt;
 	
-	public AdminDeptMgtDesign() {
-	}
-	
-	public AdminDeptMgtDesign(AdminHomeDesign awd,String title ) {
-		super(awd,title,true);
-		this.awd = awd;
+	public AdminDeptMgtDesign(AdminHomeDesign ahd,String title ) {
+		super(ahd,title,true);
+		this.ahd = ahd;
 		
 		//공통경로
 		String commonPath = "src/eduCourse_prj/image/common/";
 		String deptPath = "src/eduCourse_prj/image/admin/";
 		
 		// 우상단 로그인상태 확인창 추가
-		topLogin = new JLabel(awd.getlVO().getName() + " 관리자님 로그인 중");
+
+		topLogin = new JLabel(ahd.getlVO().getName() + " 관리자님 로그인 중");
 		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 17);
+
+		
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.WHITE);
 		topLogin.setBounds(670, 30, 200, 20);
@@ -137,8 +137,8 @@ public class AdminDeptMgtDesign extends JDialog {
 	} // setTbHorizontal
 	
 	
-	public AdminHomeDesign getAwd() {
-		return awd;
+	public AdminHomeDesign getAhd() {
+		return ahd;
 	}
 	public JButton getJbtnSlct() {
 		return jbtnSlct;

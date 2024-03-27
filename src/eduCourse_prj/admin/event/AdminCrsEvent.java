@@ -19,8 +19,8 @@ import eduCourse_prj.admin.design.AdminCrsRegDisgn;
 import eduCourse_prj.professor.dao.ProfDAO;
 
 public class AdminCrsEvent extends WindowAdapter implements ActionListener {
-	AdminCrsDesign acd;
-	AdminDAO aDAO = AdminDAO.getInstance();
+	private AdminCrsDesign acd;
+	private AdminDAO aDAO = AdminDAO.getInstance();
 
 	public AdminCrsEvent(AdminCrsDesign acd) {
 		this.acd = acd;
