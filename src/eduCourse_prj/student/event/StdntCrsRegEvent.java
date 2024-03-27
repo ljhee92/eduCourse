@@ -47,7 +47,7 @@ public class StdntCrsRegEvent extends WindowAdapter implements ActionListener {
 
 		// 최종신청 버튼 클릭
 		if (e.getSource() == scrd.getJbtnReg()) {
-			JOptionPane.showMessageDialog(scrd, "최종신청 버튼 클릭");
+
 
 			if (scrd.getDtmCrsCart().getRowCount() == 0) {
 				JOptionPane.showMessageDialog(scrd, "수강할 과목을 수강바구니에 담은 후 최종 신청버튼 클릭해주세요");
