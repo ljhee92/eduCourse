@@ -75,7 +75,7 @@ public class ProfStudMgtDesign extends JDialog {
 
 		// 우상단 로그인상태 확인창 추가
 		topLogin = new JLabel(phd.getlVO().getName() + " 교수님 로그인 중");
-		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
+		Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 17);
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.WHITE);
 		topLogin.setBounds(600, 30, 250, 20);
@@ -84,23 +84,23 @@ public class ProfStudMgtDesign extends JDialog {
 
 		jlCrs = new JLabel("과목");
 		jlCrs.setFont(font);
-		jlCrs.setBounds(500, 150, 50, 20);
+		jlCrs.setBounds(240, 150, 50, 20);
 		add(jlCrs);
 
 		jlstdNum = new JLabel("학번");
 		jlstdNum.setFont(font);
-		jlstdNum.setBounds(240, 150, 50, 20);
+		jlstdNum.setBounds(500, 150, 50, 20);
 		add(jlstdNum);
 
 	
 		jcbCrs = new JComboBox<String>();
 		jcbCrs.setFont(font);
-		jcbCrs.setBounds(540, 145, 200, 30);
+		jcbCrs.setBounds(280, 145, 200, 30);
 		add(jcbCrs);
 
 		jtfStdNum = new JTextField();
 		jtfStdNum.setFont(font);
-		jtfStdNum.setBounds(280, 145, 200, 30);
+		jtfStdNum.setBounds(540, 145, 200, 30);
 		add(jtfStdNum);
 
 		///////////////////////////////////////////////////////////////////

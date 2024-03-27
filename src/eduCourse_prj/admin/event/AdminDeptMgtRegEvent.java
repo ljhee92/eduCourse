@@ -12,7 +12,7 @@ import eduCourse_prj.admin.dao.AdminDAO;
 import eduCourse_prj.admin.design.AdminDeptMgtRegDesign;
 
 public class AdminDeptMgtRegEvent extends WindowAdapter implements ActionListener{
-	AdminDeptMgtRegDesign admrd;
+	private AdminDeptMgtRegDesign admrd;
 
 	public AdminDeptMgtRegEvent(AdminDeptMgtRegDesign admrd) {
 		this.admrd = admrd;
@@ -24,7 +24,6 @@ public class AdminDeptMgtRegEvent extends WindowAdapter implements ActionListene
 
 		if (ae.getSource() == admrd.getRegisterButton()) {
 			AdminDAO aDAO = AdminDAO.getInstance();
-			JOptionPane.showMessageDialog(admrd, "등록버튼 클릭");
 			DeptVO dVO;
 			
 			
@@ -66,7 +65,6 @@ public class AdminDeptMgtRegEvent extends WindowAdapter implements ActionListene
 		}
 		if (ae.getSource() == admrd.getCancelButton()) {
 
-			JOptionPane.showMessageDialog(admrd, "취소버튼 클릭");
 			admrd.dispose();
 		}
 

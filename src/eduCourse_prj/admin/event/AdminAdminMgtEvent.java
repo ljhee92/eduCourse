@@ -7,12 +7,12 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JOptionPane;
 
-import eduCourse_prj.admin.AdminAdminMgtMdfyDesign;
 import eduCourse_prj.admin.design.AdminAdminMgtDesign;
+import eduCourse_prj.admin.design.AdminAdminMgtMdfyDesign;
 
 public class AdminAdminMgtEvent extends WindowAdapter implements ActionListener {
 
-	AdminAdminMgtDesign aamd;
+	private AdminAdminMgtDesign aamd;
 
 	public AdminAdminMgtEvent(AdminAdminMgtDesign aamd) {
 		this.aamd = aamd;
@@ -27,7 +27,6 @@ public class AdminAdminMgtEvent extends WindowAdapter implements ActionListener 
 	public void actionPerformed(ActionEvent ae) {
 		if (ae.getSource() == aamd.getJbtnMdfy()) {
 
-			//JOptionPane.showMessageDialog(aamd, "수정버튼 클릭");
 
 			try {
 				new AdminAdminMgtMdfyDesign(aamd, "관리자 수정");

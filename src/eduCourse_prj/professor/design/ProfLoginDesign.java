@@ -23,11 +23,11 @@ public class ProfLoginDesign extends JFrame {
     
 
     
-    JButton loginButton ;
+    private JButton loginButton ;
 
 
     
-
+ 
    public  ProfLoginDesign(SelectLoginEvent sle) {
 
         super("교수 로그인");

@@ -79,7 +79,7 @@ public class ProfTestMdfyDesign extends JDialog {
 	//===============================라벨 추가======================================
 	//------------------------------header Label------------------------------------		
 			topLogin = new JLabel(ptmd.getPhd().getlVO().getName() +" 교수님 로그인 중");
-			Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 15);
+			Font font = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 17);
 			topLogin.setFont(font);
 			topLogin.setForeground(Color.WHITE);
 			topLogin.setBounds(600, 30, 250, 20);
