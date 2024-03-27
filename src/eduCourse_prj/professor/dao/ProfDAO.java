@@ -989,5 +989,38 @@ public class ProfDAO {
 		return result;
 
 	}
+	
+	/**
+	 * 교수 등록을 위해 DB의 가장 마지막 교번을 가져오는 method
+	 * @return
+	 * @throws SQLException
+	 */
+	public int selectMaxProfNumber() throws SQLException {
+		int maxProfNumber = 0;
+		DbConnection dbCon = DbConnection.getInstance();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			String id = "scott";
+			String pass = "tiger";
+			con = dbCon.getConnection(id, pass);
+
+			String selectMaxProfNumber = "select max(prof_number) as maxProfNumber from professor";
+			pstmt = con.prepareStatement(selectMaxProfNumber);
+
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				maxProfNumber = rs.getInt("maxProfNumber");
+			} // end if
+
+		} finally {
+			dbCon.dbClose(rs, pstmt, con);
+		} // end finally
+		return maxProfNumber;
+	} // selectMaxProfNumber
 
 } // class
