@@ -108,7 +108,8 @@ public class ProfCrsMgtDesign extends JDialog {
 		jbtnDel.addActionListener(pme);
 
 		setLayout(null);
-		setSize(1000,650);		
+		setSize(1000,650);	
+		setResizable(false);
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}

@@ -98,6 +98,8 @@ public class StdntTestPageDesign extends JDialog {
 		setSize(1000,650);
 		setLocationRelativeTo(null);
 		setVisible(true);
+		// 프레임크기 조절 불가
+		setResizable(false);
     } // StdntTestPageDesign
 
     /**

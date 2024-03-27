@@ -174,6 +174,8 @@ public class ProfScoreDesign extends JDialog{
 		jbtnSlctTop.addActionListener(asme);
 
 		setLocationRelativeTo(null);
+		// 프레임크기 조절 불가
+		setResizable(false);
 
 		setVisible(true);
 	}

@@ -132,6 +132,8 @@ public class ProfLoginDesign extends JFrame {
         add(back);
        
 
+		// 프레임크기 조절 불가
+		setResizable(false);
         // 프레임 표시
         setVisible(true);
     }

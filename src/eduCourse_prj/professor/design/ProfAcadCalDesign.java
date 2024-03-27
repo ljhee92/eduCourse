@@ -265,6 +265,7 @@ public class ProfAcadCalDesign extends JDialog {
 
 		setLayout(null);
 
+		setResizable(false);
 		setSize(1000, 650);
 		setLocationRelativeTo(null);
 		setVisible(true);
