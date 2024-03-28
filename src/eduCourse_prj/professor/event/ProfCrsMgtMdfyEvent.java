@@ -37,6 +37,11 @@ public class ProfCrsMgtMdfyEvent extends WindowAdapter implements ActionListener
 				String lect_room = pcmmd.getJcbLectRoom().getSelectedItem().toString();
 				int capacity = Integer.parseInt(pcmmd.getJtfCapa().getText());
 
+				boolean editable = cmrDAO.checkEditable(course_code,capacity);
+				if(!editable) {
+					JOptionPane.showMessageDialog(pcmmd, "수정될 정원은 현재 수강중인 학생수보다 낮습니다.");
+					return;
+				}
 				LectureVO ltVO = new LectureVO(prof_number, course_code, capacity, 0, null, lect_room, null);
 
 				cmrDAO.updateLect(ltVO);

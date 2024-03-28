@@ -337,4 +337,46 @@ public class CrsMgtRegDAO {
 		return lectureRoomVO;
 	} // selectOneLectRoom
 
+	/**
+	 * 
+	 * 해당 과목을 수강중인 학생의 수를 찾아 학생의 수가 수정될 정원수보다 적은지 확인하는 method
+	 * 
+	 * 
+	 * @param course_code 학과코드
+	 * @param capacity    수정될 정원수
+	 * @return 수정 가능여부 (수정될 정원수>=수강중인 학생수) -> true
+	 * @throws SQLException
+	 */
+	public boolean checkEditable(String course_code, int capacity) throws SQLException {
+		boolean result = false;
+
+		DbConnection dbCon = DbConnection.getInstance();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			String id = "scott";
+			String pass = "tiger";
+
+			con = dbCon.getConnection(id, pass);
+
+			String checkEditable = "	select CAPACITED	" + "	from LECTURE	" + "	where COURSE_CODE = ?	";
+
+			pstmt = con.prepareStatement(checkEditable);
+			pstmt.setString(1, course_code);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				if (capacity >= rs.getInt("CAPACITED")) {
+					result = true;
+				}
+			} // end if
+		} finally {
+			dbCon.dbClose(rs, pstmt, con);
+		} // end finally
+
+		return result;
+	}
+
 } // class
