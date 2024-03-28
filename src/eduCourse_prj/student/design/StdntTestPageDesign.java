@@ -1,6 +1,7 @@
 package eduCourse_prj.student.design;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumnModel;
 
 import eduCourse_prj.VO.TestPageVO;
@@ -87,6 +89,11 @@ public class StdntTestPageDesign extends JDialog {
 
 		// 테이블에 시험 문제 번호와 추가
 		slctTestContent();
+		
+		 // 1번 문제 답안에 포커스 설정
+		jtbTestPage.requestFocusInWindow();
+		jtbTestPage.changeSelection(0, 6, false, false);
+		jtbTestPage.editCellAt(0, 6);
 
 		// 이벤트 클래스 연결
 		StdntTestPageEvent stpe = new StdntTestPageEvent(this);
@@ -99,6 +106,7 @@ public class StdntTestPageDesign extends JDialog {
 		add(jlBack);
 		setSize(1000, 650);
 		setLocationRelativeTo(null);
+		
 		// 프레임크기 조절 불가
 		setResizable(false);
 		setVisible(true);
