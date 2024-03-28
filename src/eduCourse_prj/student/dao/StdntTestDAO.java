@@ -211,7 +211,7 @@ public class StdntTestDAO {
 			String pass = "tiger";
 			con = dbCon.getConnection(id, pass);
 
-			String insertScore = "insert into score(register_number, score, test_date) values(?, ?, null)";
+			String insertScore = "insert into score(register_number, score, test_date) values(?, ?, sysdate)";
 
 			pstmt = con.prepareStatement(insertScore);
 
