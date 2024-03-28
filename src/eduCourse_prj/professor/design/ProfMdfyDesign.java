@@ -55,8 +55,8 @@ public class ProfMdfyDesign extends JDialog {
 		photo.setBounds(160, 200, 198, 233);
 		add(photo);
 
-		// 학번, PW, 이메일, 주소 필수입력 라벨 추가
-		jlProfNum = new JLabel("학번");
+		// 교번, PW, 이메일, 주소 필수입력 라벨 추가
+		jlProfNum = new JLabel("교번");
 		jlProfPass = new JLabel("PW");
 		jlProfEmail = new JLabel("이메일");
 
