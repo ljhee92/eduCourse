@@ -148,7 +148,12 @@ public class AdminCrsEvent extends WindowAdapter implements ActionListener {
 				Object[] row = { cVO.getDeptName(), cVO.getCourName() };
 				acd.getDtmCrsMgt().addRow(row);
 			} // end for
-
+			
+			if(acd.getDtmCrsMgt().getRowCount() == 0) {
+				JOptionPane.showMessageDialog(acd, "검색된 정보가 없습니다.");
+				return;
+			} // end if
+			
 		} catch (SQLException se) {
 			se.printStackTrace();
 		} // end catch
