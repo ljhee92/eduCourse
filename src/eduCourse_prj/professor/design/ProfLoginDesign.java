@@ -59,7 +59,7 @@ public class ProfLoginDesign extends JFrame {
 		// PW 입력 필드
 		jpfPass = new JPasswordField("yechan", 20);
 		jpfPass.setBounds(350, 350, 300, 40);
-		jpfPass.setFont(new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 30));
+		jpfPass.setFont(new Font("맑은 고딕", Font.BOLD, 30));
 
 		// 로그인 버튼
 		loginButton = new JButton(new ImageIcon(loginPath + "login.png"));
