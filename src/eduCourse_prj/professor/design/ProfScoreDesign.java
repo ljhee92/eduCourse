@@ -77,22 +77,22 @@ public class ProfScoreDesign extends JDialog {
 
 		jlCrs = new JLabel("과목");
 		jlCrs.setFont(font);
-		jlCrs.setBounds(240, 150, 50, 20);
+		jlCrs.setBounds(190, 150, 50, 20);
 		add(jlCrs);
 
 		jlStdntNum = new JLabel("학번");
 		jlStdntNum.setFont(font);
-		jlStdntNum.setBounds(500, 150, 50, 20);
+		jlStdntNum.setBounds(470, 150, 50, 20);
 		add(jlStdntNum);
 
 		jcbCrs = new JComboBox<String>();
 		jcbCrs.setFont(font);
-		jcbCrs.setBounds(280, 145, 200, 30);
+		jcbCrs.setBounds(230, 145, 200, 30);
 		add(jcbCrs);
 
 		jtfStdNum = new JTextField();
 		jtfStdNum.setFont(font);
-		jtfStdNum.setBounds(540, 145, 200, 30);
+		jtfStdNum.setBounds(510, 145, 200, 30);
 		add(jtfStdNum);
 
 		///////////////////////////////////////////////////////////////////
@@ -135,10 +135,10 @@ public class ProfScoreDesign extends JDialog {
 		/////////////////////////////////////////////////////////////
 		// 조회, 버튼 추가
 		jbtnCnfrm = new JButton(new ImageIcon(commonPath + "Ok_s.png"));
-		jbtnSlctTop = new JButton(new ImageIcon(commonPath + "search.png"));
+		jbtnSlctTop = new JButton(new ImageIcon(commonPath + "searchButton_new.png"));
 
 		jbtnCnfrm.setBounds(440, 500, 95, 50);
-		jbtnSlctTop.setBounds(780, 145, 70, 30);
+		jbtnSlctTop.setBounds(750, 145, 55, 30);
 
 		add(jbtnCnfrm);
 		add(jbtnSlctTop);
