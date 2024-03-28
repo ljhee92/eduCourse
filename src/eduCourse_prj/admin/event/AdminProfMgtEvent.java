@@ -150,9 +150,6 @@ public class AdminProfMgtEvent extends WindowAdapter implements ActionListener {
 			}
 		}
 
-		@SuppressWarnings("unused")
-		List<ProfVO> lProfVO;
-
 		try {
 			List<ProfVO> listProfVO = pDAO.slctProf(dept_code, prof_num);
 

@@ -39,14 +39,11 @@ public class ProfScoreEvent extends WindowAdapter implements ActionListener {
 
 			// 과목이 전체가 아닐 경우
 			if (!psd.getJcbCrs().getSelectedItem().equals("전체")) {
-				// System.out.println("일부선택");
 				crs_code = psd.getLCrs().get(psd.getJcbCrs().getSelectedIndex() - 1).getCourCode();
-				// System.out.println("crs_code : " +crs_code);
 			}
 
 			// 학번 입력 유무 체크
 			if (!psd.getJtfStdNum().getText().isEmpty()) {
-				// System.out.println("학번입력되었음");
 				try {
 					std_number = Integer.parseInt(psd.getJtfStdNum().getText());
 				} catch (NumberFormatException e) {

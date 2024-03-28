@@ -83,9 +83,6 @@ public class AdminStudMgtEvent extends WindowAdapter implements ActionListener {
 				}
 			}
 
-			@SuppressWarnings("unused")
-			List<SlctStdVO> lSlctstdVO;
-
 			try {
 				List<SlctStdVO> listSlctStdVO = aDAO.slctStd(dept_code, crs_code, std_num);
 
