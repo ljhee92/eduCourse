@@ -66,7 +66,7 @@ public class AdminHomeDesign extends JFrame {
 		role.setBounds(520, 220, 150, 20);
 		showId.setBounds(520, 260, 150, 20);
 		name.setBounds(520, 300, 200, 20);
-		topLogin.setBounds(670, 30, 200, 20);
+		topLogin.setBounds(620, 30, 300, 20);
 
 		img.setBounds(270, 150, 198, 233);
 

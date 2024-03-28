@@ -80,7 +80,7 @@ public class AdminCrsRegDisgn extends JDialog {
 		topLogin = new JLabel(acd.getAhd().getlVO().getName() + " 관리자님 로그인 중");
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.WHITE);
-		topLogin.setBounds(670, 30, 200, 20);
+		topLogin.setBounds(620, 30, 300, 20);
 		add(topLogin);
 
 		jcbDept.setBounds(430, 220, 200, 30);

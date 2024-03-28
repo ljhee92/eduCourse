@@ -48,7 +48,7 @@ public class AdminProfMgtMdfyDesign extends JDialog {
 
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.WHITE);
-		topLogin.setBounds(670, 30, 200, 20);
+		topLogin.setBounds(620, 30, 300, 20);
 		add(topLogin);
 
 		// 교수관리, 수정 라벨 추가

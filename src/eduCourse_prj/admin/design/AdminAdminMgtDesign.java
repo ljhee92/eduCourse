@@ -65,7 +65,7 @@ public class AdminAdminMgtDesign extends JDialog {
 
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.WHITE);
-		topLogin.setBounds(670, 30, 200, 20);
+		topLogin.setBounds(620, 30, 300, 20);
 		add(topLogin);
 
 		// 관리자 수정 버튼 추가

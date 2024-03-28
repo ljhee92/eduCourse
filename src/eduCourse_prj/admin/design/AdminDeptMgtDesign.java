@@ -46,7 +46,7 @@ public class AdminDeptMgtDesign extends JDialog {
 
 		topLogin.setFont(font);
 		topLogin.setForeground(Color.WHITE);
-		topLogin.setBounds(670, 30, 200, 20);
+		topLogin.setBounds(620, 30, 300, 20);
 		add(topLogin);
 
 		// 학과관리 라벨 추가

@@ -95,7 +95,7 @@ public class AdminAcadCalDesign extends JDialog {
 		Font topLoginFont = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 17);
 		topLogin.setFont(topLoginFont);
 		topLogin.setForeground(Color.WHITE);
-		topLogin.setBounds(670, 30, 200, 20);
+		topLogin.setBounds(620, 30, 300, 20);
 		add(topLogin);
 
 		// 각 라벨에 border 설정
