@@ -61,7 +61,7 @@ public class StdntTestAnswerDesign extends JDialog {
 		// 과목명 라벨, 콤보박스, 선택 버튼 추가
 		jlCrs = new JLabel("과목명");
 		jcbCrs = new JComboBox<String>();
-		jbtnSlct = new JButton(new ImageIcon(commonPath + "Slct2_s.png"));
+		jbtnSlct = new JButton(new ImageIcon(commonPath + "searchButton_new.png"));
 
 		StdntAnswerDAO saDAO = StdntAnswerDAO.getInstance();
 
