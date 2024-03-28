@@ -129,7 +129,7 @@ public class AdminCrsRegDisgn extends JDialog {
 		add(jbtnCancel);
 
 		Font sfont = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 13);
-		jlNecessary = new JLabel("과목 과목코드 학점은 필수 입력사항입니다.");
+		jlNecessary = new JLabel("과목, 과목코드, 학점은 필수 입력사항입니다.");
 		jlNecessary.setFont(sfont);
 		jlNecessary.setForeground(Color.RED);
 		jlNecessary.setBounds(430, 400, 300, 30);
