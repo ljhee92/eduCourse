@@ -74,6 +74,11 @@ public class ProfStdntMgtEvent extends WindowAdapter implements ActionListener {
 							plsVO.getStd_name() };
 					psmd.getDtmStdMgt().addRow(row);
 				} // end for
+				
+				if(psmd.getDtmStdMgt().getRowCount() == 0) {
+					JOptionPane.showMessageDialog(psmd, "검색된 정보가 없습니다.");
+					return;
+				} // end if
 
 			} catch (SQLException e) {
 
