@@ -44,11 +44,11 @@ public class AdminDeptMgtRegDesign extends JDialog {
 		deptMgtReg = new JLabel(new ImageIcon(commonPath + "RegBanner_new.png"));
 		deptMgtReg.setBounds(10, 119, 967, 44);
 
-		jlNecessary = new JLabel("*학과는 필수입력 사항입니다.");
-		Font sfont = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 10);
+		jlNecessary = new JLabel("학과는 필수입력 사항입니다.");
+		Font sfont = new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 13);
 		jlNecessary.setFont(sfont);
 		jlNecessary.setForeground(Color.RED);
-		jlNecessary.setBounds(510, 375, 300, 30);
+		jlNecessary.setBounds(480, 375, 300, 30);
 
 //===============================라벨 추가======================================
 //------------------------------header Label------------------------------------
@@ -85,7 +85,10 @@ public class AdminDeptMgtRegDesign extends JDialog {
 		departmentCapacityLabel.setBounds(340, 336, 100, 50);
 		departmentCapacityTextField = new JTextField();
 		departmentCapacityTextField.setBounds(432, 340, 200, 40);
-
+		
+		departmentNameTextField.setFont(font);
+		departmentCapacityTextField.setFont(font);
+		
 		add(departmentNameLabel);
 		add(departmentNameTextField);
 		add(departmentCapacityLabel);

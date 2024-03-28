@@ -102,6 +102,9 @@ public class ProfMdfyDesign extends JDialog {
 		jtfProfNum.setBounds(510, 230, 300, 30);
 		jpfProfPass.setBounds(510, 270, 300, 30);
 		jtfProfEmail.setBounds(510, 310, 300, 30);
+		
+		jtfProfNum.setFont(font);
+		jtfProfEmail.setFont(font);
 
 		add(jtfProfNum);
 		add(jpfProfPass);

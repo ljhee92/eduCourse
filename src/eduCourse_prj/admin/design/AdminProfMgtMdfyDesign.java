@@ -135,6 +135,11 @@ public class AdminProfMgtMdfyDesign extends JDialog {
 		jtfProfEmail.setBounds(510, 350, 300, 30);
 		jcbDept.setBounds(510, 390, 300, 30);
 
+		jtfProfNum.setFont(font);
+		jtfProfName.setFont(font);
+		jtfProfEmail.setFont(font);
+		jcbDept.setFont(font);
+		
 		add(jtfProfNum);
 		add(jtfProfName);
 		add(jpfProfPass);
