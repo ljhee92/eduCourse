@@ -39,7 +39,7 @@ public class ProfHomeDesign extends JFrame {
 
 		back = new JLabel(new ImageIcon(commonPath + "back.png"));
 		role = new JLabel("권한 : 교수");
-		showId = new JLabel("ID : " + lVO.getId());
+		showId = new JLabel("교번 : " + lVO.getId());
 		name = new JLabel("이름 : " + lVO.getName());
 
 		ProfDAO pDAO = ProfDAO.getInstance();
