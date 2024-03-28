@@ -147,6 +147,15 @@ public class ProfCrsMgtRegDesign extends JDialog {
 		jcbLectRoom.setBounds(620, 275, 220, 30);
 		jtfCredit.setBounds(620, 335, 220, 30);
 		jtfCapa.setBounds(620, 395, 220, 30);
+		
+		jcbCrsName.setFont(font);
+		jtfCrsCode.setFont(font);
+		jtfDeptName.setFont(font);
+		jtfDeptCode.setFont(font);
+		jtfProfName.setFont(font);
+		jcbLectRoom.setFont(font);
+		jtfCredit.setFont(font);
+		jtfCapa.setFont(font);
 
 		jtfCrsCode.setEditable(false);
 		jtfDeptName.setEditable(false);

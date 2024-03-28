@@ -106,12 +106,12 @@ public class AdminCrsDesign extends JDialog {
 
 		jlCrsName = new JLabel("과목명");
 		jlCrsName.setFont(font);
-		jlCrsName.setBounds(480, 150, 50, 20);
+		jlCrsName.setBounds(460, 150, 50, 20);
 		add(jlCrsName);
 
 		jtfCrsName = new JTextField();
 		jtfCrsName.setFont(font);
-		jtfCrsName.setBounds(530, 145, 200, 30);
+		jtfCrsName.setBounds(510, 145, 200, 30);
 		add(jtfCrsName);
 
 		// 상단 조회버튼 추가

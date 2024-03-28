@@ -128,8 +128,11 @@ public class StdntAcadCalDesign extends JDialog {
 		monthJb.setFont(font);
 		yearCb.setFont(font);
 		monthCb.setFont(font);
+		yearJl.setFont(font);
 		yearJl2.setFont(font);
+		monthJl.setFont(font);
 		monthJl2.setFont(font);
+		dayJl.setFont(font);
 		dayJl2.setFont(font);
 
 		// 달력
@@ -178,6 +181,7 @@ public class StdntAcadCalDesign extends JDialog {
 		memoJta.setPreferredSize(new Dimension(300, 300));
 		Border border = BorderFactory.createLineBorder(Color.gray, 2);
 		memoJta.setBorder(border); // JTextArea에 Border를 추가
+		memoJta.setFont(font);
 
 		String commonPath = "src/eduCourse_prj/image/common/";
 		JPanel memoBtnJp = new JPanel();

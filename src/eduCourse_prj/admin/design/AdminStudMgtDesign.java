@@ -79,7 +79,7 @@ public class AdminStudMgtDesign extends JDialog {
 
 		jlDept = new JLabel("학과");
 		jlDept.setFont(font);
-		jlDept.setBounds(240, 150, 50, 20);
+		jlDept.setBounds(220, 150, 50, 20);
 		add(jlDept);
 
 		jlCrs = new JLabel("과목");
@@ -89,12 +89,12 @@ public class AdminStudMgtDesign extends JDialog {
 
 		jlstdNum = new JLabel("학번");
 		jlstdNum.setFont(font);
-		jlstdNum.setBounds(240, 190, 50, 20);
+		jlstdNum.setBounds(220, 190, 50, 20);
 		add(jlstdNum);
 
 		jcbDept = new JComboBox<String>();
 		jcbDept.setFont(font);
-		jcbDept.setBounds(280, 145, 200, 30);
+		jcbDept.setBounds(260, 145, 200, 30);
 		add(jcbDept);
 
 		jcbCrs = new JComboBox<String>();
@@ -104,7 +104,7 @@ public class AdminStudMgtDesign extends JDialog {
 
 		jtfStdNum = new JTextField();
 		jtfStdNum.setFont(font);
-		jtfStdNum.setBounds(280, 185, 200, 30);
+		jtfStdNum.setBounds(260, 185, 200, 30);
 		add(jtfStdNum);
 
 		///////////////////////////////////////////////////////////////////
@@ -164,8 +164,8 @@ public class AdminStudMgtDesign extends JDialog {
 
 		/////////////////////////////////////////////////////////////
 		// 조회 버튼 추가
-		jbtnSlctTop = new JButton(new ImageIcon(commonPath + "search.png"));
-		jbtnSlctTop.setBounds(780, 145, 70, 30);
+		jbtnSlctTop = new JButton(new ImageIcon(commonPath + "searchButton_new.png"));
+		jbtnSlctTop.setBounds(780, 145, 55, 30);
 		add(jbtnSlctTop);
 
 		jbtnSlct = new JButton(new ImageIcon(commonPath + "Slct.png"));
