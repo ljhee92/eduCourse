@@ -45,7 +45,7 @@ public class AdminStudMgtEvent extends WindowAdapter implements ActionListener {
 			int dept_code = 0; // 학과 코드
 			String crs_code = ""; // 과목 코드
 			int std_num = 0; // 학번
-
+			
 			// 학과가 "전체"일 경우
 			if (asmd.getJcbDept().getSelectedItem().equals("전체")) {
 
@@ -94,6 +94,11 @@ public class AdminStudMgtEvent extends WindowAdapter implements ActionListener {
 					Object[] row = { ssVO.getDept_name(), ssVO.getCrs_name(), ssVO.getStd_num(), ssVO.getStd_name() };
 					asmd.getDtmStdMgt().addRow(row);
 				} // end for
+				
+				if(asmd.getDtmStdMgt().getRowCount() == 0) {
+					JOptionPane.showMessageDialog(asmd, "검색된 정보가 없습니다.");
+					return;
+				} // end if
 
 			} catch (SQLException e) {
 				e.printStackTrace();

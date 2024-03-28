@@ -81,7 +81,7 @@ public class TestDAO {
 			}
 
 			pstmt.executeUpdate();
-			JOptionPane.showMessageDialog(null, "시험이 성공적으로 등록되엇습니다.");
+			JOptionPane.showMessageDialog(null, "시험이 성공적으로 등록되었습니다.");
 
 		} finally {
 

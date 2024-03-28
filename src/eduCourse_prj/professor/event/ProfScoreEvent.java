@@ -78,6 +78,11 @@ public class ProfScoreEvent extends WindowAdapter implements ActionListener {
 							sVO.getScore(), rowGrade };
 					psd.getDtmScore().addRow(row);
 				}
+				
+				if(psd.getDtmScore().getRowCount() == 0) {
+					JOptionPane.showMessageDialog(psd, "검색된 정보가 없습니다.");
+					return;
+				} // end if
 			} catch (SQLException e) {
 				e.printStackTrace();
 				JOptionPane.showMessageDialog(psd, "데이터베이스 조회 중 오류가 발생했습니다.");
