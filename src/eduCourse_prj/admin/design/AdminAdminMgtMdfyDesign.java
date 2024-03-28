@@ -110,6 +110,9 @@ public class AdminAdminMgtMdfyDesign extends JDialog {
 		jpfAdminPass = new JPasswordField(aVO.getAdmin_password());
 
 		jtfAdminId.setEditable(false);
+		
+		jtfAdminId.setFont(smallFont);
+		jtfAdminName.setFont(smallFont);
 
 		jtfAdminId.setBounds(520, 255, 300, 30);
 		jtfAdminName.setBounds(520, 310, 300, 30);

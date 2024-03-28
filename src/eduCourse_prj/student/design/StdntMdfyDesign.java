@@ -103,6 +103,10 @@ public class StdntMdfyDesign extends JDialog {
 		jpfStdntPass.setBounds(510, 270, 300, 30);
 		jtfStdntEmail.setBounds(510, 310, 300, 30);
 		jtfStdntAddr.setBounds(510, 350, 300, 30);
+		
+		jtfStdntNum.setFont(font);
+		jtfStdntEmail.setFont(font);
+		jtfStdntAddr.setFont(font);
 
 		add(jtfStdntNum);
 		add(jpfStdntPass);

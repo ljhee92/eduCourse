@@ -119,6 +119,7 @@ public class ProfTestMdfyDesign extends JDialog {
 		testQuestionContentTextArea.setLineWrap(true);
 		testQuestionContentTextArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		testQuestionContentTextArea.setBackground(Color.WHITE);
+		testQuestionContentTextArea.setFont(font);
 
 		// --------------------------텍스트 필드 생성 및 추가----------------------------------
 		multipleChoiceOneLabel = new JLabel("선택 1");
@@ -126,30 +127,35 @@ public class ProfTestMdfyDesign extends JDialog {
 		multipleChoiceOneLabel.setBounds(530, 250, 100, 30);
 		multipleChoiceOneTextField = new JTextField();
 		multipleChoiceOneTextField.setBounds(580, 250, 200, 30);
+		multipleChoiceOneTextField.setFont(font);
 
 		multipleChoiceTwoLabel = new JLabel("선택 2");
 		multipleChoiceTwoLabel.setFont(font);
 		multipleChoiceTwoLabel.setBounds(530, 300, 100, 30);
 		multipleChoiceTwoTextField = new JTextField();
 		multipleChoiceTwoTextField.setBounds(580, 300, 200, 30);
+		multipleChoiceTwoTextField.setFont(font);
 
 		multipleChoiceThreeLabel = new JLabel("선택 3");
 		multipleChoiceThreeLabel.setFont(font);
 		multipleChoiceThreeLabel.setBounds(530, 350, 100, 30);
 		multipleChoiceThreeTextField = new JTextField();
 		multipleChoiceThreeTextField.setBounds(580, 350, 200, 30);
+		multipleChoiceThreeTextField.setFont(font);
 
 		multipleChoiceFourLabel = new JLabel("선택 4");
 		multipleChoiceFourLabel.setFont(font);
 		multipleChoiceFourLabel.setBounds(530, 400, 100, 30);
 		multipleChoiceFourTextField = new JTextField();
 		multipleChoiceFourTextField.setBounds(580, 400, 200, 30);
+		multipleChoiceFourTextField.setFont(font);
 
 		answerLabel = new JLabel("정답");
 		answerLabel.setFont(font);
 		answerLabel.setBounds(530, 460, 100, 30);
 		answerTextField = new JTextField();
 		answerTextField.setBounds(580, 460, 50, 30);
+		answerTextField.setFont(font);
 
 		// 내용 JTA와 보기 JTF, 정답 JTF에 DB 값을 추가하는 일
 		slctTestQuestionContent();
