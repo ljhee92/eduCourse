@@ -52,12 +52,12 @@ public class ProfLoginDesign extends JFrame {
 		jlLoginTitle.setFont(new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 25));
 
 		// 사용자 ID 입력 필드
-		jtfId = new JTextField("100403140", 20);
+		jtfId = new JTextField("100403141", 20);
 		jtfId.setBounds(350, 300, 300, 40);
 		jtfId.setFont(new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 30));
 
 		// PW 입력 필드
-		jpfPass = new JPasswordField("pro", 20);
+		jpfPass = new JPasswordField("yechan", 20);
 		jpfPass.setBounds(350, 350, 300, 40);
 		jpfPass.setFont(new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 30));
 
