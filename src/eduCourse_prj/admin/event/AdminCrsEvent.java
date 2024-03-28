@@ -137,9 +137,6 @@ public class AdminCrsEvent extends WindowAdapter implements ActionListener {
 
 		}
 
-		@SuppressWarnings("unused")
-		List<CrsVO> lCrsVO;
-
 		try {
 			List<CrsVO> listCrsVO = aDAO.slctCrs(dept_code, crs_name);
 
