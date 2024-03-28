@@ -115,6 +115,11 @@ public class AdminCrsEvent extends WindowAdapter implements ActionListener {
 		int dept_code = 0; // 학과 코드
 
 		String crs_name = ""; // 과목명
+		
+		if(acd.getLDept().isEmpty()) {
+			JOptionPane.showMessageDialog(acd, "검색된 정보가 없습니다.");
+			return;
+		} // end if
 
 		// 학과가 "전체"일 경우
 		if (acd.getJcbDept().getSelectedItem().equals("전체")) {
