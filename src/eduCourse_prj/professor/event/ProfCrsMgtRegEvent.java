@@ -50,6 +50,11 @@ public class ProfCrsMgtRegEvent extends WindowAdapter implements ActionListener 
 				JOptionPane.showMessageDialog(pcmrd, "정원은 필수 입력사항입니다.");
 				return;
 			} // end if
+			
+			if(pcmrd.getJtfCrsCode().getText().isEmpty() || pcmrd.getJtfCredit().getText().isEmpty()) {
+				JOptionPane.showMessageDialog(pcmrd, "과목을 선택하면 과목코드와 학점이 자동으로 입력됩니다.");
+				return;
+			} // end if
 
 			try {
 
