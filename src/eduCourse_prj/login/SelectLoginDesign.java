@@ -16,7 +16,7 @@ public class SelectLoginDesign extends JFrame {
 	public SelectLoginDesign() {
 		super("로그인 모드 선택");
 		// 이미지 경로 변경
-		String loginPath = "C:/dev/workspace/eduCourse_prj/src/eduCourse_prj/image/login/";
+		String loginPath = "src/eduCourse_prj/image/login/";
 
 		// 마크 라벨, 살려조쌍용대학교, 하단텍스트 생성
 		sistMark = new JLabel(new ImageIcon(loginPath + "sistMark.png"));
