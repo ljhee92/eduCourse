@@ -17,6 +17,7 @@ local.properties
 .project
 .properties
 .settings
+Src/eduCourse/resources/jdbc.properties
 
 # External tool builders
 .externalToolBuilders/
