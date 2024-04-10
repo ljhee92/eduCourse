@@ -10,39 +10,43 @@ import eduCourse.professor.design.ProfLoginDesign;
 import eduCourse.student.design.StdntLoginDesign;
 
 public class SelectLoginEvent extends WindowAdapter implements ActionListener {
-	private SelectLoginDesign sld;
+	
+	private SelectLoginDesign selectLoginDesign;
 
-	public SelectLoginEvent(SelectLoginDesign sld) {
-
-		this.sld = sld;
-
-	}// SelectLoginEvent
+	public SelectLoginEvent(SelectLoginDesign selectLoginDesign) {
+		this.selectLoginDesign = selectLoginDesign;
+	} // SelectLoginEvent
 
 	@Override
 	public void actionPerformed(ActionEvent ae) {
-		if (ae.getSource() == sld.getAdminButton()) {
-			// JOptionPane.showMessageDialog(null, "관리자 버튼이 클릭되었습니다.");
+		// admin 버튼 클릭 시
+		if (ae.getSource() == selectLoginDesign.getJbtnAdmin()) {
 			new AdminLoginDesign(this);
-			sld.dispose();
-
-		}
-		if (ae.getSource() == sld.getProfessorButton()) {
-			// JOptionPane.showMessageDialog(null, "교수 버튼이 클릭되었습니다.");
+		} // end if
+		
+		// professor 버튼 클릭 시
+		if (ae.getSource() == selectLoginDesign.getJbtnProfessor()) {
 			new ProfLoginDesign(this);
-			sld.dispose();
-		}
-		if (ae.getSource() == sld.getStudentButton()) {
-			// JOptionPane.showMessageDialog(null, "학생 버튼이 클릭되었습니다.");
+		} // end if
+		
+		// student 버튼 클릭 시
+		if (ae.getSource() == selectLoginDesign.getJbtnStudent()) {
 			new StdntLoginDesign(this);
-			sld.dispose();
-		}
-
+		} // end if
+		
+		closeSelectLoginDesign();
 	}// actionPerformed
+	
+	/**
+	 * 로그인 창 닫기 method
+	 */
+	public void closeSelectLoginDesign() {
+		selectLoginDesign.dispose();
+	} // closeWindow
 
 	@Override
 	public void windowClosing(WindowEvent e) {
-		sld.dispose();
+		closeSelectLoginDesign();
+	} // windowClosing
 
-	}// windowClosing
-
-}
+} // class
